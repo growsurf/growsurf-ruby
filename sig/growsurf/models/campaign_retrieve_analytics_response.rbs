@@ -1,0 +1,217 @@
+module Growsurf
+  module Models
+    type campaign_retrieve_analytics_response =
+      {
+        analytics: Growsurf::Models::CampaignRetrieveAnalyticsResponse::Analytics,
+        end_date: Integer,
+        start_date: Integer
+      }
+
+    class CampaignRetrieveAnalyticsResponse < Growsurf::Internal::Type::BaseModel
+      attr_accessor analytics: Growsurf::Models::CampaignRetrieveAnalyticsResponse::Analytics
+
+      attr_accessor end_date: Integer
+
+      attr_accessor start_date: Integer
+
+      def initialize: (
+        analytics: Growsurf::Models::CampaignRetrieveAnalyticsResponse::Analytics,
+        end_date: Integer,
+        start_date: Integer
+      ) -> void
+
+      def to_hash: -> {
+        analytics: Growsurf::Models::CampaignRetrieveAnalyticsResponse::Analytics,
+        end_date: Integer,
+        start_date: Integer
+      }
+
+      type analytics =
+        {
+          bluesky_shares: Integer,
+          email_shares: Integer,
+          facebook_shares: Integer,
+          impressions: Integer,
+          invites: Integer,
+          linked_in_shares: Integer,
+          messenger_shares: Integer,
+          participants: Integer,
+          pinterest_shares: Integer,
+          qrcode_shares: Integer,
+          reddit_shares: Integer,
+          referral_credit_expireds: Integer,
+          referral_credit_pendings: Integer,
+          referrals: Integer,
+          sms_shares: Integer,
+          telegram_shares: Integer,
+          threads_shares: Integer,
+          total_commission_count: Integer,
+          total_commissions: Integer,
+          total_revenue: Integer,
+          tumblr_shares: Integer,
+          twitter_shares: Integer,
+          unique_impressions: Integer,
+          wechat_shares: Integer,
+          whats_app_shares: Integer
+        }
+
+      class Analytics < Growsurf::Internal::Type::BaseModel
+        attr_reader bluesky_shares: Integer?
+
+        def bluesky_shares=: (Integer) -> Integer
+
+        attr_reader email_shares: Integer?
+
+        def email_shares=: (Integer) -> Integer
+
+        attr_reader facebook_shares: Integer?
+
+        def facebook_shares=: (Integer) -> Integer
+
+        attr_reader impressions: Integer?
+
+        def impressions=: (Integer) -> Integer
+
+        attr_reader invites: Integer?
+
+        def invites=: (Integer) -> Integer
+
+        attr_reader linked_in_shares: Integer?
+
+        def linked_in_shares=: (Integer) -> Integer
+
+        attr_reader messenger_shares: Integer?
+
+        def messenger_shares=: (Integer) -> Integer
+
+        attr_reader participants: Integer?
+
+        def participants=: (Integer) -> Integer
+
+        attr_reader pinterest_shares: Integer?
+
+        def pinterest_shares=: (Integer) -> Integer
+
+        attr_reader qrcode_shares: Integer?
+
+        def qrcode_shares=: (Integer) -> Integer
+
+        attr_reader reddit_shares: Integer?
+
+        def reddit_shares=: (Integer) -> Integer
+
+        attr_reader referral_credit_expireds: Integer?
+
+        def referral_credit_expireds=: (Integer) -> Integer
+
+        attr_reader referral_credit_pendings: Integer?
+
+        def referral_credit_pendings=: (Integer) -> Integer
+
+        attr_reader referrals: Integer?
+
+        def referrals=: (Integer) -> Integer
+
+        attr_reader sms_shares: Integer?
+
+        def sms_shares=: (Integer) -> Integer
+
+        attr_reader telegram_shares: Integer?
+
+        def telegram_shares=: (Integer) -> Integer
+
+        attr_reader threads_shares: Integer?
+
+        def threads_shares=: (Integer) -> Integer
+
+        attr_reader total_commission_count: Integer?
+
+        def total_commission_count=: (Integer) -> Integer
+
+        attr_reader total_commissions: Integer?
+
+        def total_commissions=: (Integer) -> Integer
+
+        attr_reader total_revenue: Integer?
+
+        def total_revenue=: (Integer) -> Integer
+
+        attr_reader tumblr_shares: Integer?
+
+        def tumblr_shares=: (Integer) -> Integer
+
+        attr_reader twitter_shares: Integer?
+
+        def twitter_shares=: (Integer) -> Integer
+
+        attr_reader unique_impressions: Integer?
+
+        def unique_impressions=: (Integer) -> Integer
+
+        attr_reader wechat_shares: Integer?
+
+        def wechat_shares=: (Integer) -> Integer
+
+        attr_reader whats_app_shares: Integer?
+
+        def whats_app_shares=: (Integer) -> Integer
+
+        def initialize: (
+          ?bluesky_shares: Integer,
+          ?email_shares: Integer,
+          ?facebook_shares: Integer,
+          ?impressions: Integer,
+          ?invites: Integer,
+          ?linked_in_shares: Integer,
+          ?messenger_shares: Integer,
+          ?participants: Integer,
+          ?pinterest_shares: Integer,
+          ?qrcode_shares: Integer,
+          ?reddit_shares: Integer,
+          ?referral_credit_expireds: Integer,
+          ?referral_credit_pendings: Integer,
+          ?referrals: Integer,
+          ?sms_shares: Integer,
+          ?telegram_shares: Integer,
+          ?threads_shares: Integer,
+          ?total_commission_count: Integer,
+          ?total_commissions: Integer,
+          ?total_revenue: Integer,
+          ?tumblr_shares: Integer,
+          ?twitter_shares: Integer,
+          ?unique_impressions: Integer,
+          ?wechat_shares: Integer,
+          ?whats_app_shares: Integer
+        ) -> void
+
+        def to_hash: -> {
+          bluesky_shares: Integer,
+          email_shares: Integer,
+          facebook_shares: Integer,
+          impressions: Integer,
+          invites: Integer,
+          linked_in_shares: Integer,
+          messenger_shares: Integer,
+          participants: Integer,
+          pinterest_shares: Integer,
+          qrcode_shares: Integer,
+          reddit_shares: Integer,
+          referral_credit_expireds: Integer,
+          referral_credit_pendings: Integer,
+          referrals: Integer,
+          sms_shares: Integer,
+          telegram_shares: Integer,
+          threads_shares: Integer,
+          total_commission_count: Integer,
+          total_commissions: Integer,
+          total_revenue: Integer,
+          tumblr_shares: Integer,
+          twitter_shares: Integer,
+          unique_impressions: Integer,
+          wechat_shares: Integer,
+          whats_app_shares: Integer
+        }
+      end
+    end
+  end
+end

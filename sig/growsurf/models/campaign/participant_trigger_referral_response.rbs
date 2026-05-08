@@ -1,0 +1,20 @@
+module Growsurf
+  module Models
+    module Campaign
+      type participant_trigger_referral_response =
+        { success: bool, message: String }
+
+      class ParticipantTriggerReferralResponse < Growsurf::Internal::Type::BaseModel
+        attr_accessor success: bool
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (success: bool, ?message: String) -> void
+
+        def to_hash: -> { success: bool, message: String }
+      end
+    end
+  end
+end

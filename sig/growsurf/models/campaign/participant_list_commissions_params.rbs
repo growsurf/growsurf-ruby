@@ -1,0 +1,70 @@
+module Growsurf
+  module Models
+    module Campaign
+      type participant_list_commissions_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          status: Growsurf::Models::Campaign::ParticipantListCommissionsParams::status
+        }
+        & Growsurf::Internal::Type::request_parameters
+
+      class ParticipantListCommissionsParams < Growsurf::Internal::Type::BaseModel
+        extend Growsurf::Internal::Type::RequestParameters::Converter
+        include Growsurf::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader next_id: String?
+
+        def next_id=: (String) -> String
+
+        attr_reader status: Growsurf::Models::Campaign::ParticipantListCommissionsParams::status?
+
+        def status=: (
+          Growsurf::Models::Campaign::ParticipantListCommissionsParams::status
+        ) -> Growsurf::Models::Campaign::ParticipantListCommissionsParams::status
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?status: Growsurf::Models::Campaign::ParticipantListCommissionsParams::status,
+          ?request_options: Growsurf::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          status: Growsurf::Models::Campaign::ParticipantListCommissionsParams::status,
+          request_options: Growsurf::RequestOptions
+        }
+
+        type status = :PENDING | :APPROVED | :PAID | :REVERSED | :DELETED
+
+        module Status
+          extend Growsurf::Internal::Type::Enum
+
+          PENDING: :PENDING
+          APPROVED: :APPROVED
+          PAID: :PAID
+          REVERSED: :REVERSED
+          DELETED: :DELETED
+
+          def self?.values: -> ::Array[Growsurf::Models::Campaign::ParticipantListCommissionsParams::status]
+        end
+      end
+    end
+  end
+end

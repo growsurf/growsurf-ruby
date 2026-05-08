@@ -1,0 +1,47 @@
+module Growsurf
+  module Models
+    module Campaign
+      type participant_list_rewards_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String
+        }
+        & Growsurf::Internal::Type::request_parameters
+
+      class ParticipantListRewardsParams < Growsurf::Internal::Type::BaseModel
+        extend Growsurf::Internal::Type::RequestParameters::Converter
+        include Growsurf::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader next_id: String?
+
+        def next_id=: (String) -> String
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          request_options: Growsurf::RequestOptions
+        }
+      end
+    end
+  end
+end

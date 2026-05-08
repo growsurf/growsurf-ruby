@@ -1,0 +1,83 @@
+module Growsurf
+  module Models
+    type campaign_list_leaderboard_params =
+      {
+        id: String,
+        is_monthly: bool,
+        leaderboard_type: Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type,
+        limit: Integer,
+        next_id: String
+      }
+      & Growsurf::Internal::Type::request_parameters
+
+    class CampaignListLeaderboardParams < Growsurf::Internal::Type::BaseModel
+      extend Growsurf::Internal::Type::RequestParameters::Converter
+      include Growsurf::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader is_monthly: bool?
+
+      def is_monthly=: (bool) -> bool
+
+      attr_reader leaderboard_type: Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type?
+
+      def leaderboard_type=: (
+        Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type
+      ) -> Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader next_id: String?
+
+      def next_id=: (String) -> String
+
+      def initialize: (
+        id: String,
+        ?is_monthly: bool,
+        ?leaderboard_type: Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type,
+        ?limit: Integer,
+        ?next_id: String,
+        ?request_options: Growsurf::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        is_monthly: bool,
+        leaderboard_type: Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type,
+        limit: Integer,
+        next_id: String,
+        request_options: Growsurf::RequestOptions
+      }
+
+      type leaderboard_type =
+        :ALL_TIME
+        | :CURRENT_MONTH
+        | :PREV_MONTH
+        | :TOTAL_IMPRESSION_COUNT
+        | :UNIQUE_IMPRESSION_COUNT
+        | :BY_COMMISSIONS
+        | :BY_REVENUE
+        | :BY_REFERRALS
+        | :BY_LEADS
+
+      module LeaderboardType
+        extend Growsurf::Internal::Type::Enum
+
+        ALL_TIME: :ALL_TIME
+        CURRENT_MONTH: :CURRENT_MONTH
+        PREV_MONTH: :PREV_MONTH
+        TOTAL_IMPRESSION_COUNT: :TOTAL_IMPRESSION_COUNT
+        UNIQUE_IMPRESSION_COUNT: :UNIQUE_IMPRESSION_COUNT
+        BY_COMMISSIONS: :BY_COMMISSIONS
+        BY_REVENUE: :BY_REVENUE
+        BY_REFERRALS: :BY_REFERRALS
+        BY_LEADS: :BY_LEADS
+
+        def self?.values: -> ::Array[Growsurf::Models::CampaignListLeaderboardParams::leaderboard_type]
+      end
+    end
+  end
+end

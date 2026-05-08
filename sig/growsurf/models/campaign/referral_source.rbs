@@ -1,0 +1,16 @@
+module Growsurf
+  module Models
+    module Campaign
+      type referral_source = :DIRECT | :PARTICIPANT
+
+      module ReferralSource
+        extend Growsurf::Internal::Type::Enum
+
+        DIRECT: :DIRECT
+        PARTICIPANT: :PARTICIPANT
+
+        def self?.values: -> ::Array[Growsurf::Models::Campaign::referral_source]
+      end
+    end
+  end
+end

@@ -1,0 +1,84 @@
+module Growsurf
+  module Models
+    module Campaign
+      type participant_record_transaction_response =
+        Growsurf::Models::Campaign::ParticipantRecordTransactionResponse::UnionMember0
+        | Growsurf::Models::Campaign::ParticipantRecordTransactionResponse::UnionMember1
+
+      module ParticipantRecordTransactionResponse
+        extend Growsurf::Internal::Type::Union
+
+        type union_member0 =
+          { duplicate: false, first_sale: bool, message: String, success: true }
+
+        class UnionMember0 < Growsurf::Internal::Type::BaseModel
+          attr_accessor duplicate: false
+
+          attr_accessor first_sale: bool
+
+          attr_accessor message: String
+
+          attr_accessor success: true
+
+          def initialize: (
+            first_sale: bool,
+            message: String,
+            ?duplicate: false,
+            ?success: true
+          ) -> void
+
+          def to_hash: -> {
+            duplicate: false,
+            first_sale: bool,
+            message: String,
+            success: true
+          }
+        end
+
+        type union_member1 =
+          {
+            commissions_created: Integer,
+            duplicate: true,
+            duplicate_fields: ::Array[String],
+            matching_commission_ids: ::Array[String],
+            message: String,
+            success: false
+          }
+
+        class UnionMember1 < Growsurf::Internal::Type::BaseModel
+          attr_accessor commissions_created: Integer
+
+          attr_accessor duplicate: true
+
+          attr_accessor duplicate_fields: ::Array[String]
+
+          attr_accessor matching_commission_ids: ::Array[String]
+
+          attr_accessor message: String
+
+          attr_accessor success: false
+
+          def initialize: (
+            commissions_created: Integer,
+            duplicate_fields: ::Array[String],
+            matching_commission_ids: ::Array[String],
+            message: String,
+            ?duplicate: true,
+            ?success: false
+          ) -> void
+
+          def to_hash: -> {
+            commissions_created: Integer,
+            duplicate: true,
+            duplicate_fields: ::Array[String],
+            matching_commission_ids: ::Array[String],
+            message: String,
+            success: false
+          }
+        end
+
+        def self?.variants: -> ::Array[Growsurf::Models::Campaign::participant_record_transaction_response]
+      end
+    end
+  end
+end
