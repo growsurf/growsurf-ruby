@@ -1,0 +1,121 @@
+module GrowsurfRuby
+  module Models
+    type commission_structure =
+      {
+        amount: Integer?,
+        approval_required: bool?,
+        duration: String?,
+        duration_in_months: Integer?,
+        event: String?,
+        has_intro: bool?,
+        has_max_amount: bool?,
+        hold_duration: Integer?,
+        intro_amount: Integer?,
+        intro_amount_iso: String?,
+        intro_duration: String?,
+        intro_duration_in_months: Integer?,
+        intro_percent: Float?,
+        intro_type: String?,
+        max_amount: Integer?,
+        max_amount_iso: String?,
+        min_paid_referrals: Integer?,
+        percent: Float?,
+        type: GrowsurfRuby::Models::CommissionStructure::type_?
+      }
+
+    class CommissionStructure < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor amount: Integer?
+
+      attr_accessor approval_required: bool?
+
+      attr_accessor duration: String?
+
+      attr_accessor duration_in_months: Integer?
+
+      attr_accessor event: String?
+
+      attr_accessor has_intro: bool?
+
+      attr_accessor has_max_amount: bool?
+
+      attr_accessor hold_duration: Integer?
+
+      attr_accessor intro_amount: Integer?
+
+      attr_accessor intro_amount_iso: String?
+
+      attr_accessor intro_duration: String?
+
+      attr_accessor intro_duration_in_months: Integer?
+
+      attr_accessor intro_percent: Float?
+
+      attr_accessor intro_type: String?
+
+      attr_accessor max_amount: Integer?
+
+      attr_accessor max_amount_iso: String?
+
+      attr_accessor min_paid_referrals: Integer?
+
+      attr_accessor percent: Float?
+
+      attr_accessor type: GrowsurfRuby::Models::CommissionStructure::type_?
+
+      def initialize: (
+        ?amount: Integer?,
+        ?approval_required: bool?,
+        ?duration: String?,
+        ?duration_in_months: Integer?,
+        ?event: String?,
+        ?has_intro: bool?,
+        ?has_max_amount: bool?,
+        ?hold_duration: Integer?,
+        ?intro_amount: Integer?,
+        ?intro_amount_iso: String?,
+        ?intro_duration: String?,
+        ?intro_duration_in_months: Integer?,
+        ?intro_percent: Float?,
+        ?intro_type: String?,
+        ?max_amount: Integer?,
+        ?max_amount_iso: String?,
+        ?min_paid_referrals: Integer?,
+        ?percent: Float?,
+        ?type: GrowsurfRuby::Models::CommissionStructure::type_?
+      ) -> void
+
+      def to_hash: -> {
+        amount: Integer?,
+        approval_required: bool?,
+        duration: String?,
+        duration_in_months: Integer?,
+        event: String?,
+        has_intro: bool?,
+        has_max_amount: bool?,
+        hold_duration: Integer?,
+        intro_amount: Integer?,
+        intro_amount_iso: String?,
+        intro_duration: String?,
+        intro_duration_in_months: Integer?,
+        intro_percent: Float?,
+        intro_type: String?,
+        max_amount: Integer?,
+        max_amount_iso: String?,
+        min_paid_referrals: Integer?,
+        percent: Float?,
+        type: GrowsurfRuby::Models::CommissionStructure::type_?
+      }
+
+      type type_ = :PERCENT | :AMOUNT
+
+      module Type
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        PERCENT: :PERCENT
+        AMOUNT: :AMOUNT
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CommissionStructure::type_]
+      end
+    end
+  end
+end

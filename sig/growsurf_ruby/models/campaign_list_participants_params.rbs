@@ -1,0 +1,36 @@
+module GrowsurfRuby
+  module Models
+    type campaign_list_participants_params =
+      { id: String, limit: Integer, next_id: String }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignListParticipantsParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader next_id: String?
+
+      def next_id=: (String) -> String
+
+      def initialize: (
+        id: String,
+        ?limit: Integer,
+        ?next_id: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        limit: Integer,
+        next_id: String,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+    end
+  end
+end

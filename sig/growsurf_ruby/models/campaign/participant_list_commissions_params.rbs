@@ -1,0 +1,70 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_list_commissions_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantListCommissionsParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader next_id: String?
+
+        def next_id=: (String) -> String
+
+        attr_reader status: GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status?
+
+        def status=: (
+          GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?status: GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        type status = :PENDING | :APPROVED | :PAID | :REVERSED | :DELETED
+
+        module Status
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          PENDING: :PENDING
+          APPROVED: :APPROVED
+          PAID: :PAID
+          REVERSED: :REVERSED
+          DELETED: :DELETED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams::status]
+        end
+      end
+    end
+  end
+end

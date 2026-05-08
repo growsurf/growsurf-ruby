@@ -1,0 +1,14 @@
+module GrowsurfRuby
+  module Models
+    type campaign_list_response =
+      { campaigns: ::Array[GrowsurfRuby::CampaignAPI] }
+
+    class CampaignListResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor campaigns: ::Array[GrowsurfRuby::CampaignAPI]
+
+      def initialize: (campaigns: ::Array[GrowsurfRuby::CampaignAPI]) -> void
+
+      def to_hash: -> { campaigns: ::Array[GrowsurfRuby::CampaignAPI] }
+    end
+  end
+end

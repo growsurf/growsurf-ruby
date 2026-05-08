@@ -1,0 +1,116 @@
+module GrowsurfRuby
+  module Models
+    type campaign_list_referrals_params =
+      {
+        id: String,
+        desc: bool,
+        email: String,
+        first_name: String,
+        last_name: String,
+        limit: Integer,
+        next_id: String,
+        offset: Integer,
+        referral_status: GrowsurfRuby::Models::Campaign::referral_status,
+        sort_by: GrowsurfRuby::Models::CampaignListReferralsParams::sort_by
+      }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignListReferralsParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader desc: bool?
+
+      def desc=: (bool) -> bool
+
+      attr_reader email: String?
+
+      def email=: (String) -> String
+
+      attr_reader first_name: String?
+
+      def first_name=: (String) -> String
+
+      attr_reader last_name: String?
+
+      def last_name=: (String) -> String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader next_id: String?
+
+      def next_id=: (String) -> String
+
+      attr_reader offset: Integer?
+
+      def offset=: (Integer) -> Integer
+
+      attr_reader referral_status: GrowsurfRuby::Models::Campaign::referral_status?
+
+      def referral_status=: (
+        GrowsurfRuby::Models::Campaign::referral_status
+      ) -> GrowsurfRuby::Models::Campaign::referral_status
+
+      attr_reader sort_by: GrowsurfRuby::Models::CampaignListReferralsParams::sort_by?
+
+      def sort_by=: (
+        GrowsurfRuby::Models::CampaignListReferralsParams::sort_by
+      ) -> GrowsurfRuby::Models::CampaignListReferralsParams::sort_by
+
+      def initialize: (
+        id: String,
+        ?desc: bool,
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?limit: Integer,
+        ?next_id: String,
+        ?offset: Integer,
+        ?referral_status: GrowsurfRuby::Models::Campaign::referral_status,
+        ?sort_by: GrowsurfRuby::Models::CampaignListReferralsParams::sort_by,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        desc: bool,
+        email: String,
+        first_name: String,
+        last_name: String,
+        limit: Integer,
+        next_id: String,
+        offset: Integer,
+        referral_status: GrowsurfRuby::Models::Campaign::referral_status,
+        sort_by: GrowsurfRuby::Models::CampaignListReferralsParams::sort_by,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+
+      type sort_by =
+        :updatedAt
+        | :createdAt
+        | :email
+        | :firstName
+        | :lastName
+        | :referralStatus
+        | :referralTriggeredAt
+
+      module SortBy
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        UPDATED_AT: :updatedAt
+        CREATED_AT: :createdAt
+        EMAIL: :email
+        FIRST_NAME: :firstName
+        LAST_NAME: :lastName
+        REFERRAL_STATUS: :referralStatus
+        REFERRAL_TRIGGERED_AT: :referralTriggeredAt
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignListReferralsParams::sort_by]
+      end
+    end
+  end
+end

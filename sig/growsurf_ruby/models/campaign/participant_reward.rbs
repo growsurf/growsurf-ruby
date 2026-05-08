@@ -1,0 +1,111 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_reward =
+        {
+          id: String,
+          reward_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantReward::status,
+          approved: bool,
+          approved_at: Integer,
+          commission_structure: GrowsurfRuby::CommissionStructure?,
+          fulfilled_at: Integer,
+          is_available: bool,
+          is_fulfilled: bool,
+          is_referrer: bool,
+          referred_id: String,
+          referrer_id: String,
+          unread: bool
+        }
+
+      class ParticipantReward < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor reward_id: String
+
+        attr_accessor status: GrowsurfRuby::Models::Campaign::ParticipantReward::status
+
+        attr_reader approved: bool?
+
+        def approved=: (bool) -> bool
+
+        attr_reader approved_at: Integer?
+
+        def approved_at=: (Integer) -> Integer
+
+        attr_accessor commission_structure: GrowsurfRuby::CommissionStructure?
+
+        attr_reader fulfilled_at: Integer?
+
+        def fulfilled_at=: (Integer) -> Integer
+
+        attr_reader is_available: bool?
+
+        def is_available=: (bool) -> bool
+
+        attr_reader is_fulfilled: bool?
+
+        def is_fulfilled=: (bool) -> bool
+
+        attr_reader is_referrer: bool?
+
+        def is_referrer=: (bool) -> bool
+
+        attr_reader referred_id: String?
+
+        def referred_id=: (String) -> String
+
+        attr_reader referrer_id: String?
+
+        def referrer_id=: (String) -> String
+
+        attr_reader unread: bool?
+
+        def unread=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          reward_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantReward::status,
+          ?approved: bool,
+          ?approved_at: Integer,
+          ?commission_structure: GrowsurfRuby::CommissionStructure?,
+          ?fulfilled_at: Integer,
+          ?is_available: bool,
+          ?is_fulfilled: bool,
+          ?is_referrer: bool,
+          ?referred_id: String,
+          ?referrer_id: String,
+          ?unread: bool
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          reward_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantReward::status,
+          approved: bool,
+          approved_at: Integer,
+          commission_structure: GrowsurfRuby::CommissionStructure?,
+          fulfilled_at: Integer,
+          is_available: bool,
+          is_fulfilled: bool,
+          is_referrer: bool,
+          referred_id: String,
+          referrer_id: String,
+          unread: bool
+        }
+
+        type status = :PENDING | :FULFILLED
+
+        module Status
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          PENDING: :PENDING
+          FULFILLED: :FULFILLED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantReward::status]
+        end
+      end
+    end
+  end
+end

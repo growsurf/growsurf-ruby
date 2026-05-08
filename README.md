@@ -1,12 +1,12 @@
 # Growsurf Ruby API library
 
-The Growsurf Ruby library provides convenient access to the Growsurf REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/growsurf-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Growsurf Ruby library provides convenient access to the Growsurf REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/growsurf/growsurf-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/growsurf).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/growsurf-ruby).
 
 The REST API documentation can be found on [growsurf.com](https://growsurf.com/settings#contact_support).
 
@@ -14,17 +14,21 @@ The REST API documentation can be found on [growsurf.com](https://growsurf.com/s
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
+<!-- x-release-please-start-version -->
+
 ```ruby
-gem "growsurf", "~> 0.0.1"
+gem "growsurf-ruby", "~> 0.0.2"
 ```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
 ```ruby
 require "bundler/setup"
-require "growsurf"
+require "growsurf_ruby"
 
-growsurf = Growsurf::Client.new(
+growsurf = GrowsurfRuby::Client.new(
   api_key: ENV["GROWSURF_API_KEY"] # This is the default and can be omitted
 )
 
@@ -35,17 +39,17 @@ puts(campaigns.campaigns)
 
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Growsurf::Errors::APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `GrowsurfRuby::Errors::APIError` will be thrown:
 
 ```ruby
 begin
   campaign = growsurf.campaign.list
-rescue Growsurf::Errors::APIConnectionError => e
+rescue GrowsurfRuby::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
-rescue Growsurf::Errors::RateLimitError => e
+rescue GrowsurfRuby::Errors::RateLimitError => e
   puts("A 429 status code was received; we should back off a bit.")
-rescue Growsurf::Errors::APIStatusError => e
+rescue GrowsurfRuby::Errors::APIStatusError => e
   puts("Another non-200-range status code was received")
   puts(e.status)
 end
@@ -77,7 +81,7 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-growsurf = Growsurf::Client.new(
+growsurf = GrowsurfRuby::Client.new(
   max_retries: 0 # default is 2
 )
 
@@ -91,7 +95,7 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-growsurf = Growsurf::Client.new(
+growsurf = GrowsurfRuby::Client.new(
   timeout: nil # default is 60
 )
 
@@ -99,7 +103,7 @@ growsurf = Growsurf::Client.new(
 growsurf.campaign.list(request_options: {timeout: 5})
 ```
 
-On timeout, `Growsurf::Errors::APITimeoutError` is raised.
+On timeout, `GrowsurfRuby::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
@@ -107,7 +111,7 @@ Note that requests that time out are retried by default.
 
 ### BaseModel
 
-All parameter and response objects inherit from `Growsurf::Internal::Type::BaseModel`, which provides several conveniences, including:
+All parameter and response objects inherit from `GrowsurfRuby::Internal::Type::BaseModel`, which provides several conveniences, including:
 
 1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
 
@@ -158,9 +162,9 @@ response = client.request(
 
 ### Concurrency & connection pooling
 
-The `Growsurf::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
+The `GrowsurfRuby::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `Growsurf::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+Each instance of `GrowsurfRuby::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
@@ -183,7 +187,7 @@ Or, equivalently:
 growsurf.campaign.list
 
 # You can also splat a full Params class:
-params = Growsurf::CampaignListParams.new
+params = GrowsurfRuby::CampaignListParams.new
 growsurf.campaign.list(**params)
 ```
 
@@ -193,10 +197,10 @@ Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::E
 
 ```ruby
 # :PENDING
-puts(Growsurf::CampaignListCommissionsParams::Status::PENDING)
+puts(GrowsurfRuby::CampaignListCommissionsParams::Status::PENDING)
 
-# Revealed type: `T.all(Growsurf::CampaignListCommissionsParams::Status, Symbol)`
-T.reveal_type(Growsurf::CampaignListCommissionsParams::Status::PENDING)
+# Revealed type: `T.all(GrowsurfRuby::CampaignListCommissionsParams::Status, Symbol)`
+T.reveal_type(GrowsurfRuby::CampaignListCommissionsParams::Status::PENDING)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
@@ -204,7 +208,7 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 ```ruby
 # Using the enum constants preserves the tagged type information:
 growsurf.campaign.list_commissions(
-  status: Growsurf::CampaignListCommissionsParams::Status::PENDING,
+  status: GrowsurfRuby::CampaignListCommissionsParams::Status::PENDING,
   # …
 )
 
@@ -227,4 +231,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/growsurf-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/growsurf/growsurf-ruby/tree/main/CONTRIBUTING.md).
