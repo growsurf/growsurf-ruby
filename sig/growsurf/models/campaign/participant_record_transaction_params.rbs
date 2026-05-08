@@ -1,0 +1,194 @@
+module Growsurf
+  module Models
+    module Campaign
+      type participant_record_transaction_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          currency: String,
+          gross_amount: Integer,
+          amount_cash_net: Integer,
+          amount_paid: Integer,
+          charge_id: String,
+          customer_id: String,
+          description: String,
+          external_id: String,
+          invoice_id: String,
+          invoice_subtotal_excluding_tax: Integer,
+          invoice_total: Integer,
+          invoice_total_excluding_tax: Integer,
+          net_amount: Integer,
+          order_id: String,
+          paid_at: Integer,
+          payment_id: String,
+          payment_intent_id: String,
+          subscription_id: String,
+          tax_amount: Integer,
+          total_tax_amount: Integer,
+          total_tax_amounts: ::Array[::Hash[Symbol, top]],
+          total_taxes: ::Array[::Hash[Symbol, top]],
+          transaction_id: String
+        }
+        & Growsurf::Internal::Type::request_parameters
+
+      class ParticipantRecordTransactionParams < Growsurf::Internal::Type::BaseModel
+        extend Growsurf::Internal::Type::RequestParameters::Converter
+        include Growsurf::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_accessor currency: String
+
+        attr_accessor gross_amount: Integer
+
+        attr_reader amount_cash_net: Integer?
+
+        def amount_cash_net=: (Integer) -> Integer
+
+        attr_reader amount_paid: Integer?
+
+        def amount_paid=: (Integer) -> Integer
+
+        attr_reader charge_id: String?
+
+        def charge_id=: (String) -> String
+
+        attr_reader customer_id: String?
+
+        def customer_id=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader external_id: String?
+
+        def external_id=: (String) -> String
+
+        attr_reader invoice_id: String?
+
+        def invoice_id=: (String) -> String
+
+        attr_reader invoice_subtotal_excluding_tax: Integer?
+
+        def invoice_subtotal_excluding_tax=: (Integer) -> Integer
+
+        attr_reader invoice_total: Integer?
+
+        def invoice_total=: (Integer) -> Integer
+
+        attr_reader invoice_total_excluding_tax: Integer?
+
+        def invoice_total_excluding_tax=: (Integer) -> Integer
+
+        attr_reader net_amount: Integer?
+
+        def net_amount=: (Integer) -> Integer
+
+        attr_reader order_id: String?
+
+        def order_id=: (String) -> String
+
+        attr_reader paid_at: Integer?
+
+        def paid_at=: (Integer) -> Integer
+
+        attr_reader payment_id: String?
+
+        def payment_id=: (String) -> String
+
+        attr_reader payment_intent_id: String?
+
+        def payment_intent_id=: (String) -> String
+
+        attr_reader subscription_id: String?
+
+        def subscription_id=: (String) -> String
+
+        attr_reader tax_amount: Integer?
+
+        def tax_amount=: (Integer) -> Integer
+
+        attr_reader total_tax_amount: Integer?
+
+        def total_tax_amount=: (Integer) -> Integer
+
+        attr_reader total_tax_amounts: ::Array[::Hash[Symbol, top]]?
+
+        def total_tax_amounts=: (
+          ::Array[::Hash[Symbol, top]]
+        ) -> ::Array[::Hash[Symbol, top]]
+
+        attr_reader total_taxes: ::Array[::Hash[Symbol, top]]?
+
+        def total_taxes=: (
+          ::Array[::Hash[Symbol, top]]
+        ) -> ::Array[::Hash[Symbol, top]]
+
+        attr_reader transaction_id: String?
+
+        def transaction_id=: (String) -> String
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          currency: String,
+          gross_amount: Integer,
+          ?amount_cash_net: Integer,
+          ?amount_paid: Integer,
+          ?charge_id: String,
+          ?customer_id: String,
+          ?description: String,
+          ?external_id: String,
+          ?invoice_id: String,
+          ?invoice_subtotal_excluding_tax: Integer,
+          ?invoice_total: Integer,
+          ?invoice_total_excluding_tax: Integer,
+          ?net_amount: Integer,
+          ?order_id: String,
+          ?paid_at: Integer,
+          ?payment_id: String,
+          ?payment_intent_id: String,
+          ?subscription_id: String,
+          ?tax_amount: Integer,
+          ?total_tax_amount: Integer,
+          ?total_tax_amounts: ::Array[::Hash[Symbol, top]],
+          ?total_taxes: ::Array[::Hash[Symbol, top]],
+          ?transaction_id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          currency: String,
+          gross_amount: Integer,
+          amount_cash_net: Integer,
+          amount_paid: Integer,
+          charge_id: String,
+          customer_id: String,
+          description: String,
+          external_id: String,
+          invoice_id: String,
+          invoice_subtotal_excluding_tax: Integer,
+          invoice_total: Integer,
+          invoice_total_excluding_tax: Integer,
+          net_amount: Integer,
+          order_id: String,
+          paid_at: Integer,
+          payment_id: String,
+          payment_intent_id: String,
+          subscription_id: String,
+          tax_amount: Integer,
+          total_tax_amount: Integer,
+          total_tax_amounts: ::Array[::Hash[Symbol, top]],
+          total_taxes: ::Array[::Hash[Symbol, top]],
+          transaction_id: String,
+          request_options: Growsurf::RequestOptions
+        }
+      end
+    end
+  end
+end

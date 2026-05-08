@@ -1,0 +1,36 @@
+module Growsurf
+  module Models
+    module Campaign
+      type reward_approve_params =
+        { id: String, reward_id: String, fulfill: bool }
+        & Growsurf::Internal::Type::request_parameters
+
+      class RewardApproveParams < Growsurf::Internal::Type::BaseModel
+        extend Growsurf::Internal::Type::RequestParameters::Converter
+        include Growsurf::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor reward_id: String
+
+        attr_reader fulfill: bool?
+
+        def fulfill=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          reward_id: String,
+          ?fulfill: bool,
+          ?request_options: Growsurf::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          reward_id: String,
+          fulfill: bool,
+          request_options: Growsurf::RequestOptions
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,21 @@
+module Growsurf
+  module Resources
+    class Campaign
+      class Commission
+        def delete: (
+          String commission_id,
+          id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::CommissionDeleteResponse
+
+        def approve: (
+          String commission_id,
+          id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::CommissionApproveResponse
+
+        def initialize: (client: Growsurf::Client) -> void
+      end
+    end
+  end
+end

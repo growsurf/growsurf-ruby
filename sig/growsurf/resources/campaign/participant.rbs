@@ -1,0 +1,133 @@
+module Growsurf
+  module Resources
+    class Campaign
+      class Participant
+        def retrieve: (
+          String participant_id_or_email,
+          id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Campaign::CampaignParticipant
+
+        def update: (
+          String participant_id_or_email,
+          id: String,
+          ?email: String,
+          ?first_name: String,
+          ?last_name: String,
+          ?metadata: ::Hash[Symbol, top],
+          ?referral_status: Growsurf::Models::Campaign::ParticipantUpdateParams::referral_status,
+          ?referred_by: String,
+          ?unsubscribed: bool,
+          ?vanity_keys: ::Array[String],
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Campaign::CampaignParticipant
+
+        def delete: (
+          String participant_id_or_email,
+          id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::ParticipantDeleteResponse
+
+        def add: (
+          String id,
+          email: String,
+          ?fingerprint: String,
+          ?first_name: String,
+          ?ip_address: String,
+          ?last_name: String,
+          ?metadata: ::Hash[Symbol, top],
+          ?referral_status: Growsurf::Models::Campaign::ParticipantAddParams::referral_status,
+          ?referred_by: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Campaign::CampaignParticipant
+
+        def list_commissions: (
+          String participant_id_or_email,
+          id: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?status: Growsurf::Models::Campaign::ParticipantListCommissionsParams::status,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::ParticipantCommissionList
+
+        def list_payouts: (
+          String participant_id_or_email,
+          id: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?status: Growsurf::Models::Campaign::ParticipantListPayoutsParams::status,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::ParticipantPayoutList
+
+        def list_referrals: (
+          String participant_id_or_email,
+          id: String,
+          ?desc: bool,
+          ?email: String,
+          ?first_name: String,
+          ?last_name: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?offset: Integer,
+          ?referral_status: Growsurf::Models::Campaign::referral_status,
+          ?sort_by: Growsurf::Models::Campaign::ParticipantListReferralsParams::sort_by,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::ReferralList
+
+        def list_rewards: (
+          String participant_id_or_email,
+          id: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::ParticipantListRewardsResponse
+
+        def record_transaction: (
+          String participant_id_or_email,
+          id: String,
+          currency: String,
+          gross_amount: Integer,
+          ?amount_cash_net: Integer,
+          ?amount_paid: Integer,
+          ?charge_id: String,
+          ?customer_id: String,
+          ?description: String,
+          ?external_id: String,
+          ?invoice_id: String,
+          ?invoice_subtotal_excluding_tax: Integer,
+          ?invoice_total: Integer,
+          ?invoice_total_excluding_tax: Integer,
+          ?net_amount: Integer,
+          ?order_id: String,
+          ?paid_at: Integer,
+          ?payment_id: String,
+          ?payment_intent_id: String,
+          ?subscription_id: String,
+          ?tax_amount: Integer,
+          ?total_tax_amount: Integer,
+          ?total_tax_amounts: ::Array[::Hash[Symbol, top]],
+          ?total_taxes: ::Array[::Hash[Symbol, top]],
+          ?transaction_id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::participant_record_transaction_response
+
+        def send_invites: (
+          String participant_id_or_email,
+          id: String,
+          email_addresses: ::Array[String],
+          message_text: String,
+          subject_text: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::ParticipantSendInvitesResponse
+
+        def trigger_referral: (
+          String participant_id_or_email,
+          id: String,
+          ?request_options: Growsurf::request_opts
+        ) -> Growsurf::Models::Campaign::ParticipantTriggerReferralResponse
+
+        def initialize: (client: Growsurf::Client) -> void
+      end
+    end
+  end
+end

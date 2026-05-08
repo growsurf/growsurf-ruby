@@ -1,0 +1,166 @@
+module Growsurf
+  module Models
+    type participant_commission_list =
+      {
+        commissions: ::Array[Growsurf::ParticipantCommissionList::Commission],
+        limit: Integer,
+        next_id: String?
+      }
+
+    class ParticipantCommissionList < Growsurf::Internal::Type::BaseModel
+      attr_accessor commissions: ::Array[Growsurf::ParticipantCommissionList::Commission]
+
+      attr_accessor limit: Integer
+
+      attr_accessor next_id: String?
+
+      def initialize: (
+        commissions: ::Array[Growsurf::ParticipantCommissionList::Commission],
+        limit: Integer,
+        next_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        commissions: ::Array[Growsurf::ParticipantCommissionList::Commission],
+        limit: Integer,
+        next_id: String?
+      }
+
+      type commission =
+        {
+          id: String,
+          amount: Integer,
+          created_at: Integer,
+          currency_iso: String,
+          referred_id: String,
+          referrer_id: String,
+          sale_amount: Integer,
+          status: Growsurf::Models::ParticipantCommissionList::Commission::status,
+          amount_in_campaign_currency: Integer?,
+          approved_at: Integer,
+          campaign_currency_iso: String?,
+          exchange_rate: Float?,
+          exchange_rate_at: Integer,
+          fx_error: String?,
+          hold_duration: Integer?,
+          paid_at: Integer,
+          payout_queued_at: Integer,
+          provider: String?,
+          reversed_at: Integer,
+          sale_amount_amount_in_campaign_currency: Integer?
+        }
+
+      class Commission < Growsurf::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor amount: Integer
+
+        attr_accessor created_at: Integer
+
+        attr_accessor currency_iso: String
+
+        attr_accessor referred_id: String
+
+        attr_accessor referrer_id: String
+
+        attr_accessor sale_amount: Integer
+
+        attr_accessor status: Growsurf::Models::ParticipantCommissionList::Commission::status
+
+        attr_accessor amount_in_campaign_currency: Integer?
+
+        attr_reader approved_at: Integer?
+
+        def approved_at=: (Integer) -> Integer
+
+        attr_accessor campaign_currency_iso: String?
+
+        attr_accessor exchange_rate: Float?
+
+        attr_reader exchange_rate_at: Integer?
+
+        def exchange_rate_at=: (Integer) -> Integer
+
+        attr_accessor fx_error: String?
+
+        attr_accessor hold_duration: Integer?
+
+        attr_reader paid_at: Integer?
+
+        def paid_at=: (Integer) -> Integer
+
+        attr_reader payout_queued_at: Integer?
+
+        def payout_queued_at=: (Integer) -> Integer
+
+        attr_accessor provider: String?
+
+        attr_reader reversed_at: Integer?
+
+        def reversed_at=: (Integer) -> Integer
+
+        attr_accessor sale_amount_amount_in_campaign_currency: Integer?
+
+        def initialize: (
+          id: String,
+          amount: Integer,
+          created_at: Integer,
+          currency_iso: String,
+          referred_id: String,
+          referrer_id: String,
+          sale_amount: Integer,
+          status: Growsurf::Models::ParticipantCommissionList::Commission::status,
+          ?amount_in_campaign_currency: Integer?,
+          ?approved_at: Integer,
+          ?campaign_currency_iso: String?,
+          ?exchange_rate: Float?,
+          ?exchange_rate_at: Integer,
+          ?fx_error: String?,
+          ?hold_duration: Integer?,
+          ?paid_at: Integer,
+          ?payout_queued_at: Integer,
+          ?provider: String?,
+          ?reversed_at: Integer,
+          ?sale_amount_amount_in_campaign_currency: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          amount: Integer,
+          created_at: Integer,
+          currency_iso: String,
+          referred_id: String,
+          referrer_id: String,
+          sale_amount: Integer,
+          status: Growsurf::Models::ParticipantCommissionList::Commission::status,
+          amount_in_campaign_currency: Integer?,
+          approved_at: Integer,
+          campaign_currency_iso: String?,
+          exchange_rate: Float?,
+          exchange_rate_at: Integer,
+          fx_error: String?,
+          hold_duration: Integer?,
+          paid_at: Integer,
+          payout_queued_at: Integer,
+          provider: String?,
+          reversed_at: Integer,
+          sale_amount_amount_in_campaign_currency: Integer?
+        }
+
+        type status = :PENDING | :APPROVED | :PAID | :REVERSED | :DELETED
+
+        module Status
+          extend Growsurf::Internal::Type::Enum
+
+          PENDING: :PENDING
+          APPROVED: :APPROVED
+          PAID: :PAID
+          REVERSED: :REVERSED
+          DELETED: :DELETED
+
+          def self?.values: -> ::Array[Growsurf::Models::ParticipantCommissionList::Commission::status]
+        end
+      end
+    end
+  end
+end

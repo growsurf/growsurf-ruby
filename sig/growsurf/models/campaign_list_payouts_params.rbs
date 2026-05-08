@@ -1,0 +1,62 @@
+module Growsurf
+  module Models
+    type campaign_list_payouts_params =
+      {
+        id: String,
+        limit: Integer,
+        next_id: String,
+        status: Growsurf::Models::CampaignListPayoutsParams::status
+      }
+      & Growsurf::Internal::Type::request_parameters
+
+    class CampaignListPayoutsParams < Growsurf::Internal::Type::BaseModel
+      extend Growsurf::Internal::Type::RequestParameters::Converter
+      include Growsurf::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader next_id: String?
+
+      def next_id=: (String) -> String
+
+      attr_reader status: Growsurf::Models::CampaignListPayoutsParams::status?
+
+      def status=: (
+        Growsurf::Models::CampaignListPayoutsParams::status
+      ) -> Growsurf::Models::CampaignListPayoutsParams::status
+
+      def initialize: (
+        id: String,
+        ?limit: Integer,
+        ?next_id: String,
+        ?status: Growsurf::Models::CampaignListPayoutsParams::status,
+        ?request_options: Growsurf::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        limit: Integer,
+        next_id: String,
+        status: Growsurf::Models::CampaignListPayoutsParams::status,
+        request_options: Growsurf::RequestOptions
+      }
+
+      type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED
+
+      module Status
+        extend Growsurf::Internal::Type::Enum
+
+        UPCOMING: :UPCOMING
+        QUEUED: :QUEUED
+        ISSUED: :ISSUED
+        FAILED: :FAILED
+
+        def self?.values: -> ::Array[Growsurf::Models::CampaignListPayoutsParams::status]
+      end
+    end
+  end
+end
