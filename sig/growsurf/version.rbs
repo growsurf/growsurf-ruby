@@ -1,3 +1,0 @@
-module Growsurf
-  VERSION: String
-end

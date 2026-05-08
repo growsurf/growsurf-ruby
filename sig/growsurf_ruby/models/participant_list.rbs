@@ -1,0 +1,30 @@
+module GrowsurfRuby
+  module Models
+    type participant_list =
+      {
+        limit: Integer,
+        next_id: String?,
+        participants: ::Array[GrowsurfRuby::Campaign::CampaignParticipant]
+      }
+
+    class ParticipantList < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor limit: Integer
+
+      attr_accessor next_id: String?
+
+      attr_accessor participants: ::Array[GrowsurfRuby::Campaign::CampaignParticipant]
+
+      def initialize: (
+        limit: Integer,
+        next_id: String?,
+        participants: ::Array[GrowsurfRuby::Campaign::CampaignParticipant]
+      ) -> void
+
+      def to_hash: -> {
+        limit: Integer,
+        next_id: String?,
+        participants: ::Array[GrowsurfRuby::Campaign::CampaignParticipant]
+      }
+    end
+  end
+end

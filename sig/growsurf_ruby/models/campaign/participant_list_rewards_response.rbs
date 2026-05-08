@@ -1,0 +1,32 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_list_rewards_response =
+        {
+          limit: Integer,
+          next_id: String?,
+          rewards: ::Array[GrowsurfRuby::Campaign::ParticipantReward]
+        }
+
+      class ParticipantListRewardsResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor limit: Integer
+
+        attr_accessor next_id: String?
+
+        attr_accessor rewards: ::Array[GrowsurfRuby::Campaign::ParticipantReward]
+
+        def initialize: (
+          limit: Integer,
+          next_id: String?,
+          rewards: ::Array[GrowsurfRuby::Campaign::ParticipantReward]
+        ) -> void
+
+        def to_hash: -> {
+          limit: Integer,
+          next_id: String?,
+          rewards: ::Array[GrowsurfRuby::Campaign::ParticipantReward]
+        }
+      end
+    end
+  end
+end

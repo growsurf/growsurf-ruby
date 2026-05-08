@@ -1,0 +1,69 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_list_payouts_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantListPayoutsParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader next_id: String?
+
+        def next_id=: (String) -> String
+
+        attr_reader status: GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status?
+
+        def status=: (
+          GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?limit: Integer,
+          ?next_id: String,
+          ?status: GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          limit: Integer,
+          next_id: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED
+
+        module Status
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          UPCOMING: :UPCOMING
+          QUEUED: :QUEUED
+          ISSUED: :ISSUED
+          FAILED: :FAILED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status]
+        end
+      end
+    end
+  end
+end

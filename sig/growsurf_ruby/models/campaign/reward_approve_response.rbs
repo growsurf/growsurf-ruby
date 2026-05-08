@@ -1,0 +1,15 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_approve_response = { success: bool }
+
+      class RewardApproveResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor success: bool
+
+        def initialize: (success: bool) -> void
+
+        def to_hash: -> { success: bool }
+      end
+    end
+  end
+end

@@ -1,0 +1,3 @@
+module GrowsurfRuby
+  VERSION: String
+end

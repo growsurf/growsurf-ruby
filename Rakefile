@@ -162,7 +162,7 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- growsurf.gemspec])
+  sh(*%w[gem build -- growsurf_ruby.gemspec])
   rm_rf(ignore_file)
 end
 

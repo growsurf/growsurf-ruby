@@ -1,0 +1,221 @@
+module GrowsurfRuby
+  module Models
+    type campaign_api =
+      {
+        id: String,
+        impression_count: Integer,
+        invite_count: Integer,
+        name: String,
+        participant_count: Integer,
+        referral_count: Integer,
+        rewards: ::Array[GrowsurfRuby::CampaignAPI::Reward],
+        status: GrowsurfRuby::Models::CampaignAPI::status,
+        type: GrowsurfRuby::Models::CampaignAPI::type_,
+        winner_count: Integer,
+        currency_iso: String
+      }
+
+    class CampaignAPI < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor impression_count: Integer
+
+      attr_accessor invite_count: Integer
+
+      attr_accessor name: String
+
+      attr_accessor participant_count: Integer
+
+      attr_accessor referral_count: Integer
+
+      attr_accessor rewards: ::Array[GrowsurfRuby::CampaignAPI::Reward]
+
+      attr_accessor status: GrowsurfRuby::Models::CampaignAPI::status
+
+      attr_accessor type: GrowsurfRuby::Models::CampaignAPI::type_
+
+      attr_accessor winner_count: Integer
+
+      attr_reader currency_iso: String?
+
+      def currency_iso=: (String) -> String
+
+      def initialize: (
+        id: String,
+        impression_count: Integer,
+        invite_count: Integer,
+        name: String,
+        participant_count: Integer,
+        referral_count: Integer,
+        rewards: ::Array[GrowsurfRuby::CampaignAPI::Reward],
+        status: GrowsurfRuby::Models::CampaignAPI::status,
+        type: GrowsurfRuby::Models::CampaignAPI::type_,
+        winner_count: Integer,
+        ?currency_iso: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        impression_count: Integer,
+        invite_count: Integer,
+        name: String,
+        participant_count: Integer,
+        referral_count: Integer,
+        rewards: ::Array[GrowsurfRuby::CampaignAPI::Reward],
+        status: GrowsurfRuby::Models::CampaignAPI::status,
+        type: GrowsurfRuby::Models::CampaignAPI::type_,
+        winner_count: Integer,
+        currency_iso: String
+      }
+
+      type reward =
+        {
+          id: String,
+          is_unlimited: bool,
+          metadata: ::Hash[Symbol, top],
+          type: GrowsurfRuby::Models::CampaignAPI::Reward::type_,
+          commission_structure: GrowsurfRuby::CommissionStructure?,
+          conversions_required: Integer?,
+          coupon_code: String?,
+          description: String?,
+          image_url: String?,
+          limit: Integer?,
+          limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?,
+          next_milestone_prefix: String?,
+          next_milestone_suffix: String?,
+          number_of_winners: Integer?,
+          order: Integer?,
+          referral_description: String?,
+          referred_reward_upfront: bool
+        }
+
+      class Reward < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor is_unlimited: bool
+
+        attr_accessor metadata: ::Hash[Symbol, top]
+
+        attr_accessor type: GrowsurfRuby::Models::CampaignAPI::Reward::type_
+
+        attr_accessor commission_structure: GrowsurfRuby::CommissionStructure?
+
+        attr_accessor conversions_required: Integer?
+
+        attr_accessor coupon_code: String?
+
+        attr_accessor description: String?
+
+        attr_accessor image_url: String?
+
+        attr_accessor limit: Integer?
+
+        attr_accessor limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?
+
+        attr_accessor next_milestone_prefix: String?
+
+        attr_accessor next_milestone_suffix: String?
+
+        attr_accessor number_of_winners: Integer?
+
+        attr_accessor order: Integer?
+
+        attr_accessor referral_description: String?
+
+        attr_reader referred_reward_upfront: bool?
+
+        def referred_reward_upfront=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          is_unlimited: bool,
+          metadata: ::Hash[Symbol, top],
+          type: GrowsurfRuby::Models::CampaignAPI::Reward::type_,
+          ?commission_structure: GrowsurfRuby::CommissionStructure?,
+          ?conversions_required: Integer?,
+          ?coupon_code: String?,
+          ?description: String?,
+          ?image_url: String?,
+          ?limit: Integer?,
+          ?limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?,
+          ?next_milestone_prefix: String?,
+          ?next_milestone_suffix: String?,
+          ?number_of_winners: Integer?,
+          ?order: Integer?,
+          ?referral_description: String?,
+          ?referred_reward_upfront: bool
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          is_unlimited: bool,
+          metadata: ::Hash[Symbol, top],
+          type: GrowsurfRuby::Models::CampaignAPI::Reward::type_,
+          commission_structure: GrowsurfRuby::CommissionStructure?,
+          conversions_required: Integer?,
+          coupon_code: String?,
+          description: String?,
+          image_url: String?,
+          limit: Integer?,
+          limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?,
+          next_milestone_prefix: String?,
+          next_milestone_suffix: String?,
+          number_of_winners: Integer?,
+          order: Integer?,
+          referral_description: String?,
+          referred_reward_upfront: bool
+        }
+
+        type type_ =
+          :SINGLE_SIDED | :DOUBLE_SIDED | :MILESTONE | :LEADERBOARD | :AFFILIATE
+
+        module Type
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          SINGLE_SIDED: :SINGLE_SIDED
+          DOUBLE_SIDED: :DOUBLE_SIDED
+          MILESTONE: :MILESTONE
+          LEADERBOARD: :LEADERBOARD
+          AFFILIATE: :AFFILIATE
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::Reward::type_]
+        end
+
+        type limit_duration = :IN_TOTAL | :PER_MONTH
+
+        module LimitDuration
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          IN_TOTAL: :IN_TOTAL
+          PER_MONTH: :PER_MONTH
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration]
+        end
+      end
+
+      type status = :DRAFT | :IN_PROGRESS | :COMPLETE | :DELETED
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        DRAFT: :DRAFT
+        IN_PROGRESS: :IN_PROGRESS
+        COMPLETE: :COMPLETE
+        DELETED: :DELETED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::status]
+      end
+
+      type type_ = :REFERRAL | :AFFILIATE
+
+      module Type
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        REFERRAL: :REFERRAL
+        AFFILIATE: :AFFILIATE
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::type_]
+      end
+    end
+  end
+end

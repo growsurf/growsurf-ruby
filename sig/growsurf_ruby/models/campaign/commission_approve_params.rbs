@@ -1,0 +1,30 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type commission_approve_params =
+        { id: String, commission_id: String }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class CommissionApproveParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor commission_id: String
+
+        def initialize: (
+          id: String,
+          commission_id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          commission_id: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

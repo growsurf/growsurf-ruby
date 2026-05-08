@@ -1,0 +1,136 @@
+module GrowsurfRuby
+  module Models
+    type participant_payout_list =
+      {
+        limit: Integer,
+        next_id: String?,
+        payouts: ::Array[GrowsurfRuby::ParticipantPayoutList::Payout]
+      }
+
+    class ParticipantPayoutList < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor limit: Integer
+
+      attr_accessor next_id: String?
+
+      attr_accessor payouts: ::Array[GrowsurfRuby::ParticipantPayoutList::Payout]
+
+      def initialize: (
+        limit: Integer,
+        next_id: String?,
+        payouts: ::Array[GrowsurfRuby::ParticipantPayoutList::Payout]
+      ) -> void
+
+      def to_hash: -> {
+        limit: Integer,
+        next_id: String?,
+        payouts: ::Array[GrowsurfRuby::ParticipantPayoutList::Payout]
+      }
+
+      type payout =
+        {
+          id: String,
+          amount: Integer,
+          commission_ids: ::Array[String],
+          created_at: Integer,
+          currency_iso: String,
+          participant_id: String,
+          status: GrowsurfRuby::Models::ParticipantPayoutList::Payout::status,
+          amount_in_campaign_currency: Integer?,
+          campaign_currency_iso: String?,
+          exchange_rate: Float?,
+          exchange_rate_at: Integer,
+          failed_at: Integer,
+          fx_error: String?,
+          issued_at: Integer,
+          provider: String?
+        }
+
+      class Payout < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor amount: Integer
+
+        attr_accessor commission_ids: ::Array[String]
+
+        attr_accessor created_at: Integer
+
+        attr_accessor currency_iso: String
+
+        attr_accessor participant_id: String
+
+        attr_accessor status: GrowsurfRuby::Models::ParticipantPayoutList::Payout::status
+
+        attr_accessor amount_in_campaign_currency: Integer?
+
+        attr_accessor campaign_currency_iso: String?
+
+        attr_accessor exchange_rate: Float?
+
+        attr_reader exchange_rate_at: Integer?
+
+        def exchange_rate_at=: (Integer) -> Integer
+
+        attr_reader failed_at: Integer?
+
+        def failed_at=: (Integer) -> Integer
+
+        attr_accessor fx_error: String?
+
+        attr_reader issued_at: Integer?
+
+        def issued_at=: (Integer) -> Integer
+
+        attr_accessor provider: String?
+
+        def initialize: (
+          id: String,
+          amount: Integer,
+          commission_ids: ::Array[String],
+          created_at: Integer,
+          currency_iso: String,
+          participant_id: String,
+          status: GrowsurfRuby::Models::ParticipantPayoutList::Payout::status,
+          ?amount_in_campaign_currency: Integer?,
+          ?campaign_currency_iso: String?,
+          ?exchange_rate: Float?,
+          ?exchange_rate_at: Integer,
+          ?failed_at: Integer,
+          ?fx_error: String?,
+          ?issued_at: Integer,
+          ?provider: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          amount: Integer,
+          commission_ids: ::Array[String],
+          created_at: Integer,
+          currency_iso: String,
+          participant_id: String,
+          status: GrowsurfRuby::Models::ParticipantPayoutList::Payout::status,
+          amount_in_campaign_currency: Integer?,
+          campaign_currency_iso: String?,
+          exchange_rate: Float?,
+          exchange_rate_at: Integer,
+          failed_at: Integer,
+          fx_error: String?,
+          issued_at: Integer,
+          provider: String?
+        }
+
+        type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED
+
+        module Status
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          UPCOMING: :UPCOMING
+          QUEUED: :QUEUED
+          ISSUED: :ISSUED
+          FAILED: :FAILED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::ParticipantPayoutList::Payout::status]
+        end
+      end
+    end
+  end
+end

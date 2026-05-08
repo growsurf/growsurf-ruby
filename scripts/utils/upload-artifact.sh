@@ -110,4 +110,4 @@ walk_tree "$DIST_DIR"
 echo "::endgroup::"
 
 echo -e "${GREEN}Gem artifacts uploaded to Stainless storage.${NC}"
-echo -e "\033[32mInstallation: bundle remove growsurf && bundle add growsurf --source 'https://pkg.stainless.com/s/growsurf-ruby/$SHA'\033[0m"
+echo -e "\033[32mInstallation: bundle remove growsurf-ruby && bundle add growsurf-ruby --source 'https://pkg.stainless.com/s/growsurf-ruby/$SHA'\033[0m"

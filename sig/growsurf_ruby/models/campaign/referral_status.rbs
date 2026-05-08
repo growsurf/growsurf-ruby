@@ -1,0 +1,19 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type referral_status =
+        :CREDIT_PENDING | :CREDIT_AWARDED | :CREDIT_EXPIRED | :INVITE_SENT
+
+      module ReferralStatus
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        CREDIT_PENDING: :CREDIT_PENDING
+        CREDIT_AWARDED: :CREDIT_AWARDED
+        CREDIT_EXPIRED: :CREDIT_EXPIRED
+        INVITE_SENT: :INVITE_SENT
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::referral_status]
+      end
+    end
+  end
+end

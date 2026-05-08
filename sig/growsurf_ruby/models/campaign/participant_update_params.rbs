@@ -1,0 +1,104 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_update_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          email: String,
+          first_name: String,
+          last_name: String,
+          metadata: ::Hash[Symbol, top],
+          referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
+          referred_by: String,
+          unsubscribed: bool,
+          vanity_keys: ::Array[String]
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantUpdateParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader email: String?
+
+        def email=: (String) -> String
+
+        attr_reader first_name: String?
+
+        def first_name=: (String) -> String
+
+        attr_reader last_name: String?
+
+        def last_name=: (String) -> String
+
+        attr_reader metadata: ::Hash[Symbol, top]?
+
+        def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status?
+
+        def referral_status=: (
+          GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status
+
+        attr_reader referred_by: String?
+
+        def referred_by=: (String) -> String
+
+        attr_reader unsubscribed: bool?
+
+        def unsubscribed=: (bool) -> bool
+
+        attr_reader vanity_keys: ::Array[String]?
+
+        def vanity_keys=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?email: String,
+          ?first_name: String,
+          ?last_name: String,
+          ?metadata: ::Hash[Symbol, top],
+          ?referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
+          ?referred_by: String,
+          ?unsubscribed: bool,
+          ?vanity_keys: ::Array[String],
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          email: String,
+          first_name: String,
+          last_name: String,
+          metadata: ::Hash[Symbol, top],
+          referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
+          referred_by: String,
+          unsubscribed: bool,
+          vanity_keys: ::Array[String],
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        type referral_status =
+          :CREDIT_PENDING | :CREDIT_AWARDED | :CREDIT_EXPIRED
+
+        module ReferralStatus
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          CREDIT_PENDING: :CREDIT_PENDING
+          CREDIT_AWARDED: :CREDIT_AWARDED
+          CREDIT_EXPIRED: :CREDIT_EXPIRED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status]
+        end
+      end
+    end
+  end
+end
