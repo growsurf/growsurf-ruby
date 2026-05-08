@@ -1,0 +1,15 @@
+module GrowsurfRuby
+  module Models
+    type campaign_list_params =
+      {  } & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignListParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: GrowsurfRuby::request_opts) -> void
+
+      def to_hash: -> { request_options: GrowsurfRuby::RequestOptions }
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type fraud_risk_level = :LOW | :MEDIUM | :HIGH
+
+      module FraudRiskLevel
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        LOW: :LOW
+        MEDIUM: :MEDIUM
+        HIGH: :HIGH
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::fraud_risk_level]
+      end
+    end
+  end
+end

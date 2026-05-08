@@ -5,7 +5,7 @@ include:
   - 'Rakefile'
   - 'examples/**/*.rb'
   - 'lib/**/*.rb'
-  - 'test/growsurf/resource_namespaces.rb'
-  - 'test/growsurf/test_helper.rb'
+  - 'test/growsurf_ruby/resource_namespaces.rb'
+  - 'test/growsurf_ruby/test_helper.rb'
 exclude:
   - 'rbi/**/*'

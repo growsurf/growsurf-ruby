@@ -1,0 +1,9 @@
+module GrowsurfRuby
+  module Internal
+    extend GrowsurfRuby::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | GrowsurfRuby::FilePart
+
+    OMIT: Object
+  end
+end

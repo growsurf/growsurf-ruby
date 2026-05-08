@@ -1,0 +1,76 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      attr_reader participant: GrowsurfRuby::Resources::Campaign::Participant
+
+      attr_reader reward: GrowsurfRuby::Resources::Campaign::Reward
+
+      attr_reader commission: GrowsurfRuby::Resources::Campaign::Commission
+
+      def retrieve: (
+        String id,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::CampaignAPI
+
+      def list: (
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::CampaignListResponse
+
+      def list_commissions: (
+        String id,
+        ?limit: Integer,
+        ?next_id: String,
+        ?status: GrowsurfRuby::Models::CampaignListCommissionsParams::status,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::ParticipantCommissionList
+
+      def list_leaderboard: (
+        String id,
+        ?is_monthly: bool,
+        ?leaderboard_type: GrowsurfRuby::Models::CampaignListLeaderboardParams::leaderboard_type,
+        ?limit: Integer,
+        ?next_id: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::ParticipantList
+
+      def list_participants: (
+        String id,
+        ?limit: Integer,
+        ?next_id: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::ParticipantList
+
+      def list_payouts: (
+        String id,
+        ?limit: Integer,
+        ?next_id: String,
+        ?status: GrowsurfRuby::Models::CampaignListPayoutsParams::status,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::ParticipantPayoutList
+
+      def list_referrals: (
+        String id,
+        ?desc: bool,
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?limit: Integer,
+        ?next_id: String,
+        ?offset: Integer,
+        ?referral_status: GrowsurfRuby::Models::Campaign::referral_status,
+        ?sort_by: GrowsurfRuby::Models::CampaignListReferralsParams::sort_by,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::ReferralList
+
+      def retrieve_analytics: (
+        String id,
+        ?days: Integer,
+        ?end_date: Integer,
+        ?start_date: Integer,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse
+
+      def initialize: (client: GrowsurfRuby::Client) -> void
+    end
+  end
+end

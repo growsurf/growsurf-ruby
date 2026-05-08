@@ -1,0 +1,266 @@
+# frozen_string_literal: true
+
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      # @return [GrowsurfRuby::Resources::Campaign::Participant]
+      attr_reader :participant
+
+      # Participant reward retrieval and manual reward operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Reward]
+      attr_reader :reward
+
+      # Affiliate transaction, commission, and payout operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Commission]
+      attr_reader :commission
+
+      # Retrieves a program for the given program ID.
+      #
+      # @overload retrieve(id, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignAPI]
+      #
+      # @see GrowsurfRuby::Models::CampaignRetrieveParams
+      def retrieve(id, params = {})
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s", id],
+          model: GrowsurfRuby::CampaignAPI,
+          options: params[:request_options]
+        )
+      end
+
+      # Retrieves a list of your programs. Deleted programs are not returned.
+      #
+      # @overload list(request_options: {})
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignListResponse]
+      #
+      # @see GrowsurfRuby::Models::CampaignListParams
+      def list(params = {})
+        @client.request(
+          method: :get,
+          path: "campaigns",
+          model: GrowsurfRuby::Models::CampaignListResponse,
+          options: params[:request_options]
+        )
+      end
+
+      # Retrieves a paged list of all participant commissions in an affiliate program.
+      #
+      # @overload list_commissions(id, limit: nil, next_id: nil, status: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param limit [Integer] Number of results to return. Maximum 100.
+      #
+      # @param next_id [String] ID to start the next paged result set with.
+      #
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignListCommissionsParams::Status] Participant commission status.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::ParticipantCommissionList]
+      #
+      # @see GrowsurfRuby::Models::CampaignListCommissionsParams
+      def list_commissions(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListCommissionsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/commissions", id],
+          query: query.transform_keys(next_id: "nextId"),
+          model: GrowsurfRuby::ParticipantCommissionList,
+          options: options
+        )
+      end
+
+      # Retrieves participants in leaderboard order for the specified leaderboard type.
+      #
+      # @overload list_leaderboard(id, is_monthly: nil, leaderboard_type: nil, limit: nil, next_id: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param is_monthly [Boolean] Deprecated. Use `leaderboardType=CURRENT_MONTH` instead.
+      #
+      # @param leaderboard_type [Symbol, GrowsurfRuby::Models::CampaignListLeaderboardParams::LeaderboardType] Leaderboard ordering mode.
+      #
+      # @param limit [Integer] Number of results to return. Maximum 100.
+      #
+      # @param next_id [String] ID to start the next paged result set with.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::ParticipantList]
+      #
+      # @see GrowsurfRuby::Models::CampaignListLeaderboardParams
+      def list_leaderboard(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListLeaderboardParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/leaderboard", id],
+          query: query.transform_keys(
+            is_monthly: "isMonthly",
+            leaderboard_type: "leaderboardType",
+            next_id: "nextId"
+          ),
+          model: GrowsurfRuby::ParticipantList,
+          options: options
+        )
+      end
+
+      # Retrieves a paged list of participants in a program.
+      #
+      # @overload list_participants(id, limit: nil, next_id: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param limit [Integer] Number of results to return. Maximum 100.
+      #
+      # @param next_id [String] ID to start the next paged result set with.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::ParticipantList]
+      #
+      # @see GrowsurfRuby::Models::CampaignListParticipantsParams
+      def list_participants(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListParticipantsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/participants", id],
+          query: query.transform_keys(next_id: "nextId"),
+          model: GrowsurfRuby::ParticipantList,
+          options: options
+        )
+      end
+
+      # Retrieves a paged list of all participant payouts in an affiliate program.
+      #
+      # @overload list_payouts(id, limit: nil, next_id: nil, status: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param limit [Integer] Number of results to return. Maximum 100.
+      #
+      # @param next_id [String] ID to start the next paged result set with.
+      #
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignListPayoutsParams::Status] Participant payout status.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::ParticipantPayoutList]
+      #
+      # @see GrowsurfRuby::Models::CampaignListPayoutsParams
+      def list_payouts(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListPayoutsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/payouts", id],
+          query: query.transform_keys(next_id: "nextId"),
+          model: GrowsurfRuby::ParticipantPayoutList,
+          options: options
+        )
+      end
+
+      # Retrieves a list of all referrals and email invites made by participants in a
+      # program.
+      #
+      # @overload list_referrals(id, desc: nil, email: nil, first_name: nil, last_name: nil, limit: nil, next_id: nil, offset: nil, referral_status: nil, sort_by: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param desc [Boolean] Return results in descending order when true.
+      #
+      # @param email [String] URL-encoded email value to filter referral results.
+      #
+      # @param first_name [String] First name value to filter results.
+      #
+      # @param last_name [String] Last name value to filter results.
+      #
+      # @param limit [Integer] Number of results to return. Maximum 100.
+      #
+      # @param next_id [String] ID to start the next paged result set with.
+      #
+      # @param offset [Integer] Offset number used to skip through a result set.
+      #
+      # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::ReferralStatus]
+      #
+      # @param sort_by [Symbol, GrowsurfRuby::Models::CampaignListReferralsParams::SortBy] Field used to sort referral results.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::ReferralList]
+      #
+      # @see GrowsurfRuby::Models::CampaignListReferralsParams
+      def list_referrals(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListReferralsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/referrals", id],
+          query: query.transform_keys(
+            first_name: "firstName",
+            last_name: "lastName",
+            next_id: "nextId",
+            referral_status: "referralStatus",
+            sort_by: "sortBy"
+          ),
+          model: GrowsurfRuby::ReferralList,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams} for more details.
+      #
+      # Retrieves analytics for a program.
+      #
+      # @overload retrieve_analytics(id, days: nil, end_date: nil, start_date: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param days [Integer] Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
+      #
+      # @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
+      #
+      # @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse]
+      #
+      # @see GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams
+      def retrieve_analytics(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignRetrieveAnalyticsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/analytics", id],
+          query: query.transform_keys(end_date: "endDate", start_date: "startDate"),
+          model: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse,
+          options: options
+        )
+      end
+
+      # @api private
+      #
+      # @param client [GrowsurfRuby::Client]
+      def initialize(client:)
+        @client = client
+        @participant = GrowsurfRuby::Resources::Campaign::Participant.new(client: client)
+        @reward = GrowsurfRuby::Resources::Campaign::Reward.new(client: client)
+        @commission = GrowsurfRuby::Resources::Campaign::Commission.new(client: client)
+      end
+    end
+  end
+end

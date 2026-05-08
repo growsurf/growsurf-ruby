@@ -60,7 +60,7 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/growsurf/version.rb",
+  "version-file": "lib/growsurf_ruby/version.rb",
   "extra-files": [
     {
       "type": "ruby-readme",

@@ -1,0 +1,48 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_send_invites_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          email_addresses: ::Array[String],
+          message_text: String,
+          subject_text: String
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantSendInvitesParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_accessor email_addresses: ::Array[String]
+
+        attr_accessor message_text: String
+
+        attr_accessor subject_text: String
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          email_addresses: ::Array[String],
+          message_text: String,
+          subject_text: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          email_addresses: ::Array[String],
+          message_text: String,
+          subject_text: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

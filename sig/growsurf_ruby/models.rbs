@@ -1,0 +1,31 @@
+module GrowsurfRuby
+  module Campaign = GrowsurfRuby::Models::Campaign
+
+  class CampaignAPI = GrowsurfRuby::Models::CampaignAPI
+
+  class CampaignListCommissionsParams = GrowsurfRuby::Models::CampaignListCommissionsParams
+
+  class CampaignListLeaderboardParams = GrowsurfRuby::Models::CampaignListLeaderboardParams
+
+  class CampaignListParams = GrowsurfRuby::Models::CampaignListParams
+
+  class CampaignListParticipantsParams = GrowsurfRuby::Models::CampaignListParticipantsParams
+
+  class CampaignListPayoutsParams = GrowsurfRuby::Models::CampaignListPayoutsParams
+
+  class CampaignListReferralsParams = GrowsurfRuby::Models::CampaignListReferralsParams
+
+  class CampaignRetrieveAnalyticsParams = GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams
+
+  class CampaignRetrieveParams = GrowsurfRuby::Models::CampaignRetrieveParams
+
+  class CommissionStructure = GrowsurfRuby::Models::CommissionStructure
+
+  class ParticipantCommissionList = GrowsurfRuby::Models::ParticipantCommissionList
+
+  class ParticipantList = GrowsurfRuby::Models::ParticipantList
+
+  class ParticipantPayoutList = GrowsurfRuby::Models::ParticipantPayoutList
+
+  class ReferralList = GrowsurfRuby::Models::ReferralList
+end
