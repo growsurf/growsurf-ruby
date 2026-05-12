@@ -141,6 +141,34 @@ module GrowsurfRuby
           )
         end
 
+        # Creates a participant-scoped token for GrowSurf mobile SDK participant
+        # endpoints. The program must have mobile SDK access enabled.
+        #
+        # @overload create_mobile_token(participant_id_or_email, id:, request_options: {})
+        #
+        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        #
+        # @param id [String] GrowSurf program ID.
+        #
+        # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [GrowsurfRuby::Models::Campaign::ParticipantCreateMobileTokenResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::ParticipantCreateMobileTokenParams
+        def create_mobile_token(participant_id_or_email, params)
+          parsed, options = GrowsurfRuby::Campaign::ParticipantCreateMobileTokenParams.dump_request(params)
+          id =
+            parsed.delete(:id) do
+              raise ArgumentError.new("missing required path argument #{_1}")
+            end
+          @client.request(
+            method: :post,
+            path: ["campaign/%1$s/participant/%2$s/mobile-token", id, participant_id_or_email],
+            model: GrowsurfRuby::Models::Campaign::ParticipantCreateMobileTokenResponse,
+            options: options
+          )
+        end
+
         # Retrieves a paged list of commissions earned by a participant.
         #
         # @overload list_commissions(participant_id_or_email, id:, limit: nil, next_id: nil, status: nil, request_options: {})

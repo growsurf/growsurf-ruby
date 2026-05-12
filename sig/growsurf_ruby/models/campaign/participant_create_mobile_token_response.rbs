@@ -1,0 +1,18 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_create_mobile_token_response =
+        { expires_in: Integer, participant_token: String }
+
+      class ParticipantCreateMobileTokenResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor expires_in: Integer
+
+        attr_accessor participant_token: String
+
+        def initialize: (expires_in: Integer, participant_token: String) -> void
+
+        def to_hash: -> { expires_in: Integer, participant_token: String }
+      end
+    end
+  end
+end
