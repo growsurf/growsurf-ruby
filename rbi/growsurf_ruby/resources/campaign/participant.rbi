@@ -114,6 +114,26 @@ module GrowsurfRuby
         )
         end
 
+        # Creates a participant-scoped token for GrowSurf mobile SDK participant
+        # endpoints. The program must have mobile SDK access enabled.
+        sig do
+          params(
+            participant_id_or_email: String,
+            id: String,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(
+            GrowsurfRuby::Models::Campaign::ParticipantCreateMobileTokenResponse
+          )
+        end
+        def create_mobile_token(
+          # GrowSurf participant ID or URL-encoded participant email address.
+          participant_id_or_email,
+          # GrowSurf program ID.
+          id:,
+          request_options: {}
+        )
+        end
+
         # Retrieves a paged list of commissions earned by a participant.
         sig do
           params(
