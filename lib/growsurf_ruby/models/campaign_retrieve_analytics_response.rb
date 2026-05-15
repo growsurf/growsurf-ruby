@@ -26,10 +26,20 @@ module GrowsurfRuby
 
       # @see GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse#analytics
       class Analytics < GrowsurfRuby::Internal::Type::BaseModel
+        # @!attribute android_native_shares
+        #
+        #   @return [Integer, nil]
+        optional :android_native_shares, Integer, api_name: :androidNativeShares
+
         # @!attribute bluesky_shares
         #
         #   @return [Integer, nil]
         optional :bluesky_shares, Integer, api_name: :blueskyShares
+
+        # @!attribute copy_ref_link_shares
+        #
+        #   @return [Integer, nil]
+        optional :copy_ref_link_shares, Integer, api_name: :copyRefLinkShares
 
         # @!attribute email_shares
         #
@@ -50,6 +60,11 @@ module GrowsurfRuby
         #
         #   @return [Integer, nil]
         optional :invites, Integer
+
+        # @!attribute ios_native_shares
+        #
+        #   @return [Integer, nil]
+        optional :ios_native_shares, Integer, api_name: :iosNativeShares
 
         # @!attribute linked_in_shares
         #
@@ -155,12 +170,16 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :whats_app_shares, Integer, api_name: :whatsAppShares
 
-        # @!method initialize(bluesky_shares: nil, email_shares: nil, facebook_shares: nil, impressions: nil, invites: nil, linked_in_shares: nil, messenger_shares: nil, participants: nil, pinterest_shares: nil, qrcode_shares: nil, reddit_shares: nil, referral_credit_expireds: nil, referral_credit_pendings: nil, referrals: nil, sms_shares: nil, telegram_shares: nil, threads_shares: nil, total_commission_count: nil, total_commissions: nil, total_revenue: nil, tumblr_shares: nil, twitter_shares: nil, unique_impressions: nil, wechat_shares: nil, whats_app_shares: nil)
+        # @!method initialize(android_native_shares: nil, bluesky_shares: nil, copy_ref_link_shares: nil, email_shares: nil, facebook_shares: nil, impressions: nil, invites: nil, ios_native_shares: nil, linked_in_shares: nil, messenger_shares: nil, participants: nil, pinterest_shares: nil, qrcode_shares: nil, reddit_shares: nil, referral_credit_expireds: nil, referral_credit_pendings: nil, referrals: nil, sms_shares: nil, telegram_shares: nil, threads_shares: nil, total_commission_count: nil, total_commissions: nil, total_revenue: nil, tumblr_shares: nil, twitter_shares: nil, unique_impressions: nil, wechat_shares: nil, whats_app_shares: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics} for more
         #   details.
         #
+        #   @param android_native_shares [Integer]
+        #
         #   @param bluesky_shares [Integer]
+        #
+        #   @param copy_ref_link_shares [Integer]
         #
         #   @param email_shares [Integer]
         #
@@ -169,6 +188,8 @@ module GrowsurfRuby
         #   @param impressions [Integer]
         #
         #   @param invites [Integer]
+        #
+        #   @param ios_native_shares [Integer]
         #
         #   @param linked_in_shares [Integer]
         #
