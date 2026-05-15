@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.0 (2026-05-15)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/growsurf/growsurf-ruby/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([bc04ef1](https://github.com/growsurf/growsurf-ruby/commit/bc04ef142661cac35875e2d602c556d7a88c8298))
+
+
+### Bug Fixes
+
+* **client:** elide content type header on requests without body ([b97e5fd](https://github.com/growsurf/growsurf-ruby/commit/b97e5fd6e4e4874cb9aeaa03eec2fd99d9325107))
+
 ## 0.1.1 (2026-05-13)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/growsurf/growsurf-ruby/compare/v0.1.0...v0.1.1)
