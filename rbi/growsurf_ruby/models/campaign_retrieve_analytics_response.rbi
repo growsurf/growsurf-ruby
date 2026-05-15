@@ -66,10 +66,22 @@ module GrowsurfRuby
           end
 
         sig { returns(T.nilable(Integer)) }
+        attr_reader :android_native_shares
+
+        sig { params(android_native_shares: Integer).void }
+        attr_writer :android_native_shares
+
+        sig { returns(T.nilable(Integer)) }
         attr_reader :bluesky_shares
 
         sig { params(bluesky_shares: Integer).void }
         attr_writer :bluesky_shares
+
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :copy_ref_link_shares
+
+        sig { params(copy_ref_link_shares: Integer).void }
+        attr_writer :copy_ref_link_shares
 
         sig { returns(T.nilable(Integer)) }
         attr_reader :email_shares
@@ -94,6 +106,12 @@ module GrowsurfRuby
 
         sig { params(invites: Integer).void }
         attr_writer :invites
+
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :ios_native_shares
+
+        sig { params(ios_native_shares: Integer).void }
+        attr_writer :ios_native_shares
 
         sig { returns(T.nilable(Integer)) }
         attr_reader :linked_in_shares
@@ -221,11 +239,14 @@ module GrowsurfRuby
 
         sig do
           params(
+            android_native_shares: Integer,
             bluesky_shares: Integer,
+            copy_ref_link_shares: Integer,
             email_shares: Integer,
             facebook_shares: Integer,
             impressions: Integer,
             invites: Integer,
+            ios_native_shares: Integer,
             linked_in_shares: Integer,
             messenger_shares: Integer,
             participants: Integer,
@@ -249,11 +270,14 @@ module GrowsurfRuby
           ).returns(T.attached_class)
         end
         def self.new(
+          android_native_shares: nil,
           bluesky_shares: nil,
+          copy_ref_link_shares: nil,
           email_shares: nil,
           facebook_shares: nil,
           impressions: nil,
           invites: nil,
+          ios_native_shares: nil,
           linked_in_shares: nil,
           messenger_shares: nil,
           participants: nil,
@@ -284,11 +308,14 @@ module GrowsurfRuby
         sig do
           override.returns(
             {
+              android_native_shares: Integer,
               bluesky_shares: Integer,
+              copy_ref_link_shares: Integer,
               email_shares: Integer,
               facebook_shares: Integer,
               impressions: Integer,
               invites: Integer,
+              ios_native_shares: Integer,
               linked_in_shares: Integer,
               messenger_shares: Integer,
               participants: Integer,
