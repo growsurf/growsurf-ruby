@@ -16,6 +16,19 @@ module GrowsurfRuby
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::Models::CampaignListResponse
 
+      def create_mobile_participant_token: (
+        String id,
+        email: String,
+        ?fingerprint: String,
+        ?first_name: String,
+        ?ip_address: String,
+        ?last_name: String,
+        ?metadata: ::Hash[Symbol, top],
+        ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+        ?referred_by: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenResponse
+
       def list_commissions: (
         String id,
         ?limit: Integer,

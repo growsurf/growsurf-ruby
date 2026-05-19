@@ -52,6 +52,47 @@ module GrowsurfRuby
         )
       end
 
+      # Creates or returns a participant using the same input behavior as Add
+      # Participant, then returns a participant-scoped token for GrowSurf mobile SDK
+      # participant endpoints. Use this endpoint from your backend after your mobile app
+      # authenticates a signed-in user. The program must have mobile SDK access enabled.
+      #
+      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, referral_status: nil, referred_by: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param email [String]
+      #
+      # @param fingerprint [String]
+      #
+      # @param first_name [String]
+      #
+      # @param ip_address [String]
+      #
+      # @param last_name [String]
+      #
+      # @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
+      #
+      # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus]
+      #
+      # @param referred_by [String] Referrer participant ID or email address.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenResponse]
+      #
+      # @see GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams
+      def create_mobile_participant_token(id, params)
+        parsed, options = GrowsurfRuby::CampaignCreateMobileParticipantTokenParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["campaign/%1$s/mobile-participant-token", id],
+          body: parsed,
+          model: GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenResponse,
+          options: options
+        )
+      end
+
       # Retrieves a paged list of all participant commissions in an affiliate program.
       #
       # @overload list_commissions(id, limit: nil, next_id: nil, status: nil, request_options: {})

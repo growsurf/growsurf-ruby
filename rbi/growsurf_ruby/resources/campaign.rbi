@@ -37,6 +37,44 @@ module GrowsurfRuby
       def list(request_options: {})
       end
 
+      # Creates or returns a participant using the same input behavior as Add
+      # Participant, then returns a participant-scoped token for GrowSurf mobile SDK
+      # participant endpoints. Use this endpoint from your backend after your mobile app
+      # authenticates a signed-in user. The program must have mobile SDK access enabled.
+      sig do
+        params(
+          id: String,
+          email: String,
+          fingerprint: String,
+          first_name: String,
+          ip_address: String,
+          last_name: String,
+          metadata: T::Hash[Symbol, T.anything],
+          referral_status:
+            GrowsurfRuby::Campaign::Create::ReferralStatus::OrSymbol,
+          referred_by: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(
+          GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenResponse
+        )
+      end
+      def create_mobile_participant_token(
+        # GrowSurf program ID.
+        id,
+        email:,
+        fingerprint: nil,
+        first_name: nil,
+        ip_address: nil,
+        last_name: nil,
+        # Shallow custom metadata object.
+        metadata: nil,
+        referral_status: nil,
+        # Referrer participant ID or email address.
+        referred_by: nil,
+        request_options: {}
+      )
+      end
+
       # Retrieves a paged list of all participant commissions in an affiliate program.
       sig do
         params(

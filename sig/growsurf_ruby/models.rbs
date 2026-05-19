@@ -3,6 +3,8 @@ module GrowsurfRuby
 
   class CampaignAPI = GrowsurfRuby::Models::CampaignAPI
 
+  class CampaignCreateMobileParticipantTokenParams = GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams
+
   class CampaignListCommissionsParams = GrowsurfRuby::Models::CampaignListCommissionsParams
 
   class CampaignListLeaderboardParams = GrowsurfRuby::Models::CampaignListLeaderboardParams

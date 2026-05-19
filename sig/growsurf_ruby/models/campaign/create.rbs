@@ -1,0 +1,84 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type create =
+        {
+          email: String,
+          fingerprint: String,
+          first_name: String,
+          ip_address: String,
+          last_name: String,
+          metadata: ::Hash[Symbol, top],
+          referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          referred_by: String
+        }
+
+      class Create < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor email: String
+
+        attr_reader fingerprint: String?
+
+        def fingerprint=: (String) -> String
+
+        attr_reader first_name: String?
+
+        def first_name=: (String) -> String
+
+        attr_reader ip_address: String?
+
+        def ip_address=: (String) -> String
+
+        attr_reader last_name: String?
+
+        def last_name=: (String) -> String
+
+        attr_reader metadata: ::Hash[Symbol, top]?
+
+        def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status?
+
+        def referral_status=: (
+          GrowsurfRuby::Models::Campaign::Create::referral_status
+        ) -> GrowsurfRuby::Models::Campaign::Create::referral_status
+
+        attr_reader referred_by: String?
+
+        def referred_by=: (String) -> String
+
+        def initialize: (
+          email: String,
+          ?fingerprint: String,
+          ?first_name: String,
+          ?ip_address: String,
+          ?last_name: String,
+          ?metadata: ::Hash[Symbol, top],
+          ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          ?referred_by: String
+        ) -> void
+
+        def to_hash: -> {
+          email: String,
+          fingerprint: String,
+          first_name: String,
+          ip_address: String,
+          last_name: String,
+          metadata: ::Hash[Symbol, top],
+          referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          referred_by: String
+        }
+
+        type referral_status = :CREDIT_PENDING | :CREDIT_AWARDED
+
+        module ReferralStatus
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          CREDIT_PENDING: :CREDIT_PENDING
+          CREDIT_AWARDED: :CREDIT_AWARDED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::Create::referral_status]
+        end
+      end
+    end
+  end
+end
