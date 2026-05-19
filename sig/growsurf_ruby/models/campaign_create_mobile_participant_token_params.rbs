@@ -1,0 +1,25 @@
+module GrowsurfRuby
+  module Models
+    type campaign_create_mobile_participant_token_params =
+      { id: String } & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignCreateMobileParticipantTokenParams < GrowsurfRuby::Models::Campaign::Create
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      def id: -> String
+
+      def id=: (String _) -> String
+
+      def initialize: (
+        id: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+    end
+  end
+end

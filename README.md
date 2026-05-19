@@ -196,25 +196,25 @@ growsurf.campaign.list(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :PENDING
-puts(GrowsurfRuby::CampaignListCommissionsParams::Status::PENDING)
+# :CREDIT_PENDING
+puts(GrowsurfRuby::Campaign::Create::ReferralStatus::CREDIT_PENDING)
 
-# Revealed type: `T.all(GrowsurfRuby::CampaignListCommissionsParams::Status, Symbol)`
-T.reveal_type(GrowsurfRuby::CampaignListCommissionsParams::Status::PENDING)
+# Revealed type: `T.all(GrowsurfRuby::Campaign::Create::ReferralStatus, Symbol)`
+T.reveal_type(GrowsurfRuby::Campaign::Create::ReferralStatus::CREDIT_PENDING)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-growsurf.campaign.list_commissions(
-  status: GrowsurfRuby::CampaignListCommissionsParams::Status::PENDING,
+growsurf.campaign.create_mobile_participant_token(
+  referral_status: GrowsurfRuby::Campaign::Create::ReferralStatus::CREDIT_PENDING,
   # …
 )
 
 # Literal values are also permissible:
-growsurf.campaign.list_commissions(
-  status: :PENDING,
+growsurf.campaign.create_mobile_participant_token(
+  referral_status: :CREDIT_PENDING,
   # …
 )
 ```

@@ -126,7 +126,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
   def test_add_required_params
     skip("Mock server tests are disabled")
 
-    response = @growsurf.campaign.participant.add("id", email: "gavin@hooli.com")
+    response = @growsurf.campaign.participant.add("id", email: "dev@stainless.com")
 
     assert_pattern do
       response => GrowsurfRuby::Campaign::CampaignParticipant
@@ -171,23 +171,6 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         unread_payouts_count: Integer | nil,
         unsubscribed: GrowsurfRuby::Internal::Type::Boolean | nil,
         vanity_keys: ^(GrowsurfRuby::Internal::Type::ArrayOf[String]) | nil
-      }
-    end
-  end
-
-  def test_create_mobile_token_required_params
-    skip("Mock server tests are disabled")
-
-    response = @growsurf.campaign.participant.create_mobile_token("participantIdOrEmail", id: "id")
-
-    assert_pattern do
-      response => GrowsurfRuby::Models::Campaign::ParticipantCreateMobileTokenResponse
-    end
-
-    assert_pattern do
-      response => {
-        expires_in: Integer,
-        participant_token: String
       }
     end
   end
