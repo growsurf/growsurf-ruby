@@ -36,16 +36,10 @@ module GrowsurfRuby
           ?ip_address: String,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
-          ?referral_status: GrowsurfRuby::Models::Campaign::ParticipantAddParams::referral_status,
+          ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
           ?referred_by: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Campaign::CampaignParticipant
-
-        def create_mobile_token: (
-          String participant_id_or_email,
-          id: String,
-          ?request_options: GrowsurfRuby::request_opts
-        ) -> GrowsurfRuby::Models::Campaign::ParticipantCreateMobileTokenResponse
 
         def list_commissions: (
           String participant_id_or_email,

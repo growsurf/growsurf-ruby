@@ -45,6 +45,25 @@ class GrowsurfRuby::Test::Resources::CampaignTest < GrowsurfRuby::Test::Resource
     end
   end
 
+  def test_create_mobile_participant_token_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.create_mobile_participant_token("id", email: "dev@stainless.com")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenResponse
+    end
+
+    assert_pattern do
+      response => {
+        expires_in: Integer,
+        is_new: GrowsurfRuby::Internal::Type::Boolean,
+        participant: GrowsurfRuby::Campaign::CampaignParticipant,
+        participant_token: String
+      }
+    end
+  end
+
   def test_list_commissions
     skip("Mock server tests are disabled")
 
