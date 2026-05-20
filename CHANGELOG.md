@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2026-05-20)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/growsurf/growsurf-ruby/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** Add Participant.mobileInstanceId ([c5ca7c3](https://github.com/growsurf/growsurf-ruby/commit/c5ca7c3334d28caf6d28afa9baf71cd9cfbfee11))
+
 ## 0.3.0 (2026-05-19)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/growsurf/growsurf-ruby/compare/v0.2.0...v0.3.0)

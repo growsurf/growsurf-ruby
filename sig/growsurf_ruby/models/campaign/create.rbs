@@ -9,6 +9,7 @@ module GrowsurfRuby
           ip_address: String,
           last_name: String,
           metadata: ::Hash[Symbol, top],
+          mobile_instance_id: String,
           referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
           referred_by: String
         }
@@ -36,6 +37,10 @@ module GrowsurfRuby
 
         def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
+        attr_reader mobile_instance_id: String?
+
+        def mobile_instance_id=: (String) -> String
+
         attr_reader referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status?
 
         def referral_status=: (
@@ -53,6 +58,7 @@ module GrowsurfRuby
           ?ip_address: String,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
+          ?mobile_instance_id: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
           ?referred_by: String
         ) -> void
@@ -64,6 +70,7 @@ module GrowsurfRuby
           ip_address: String,
           last_name: String,
           metadata: ::Hash[Symbol, top],
+          mobile_instance_id: String,
           referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
           referred_by: String
         }

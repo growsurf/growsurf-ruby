@@ -102,10 +102,13 @@ module GrowsurfRuby
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {GrowsurfRuby::Models::Campaign::ParticipantAddParams} for more details.
+        #
         # Adds a new participant to the program. If the email already exists, the existing
         # participant is returned.
         #
-        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, referral_status: nil, referred_by: nil, request_options: {})
+        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -120,6 +123,8 @@ module GrowsurfRuby
         # @param last_name [String]
         #
         # @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
+        #
+        # @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
         #
         # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus]
         #

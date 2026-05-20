@@ -117,6 +117,13 @@ module GrowsurfRuby
         #   @return [Hash{Symbol=>Object}, nil]
         optional :metadata, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
 
+        # @!attribute mobile_instance_id
+        #   App-install scoped mobile identifier used for anti-fraud matching when provided
+        #   by native mobile apps. Not stored when strict GDPR/CCPA mode is enabled.
+        #
+        #   @return [String, nil]
+        optional :mobile_instance_id, String, api_name: :mobileInstanceId, nil?: true
+
         # @!attribute monthly_referrals
         #
         #   @return [Array<String>, nil]
@@ -207,7 +214,10 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url:, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_new: nil, is_winner: nil, last_name: nil, metadata: nil, monthly_referrals: nil, notes: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
+        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url:, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_new: nil, is_winner: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {GrowsurfRuby::Models::Campaign::CampaignParticipant} for more details.
+        #
         #   @param id [String]
         #
         #   @param email [String]
@@ -249,6 +259,8 @@ module GrowsurfRuby
         #   @param last_name [String, nil]
         #
         #   @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
+        #
+        #   @param mobile_instance_id [String, nil] App-install scoped mobile identifier used for anti-fraud matching when provided
         #
         #   @param monthly_referrals [Array<String>]
         #

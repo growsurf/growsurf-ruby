@@ -36,6 +36,7 @@ module GrowsurfRuby
           ?ip_address: String,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
+          ?mobile_instance_id: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
           ?referred_by: String,
           ?request_options: GrowsurfRuby::request_opts
