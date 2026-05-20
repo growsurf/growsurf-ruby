@@ -52,12 +52,16 @@ module GrowsurfRuby
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams} for more
+      # details.
+      #
       # Creates or returns a participant using the same input behavior as Add
       # Participant, then returns a participant-scoped token for GrowSurf mobile SDK
       # participant endpoints. Use this endpoint from your backend after your mobile app
       # authenticates a signed-in user. The program must have mobile SDK access enabled.
       #
-      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, referral_status: nil, referred_by: nil, request_options: {})
+      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
       #
@@ -72,6 +76,8 @@ module GrowsurfRuby
       # @param last_name [String]
       #
       # @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
+      #
+      # @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
       #
       # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus]
       #

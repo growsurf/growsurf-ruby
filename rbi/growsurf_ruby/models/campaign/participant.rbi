@@ -115,6 +115,11 @@ module GrowsurfRuby
         sig { params(metadata: T::Hash[Symbol, T.anything]).void }
         attr_writer :metadata
 
+        # App-install scoped mobile identifier used for anti-fraud matching when provided
+        # by native mobile apps. Not stored when strict GDPR/CCPA mode is enabled.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :mobile_instance_id
+
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :monthly_referrals
 
@@ -259,6 +264,7 @@ module GrowsurfRuby
             is_winner: T::Boolean,
             last_name: T.nilable(String),
             metadata: T::Hash[Symbol, T.anything],
+            mobile_instance_id: T.nilable(String),
             monthly_referrals: T::Array[String],
             notes: T.nilable(String),
             paypal_email_address: String,
@@ -303,6 +309,9 @@ module GrowsurfRuby
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,
+          # App-install scoped mobile identifier used for anti-fraud matching when provided
+          # by native mobile apps. Not stored when strict GDPR/CCPA mode is enabled.
+          mobile_instance_id: nil,
           monthly_referrals: nil,
           notes: nil,
           paypal_email_address: nil,
@@ -347,6 +356,7 @@ module GrowsurfRuby
               is_winner: T::Boolean,
               last_name: T.nilable(String),
               metadata: T::Hash[Symbol, T.anything],
+              mobile_instance_id: T.nilable(String),
               monthly_referrals: T::Array[String],
               notes: T.nilable(String),
               paypal_email_address: String,

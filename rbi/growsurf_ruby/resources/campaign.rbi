@@ -50,6 +50,7 @@ module GrowsurfRuby
           ip_address: String,
           last_name: String,
           metadata: T::Hash[Symbol, T.anything],
+          mobile_instance_id: String,
           referral_status:
             GrowsurfRuby::Campaign::Create::ReferralStatus::OrSymbol,
           referred_by: String,
@@ -68,6 +69,9 @@ module GrowsurfRuby
         last_name: nil,
         # Shallow custom metadata object.
         metadata: nil,
+        # Optional app-install scoped identifier for native mobile anti-fraud. Recommended
+        # for mobile participant creation and mobile participant token flows.
+        mobile_instance_id: nil,
         referral_status: nil,
         # Referrer participant ID or email address.
         referred_by: nil,
