@@ -24,6 +24,7 @@ module GrowsurfRuby
           is_winner: bool,
           last_name: String?,
           metadata: ::Hash[Symbol, top],
+          mobile_instance_id: String?,
           monthly_referrals: ::Array[String],
           notes: String?,
           paypal_email_address: String,
@@ -106,6 +107,8 @@ module GrowsurfRuby
         attr_reader metadata: ::Hash[Symbol, top]?
 
         def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_accessor mobile_instance_id: String?
 
         attr_reader monthly_referrals: ::Array[String]?
 
@@ -193,6 +196,7 @@ module GrowsurfRuby
           ?is_winner: bool,
           ?last_name: String?,
           ?metadata: ::Hash[Symbol, top],
+          ?mobile_instance_id: String?,
           ?monthly_referrals: ::Array[String],
           ?notes: String?,
           ?paypal_email_address: String,
@@ -233,6 +237,7 @@ module GrowsurfRuby
           is_winner: bool,
           last_name: String?,
           metadata: ::Hash[Symbol, top],
+          mobile_instance_id: String?,
           monthly_referrals: ::Array[String],
           notes: String?,
           paypal_email_address: String,

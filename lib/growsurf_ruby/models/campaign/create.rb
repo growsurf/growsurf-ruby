@@ -35,6 +35,13 @@ module GrowsurfRuby
         #   @return [Hash{Symbol=>Object}, nil]
         optional :metadata, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
 
+        # @!attribute mobile_instance_id
+        #   Optional app-install scoped identifier for native mobile anti-fraud. Recommended
+        #   for mobile participant creation and mobile participant token flows.
+        #
+        #   @return [String, nil]
+        optional :mobile_instance_id, String, api_name: :mobileInstanceId
+
         # @!attribute referral_status
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus, nil]
@@ -48,7 +55,10 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :referred_by, String, api_name: :referredBy
 
-        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, referral_status: nil, referred_by: nil)
+        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {GrowsurfRuby::Models::Campaign::Create} for more details.
+        #
         #   @param email [String]
         #
         #   @param fingerprint [String]
@@ -60,6 +70,8 @@ module GrowsurfRuby
         #   @param last_name [String]
         #
         #   @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
+        #
+        #   @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
         #
         #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus]
         #
