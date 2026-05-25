@@ -47,7 +47,8 @@ module GrowsurfRuby
         attr_writer :metadata
 
         # Optional app-install scoped identifier for native mobile anti-fraud. Recommended
-        # for mobile participant creation and mobile participant token flows.
+        # for mobile participant creation and mobile participant token flows. The official
+        # mobile SDKs generate this as a lowercase UUID.
         sig { returns(T.nilable(String)) }
         attr_reader :mobile_instance_id
 
@@ -99,7 +100,8 @@ module GrowsurfRuby
           # Shallow custom metadata object.
           metadata: nil,
           # Optional app-install scoped identifier for native mobile anti-fraud. Recommended
-          # for mobile participant creation and mobile participant token flows.
+          # for mobile participant creation and mobile participant token flows. The official
+          # mobile SDKs generate this as a lowercase UUID.
           mobile_instance_id: nil,
           referral_status: nil,
           # Referrer participant ID or email address.

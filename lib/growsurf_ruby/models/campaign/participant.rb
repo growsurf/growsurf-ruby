@@ -119,7 +119,8 @@ module GrowsurfRuby
 
         # @!attribute mobile_instance_id
         #   App-install scoped mobile identifier used for anti-fraud matching when provided
-        #   by native mobile apps. Not stored when strict GDPR/CCPA mode is enabled.
+        #   by native mobile apps. The official mobile SDKs generate this as a lowercase
+        #   UUID. Not stored when strict GDPR/CCPA mode is enabled.
         #
         #   @return [String, nil]
         optional :mobile_instance_id, String, api_name: :mobileInstanceId, nil?: true

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2026-05-25)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/growsurf/growsurf-ruby/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** manual updates ([e9e3916](https://github.com/growsurf/growsurf-ruby/commit/e9e3916ed07e217dbad3bcea88a7979226927915))
+
 ## 0.4.0 (2026-05-20)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/growsurf/growsurf-ruby/compare/v0.3.0...v0.4.0)

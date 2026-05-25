@@ -116,7 +116,8 @@ module GrowsurfRuby
         attr_writer :metadata
 
         # App-install scoped mobile identifier used for anti-fraud matching when provided
-        # by native mobile apps. Not stored when strict GDPR/CCPA mode is enabled.
+        # by native mobile apps. The official mobile SDKs generate this as a lowercase
+        # UUID. Not stored when strict GDPR/CCPA mode is enabled.
         sig { returns(T.nilable(String)) }
         attr_accessor :mobile_instance_id
 
@@ -310,7 +311,8 @@ module GrowsurfRuby
           # Shallow custom metadata object.
           metadata: nil,
           # App-install scoped mobile identifier used for anti-fraud matching when provided
-          # by native mobile apps. Not stored when strict GDPR/CCPA mode is enabled.
+          # by native mobile apps. The official mobile SDKs generate this as a lowercase
+          # UUID. Not stored when strict GDPR/CCPA mode is enabled.
           mobile_instance_id: nil,
           monthly_referrals: nil,
           notes: nil,
