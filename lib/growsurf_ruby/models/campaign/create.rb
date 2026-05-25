@@ -37,7 +37,8 @@ module GrowsurfRuby
 
         # @!attribute mobile_instance_id
         #   Optional app-install scoped identifier for native mobile anti-fraud. Recommended
-        #   for mobile participant creation and mobile participant token flows.
+        #   for mobile participant creation and mobile participant token flows. The official
+        #   mobile SDKs generate this as a lowercase UUID.
         #
         #   @return [String, nil]
         optional :mobile_instance_id, String, api_name: :mobileInstanceId
