@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.6.0 (2026-06-23)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/growsurf/growsurf-ruby/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** add payoutSettings to Participant ([06cc7ba](https://github.com/growsurf/growsurf-ruby/commit/06cc7baef48c17162488b5f102cdf02f33573e7a))
+* **api:** manual updates ([f004f12](https://github.com/growsurf/growsurf-ruby/commit/f004f12b834d5f569f9768415c4929a899ddb514))
+
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([0240e48](https://github.com/growsurf/growsurf-ruby/commit/0240e480262947dcb8f679ad59e9f91003330af2))
+
 ## 0.5.0 (2026-05-25)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/growsurf/growsurf-ruby/compare/v0.4.0...v0.5.0)
