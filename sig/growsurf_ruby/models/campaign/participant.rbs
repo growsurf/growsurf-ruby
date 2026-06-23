@@ -27,7 +27,6 @@ module GrowsurfRuby
           mobile_instance_id: String?,
           monthly_referrals: ::Array[String],
           notes: String?,
-          payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
           paypal_email_address: String,
           prev_monthly_rank: Integer,
           prev_monthly_referral_count: Integer,
@@ -117,12 +116,6 @@ module GrowsurfRuby
 
         attr_accessor notes: String?
 
-        attr_reader payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings?
-
-        def payout_settings=: (
-          GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings
-        ) -> GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings
-
         attr_reader paypal_email_address: String?
 
         def paypal_email_address=: (String) -> String
@@ -206,7 +199,6 @@ module GrowsurfRuby
           ?mobile_instance_id: String?,
           ?monthly_referrals: ::Array[String],
           ?notes: String?,
-          ?payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
           ?paypal_email_address: String,
           ?prev_monthly_rank: Integer,
           ?prev_monthly_referral_count: Integer,
@@ -248,7 +240,6 @@ module GrowsurfRuby
           mobile_instance_id: String?,
           monthly_referrals: ::Array[String],
           notes: String?,
-          payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
           paypal_email_address: String,
           prev_monthly_rank: Integer,
           prev_monthly_referral_count: Integer,
@@ -264,38 +255,6 @@ module GrowsurfRuby
           unsubscribed: bool,
           vanity_keys: ::Array[String]
         }
-
-        type payout_settings =
-          {
-            required_actions: ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]
-          }
-
-        class PayoutSettings < GrowsurfRuby::Internal::Type::BaseModel
-          attr_reader required_actions: ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]?
-
-          def required_actions=: (
-            ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]
-          ) -> ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]
-
-          def initialize: (
-            ?required_actions: ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]
-          ) -> void
-
-          def to_hash: -> {
-            required_actions: ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]
-          }
-
-          type required_action = :PAYPAL_EMAIL | :TAX_INFO
-
-          module RequiredAction
-            extend GrowsurfRuby::Internal::Type::Enum
-
-            PAYPAL_EMAIL: :PAYPAL_EMAIL
-            TAX_INFO: :TAX_INFO
-
-            def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::required_action]
-          end
-        end
 
         type referrer =
           {

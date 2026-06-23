@@ -130,26 +130,6 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :notes
 
-        # Payout-related actions the participant must complete before a payout can be
-        # released (e.g. confirming a PayPal email or submitting a W-9/W-8 tax form).
-        # Always present; the requiredActions array is empty when no action is required.
-        sig do
-          returns(
-            T.nilable(
-              GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings
-            )
-          )
-        end
-        attr_reader :payout_settings
-
-        sig do
-          params(
-            payout_settings:
-              GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::OrHash
-          ).void
-        end
-        attr_writer :payout_settings
-
         sig { returns(T.nilable(String)) }
         attr_reader :paypal_email_address
 
@@ -288,8 +268,6 @@ module GrowsurfRuby
             mobile_instance_id: T.nilable(String),
             monthly_referrals: T::Array[String],
             notes: T.nilable(String),
-            payout_settings:
-              GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::OrHash,
             paypal_email_address: String,
             prev_monthly_rank: Integer,
             prev_monthly_referral_count: Integer,
@@ -338,10 +316,6 @@ module GrowsurfRuby
           mobile_instance_id: nil,
           monthly_referrals: nil,
           notes: nil,
-          # Payout-related actions the participant must complete before a payout can be
-          # released (e.g. confirming a PayPal email or submitting a W-9/W-8 tax form).
-          # Always present; the requiredActions array is empty when no action is required.
-          payout_settings: nil,
           paypal_email_address: nil,
           prev_monthly_rank: nil,
           prev_monthly_referral_count: nil,
@@ -387,8 +361,6 @@ module GrowsurfRuby
               mobile_instance_id: T.nilable(String),
               monthly_referrals: T::Array[String],
               notes: T.nilable(String),
-              payout_settings:
-                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
               paypal_email_address: String,
               prev_monthly_rank: Integer,
               prev_monthly_referral_count: Integer,
@@ -412,98 +384,6 @@ module GrowsurfRuby
           )
         end
         def to_hash
-        end
-
-        class PayoutSettings < GrowsurfRuby::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
-                GrowsurfRuby::Internal::AnyHash
-              )
-            end
-
-          sig do
-            returns(
-              T.nilable(
-                T::Array[
-                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
-                ]
-              )
-            )
-          end
-          attr_reader :required_actions
-
-          sig do
-            params(
-              required_actions:
-                T::Array[
-                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::OrSymbol
-                ]
-            ).void
-          end
-          attr_writer :required_actions
-
-          # Payout-related actions the participant must complete before a payout can be
-          # released (e.g. confirming a PayPal email or submitting a W-9/W-8 tax form).
-          # Always present; the requiredActions array is empty when no action is required.
-          sig do
-            params(
-              required_actions:
-                T::Array[
-                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::OrSymbol
-                ]
-            ).returns(T.attached_class)
-          end
-          def self.new(required_actions: nil)
-          end
-
-          sig do
-            override.returns(
-              {
-                required_actions:
-                  T::Array[
-                    GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
-                  ]
-              }
-            )
-          end
-          def to_hash
-          end
-
-          module RequiredAction
-            extend GrowsurfRuby::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            PAYPAL_EMAIL =
-              T.let(
-                :PAYPAL_EMAIL,
-                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
-              )
-            TAX_INFO =
-              T.let(
-                :TAX_INFO,
-                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
-          end
         end
 
         class Referrer < GrowsurfRuby::Internal::Type::BaseModel
