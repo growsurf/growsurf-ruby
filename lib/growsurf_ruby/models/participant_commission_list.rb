@@ -33,8 +33,8 @@ module GrowsurfRuby
 
         # @!attribute amount
         #
-        #   @return [Integer]
-        required :amount, Integer
+        #   @return [Integer, nil]
+        required :amount, Integer, nil?: true
 
         # @!attribute created_at
         #
@@ -58,8 +58,8 @@ module GrowsurfRuby
 
         # @!attribute sale_amount
         #
-        #   @return [Integer]
-        required :sale_amount, Integer, api_name: :saleAmount
+        #   @return [Integer, nil]
+        required :sale_amount, Integer, api_name: :saleAmount, nil?: true
 
         # @!attribute status
         #
@@ -121,22 +121,22 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :reversed_at, Integer, api_name: :reversedAt
 
-        # @!attribute sale_amount_amount_in_campaign_currency
+        # @!attribute sale_amount_in_campaign_currency
         #
         #   @return [Integer, nil]
-        optional :sale_amount_amount_in_campaign_currency,
+        optional :sale_amount_in_campaign_currency,
                  Integer,
-                 api_name: :saleAmountAmountInCampaignCurrency,
+                 api_name: :saleAmountInCampaignCurrency,
                  nil?: true
 
-        # @!method initialize(id:, amount:, created_at:, currency_iso:, referred_id:, referrer_id:, sale_amount:, status:, amount_in_campaign_currency: nil, approved_at: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, fx_error: nil, hold_duration: nil, paid_at: nil, payout_queued_at: nil, provider: nil, reversed_at: nil, sale_amount_amount_in_campaign_currency: nil)
+        # @!method initialize(id:, amount:, created_at:, currency_iso:, referred_id:, referrer_id:, sale_amount:, status:, amount_in_campaign_currency: nil, approved_at: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, fx_error: nil, hold_duration: nil, paid_at: nil, payout_queued_at: nil, provider: nil, reversed_at: nil, sale_amount_in_campaign_currency: nil)
         #   @param id [String]
-        #   @param amount [Integer]
+        #   @param amount [Integer, nil]
         #   @param created_at [Integer]
         #   @param currency_iso [String]
         #   @param referred_id [String]
         #   @param referrer_id [String]
-        #   @param sale_amount [Integer]
+        #   @param sale_amount [Integer, nil]
         #   @param status [Symbol, GrowsurfRuby::Models::ParticipantCommissionList::Commission::Status]
         #   @param amount_in_campaign_currency [Integer, nil]
         #   @param approved_at [Integer]
@@ -149,7 +149,7 @@ module GrowsurfRuby
         #   @param payout_queued_at [Integer]
         #   @param provider [String, nil]
         #   @param reversed_at [Integer]
-        #   @param sale_amount_amount_in_campaign_currency [Integer, nil]
+        #   @param sale_amount_in_campaign_currency [Integer, nil]
 
         # @see GrowsurfRuby::Models::ParticipantCommissionList::Commission#status
         module Status

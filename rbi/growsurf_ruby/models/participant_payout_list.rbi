@@ -109,6 +109,12 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :provider
 
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :queued_at
+
+        sig { params(queued_at: Integer).void }
+        attr_writer :queued_at
+
         sig do
           params(
             id: String,
@@ -126,7 +132,8 @@ module GrowsurfRuby
             failed_at: Integer,
             fx_error: T.nilable(String),
             issued_at: Integer,
-            provider: T.nilable(String)
+            provider: T.nilable(String),
+            queued_at: Integer
           ).returns(T.attached_class)
         end
         def self.new(
@@ -144,7 +151,8 @@ module GrowsurfRuby
           failed_at: nil,
           fx_error: nil,
           issued_at: nil,
-          provider: nil
+          provider: nil,
+          queued_at: nil
         )
         end
 
@@ -166,7 +174,8 @@ module GrowsurfRuby
               failed_at: Integer,
               fx_error: T.nilable(String),
               issued_at: Integer,
-              provider: T.nilable(String)
+              provider: T.nilable(String),
+              queued_at: Integer
             }
           )
         end

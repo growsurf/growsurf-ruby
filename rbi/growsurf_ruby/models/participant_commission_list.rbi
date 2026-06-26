@@ -60,7 +60,7 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :id
 
-        sig { returns(Integer) }
+        sig { returns(T.nilable(Integer)) }
         attr_accessor :amount
 
         sig { returns(Integer) }
@@ -75,7 +75,7 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :referrer_id
 
-        sig { returns(Integer) }
+        sig { returns(T.nilable(Integer)) }
         attr_accessor :sale_amount
 
         sig do
@@ -134,17 +134,17 @@ module GrowsurfRuby
         attr_writer :reversed_at
 
         sig { returns(T.nilable(Integer)) }
-        attr_accessor :sale_amount_amount_in_campaign_currency
+        attr_accessor :sale_amount_in_campaign_currency
 
         sig do
           params(
             id: String,
-            amount: Integer,
+            amount: T.nilable(Integer),
             created_at: Integer,
             currency_iso: String,
             referred_id: String,
             referrer_id: String,
-            sale_amount: Integer,
+            sale_amount: T.nilable(Integer),
             status:
               GrowsurfRuby::ParticipantCommissionList::Commission::Status::OrSymbol,
             amount_in_campaign_currency: T.nilable(Integer),
@@ -158,7 +158,7 @@ module GrowsurfRuby
             payout_queued_at: Integer,
             provider: T.nilable(String),
             reversed_at: Integer,
-            sale_amount_amount_in_campaign_currency: T.nilable(Integer)
+            sale_amount_in_campaign_currency: T.nilable(Integer)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -181,7 +181,7 @@ module GrowsurfRuby
           payout_queued_at: nil,
           provider: nil,
           reversed_at: nil,
-          sale_amount_amount_in_campaign_currency: nil
+          sale_amount_in_campaign_currency: nil
         )
         end
 
@@ -189,12 +189,12 @@ module GrowsurfRuby
           override.returns(
             {
               id: String,
-              amount: Integer,
+              amount: T.nilable(Integer),
               created_at: Integer,
               currency_iso: String,
               referred_id: String,
               referrer_id: String,
-              sale_amount: Integer,
+              sale_amount: T.nilable(Integer),
               status:
                 GrowsurfRuby::ParticipantCommissionList::Commission::Status::TaggedSymbol,
               amount_in_campaign_currency: T.nilable(Integer),
@@ -208,7 +208,7 @@ module GrowsurfRuby
               payout_queued_at: Integer,
               provider: T.nilable(String),
               reversed_at: Integer,
-              sale_amount_amount_in_campaign_currency: T.nilable(Integer)
+              sale_amount_in_campaign_currency: T.nilable(Integer)
             }
           )
         end

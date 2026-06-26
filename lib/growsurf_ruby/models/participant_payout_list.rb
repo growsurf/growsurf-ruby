@@ -101,7 +101,12 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :provider, String, nil?: true
 
-        # @!method initialize(id:, amount:, commission_ids:, created_at:, currency_iso:, participant_id:, status:, amount_in_campaign_currency: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, failed_at: nil, fx_error: nil, issued_at: nil, provider: nil)
+        # @!attribute queued_at
+        #
+        #   @return [Integer, nil]
+        optional :queued_at, Integer, api_name: :queuedAt
+
+        # @!method initialize(id:, amount:, commission_ids:, created_at:, currency_iso:, participant_id:, status:, amount_in_campaign_currency: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, failed_at: nil, fx_error: nil, issued_at: nil, provider: nil, queued_at: nil)
         #   @param id [String]
         #   @param amount [Integer]
         #   @param commission_ids [Array<String>]
@@ -117,6 +122,7 @@ module GrowsurfRuby
         #   @param fx_error [String, nil]
         #   @param issued_at [Integer]
         #   @param provider [String, nil]
+        #   @param queued_at [Integer]
 
         # @see GrowsurfRuby::Models::ParticipantPayoutList::Payout#status
         module Status

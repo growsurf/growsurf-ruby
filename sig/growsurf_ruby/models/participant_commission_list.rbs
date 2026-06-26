@@ -29,12 +29,12 @@ module GrowsurfRuby
       type commission =
         {
           id: String,
-          amount: Integer,
+          amount: Integer?,
           created_at: Integer,
           currency_iso: String,
           referred_id: String,
           referrer_id: String,
-          sale_amount: Integer,
+          sale_amount: Integer?,
           status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status,
           amount_in_campaign_currency: Integer?,
           approved_at: Integer,
@@ -47,13 +47,13 @@ module GrowsurfRuby
           payout_queued_at: Integer,
           provider: String?,
           reversed_at: Integer,
-          sale_amount_amount_in_campaign_currency: Integer?
+          sale_amount_in_campaign_currency: Integer?
         }
 
       class Commission < GrowsurfRuby::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor amount: Integer
+        attr_accessor amount: Integer?
 
         attr_accessor created_at: Integer
 
@@ -63,7 +63,7 @@ module GrowsurfRuby
 
         attr_accessor referrer_id: String
 
-        attr_accessor sale_amount: Integer
+        attr_accessor sale_amount: Integer?
 
         attr_accessor status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status
 
@@ -99,16 +99,16 @@ module GrowsurfRuby
 
         def reversed_at=: (Integer) -> Integer
 
-        attr_accessor sale_amount_amount_in_campaign_currency: Integer?
+        attr_accessor sale_amount_in_campaign_currency: Integer?
 
         def initialize: (
           id: String,
-          amount: Integer,
+          amount: Integer?,
           created_at: Integer,
           currency_iso: String,
           referred_id: String,
           referrer_id: String,
-          sale_amount: Integer,
+          sale_amount: Integer?,
           status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status,
           ?amount_in_campaign_currency: Integer?,
           ?approved_at: Integer,
@@ -121,17 +121,17 @@ module GrowsurfRuby
           ?payout_queued_at: Integer,
           ?provider: String?,
           ?reversed_at: Integer,
-          ?sale_amount_amount_in_campaign_currency: Integer?
+          ?sale_amount_in_campaign_currency: Integer?
         ) -> void
 
         def to_hash: -> {
           id: String,
-          amount: Integer,
+          amount: Integer?,
           created_at: Integer,
           currency_iso: String,
           referred_id: String,
           referrer_id: String,
-          sale_amount: Integer,
+          sale_amount: Integer?,
           status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status,
           amount_in_campaign_currency: Integer?,
           approved_at: Integer,
@@ -144,7 +144,7 @@ module GrowsurfRuby
           payout_queued_at: Integer,
           provider: String?,
           reversed_at: Integer,
-          sale_amount_amount_in_campaign_currency: Integer?
+          sale_amount_in_campaign_currency: Integer?
         }
 
         type status = :PENDING | :APPROVED | :PAID | :REVERSED | :DELETED
