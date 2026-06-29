@@ -112,6 +112,27 @@ module GrowsurfRuby
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::participant_record_transaction_response
 
+        def refund_transaction: (
+          String participant_id_or_email,
+          id: String,
+          ?amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type,
+          ?amount: Integer,
+          ?amount_refunded: Integer,
+          ?charge_id: String,
+          ?currency: String,
+          ?description: String,
+          ?external_id: String,
+          ?invoice_id: String,
+          ?order_id: String,
+          ?payment_id: String,
+          ?payment_intent_id: String,
+          ?refund_amount: Integer,
+          ?refund_id: String,
+          ?refund_status: String,
+          ?transaction_id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse
+
         def send_invites: (
           String participant_id_or_email,
           id: String,
@@ -124,8 +145,15 @@ module GrowsurfRuby
         def trigger_referral: (
           String participant_id_or_email,
           id: String,
+          ?delay_in_days: Integer,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::ParticipantTriggerReferralResponse
+
+        def cancel_delayed_referral: (
+          String participant_id_or_email,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantCancelDelayedReferralResponse
 
         def initialize: (client: GrowsurfRuby::Client) -> void
       end

@@ -18,9 +18,27 @@ module GrowsurfRuby
         #   @return [String]
         required :participant_id_or_email, String
 
-        # @!method initialize(id:, participant_id_or_email:, request_options: {})
+        # @!attribute delay_in_days
+        #   Number of whole days to hold referral credit before it is awarded. Useful for
+        #   honoring a refund window before crediting a referrer. Omit this field to award
+        #   credit immediately. The credit is awarded automatically once the delay elapses,
+        #   and can be cancelled before then with the Cancel delayed referral trigger
+        #   request.
+        #
+        #   @return [Integer, nil]
+        optional :delay_in_days, Integer, api_name: :delayInDays
+
+        # @!method initialize(id:, participant_id_or_email:, delay_in_days: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {GrowsurfRuby::Models::Campaign::ParticipantTriggerReferralParams} for more
+        #   details.
+        #
         #   @param id [String]
+        #
         #   @param participant_id_or_email [String]
+        #
+        #   @param delay_in_days [Integer] Number of whole days to hold referral credit before it is awarded. Useful for
+        #
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
       end
     end

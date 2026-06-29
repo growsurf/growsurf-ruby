@@ -1,0 +1,151 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_refund_transaction_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type,
+          amount: Integer,
+          amount_refunded: Integer,
+          charge_id: String,
+          currency: String,
+          description: String,
+          external_id: String,
+          invoice_id: String,
+          order_id: String,
+          payment_id: String,
+          payment_intent_id: String,
+          refund_amount: Integer,
+          refund_id: String,
+          refund_status: String,
+          transaction_id: String
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantRefundTransactionParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type?
+
+        def amendment_type=: (
+          GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type
+
+        attr_reader amount: Integer?
+
+        def amount=: (Integer) -> Integer
+
+        attr_reader amount_refunded: Integer?
+
+        def amount_refunded=: (Integer) -> Integer
+
+        attr_reader charge_id: String?
+
+        def charge_id=: (String) -> String
+
+        attr_reader currency: String?
+
+        def currency=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader external_id: String?
+
+        def external_id=: (String) -> String
+
+        attr_reader invoice_id: String?
+
+        def invoice_id=: (String) -> String
+
+        attr_reader order_id: String?
+
+        def order_id=: (String) -> String
+
+        attr_reader payment_id: String?
+
+        def payment_id=: (String) -> String
+
+        attr_reader payment_intent_id: String?
+
+        def payment_intent_id=: (String) -> String
+
+        attr_reader refund_amount: Integer?
+
+        def refund_amount=: (Integer) -> Integer
+
+        attr_reader refund_id: String?
+
+        def refund_id=: (String) -> String
+
+        attr_reader refund_status: String?
+
+        def refund_status=: (String) -> String
+
+        attr_reader transaction_id: String?
+
+        def transaction_id=: (String) -> String
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type,
+          ?amount: Integer,
+          ?amount_refunded: Integer,
+          ?charge_id: String,
+          ?currency: String,
+          ?description: String,
+          ?external_id: String,
+          ?invoice_id: String,
+          ?order_id: String,
+          ?payment_id: String,
+          ?payment_intent_id: String,
+          ?refund_amount: Integer,
+          ?refund_id: String,
+          ?refund_status: String,
+          ?transaction_id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type,
+          amount: Integer,
+          amount_refunded: Integer,
+          charge_id: String,
+          currency: String,
+          description: String,
+          external_id: String,
+          invoice_id: String,
+          order_id: String,
+          payment_id: String,
+          payment_intent_id: String,
+          refund_amount: Integer,
+          refund_id: String,
+          refund_status: String,
+          transaction_id: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        type amendment_type = :REFUND | :CHARGEBACK
+
+        module AmendmentType
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          REFUND: :REFUND
+          CHARGEBACK: :CHARGEBACK
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::amendment_type]
+        end
+      end
+    end
+  end
+end

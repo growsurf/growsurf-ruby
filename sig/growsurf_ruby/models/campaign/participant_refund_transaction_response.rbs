@@ -1,0 +1,75 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_refund_transaction_response =
+        {
+          adjusted: Integer,
+          amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse::amendment_type,
+          deleted: Integer,
+          matched: Integer,
+          matching_commission_ids: ::Array[String],
+          message: String,
+          reversed: Integer,
+          success: bool,
+          not_found: bool
+        }
+
+      class ParticipantRefundTransactionResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor adjusted: Integer
+
+        attr_accessor amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse::amendment_type
+
+        attr_accessor deleted: Integer
+
+        attr_accessor matched: Integer
+
+        attr_accessor matching_commission_ids: ::Array[String]
+
+        attr_accessor message: String
+
+        attr_accessor reversed: Integer
+
+        attr_accessor success: bool
+
+        attr_reader not_found: bool?
+
+        def not_found=: (bool) -> bool
+
+        def initialize: (
+          adjusted: Integer,
+          amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse::amendment_type,
+          deleted: Integer,
+          matched: Integer,
+          matching_commission_ids: ::Array[String],
+          message: String,
+          reversed: Integer,
+          success: bool,
+          ?not_found: bool
+        ) -> void
+
+        def to_hash: -> {
+          adjusted: Integer,
+          amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse::amendment_type,
+          deleted: Integer,
+          matched: Integer,
+          matching_commission_ids: ::Array[String],
+          message: String,
+          reversed: Integer,
+          success: bool,
+          not_found: bool
+        }
+
+        type amendment_type = :REFUND | :CHARGEBACK
+
+        module AmendmentType
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          REFUND: :REFUND
+          CHARGEBACK: :CHARGEBACK
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse::amendment_type]
+        end
+      end
+    end
+  end
+end

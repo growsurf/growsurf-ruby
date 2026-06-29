@@ -275,6 +275,30 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
     end
   end
 
+  def test_refund_transaction_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.refund_transaction("participantIdOrEmail", id: "id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse
+    end
+
+    assert_pattern do
+      response => {
+        adjusted: Integer,
+        amendment_type: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse::AmendmentType,
+        deleted: Integer,
+        matched: Integer,
+        matching_commission_ids: ^(GrowsurfRuby::Internal::Type::ArrayOf[String]),
+        message: String,
+        reversed: Integer,
+        success: GrowsurfRuby::Internal::Type::Boolean,
+        not_found: GrowsurfRuby::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
   def test_send_invites_required_params
     skip("Mock server tests are disabled")
 
@@ -307,6 +331,23 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
 
     assert_pattern do
       response => GrowsurfRuby::Models::Campaign::ParticipantTriggerReferralResponse
+    end
+
+    assert_pattern do
+      response => {
+        success: GrowsurfRuby::Internal::Type::Boolean,
+        message: String | nil
+      }
+    end
+  end
+
+  def test_cancel_delayed_referral_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.cancel_delayed_referral("participantIdOrEmail", id: "id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantCancelDelayedReferralResponse
     end
 
     assert_pattern do

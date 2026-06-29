@@ -377,6 +377,66 @@ module GrowsurfRuby
           )
         end
 
+        # Records an amendment (refund, partial refund, refund cancellation, or
+        # chargeback) against a previously recorded transaction and reverses or adjusts
+        # the referrer's commission.
+        #
+        # @overload refund_transaction(participant_id_or_email, id:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
+        #
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        #
+        # @param id [String] Path param: GrowSurf program ID.
+        #
+        # @param amendment_type [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::AmendmentType] Body param
+        #
+        # @param amount [Integer] Body param
+        #
+        # @param amount_refunded [Integer] Body param
+        #
+        # @param charge_id [String] Body param
+        #
+        # @param currency [String] Body param
+        #
+        # @param description [String] Body param
+        #
+        # @param external_id [String] Body param
+        #
+        # @param invoice_id [String] Body param
+        #
+        # @param order_id [String] Body param
+        #
+        # @param payment_id [String] Body param
+        #
+        # @param payment_intent_id [String] Body param
+        #
+        # @param refund_amount [Integer] Body param
+        #
+        # @param refund_id [String] Body param
+        #
+        # @param refund_status [String] Body param
+        #
+        # @param transaction_id [String] Body param
+        #
+        # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams
+        def refund_transaction(participant_id_or_email, params)
+          parsed, options = GrowsurfRuby::Campaign::ParticipantRefundTransactionParams.dump_request(params)
+          id =
+            parsed.delete(:id) do
+              raise ArgumentError.new("missing required path argument #{_1}")
+            end
+          @client.request(
+            method: :post,
+            path: ["campaign/%1$s/participant/%2$s/transaction/refund", id, participant_id_or_email],
+            body: parsed,
+            model: GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse,
+            options: options
+          )
+        end
+
         # Sends email invites on behalf of a participant to a list of email addresses.
         #
         # @overload send_invites(participant_id_or_email, id:, email_addresses:, message_text:, subject_text:, request_options: {})
@@ -411,14 +471,20 @@ module GrowsurfRuby
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {GrowsurfRuby::Models::Campaign::ParticipantTriggerReferralParams} for more
+        # details.
+        #
         # Triggers referral credit for an existing referred participant by GrowSurf
         # participant ID or email address.
         #
-        # @overload trigger_referral(participant_id_or_email, id:, request_options: {})
+        # @overload trigger_referral(participant_id_or_email, id:, delay_in_days: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
         #
-        # @param id [String] GrowSurf program ID.
+        # @param id [String] Path param: GrowSurf program ID.
+        #
+        # @param delay_in_days [Integer] Body param: Number of whole days to hold referral credit before it is awarded. U
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -434,7 +500,36 @@ module GrowsurfRuby
           @client.request(
             method: :post,
             path: ["campaign/%1$s/participant/%2$s/ref", id, participant_id_or_email],
+            body: parsed,
             model: GrowsurfRuby::Models::Campaign::ParticipantTriggerReferralResponse,
+            options: options
+          )
+        end
+
+        # Cancels a pending delayed referral trigger for an existing referred participant
+        # by GrowSurf participant ID or email address.
+        #
+        # @overload cancel_delayed_referral(participant_id_or_email, id:, request_options: {})
+        #
+        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        #
+        # @param id [String] GrowSurf program ID.
+        #
+        # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [GrowsurfRuby::Models::Campaign::ParticipantCancelDelayedReferralResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::ParticipantCancelDelayedReferralParams
+        def cancel_delayed_referral(participant_id_or_email, params)
+          parsed, options = GrowsurfRuby::Campaign::ParticipantCancelDelayedReferralParams.dump_request(params)
+          id =
+            parsed.delete(:id) do
+              raise ArgumentError.new("missing required path argument #{_1}")
+            end
+          @client.request(
+            method: :delete,
+            path: ["campaign/%1$s/participant/%2$s/ref", id, participant_id_or_email],
+            model: GrowsurfRuby::Models::Campaign::ParticipantCancelDelayedReferralResponse,
             options: options
           )
         end

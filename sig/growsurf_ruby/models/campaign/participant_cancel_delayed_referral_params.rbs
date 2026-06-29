@@ -1,11 +1,11 @@
 module GrowsurfRuby
   module Models
     module Campaign
-      type participant_trigger_referral_params =
-        { id: String, participant_id_or_email: String, delay_in_days: Integer }
+      type participant_cancel_delayed_referral_params =
+        { id: String, participant_id_or_email: String }
         & GrowsurfRuby::Internal::Type::request_parameters
 
-      class ParticipantTriggerReferralParams < GrowsurfRuby::Internal::Type::BaseModel
+      class ParticipantCancelDelayedReferralParams < GrowsurfRuby::Internal::Type::BaseModel
         extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
         include GrowsurfRuby::Internal::Type::RequestParameters
 
@@ -13,21 +13,15 @@ module GrowsurfRuby
 
         attr_accessor participant_id_or_email: String
 
-        attr_reader delay_in_days: Integer?
-
-        def delay_in_days=: (Integer) -> Integer
-
         def initialize: (
           id: String,
           participant_id_or_email: String,
-          ?delay_in_days: Integer,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
           participant_id_or_email: String,
-          delay_in_days: Integer,
           request_options: GrowsurfRuby::RequestOptions
         }
       end
