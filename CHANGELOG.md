@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 (2026-06-29)
+
+Full Changelog: [v0.6.1...v0.7.0](https://github.com/growsurf/growsurf-ruby/compare/v0.6.1...v0.7.0)
+
+### Features
+
+* **api:** support delayed referral rewards and affiliate refunds ([d707d44](https://github.com/growsurf/growsurf-ruby/commit/d707d443a5806f3e117532d4032386390e2654a5))
+
 ## 0.6.1 (2026-06-26)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/growsurf/growsurf-ruby/compare/v0.6.0...v0.6.1)
