@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1 (2026-06-30)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/growsurf/growsurf-ruby/compare/v0.7.0...v0.7.1)
+
+### Chores
+
+* **internal:** bound formatter parallelism to CPU count ([ae4e25e](https://github.com/growsurf/growsurf-ruby/commit/ae4e25e899f70ff3d04af7e4e496e1dafa1941b5))
+
 ## 0.7.0 (2026-06-29)
 
 Full Changelog: [v0.6.1...v0.7.0](https://github.com/growsurf/growsurf-ruby/compare/v0.6.1...v0.7.0)
