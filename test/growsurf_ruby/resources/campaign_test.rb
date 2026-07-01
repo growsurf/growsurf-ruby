@@ -45,6 +45,84 @@ class GrowsurfRuby::Test::Resources::CampaignTest < GrowsurfRuby::Test::Resource
     end
   end
 
+  def test_create_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.create(type: :REFERRAL)
+
+    assert_pattern do
+      response => GrowsurfRuby::CampaignAPI
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        impression_count: Integer,
+        invite_count: Integer,
+        name: String,
+        participant_count: Integer,
+        referral_count: Integer,
+        rewards: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::CampaignAPI::Reward]),
+        status: GrowsurfRuby::CampaignAPI::Status,
+        type: GrowsurfRuby::CampaignAPI::Type,
+        winner_count: Integer,
+        currency_iso: String | nil
+      }
+    end
+  end
+
+  def test_update
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.update("id")
+
+    assert_pattern do
+      response => GrowsurfRuby::CampaignAPI
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        impression_count: Integer,
+        invite_count: Integer,
+        name: String,
+        participant_count: Integer,
+        referral_count: Integer,
+        rewards: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::CampaignAPI::Reward]),
+        status: GrowsurfRuby::CampaignAPI::Status,
+        type: GrowsurfRuby::CampaignAPI::Type,
+        winner_count: Integer,
+        currency_iso: String | nil
+      }
+    end
+  end
+
+  def test_clone
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.clone("id")
+
+    assert_pattern do
+      response => GrowsurfRuby::CampaignAPI
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        impression_count: Integer,
+        invite_count: Integer,
+        name: String,
+        participant_count: Integer,
+        referral_count: Integer,
+        rewards: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::CampaignAPI::Reward]),
+        status: GrowsurfRuby::CampaignAPI::Status,
+        type: GrowsurfRuby::CampaignAPI::Type,
+        winner_count: Integer,
+        currency_iso: String | nil
+      }
+    end
+  end
+
   def test_create_mobile_participant_token_required_params
     skip("Mock server tests are disabled")
 

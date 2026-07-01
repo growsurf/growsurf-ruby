@@ -14,6 +14,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Commission]
       attr_reader :commission
 
+      # Program reward configuration operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Rewards]
+      attr_reader :rewards
+
       # Retrieves a program for the given program ID.
       #
       # @overload retrieve(id, request_options: {})
@@ -48,6 +52,106 @@ module GrowsurfRuby
           method: :get,
           path: "campaigns",
           model: GrowsurfRuby::Models::CampaignListResponse,
+          options: params[:request_options]
+        )
+      end
+
+      # Creates a program. Only `type` is required; everything else is
+      # server-defaulted.
+      #
+      # @overload create(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, goal: nil, name: nil, options: nil, rewards: nil, request_options: {})
+      #
+      # @param type [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Type] The program type. Immutable after creation.
+      #
+      # @param company_logo_image_url [String]
+      #
+      # @param company_name [String]
+      #
+      # @param currency_iso [String] ISO 4217 currency code. Defaults to USD.
+      #
+      # @param goal [String]
+      #
+      # @param name [String] The program name. Defaults to "Untitled Program".
+      #
+      # @param options [Hash{Symbol=>Object}] A curated subset of program options to shallow-merge onto the defaults.
+      #
+      # @param rewards [Array<GrowsurfRuby::Models::Campaign::RewardCreateParams>] Optional inline rewards to create with the program.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignAPI]
+      #
+      # @see GrowsurfRuby::Models::CampaignCreateParams
+      def create(params)
+        parsed, options = GrowsurfRuby::CampaignCreateParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: "campaigns",
+          body: parsed,
+          model: GrowsurfRuby::CampaignAPI,
+          options: options
+        )
+      end
+
+      # Updates a program. Only the fields you send are changed. `type` and `urlId` are
+      # immutable.
+      #
+      # @overload update(id, company_logo_image_url: nil, company_name: nil, currency_iso: nil, design: nil, emails: nil, goal: nil, installation: nil, name: nil, notifications: nil, options: nil, status: nil, request_options: {})
+      #
+      # @param id [String] Path param: GrowSurf program ID.
+      #
+      # @param company_logo_image_url [String] Body param
+      #
+      # @param company_name [String] Body param
+      #
+      # @param currency_iso [String] Body param
+      #
+      # @param design [Hash{Symbol=>Object}] Body param
+      #
+      # @param emails [Hash{Symbol=>Object}] Body param
+      #
+      # @param goal [String] Body param
+      #
+      # @param installation [Hash{Symbol=>Object}] Body param
+      #
+      # @param name [String] Body param
+      #
+      # @param notifications [Hash{Symbol=>Object}] Body param
+      #
+      # @param options [Hash{Symbol=>Object}] Body param
+      #
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignUpdateParams::Status] Body param: The program status. Transitions are validated; DELETED is not allowe
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignAPI]
+      #
+      # @see GrowsurfRuby::Models::CampaignUpdateParams
+      def update(id, params)
+        parsed, options = GrowsurfRuby::CampaignUpdateParams.dump_request(params)
+        @client.request(
+          method: :patch,
+          path: ["campaign/%1$s", id],
+          body: parsed,
+          model: GrowsurfRuby::CampaignAPI,
+          options: options
+        )
+      end
+
+      # Clones an existing program, returning the newly created program.
+      #
+      # @overload clone(id, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::CampaignAPI]
+      def clone(id, params = {})
+        @client.request(
+          method: :post,
+          path: ["campaign/%1$s/clone", id],
+          model: GrowsurfRuby::CampaignAPI,
           options: params[:request_options]
         )
       end
@@ -307,6 +411,7 @@ module GrowsurfRuby
         @participant = GrowsurfRuby::Resources::Campaign::Participant.new(client: client)
         @reward = GrowsurfRuby::Resources::Campaign::Reward.new(client: client)
         @commission = GrowsurfRuby::Resources::Campaign::Commission.new(client: client)
+        @rewards = GrowsurfRuby::Resources::Campaign::Rewards.new(client: client)
       end
     end
   end

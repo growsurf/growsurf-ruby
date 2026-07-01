@@ -1,0 +1,70 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      class Rewards
+        def list: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::CampaignRewardListResponse
+
+        def create: (
+          String id,
+          type: GrowsurfRuby::Models::Campaign::RewardCreateParams::type_,
+          ?commission_structure: GrowsurfRuby::CommissionStructure,
+          ?conversions_required: Integer,
+          ?coupon_code: String,
+          ?description: String,
+          ?image_url: String,
+          ?is_active: bool,
+          ?is_unlimited: bool,
+          ?is_visible: bool,
+          ?limit: Integer,
+          ?limit_duration: GrowsurfRuby::Models::Campaign::RewardCreateParams::limit_duration,
+          ?metadata: ::Hash[Symbol, top],
+          ?next_milestone_prefix: String,
+          ?next_milestone_suffix: String,
+          ?number_of_winners: Integer,
+          ?order: Integer,
+          ?referral_coupon_code: String,
+          ?referral_description: String,
+          ?referred_reward_upfront: bool,
+          ?title: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::Reward
+
+        def update: (
+          String reward_id,
+          id: String,
+          ?commission_structure: GrowsurfRuby::CommissionStructure,
+          ?conversions_required: Integer,
+          ?coupon_code: String,
+          ?description: String,
+          ?image_url: String,
+          ?is_active: bool,
+          ?is_unlimited: bool,
+          ?is_visible: bool,
+          ?limit: Integer,
+          ?limit_duration: GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration,
+          ?metadata: ::Hash[Symbol, top],
+          ?next_milestone_prefix: String,
+          ?next_milestone_suffix: String,
+          ?number_of_winners: Integer,
+          ?order: Integer,
+          ?referral_coupon_code: String,
+          ?referral_description: String,
+          ?referred_reward_upfront: bool,
+          ?title: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::Reward
+
+        def delete: (
+          String reward_id,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::DeleteRewardResponse
+
+        def initialize: (client: GrowsurfRuby::Client) -> void
+      end
+    end
+  end
+end

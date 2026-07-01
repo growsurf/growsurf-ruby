@@ -1,0 +1,119 @@
+module GrowsurfRuby
+  module Models
+    type campaign_update_params =
+      {
+        id: String,
+        company_logo_image_url: String,
+        company_name: String,
+        currency_iso: String,
+        design: ::Hash[Symbol, top],
+        emails: ::Hash[Symbol, top],
+        goal: String,
+        installation: ::Hash[Symbol, top],
+        name: String,
+        notifications: ::Hash[Symbol, top],
+        options: ::Hash[Symbol, top],
+        status: GrowsurfRuby::Models::CampaignUpdateParams::status
+      }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignUpdateParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader company_logo_image_url: String?
+
+      def company_logo_image_url=: (String) -> String
+
+      attr_reader company_name: String?
+
+      def company_name=: (String) -> String
+
+      attr_reader currency_iso: String?
+
+      def currency_iso=: (String) -> String
+
+      attr_reader design: ::Hash[Symbol, top]?
+
+      def design=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader emails: ::Hash[Symbol, top]?
+
+      def emails=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader goal: String?
+
+      def goal=: (String) -> String
+
+      attr_reader installation: ::Hash[Symbol, top]?
+
+      def installation=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader notifications: ::Hash[Symbol, top]?
+
+      def notifications=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader options: ::Hash[Symbol, top]?
+
+      def options=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader status: GrowsurfRuby::Models::CampaignUpdateParams::status?
+
+      def status=: (
+        GrowsurfRuby::Models::CampaignUpdateParams::status
+      ) -> GrowsurfRuby::Models::CampaignUpdateParams::status
+
+      def initialize: (
+        id: String,
+        ?company_logo_image_url: String,
+        ?company_name: String,
+        ?currency_iso: String,
+        ?design: ::Hash[Symbol, top],
+        ?emails: ::Hash[Symbol, top],
+        ?goal: String,
+        ?installation: ::Hash[Symbol, top],
+        ?name: String,
+        ?notifications: ::Hash[Symbol, top],
+        ?options: ::Hash[Symbol, top],
+        ?status: GrowsurfRuby::Models::CampaignUpdateParams::status,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        company_logo_image_url: String,
+        company_name: String,
+        currency_iso: String,
+        design: ::Hash[Symbol, top],
+        emails: ::Hash[Symbol, top],
+        goal: String,
+        installation: ::Hash[Symbol, top],
+        name: String,
+        notifications: ::Hash[Symbol, top],
+        options: ::Hash[Symbol, top],
+        status: GrowsurfRuby::Models::CampaignUpdateParams::status,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+
+      type status = :DRAFT | :PENDING | :IN_PROGRESS | :COMPLETE | :CANCELLED
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        DRAFT: :DRAFT
+        PENDING: :PENDING
+        IN_PROGRESS: :IN_PROGRESS
+        COMPLETE: :COMPLETE
+        CANCELLED: :CANCELLED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignUpdateParams::status]
+      end
+    end
+  end
+end

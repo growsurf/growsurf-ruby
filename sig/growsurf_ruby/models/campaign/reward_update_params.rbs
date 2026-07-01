@@ -1,0 +1,182 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_update_params =
+        {
+          id: String,
+          reward_id: String,
+          commission_structure: GrowsurfRuby::CommissionStructure,
+          conversions_required: Integer,
+          coupon_code: String,
+          description: String,
+          image_url: String,
+          is_active: bool,
+          is_unlimited: bool,
+          is_visible: bool,
+          limit: Integer,
+          limit_duration: GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration,
+          metadata: ::Hash[Symbol, top],
+          next_milestone_prefix: String,
+          next_milestone_suffix: String,
+          number_of_winners: Integer,
+          order: Integer,
+          referral_coupon_code: String,
+          referral_description: String,
+          referred_reward_upfront: bool,
+          title: String
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class RewardUpdateParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor reward_id: String
+
+        attr_reader commission_structure: GrowsurfRuby::CommissionStructure?
+
+        def commission_structure=: (
+          GrowsurfRuby::CommissionStructure
+        ) -> GrowsurfRuby::CommissionStructure
+
+        attr_reader conversions_required: Integer?
+
+        def conversions_required=: (Integer) -> Integer
+
+        attr_reader coupon_code: String?
+
+        def coupon_code=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader image_url: String?
+
+        def image_url=: (String) -> String
+
+        attr_reader is_active: bool?
+
+        def is_active=: (bool) -> bool
+
+        attr_reader is_unlimited: bool?
+
+        def is_unlimited=: (bool) -> bool
+
+        attr_reader is_visible: bool?
+
+        def is_visible=: (bool) -> bool
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader limit_duration: GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration?
+
+        def limit_duration=: (
+          GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration
+        ) -> GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration
+
+        attr_reader metadata: ::Hash[Symbol, top]?
+
+        def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader next_milestone_prefix: String?
+
+        def next_milestone_prefix=: (String) -> String
+
+        attr_reader next_milestone_suffix: String?
+
+        def next_milestone_suffix=: (String) -> String
+
+        attr_reader number_of_winners: Integer?
+
+        def number_of_winners=: (Integer) -> Integer
+
+        attr_reader order: Integer?
+
+        def order=: (Integer) -> Integer
+
+        attr_reader referral_coupon_code: String?
+
+        def referral_coupon_code=: (String) -> String
+
+        attr_reader referral_description: String?
+
+        def referral_description=: (String) -> String
+
+        attr_reader referred_reward_upfront: bool?
+
+        def referred_reward_upfront=: (bool) -> bool
+
+        attr_reader title: String?
+
+        def title=: (String) -> String
+
+        def initialize: (
+          id: String,
+          reward_id: String,
+          ?commission_structure: GrowsurfRuby::CommissionStructure,
+          ?conversions_required: Integer,
+          ?coupon_code: String,
+          ?description: String,
+          ?image_url: String,
+          ?is_active: bool,
+          ?is_unlimited: bool,
+          ?is_visible: bool,
+          ?limit: Integer,
+          ?limit_duration: GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration,
+          ?metadata: ::Hash[Symbol, top],
+          ?next_milestone_prefix: String,
+          ?next_milestone_suffix: String,
+          ?number_of_winners: Integer,
+          ?order: Integer,
+          ?referral_coupon_code: String,
+          ?referral_description: String,
+          ?referred_reward_upfront: bool,
+          ?title: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          reward_id: String,
+          commission_structure: GrowsurfRuby::CommissionStructure,
+          conversions_required: Integer,
+          coupon_code: String,
+          description: String,
+          image_url: String,
+          is_active: bool,
+          is_unlimited: bool,
+          is_visible: bool,
+          limit: Integer,
+          limit_duration: GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration,
+          metadata: ::Hash[Symbol, top],
+          next_milestone_prefix: String,
+          next_milestone_suffix: String,
+          number_of_winners: Integer,
+          order: Integer,
+          referral_coupon_code: String,
+          referral_description: String,
+          referred_reward_upfront: bool,
+          title: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        type limit_duration = :IN_TOTAL | :PER_MONTH | :PER_YEAR
+
+        module LimitDuration
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          IN_TOTAL: :IN_TOTAL
+          PER_MONTH: :PER_MONTH
+          PER_YEAR: :PER_YEAR
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration]
+        end
+      end
+    end
+  end
+end

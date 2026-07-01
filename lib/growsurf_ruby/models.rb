@@ -46,6 +46,8 @@ module GrowsurfRuby
   CampaignCreateMobileParticipantTokenParams =
     GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams
 
+  CampaignCreateParams = GrowsurfRuby::Models::CampaignCreateParams
+
   CampaignListCommissionsParams = GrowsurfRuby::Models::CampaignListCommissionsParams
 
   CampaignListLeaderboardParams = GrowsurfRuby::Models::CampaignListLeaderboardParams
@@ -61,6 +63,8 @@ module GrowsurfRuby
   CampaignRetrieveAnalyticsParams = GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams
 
   CampaignRetrieveParams = GrowsurfRuby::Models::CampaignRetrieveParams
+
+  CampaignUpdateParams = GrowsurfRuby::Models::CampaignUpdateParams
 
   CommissionStructure = GrowsurfRuby::Models::CommissionStructure
 

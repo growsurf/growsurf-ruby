@@ -14,6 +14,10 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::Commission) }
       attr_reader :commission
 
+      # Program reward configuration operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Rewards) }
+      attr_reader :rewards
+
       # Retrieves a program for the given program ID.
       sig do
         params(
@@ -35,6 +39,101 @@ module GrowsurfRuby
         )
       end
       def list(request_options: {})
+      end
+
+      # Creates a program. Only `type` is required; everything else is server-defaulted.
+      sig do
+        params(
+          type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,
+          company_logo_image_url: String,
+          company_name: String,
+          currency_iso: String,
+          goal: String,
+          name: String,
+          options: T::Hash[Symbol, T.anything],
+          rewards: T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::CampaignAPI)
+      end
+      def create(
+        # The program type. Immutable after creation.
+        type:,
+        company_logo_image_url: nil,
+        company_name: nil,
+        # ISO 4217 currency code. Defaults to USD.
+        currency_iso: nil,
+        goal: nil,
+        # The program name. Defaults to "Untitled Program".
+        name: nil,
+        # A curated subset of program options to shallow-merge onto the defaults.
+        options: nil,
+        # Optional inline rewards to create with the program.
+        rewards: nil,
+        request_options: {}
+      )
+      end
+
+      # Updates a program. Only the fields you send are changed. `type` and `urlId` are
+      # immutable.
+      sig do
+        params(
+          id: String,
+          company_logo_image_url: String,
+          company_name: String,
+          currency_iso: String,
+          design: T::Hash[Symbol, T.anything],
+          emails: T::Hash[Symbol, T.anything],
+          goal: String,
+          installation: T::Hash[Symbol, T.anything],
+          name: String,
+          notifications: T::Hash[Symbol, T.anything],
+          options: T::Hash[Symbol, T.anything],
+          status: GrowsurfRuby::CampaignUpdateParams::Status::OrSymbol,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::CampaignAPI)
+      end
+      def update(
+        # Path param: GrowSurf program ID.
+        id,
+        # Body param
+        company_logo_image_url: nil,
+        # Body param
+        company_name: nil,
+        # Body param
+        currency_iso: nil,
+        # Body param
+        design: nil,
+        # Body param
+        emails: nil,
+        # Body param
+        goal: nil,
+        # Body param
+        installation: nil,
+        # Body param
+        name: nil,
+        # Body param
+        notifications: nil,
+        # Body param
+        options: nil,
+        # Body param: The program status. Transitions are validated; DELETED is not
+        # allowed.
+        status: nil,
+        request_options: {}
+      )
+      end
+
+      # Clones an existing program, returning the newly created program.
+      sig do
+        params(
+          id: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::CampaignAPI)
+      end
+      def clone(
+        # GrowSurf program ID.
+        id,
+        request_options: {}
+      )
       end
 
       # Creates or returns a participant using the same input behavior as Add

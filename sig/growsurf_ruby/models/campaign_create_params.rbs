@@ -1,0 +1,88 @@
+module GrowsurfRuby
+  module Models
+    type campaign_create_params =
+      {
+        type: GrowsurfRuby::Models::CampaignCreateParams::type_,
+        company_logo_image_url: String,
+        company_name: String,
+        currency_iso: String,
+        goal: String,
+        name: String,
+        options: ::Hash[Symbol, top],
+        rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams]
+      }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignCreateParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor type: GrowsurfRuby::Models::CampaignCreateParams::type_
+
+      attr_reader company_logo_image_url: String?
+
+      def company_logo_image_url=: (String) -> String
+
+      attr_reader company_name: String?
+
+      def company_name=: (String) -> String
+
+      attr_reader currency_iso: String?
+
+      def currency_iso=: (String) -> String
+
+      attr_reader goal: String?
+
+      def goal=: (String) -> String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader options: ::Hash[Symbol, top]?
+
+      def options=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams]?
+
+      def rewards=: (
+        ::Array[GrowsurfRuby::Campaign::RewardCreateParams]
+      ) -> ::Array[GrowsurfRuby::Campaign::RewardCreateParams]
+
+      def initialize: (
+        type: GrowsurfRuby::Models::CampaignCreateParams::type_,
+        ?company_logo_image_url: String,
+        ?company_name: String,
+        ?currency_iso: String,
+        ?goal: String,
+        ?name: String,
+        ?options: ::Hash[Symbol, top],
+        ?rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        type: GrowsurfRuby::Models::CampaignCreateParams::type_,
+        company_logo_image_url: String,
+        company_name: String,
+        currency_iso: String,
+        goal: String,
+        name: String,
+        options: ::Hash[Symbol, top],
+        rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
+        request_options: GrowsurfRuby::RequestOptions
+      }
+
+      type type_ = :REFERRAL | :AFFILIATE
+
+      module Type
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        REFERRAL: :REFERRAL
+        AFFILIATE: :AFFILIATE
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignCreateParams::type_]
+      end
+    end
+  end
+end

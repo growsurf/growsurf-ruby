@@ -7,6 +7,8 @@ module GrowsurfRuby
 
       attr_reader commission: GrowsurfRuby::Resources::Campaign::Commission
 
+      attr_reader rewards: GrowsurfRuby::Resources::Campaign::Rewards
+
       def retrieve: (
         String id,
         ?request_options: GrowsurfRuby::request_opts
@@ -15,6 +17,39 @@ module GrowsurfRuby
       def list: (
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::Models::CampaignListResponse
+
+      def create: (
+        type: GrowsurfRuby::Models::CampaignCreateParams::type_,
+        ?company_logo_image_url: String,
+        ?company_name: String,
+        ?currency_iso: String,
+        ?goal: String,
+        ?name: String,
+        ?options: ::Hash[Symbol, top],
+        ?rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::CampaignAPI
+
+      def update: (
+        String id,
+        ?company_logo_image_url: String,
+        ?company_name: String,
+        ?currency_iso: String,
+        ?design: ::Hash[Symbol, top],
+        ?emails: ::Hash[Symbol, top],
+        ?goal: String,
+        ?installation: ::Hash[Symbol, top],
+        ?name: String,
+        ?notifications: ::Hash[Symbol, top],
+        ?options: ::Hash[Symbol, top],
+        ?status: GrowsurfRuby::Models::CampaignUpdateParams::status,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::CampaignAPI
+
+      def clone: (
+        String id,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::CampaignAPI
 
       def create_mobile_participant_token: (
         String id,
