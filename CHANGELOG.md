@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/growsurf/growsurf-ruby/compare/v0.7.0...v0.8.0) (2026-07-01)
+
+
+### Features
+
+* **api:** add campaign create/update/clone and program-reward CRUD ([aa8d3dd](https://github.com/growsurf/growsurf-ruby/commit/aa8d3ddbf167f26d0807ba58fce2071517afb318))
+
 ## 0.7.0 (2026-06-29)
 
 Full Changelog: [v0.6.1...v0.7.0](https://github.com/growsurf/growsurf-ruby/compare/v0.6.1...v0.7.0)
