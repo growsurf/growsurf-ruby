@@ -88,6 +88,12 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :order, Integer, nil?: true
 
+        # @!attribute referral_coupon_code
+        #   The coupon code delivered to the referred friend (double-sided rewards).
+        #
+        #   @return [String, nil]
+        optional :referral_coupon_code, String, api_name: :referralCouponCode, nil?: true
+
         # @!attribute referral_description
         #
         #   @return [String, nil]
@@ -100,7 +106,22 @@ module GrowsurfRuby
                  GrowsurfRuby::Internal::Type::Boolean,
                  api_name: :referredRewardUpfront
 
-        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_description: nil, referred_reward_upfront: nil)
+        # @!attribute referred_value
+        #   Tax valuation for the referred friend's side of a double-sided reward.
+        #
+        #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
+        optional :referred_value,
+                 -> { GrowsurfRuby::RewardTaxValuation },
+                 api_name: :referredValue,
+                 nil?: true
+
+        # @!attribute value
+        #   Tax valuation for the reward (the referrer's side of a double-sided reward).
+        #
+        #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
+        optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
+
+        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, value: nil)
         #   @param id [String]
         #
         #   @param is_unlimited [Boolean]
@@ -131,9 +152,15 @@ module GrowsurfRuby
         #
         #   @param order [Integer, nil]
         #
+        #   @param referral_coupon_code [String, nil] The coupon code delivered to the referred friend (double-sided rewards).
+        #
         #   @param referral_description [String, nil]
         #
         #   @param referred_reward_upfront [Boolean]
+        #
+        #   @param referred_value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax valuation for the referred friend's side of a double-sided reward.
+        #
+        #   @param value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax valuation for the reward (the referrer's side of a double-sided reward).
 
         # @see GrowsurfRuby::Models::Campaign::Reward#type
         module Type

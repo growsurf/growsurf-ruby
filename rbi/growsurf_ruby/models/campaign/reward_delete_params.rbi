@@ -19,23 +19,23 @@ module GrowsurfRuby
         attr_accessor :id
 
         sig { returns(String) }
-        attr_accessor :reward_id
+        attr_accessor :campaign_reward_id
 
         sig do
           params(
             id: String,
-            reward_id: String,
+            campaign_reward_id: String,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(id:, reward_id:, request_options: {})
+        def self.new(id:, campaign_reward_id:, request_options: {})
         end
 
         sig do
           override.returns(
             {
               id: String,
-              reward_id: String,
+              campaign_reward_id: String,
               request_options: GrowsurfRuby::RequestOptions
             }
           )

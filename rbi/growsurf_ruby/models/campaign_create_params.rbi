@@ -36,22 +36,10 @@ module GrowsurfRuby
       attr_writer :currency_iso
 
       sig { returns(T.nilable(String)) }
-      attr_reader :goal
-
-      sig { params(goal: String).void }
-      attr_writer :goal
-
-      sig { returns(T.nilable(String)) }
       attr_reader :name
 
       sig { params(name: String).void }
       attr_writer :name
-
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :options
-
-      sig { params(options: T::Hash[Symbol, T.anything]).void }
-      attr_writer :options
 
       sig do
         returns(T.nilable(T::Array[GrowsurfRuby::Campaign::RewardCreateParams]))
@@ -71,9 +59,7 @@ module GrowsurfRuby
           company_logo_image_url: String,
           company_name: String,
           currency_iso: String,
-          goal: String,
           name: String,
-          options: T::Hash[Symbol, T.anything],
           rewards: T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -83,9 +69,7 @@ module GrowsurfRuby
         company_logo_image_url: nil,
         company_name: nil,
         currency_iso: nil,
-        goal: nil,
         name: nil,
-        options: nil,
         rewards: nil,
         request_options: {}
       )
@@ -98,9 +82,7 @@ module GrowsurfRuby
             company_logo_image_url: String,
             company_name: String,
             currency_iso: String,
-            goal: String,
             name: String,
-            options: T::Hash[Symbol, T.anything],
             rewards:
               T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
             request_options: GrowsurfRuby::RequestOptions

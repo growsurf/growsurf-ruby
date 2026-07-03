@@ -14,9 +14,25 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::Commission) }
       attr_reader :commission
 
-      # Program reward configuration operations.
+      # Campaign reward configuration operations.
       sig { returns(GrowsurfRuby::Resources::Campaign::Rewards) }
       attr_reader :rewards
+
+      # Program Editor "Design" tab configuration operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Design) }
+      attr_reader :design
+
+      # Program Editor "Emails" tab configuration operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Emails) }
+      attr_reader :emails
+
+      # Program Editor "Options" tab configuration operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Options) }
+      attr_reader :options
+
+      # Program Editor "Installation" tab configuration operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Installation) }
+      attr_reader :installation
 
       # Retrieves a program for the given program ID.
       sig do
@@ -42,15 +58,15 @@ module GrowsurfRuby
       end
 
       # Creates a program. Only `type` is required; everything else is server-defaulted.
+      # Editor-tab configuration (design, emails, options, installation) is not accepted
+      # here — configure it via the config sub-resources after the program is created.
       sig do
         params(
           type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,
           company_logo_image_url: String,
           company_name: String,
           currency_iso: String,
-          goal: String,
           name: String,
-          options: T::Hash[Symbol, T.anything],
           rewards: T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(GrowsurfRuby::CampaignAPI)
@@ -60,34 +76,27 @@ module GrowsurfRuby
         type:,
         company_logo_image_url: nil,
         company_name: nil,
-        # ISO 4217 currency code. Defaults to USD.
+        # ISO 4217 currency code. Defaults to USD. Chosen when the program is created and
+        # immutable afterward — it cannot be changed on update.
         currency_iso: nil,
-        goal: nil,
         # The program name. Defaults to "Untitled Program".
         name: nil,
-        # A curated subset of program options to shallow-merge onto the defaults.
-        options: nil,
         # Optional inline rewards to create with the program.
         rewards: nil,
         request_options: {}
       )
       end
 
-      # Updates a program. Only the fields you send are changed. `type` and `urlId` are
-      # immutable.
+      # Updates a program's identity and lifecycle. Only the fields you send are changed.
+      # `type`, `urlId`, and `currencyISO` are immutable. Editor-tab configuration (design, emails,
+      # options, installation) is edited via the dedicated config sub-resources, not
+      # here.
       sig do
         params(
           id: String,
           company_logo_image_url: String,
           company_name: String,
-          currency_iso: String,
-          design: T::Hash[Symbol, T.anything],
-          emails: T::Hash[Symbol, T.anything],
-          goal: String,
-          installation: T::Hash[Symbol, T.anything],
           name: String,
-          notifications: T::Hash[Symbol, T.anything],
-          options: T::Hash[Symbol, T.anything],
           status: GrowsurfRuby::CampaignUpdateParams::Status::OrSymbol,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(GrowsurfRuby::CampaignAPI)
@@ -100,21 +109,7 @@ module GrowsurfRuby
         # Body param
         company_name: nil,
         # Body param
-        currency_iso: nil,
-        # Body param
-        design: nil,
-        # Body param
-        emails: nil,
-        # Body param
-        goal: nil,
-        # Body param
-        installation: nil,
-        # Body param
         name: nil,
-        # Body param
-        notifications: nil,
-        # Body param
-        options: nil,
         # Body param: The program status. Transitions are validated; DELETED is not
         # allowed.
         status: nil,

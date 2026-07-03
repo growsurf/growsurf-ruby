@@ -146,11 +146,29 @@ module GrowsurfRuby
         sig { params(referred_reward_upfront: T::Boolean).void }
         attr_writer :referred_reward_upfront
 
+        # Tax valuation for the referred friend's side of a double-sided reward.
+        # Defaults to not tax-reportable (a purchase rebate).
+        sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
+        attr_reader :referred_value
+
+        sig do
+          params(referred_value: GrowsurfRuby::RewardTaxValuation::OrHash).void
+        end
+        attr_writer :referred_value
+
         sig { returns(T.nilable(String)) }
         attr_reader :title
 
         sig { params(title: String).void }
         attr_writer :title
+
+        # Tax valuation for the reward (the referrer's side of a double-sided reward).
+        # Used by tax documentation / 1099 reporting.
+        sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
+        attr_reader :value
+
+        sig { params(value: GrowsurfRuby::RewardTaxValuation::OrHash).void }
+        attr_writer :value
 
         sig do
           params(
@@ -175,7 +193,9 @@ module GrowsurfRuby
             referral_coupon_code: String,
             referral_description: String,
             referred_reward_upfront: T::Boolean,
+            referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
             title: String,
+            value: GrowsurfRuby::RewardTaxValuation::OrHash,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -200,7 +220,13 @@ module GrowsurfRuby
           referral_coupon_code: nil,
           referral_description: nil,
           referred_reward_upfront: nil,
+          # Tax valuation for the referred friend's side of a double-sided reward.
+          # Defaults to not tax-reportable (a purchase rebate).
+          referred_value: nil,
           title: nil,
+          # Tax valuation for the reward (the referrer's side of a double-sided reward).
+          # Used by tax documentation / 1099 reporting.
+          value: nil,
           request_options: {}
         )
         end
@@ -229,7 +255,9 @@ module GrowsurfRuby
               referral_coupon_code: String,
               referral_description: String,
               referred_reward_upfront: T::Boolean,
+              referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
               title: String,
+              value: GrowsurfRuby::RewardTaxValuation::OrHash,
               request_options: GrowsurfRuby::RequestOptions
             }
           )

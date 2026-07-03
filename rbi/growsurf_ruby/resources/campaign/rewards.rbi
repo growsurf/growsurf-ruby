@@ -44,7 +44,9 @@ module GrowsurfRuby
             referral_coupon_code: String,
             referral_description: String,
             referred_reward_upfront: T::Boolean,
+            referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
             title: String,
+            value: GrowsurfRuby::RewardTaxValuation::OrHash,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(GrowsurfRuby::Models::Campaign::Reward)
         end
@@ -90,17 +92,23 @@ module GrowsurfRuby
           referral_description: nil,
           # Body param
           referred_reward_upfront: nil,
+          # Body param: Tax valuation for the referred friend's side of a double-sided
+          # reward. Defaults to not tax-reportable (a purchase rebate).
+          referred_value: nil,
           # Body param
           title: nil,
+          # Body param: Tax valuation for the reward (the referrer's side of a
+          # double-sided reward). Used by tax documentation / 1099 reporting.
+          value: nil,
           request_options: {}
         )
         end
 
-        # Updates an existing program reward. Only the fields you send are changed; `type`
+        # Updates an existing campaign reward. Only the fields you send are changed; `type`
         # is immutable and must not be supplied.
         sig do
           params(
-            reward_id: String,
+            campaign_reward_id: String,
             id: String,
             commission_structure: GrowsurfRuby::CommissionStructure::OrHash,
             conversions_required: Integer,
@@ -121,13 +129,15 @@ module GrowsurfRuby
             referral_coupon_code: String,
             referral_description: String,
             referred_reward_upfront: T::Boolean,
+            referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
             title: String,
+            value: GrowsurfRuby::RewardTaxValuation::OrHash,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(GrowsurfRuby::Models::Campaign::Reward)
         end
         def update(
-          # Path param: Program reward ID.
-          reward_id,
+          # Path param: Campaign reward ID.
+          campaign_reward_id,
           # Path param: GrowSurf program ID.
           id:,
           # Body param
@@ -167,23 +177,29 @@ module GrowsurfRuby
           referral_description: nil,
           # Body param
           referred_reward_upfront: nil,
+          # Body param: Tax valuation for the referred friend's side of a double-sided
+          # reward. Defaults to not tax-reportable (a purchase rebate).
+          referred_value: nil,
           # Body param
           title: nil,
+          # Body param: Tax valuation for the reward (the referrer's side of a
+          # double-sided reward). Used by tax documentation / 1099 reporting.
+          value: nil,
           request_options: {}
         )
         end
 
-        # Deletes a program reward.
+        # Deletes a campaign reward.
         sig do
           params(
-            reward_id: String,
+            campaign_reward_id: String,
             id: String,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(GrowsurfRuby::Models::Campaign::DeleteRewardResponse)
         end
         def delete(
-          # Program reward ID.
-          reward_id,
+          # Campaign reward ID.
+          campaign_reward_id,
           # GrowSurf program ID.
           id:,
           request_options: {}

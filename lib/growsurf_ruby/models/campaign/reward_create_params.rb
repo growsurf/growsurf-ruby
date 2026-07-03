@@ -110,12 +110,31 @@ module GrowsurfRuby
                  GrowsurfRuby::Internal::Type::Boolean,
                  api_name: :referredRewardUpfront
 
+        # @!attribute referred_value
+        #   Tax valuation for the referred friend's side of a double-sided reward.
+        #   Defaults to not tax-reportable (a purchase rebate).
+        #
+        #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
+        optional :referred_value,
+                 -> { GrowsurfRuby::RewardTaxValuation },
+                 api_name: :referredValue
+
         # @!attribute title
         #
         #   @return [String, nil]
         optional :title, String
 
-        # @!method initialize(type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_active: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, title: nil, request_options: {})
+        # @!attribute value
+        #   Tax valuation for the reward (the referrer's side of a double-sided reward).
+        #   Used by tax documentation / 1099 reporting.
+        #
+        #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
+        optional :value, -> { GrowsurfRuby::RewardTaxValuation }
+
+        # @!method initialize(type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_active: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {GrowsurfRuby::Models::Campaign::RewardCreateParams} for more details.
+        #
         #   @param type [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::Type]
         #
         #   @param commission_structure [GrowsurfRuby::Models::CommissionStructure]
@@ -154,7 +173,11 @@ module GrowsurfRuby
         #
         #   @param referred_reward_upfront [Boolean]
         #
+        #   @param referred_value [GrowsurfRuby::Models::RewardTaxValuation] Tax valuation for the referred friend's side of a double-sided reward. Defaults
+        #
         #   @param title [String]
+        #
+        #   @param value [GrowsurfRuby::Models::RewardTaxValuation] Tax valuation for the reward (the referrer's side of a double-sided reward). Use
         #
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 

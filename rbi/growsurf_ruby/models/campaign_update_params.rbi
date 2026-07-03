@@ -30,52 +30,10 @@ module GrowsurfRuby
       attr_writer :company_name
 
       sig { returns(T.nilable(String)) }
-      attr_reader :currency_iso
-
-      sig { params(currency_iso: String).void }
-      attr_writer :currency_iso
-
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :design
-
-      sig { params(design: T::Hash[Symbol, T.anything]).void }
-      attr_writer :design
-
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :emails
-
-      sig { params(emails: T::Hash[Symbol, T.anything]).void }
-      attr_writer :emails
-
-      sig { returns(T.nilable(String)) }
-      attr_reader :goal
-
-      sig { params(goal: String).void }
-      attr_writer :goal
-
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :installation
-
-      sig { params(installation: T::Hash[Symbol, T.anything]).void }
-      attr_writer :installation
-
-      sig { returns(T.nilable(String)) }
       attr_reader :name
 
       sig { params(name: String).void }
       attr_writer :name
-
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :notifications
-
-      sig { params(notifications: T::Hash[Symbol, T.anything]).void }
-      attr_writer :notifications
-
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :options
-
-      sig { params(options: T::Hash[Symbol, T.anything]).void }
-      attr_writer :options
 
       sig do
         returns(T.nilable(GrowsurfRuby::CampaignUpdateParams::Status::OrSymbol))
@@ -94,14 +52,7 @@ module GrowsurfRuby
           id: String,
           company_logo_image_url: String,
           company_name: String,
-          currency_iso: String,
-          design: T::Hash[Symbol, T.anything],
-          emails: T::Hash[Symbol, T.anything],
-          goal: String,
-          installation: T::Hash[Symbol, T.anything],
           name: String,
-          notifications: T::Hash[Symbol, T.anything],
-          options: T::Hash[Symbol, T.anything],
           status: GrowsurfRuby::CampaignUpdateParams::Status::OrSymbol,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -110,14 +61,7 @@ module GrowsurfRuby
         id:,
         company_logo_image_url: nil,
         company_name: nil,
-        currency_iso: nil,
-        design: nil,
-        emails: nil,
-        goal: nil,
-        installation: nil,
         name: nil,
-        notifications: nil,
-        options: nil,
         status: nil,
         request_options: {}
       )
@@ -129,14 +73,7 @@ module GrowsurfRuby
             id: String,
             company_logo_image_url: String,
             company_name: String,
-            currency_iso: String,
-            design: T::Hash[Symbol, T.anything],
-            emails: T::Hash[Symbol, T.anything],
-            goal: String,
-            installation: T::Hash[Symbol, T.anything],
             name: String,
-            notifications: T::Hash[Symbol, T.anything],
-            options: T::Hash[Symbol, T.anything],
             status: GrowsurfRuby::CampaignUpdateParams::Status::OrSymbol,
             request_options: GrowsurfRuby::RequestOptions
           }

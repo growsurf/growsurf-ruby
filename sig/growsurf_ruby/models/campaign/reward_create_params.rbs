@@ -22,7 +22,9 @@ module GrowsurfRuby
           referral_coupon_code: String,
           referral_description: String,
           referred_reward_upfront: bool,
-          title: String
+          referred_value: GrowsurfRuby::RewardTaxValuation,
+          title: String,
+          value: GrowsurfRuby::RewardTaxValuation
         }
         & GrowsurfRuby::Internal::Type::request_parameters
 
@@ -108,9 +110,21 @@ module GrowsurfRuby
 
         def referred_reward_upfront=: (bool) -> bool
 
+        attr_reader referred_value: GrowsurfRuby::RewardTaxValuation?
+
+        def referred_value=: (
+          GrowsurfRuby::RewardTaxValuation
+        ) -> GrowsurfRuby::RewardTaxValuation
+
         attr_reader title: String?
 
         def title=: (String) -> String
+
+        attr_reader value: GrowsurfRuby::RewardTaxValuation?
+
+        def value=: (
+          GrowsurfRuby::RewardTaxValuation
+        ) -> GrowsurfRuby::RewardTaxValuation
 
         def initialize: (
           type: GrowsurfRuby::Models::Campaign::RewardCreateParams::type_,
@@ -132,7 +146,9 @@ module GrowsurfRuby
           ?referral_coupon_code: String,
           ?referral_description: String,
           ?referred_reward_upfront: bool,
+          ?referred_value: GrowsurfRuby::RewardTaxValuation,
           ?title: String,
+          ?value: GrowsurfRuby::RewardTaxValuation,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
 
@@ -156,7 +172,9 @@ module GrowsurfRuby
           referral_coupon_code: String,
           referral_description: String,
           referred_reward_upfront: bool,
+          referred_value: GrowsurfRuby::RewardTaxValuation,
           title: String,
+          value: GrowsurfRuby::RewardTaxValuation,
           request_options: GrowsurfRuby::RequestOptions
         }
 

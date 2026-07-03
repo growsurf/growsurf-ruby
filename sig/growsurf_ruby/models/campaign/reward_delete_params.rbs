@@ -2,7 +2,7 @@ module GrowsurfRuby
   module Models
     module Campaign
       type reward_delete_params =
-        { id: String, reward_id: String }
+        { id: String, campaign_reward_id: String }
         & GrowsurfRuby::Internal::Type::request_parameters
 
       class RewardDeleteParams < GrowsurfRuby::Internal::Type::BaseModel
@@ -11,17 +11,17 @@ module GrowsurfRuby
 
         attr_accessor id: String
 
-        attr_accessor reward_id: String
+        attr_accessor campaign_reward_id: String
 
         def initialize: (
           id: String,
-          reward_id: String,
+          campaign_reward_id: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
-          reward_id: String,
+          campaign_reward_id: String,
           request_options: GrowsurfRuby::RequestOptions
         }
       end

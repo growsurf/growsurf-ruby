@@ -6,9 +6,7 @@ module GrowsurfRuby
         company_logo_image_url: String,
         company_name: String,
         currency_iso: String,
-        goal: String,
         name: String,
-        options: ::Hash[Symbol, top],
         rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams]
       }
       & GrowsurfRuby::Internal::Type::request_parameters
@@ -31,17 +29,9 @@ module GrowsurfRuby
 
       def currency_iso=: (String) -> String
 
-      attr_reader goal: String?
-
-      def goal=: (String) -> String
-
       attr_reader name: String?
 
       def name=: (String) -> String
-
-      attr_reader options: ::Hash[Symbol, top]?
-
-      def options=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
       attr_reader rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams]?
 
@@ -54,9 +44,7 @@ module GrowsurfRuby
         ?company_logo_image_url: String,
         ?company_name: String,
         ?currency_iso: String,
-        ?goal: String,
         ?name: String,
-        ?options: ::Hash[Symbol, top],
         ?rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
         ?request_options: GrowsurfRuby::request_opts
       ) -> void
@@ -66,9 +54,7 @@ module GrowsurfRuby
         company_logo_image_url: String,
         company_name: String,
         currency_iso: String,
-        goal: String,
         name: String,
-        options: ::Hash[Symbol, top],
         rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
         request_options: GrowsurfRuby::RequestOptions
       }

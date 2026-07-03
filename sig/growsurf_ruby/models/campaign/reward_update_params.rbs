@@ -4,7 +4,7 @@ module GrowsurfRuby
       type reward_update_params =
         {
           id: String,
-          reward_id: String,
+          campaign_reward_id: String,
           commission_structure: GrowsurfRuby::CommissionStructure,
           conversions_required: Integer,
           coupon_code: String,
@@ -23,7 +23,9 @@ module GrowsurfRuby
           referral_coupon_code: String,
           referral_description: String,
           referred_reward_upfront: bool,
-          title: String
+          referred_value: GrowsurfRuby::RewardTaxValuation,
+          title: String,
+          value: GrowsurfRuby::RewardTaxValuation
         }
         & GrowsurfRuby::Internal::Type::request_parameters
 
@@ -33,7 +35,7 @@ module GrowsurfRuby
 
         attr_accessor id: String
 
-        attr_accessor reward_id: String
+        attr_accessor campaign_reward_id: String
 
         attr_reader commission_structure: GrowsurfRuby::CommissionStructure?
 
@@ -111,13 +113,25 @@ module GrowsurfRuby
 
         def referred_reward_upfront=: (bool) -> bool
 
+        attr_reader referred_value: GrowsurfRuby::RewardTaxValuation?
+
+        def referred_value=: (
+          GrowsurfRuby::RewardTaxValuation
+        ) -> GrowsurfRuby::RewardTaxValuation
+
         attr_reader title: String?
 
         def title=: (String) -> String
 
+        attr_reader value: GrowsurfRuby::RewardTaxValuation?
+
+        def value=: (
+          GrowsurfRuby::RewardTaxValuation
+        ) -> GrowsurfRuby::RewardTaxValuation
+
         def initialize: (
           id: String,
-          reward_id: String,
+          campaign_reward_id: String,
           ?commission_structure: GrowsurfRuby::CommissionStructure,
           ?conversions_required: Integer,
           ?coupon_code: String,
@@ -136,13 +150,15 @@ module GrowsurfRuby
           ?referral_coupon_code: String,
           ?referral_description: String,
           ?referred_reward_upfront: bool,
+          ?referred_value: GrowsurfRuby::RewardTaxValuation,
           ?title: String,
+          ?value: GrowsurfRuby::RewardTaxValuation,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
-          reward_id: String,
+          campaign_reward_id: String,
           commission_structure: GrowsurfRuby::CommissionStructure,
           conversions_required: Integer,
           coupon_code: String,
@@ -161,7 +177,9 @@ module GrowsurfRuby
           referral_coupon_code: String,
           referral_description: String,
           referred_reward_upfront: bool,
+          referred_value: GrowsurfRuby::RewardTaxValuation,
           title: String,
+          value: GrowsurfRuby::RewardTaxValuation,
           request_options: GrowsurfRuby::RequestOptions
         }
 

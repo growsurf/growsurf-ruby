@@ -45,8 +45,11 @@ class GrowsurfRuby::Test::Resources::Campaign::RewardsTest < GrowsurfRuby::Test:
         next_milestone_suffix: String | nil,
         number_of_winners: Integer | nil,
         order: Integer | nil,
+        referral_coupon_code: String | nil,
         referral_description: String | nil,
-        referred_reward_upfront: GrowsurfRuby::Internal::Type::Boolean | nil
+        referred_reward_upfront: GrowsurfRuby::Internal::Type::Boolean | nil,
+        referred_value: GrowsurfRuby::RewardTaxValuation | nil,
+        value: GrowsurfRuby::RewardTaxValuation | nil
       }
     end
   end
@@ -77,8 +80,11 @@ class GrowsurfRuby::Test::Resources::Campaign::RewardsTest < GrowsurfRuby::Test:
         next_milestone_suffix: String | nil,
         number_of_winners: Integer | nil,
         order: Integer | nil,
+        referral_coupon_code: String | nil,
         referral_description: String | nil,
-        referred_reward_upfront: GrowsurfRuby::Internal::Type::Boolean | nil
+        referred_reward_upfront: GrowsurfRuby::Internal::Type::Boolean | nil,
+        referred_value: GrowsurfRuby::RewardTaxValuation | nil,
+        value: GrowsurfRuby::RewardTaxValuation | nil
       }
     end
   end

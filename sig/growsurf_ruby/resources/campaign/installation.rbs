@@ -1,0 +1,20 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      class Installation
+        def retrieve: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> ::Hash[Symbol, top]
+
+        def update: (
+          String id,
+          ::Hash[Symbol, top] body,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> ::Hash[Symbol, top]
+
+        def initialize: (client: GrowsurfRuby::Client) -> void
+      end
+    end
+  end
+end

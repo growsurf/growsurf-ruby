@@ -42,4 +42,6 @@ module GrowsurfRuby
   ParticipantPayoutList = GrowsurfRuby::Models::ParticipantPayoutList
 
   ReferralList = GrowsurfRuby::Models::ReferralList
+
+  RewardTaxValuation = GrowsurfRuby::Models::RewardTaxValuation
 end

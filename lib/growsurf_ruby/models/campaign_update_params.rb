@@ -22,73 +22,24 @@ module GrowsurfRuby
       #   @return [String, nil]
       optional :company_name, String, api_name: :companyName
 
-      # @!attribute currency_iso
-      #
-      #   @return [String, nil]
-      optional :currency_iso, String, api_name: :currencyISO
-
-      # @!attribute design
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :design, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
-
-      # @!attribute emails
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :emails, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
-
-      # @!attribute goal
-      #
-      #   @return [String, nil]
-      optional :goal, String
-
-      # @!attribute installation
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :installation, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
-
       # @!attribute name
       #
       #   @return [String, nil]
       optional :name, String
-
-      # @!attribute notifications
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :notifications, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
-
-      # @!attribute options
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :options, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
 
       # @!attribute status
       #
       #   @return [Symbol, GrowsurfRuby::Models::CampaignUpdateParams::Status, nil]
       optional :status, enum: -> { GrowsurfRuby::CampaignUpdateParams::Status }
 
-      # @!method initialize(id:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, design: nil, emails: nil, goal: nil, installation: nil, name: nil, notifications: nil, options: nil, status: nil, request_options: {})
+      # @!method initialize(id:, company_logo_image_url: nil, company_name: nil, name: nil, status: nil, request_options: {})
       #   @param id [String]
       #
       #   @param company_logo_image_url [String]
       #
       #   @param company_name [String]
       #
-      #   @param currency_iso [String]
-      #
-      #   @param design [Hash{Symbol=>Object}]
-      #
-      #   @param emails [Hash{Symbol=>Object}]
-      #
-      #   @param goal [String]
-      #
-      #   @param installation [Hash{Symbol=>Object}]
-      #
       #   @param name [String]
-      #
-      #   @param notifications [Hash{Symbol=>Object}]
-      #
-      #   @param options [Hash{Symbol=>Object}]
       #
       #   @param status [Symbol, GrowsurfRuby::Models::CampaignUpdateParams::Status]
       #

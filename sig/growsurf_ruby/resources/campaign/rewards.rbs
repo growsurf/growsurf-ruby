@@ -28,12 +28,14 @@ module GrowsurfRuby
           ?referral_coupon_code: String,
           ?referral_description: String,
           ?referred_reward_upfront: bool,
+          ?referred_value: GrowsurfRuby::RewardTaxValuation,
           ?title: String,
+          ?value: GrowsurfRuby::RewardTaxValuation,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::Reward
 
         def update: (
-          String reward_id,
+          String campaign_reward_id,
           id: String,
           ?commission_structure: GrowsurfRuby::CommissionStructure,
           ?conversions_required: Integer,
@@ -53,12 +55,14 @@ module GrowsurfRuby
           ?referral_coupon_code: String,
           ?referral_description: String,
           ?referred_reward_upfront: bool,
+          ?referred_value: GrowsurfRuby::RewardTaxValuation,
           ?title: String,
+          ?value: GrowsurfRuby::RewardTaxValuation,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::Reward
 
         def delete: (
-          String reward_id,
+          String campaign_reward_id,
           id: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::DeleteRewardResponse

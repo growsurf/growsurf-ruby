@@ -14,9 +14,25 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Commission]
       attr_reader :commission
 
-      # Program reward configuration operations.
+      # Campaign reward configuration operations.
       # @return [GrowsurfRuby::Resources::Campaign::Rewards]
       attr_reader :rewards
+
+      # Program Editor "Design" tab configuration operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Design]
+      attr_reader :design
+
+      # Program Editor "Emails" tab configuration operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Emails]
+      attr_reader :emails
+
+      # Program Editor "Options" tab configuration operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Options]
+      attr_reader :options
+
+      # Program Editor "Installation" tab configuration operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Installation]
+      attr_reader :installation
 
       # Retrieves a program for the given program ID.
       #
@@ -57,9 +73,11 @@ module GrowsurfRuby
       end
 
       # Creates a program. Only `type` is required; everything else is
-      # server-defaulted.
+      # server-defaulted. Editor-tab configuration (design, emails, options,
+      # installation) is not accepted here — configure it via the config sub-resources
+      # (e.g. `campaign.options.update`) after the program is created.
       #
-      # @overload create(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, goal: nil, name: nil, options: nil, rewards: nil, request_options: {})
+      # @overload create(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, name: nil, rewards: nil, request_options: {})
       #
       # @param type [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Type] The program type. Immutable after creation.
       #
@@ -67,13 +85,9 @@ module GrowsurfRuby
       #
       # @param company_name [String]
       #
-      # @param currency_iso [String] ISO 4217 currency code. Defaults to USD.
-      #
-      # @param goal [String]
+      # @param currency_iso [String] ISO 4217 currency code. Defaults to USD. Chosen when the program is created and immutable afterward — it cannot be changed on update.
       #
       # @param name [String] The program name. Defaults to "Untitled Program".
-      #
-      # @param options [Hash{Symbol=>Object}] A curated subset of program options to shallow-merge onto the defaults.
       #
       # @param rewards [Array<GrowsurfRuby::Models::Campaign::RewardCreateParams>] Optional inline rewards to create with the program.
       #
@@ -93,10 +107,13 @@ module GrowsurfRuby
         )
       end
 
-      # Updates a program. Only the fields you send are changed. `type` and `urlId` are
-      # immutable.
+      # Updates a program's identity and lifecycle. Only the fields you send are changed.
+      # `type`, `urlId`, and `currencyISO` are immutable. Editor-tab configuration (design, emails,
+      # options, installation) is edited via the dedicated config sub-resources
+      # (`campaign.design`, `campaign.emails`, `campaign.options`, `campaign.installation`),
+      # not here.
       #
-      # @overload update(id, company_logo_image_url: nil, company_name: nil, currency_iso: nil, design: nil, emails: nil, goal: nil, installation: nil, name: nil, notifications: nil, options: nil, status: nil, request_options: {})
+      # @overload update(id, company_logo_image_url: nil, company_name: nil, name: nil, status: nil, request_options: {})
       #
       # @param id [String] Path param: GrowSurf program ID.
       #
@@ -104,21 +121,7 @@ module GrowsurfRuby
       #
       # @param company_name [String] Body param
       #
-      # @param currency_iso [String] Body param
-      #
-      # @param design [Hash{Symbol=>Object}] Body param
-      #
-      # @param emails [Hash{Symbol=>Object}] Body param
-      #
-      # @param goal [String] Body param
-      #
-      # @param installation [Hash{Symbol=>Object}] Body param
-      #
       # @param name [String] Body param
-      #
-      # @param notifications [Hash{Symbol=>Object}] Body param
-      #
-      # @param options [Hash{Symbol=>Object}] Body param
       #
       # @param status [Symbol, GrowsurfRuby::Models::CampaignUpdateParams::Status] Body param: The program status. Transitions are validated; DELETED is not allowe
       #
@@ -412,6 +415,10 @@ module GrowsurfRuby
         @reward = GrowsurfRuby::Resources::Campaign::Reward.new(client: client)
         @commission = GrowsurfRuby::Resources::Campaign::Commission.new(client: client)
         @rewards = GrowsurfRuby::Resources::Campaign::Rewards.new(client: client)
+        @design = GrowsurfRuby::Resources::Campaign::Design.new(client: client)
+        @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)
+        @options = GrowsurfRuby::Resources::Campaign::Options.new(client: client)
+        @installation = GrowsurfRuby::Resources::Campaign::Installation.new(client: client)
       end
     end
   end

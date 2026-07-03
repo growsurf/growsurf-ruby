@@ -75,6 +75,10 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_accessor :order
 
+        # The coupon code delivered to the referred friend (double-sided rewards).
+        sig { returns(T.nilable(String)) }
+        attr_accessor :referral_coupon_code
+
         sig { returns(T.nilable(String)) }
         attr_accessor :referral_description
 
@@ -83,6 +87,28 @@ module GrowsurfRuby
 
         sig { params(referred_reward_upfront: T::Boolean).void }
         attr_writer :referred_reward_upfront
+
+        # Tax valuation for the referred friend's side of a double-sided reward.
+        sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
+        attr_reader :referred_value
+
+        sig do
+          params(
+            referred_value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
+          ).void
+        end
+        attr_writer :referred_value
+
+        # Tax valuation for the reward (the referrer's side of a double-sided reward).
+        sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
+        attr_reader :value
+
+        sig do
+          params(
+            value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
+          ).void
+        end
+        attr_writer :value
 
         sig do
           params(
@@ -105,8 +131,12 @@ module GrowsurfRuby
             next_milestone_suffix: T.nilable(String),
             number_of_winners: T.nilable(Integer),
             order: T.nilable(Integer),
+            referral_coupon_code: T.nilable(String),
             referral_description: T.nilable(String),
-            referred_reward_upfront: T::Boolean
+            referred_reward_upfront: T::Boolean,
+            referred_value:
+              T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
+            value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -127,8 +157,14 @@ module GrowsurfRuby
           next_milestone_suffix: nil,
           number_of_winners: nil,
           order: nil,
+          # The coupon code delivered to the referred friend (double-sided rewards).
+          referral_coupon_code: nil,
           referral_description: nil,
-          referred_reward_upfront: nil
+          referred_reward_upfront: nil,
+          # Tax valuation for the referred friend's side of a double-sided reward.
+          referred_value: nil,
+          # Tax valuation for the reward (the referrer's side of a double-sided reward).
+          value: nil
         )
         end
 
@@ -154,8 +190,11 @@ module GrowsurfRuby
               next_milestone_suffix: T.nilable(String),
               number_of_winners: T.nilable(Integer),
               order: T.nilable(Integer),
+              referral_coupon_code: T.nilable(String),
               referral_description: T.nilable(String),
-              referred_reward_upfront: T::Boolean
+              referred_reward_upfront: T::Boolean,
+              referred_value: T.nilable(GrowsurfRuby::RewardTaxValuation),
+              value: T.nilable(GrowsurfRuby::RewardTaxValuation)
             }
           )
         end

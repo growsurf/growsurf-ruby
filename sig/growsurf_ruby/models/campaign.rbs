@@ -85,8 +85,11 @@ module GrowsurfRuby
           next_milestone_suffix: String?,
           number_of_winners: Integer?,
           order: Integer?,
+          referral_coupon_code: String?,
           referral_description: String?,
-          referred_reward_upfront: bool
+          referred_reward_upfront: bool,
+          referred_value: GrowsurfRuby::RewardTaxValuation?,
+          value: GrowsurfRuby::RewardTaxValuation?
         }
 
       class Reward < GrowsurfRuby::Internal::Type::BaseModel
@@ -120,11 +123,17 @@ module GrowsurfRuby
 
         attr_accessor order: Integer?
 
+        attr_accessor referral_coupon_code: String?
+
         attr_accessor referral_description: String?
 
         attr_reader referred_reward_upfront: bool?
 
         def referred_reward_upfront=: (bool) -> bool
+
+        attr_accessor referred_value: GrowsurfRuby::RewardTaxValuation?
+
+        attr_accessor value: GrowsurfRuby::RewardTaxValuation?
 
         def initialize: (
           id: String,
@@ -142,8 +151,11 @@ module GrowsurfRuby
           ?next_milestone_suffix: String?,
           ?number_of_winners: Integer?,
           ?order: Integer?,
+          ?referral_coupon_code: String?,
           ?referral_description: String?,
-          ?referred_reward_upfront: bool
+          ?referred_reward_upfront: bool,
+          ?referred_value: GrowsurfRuby::RewardTaxValuation?,
+          ?value: GrowsurfRuby::RewardTaxValuation?
         ) -> void
 
         def to_hash: -> {
@@ -162,8 +174,11 @@ module GrowsurfRuby
           next_milestone_suffix: String?,
           number_of_winners: Integer?,
           order: Integer?,
+          referral_coupon_code: String?,
           referral_description: String?,
-          referred_reward_upfront: bool
+          referred_reward_upfront: bool,
+          referred_value: GrowsurfRuby::RewardTaxValuation?,
+          value: GrowsurfRuby::RewardTaxValuation?
         }
 
         type type_ =

@@ -27,20 +27,10 @@ module GrowsurfRuby
       #   @return [String, nil]
       optional :currency_iso, String, api_name: :currencyISO
 
-      # @!attribute goal
-      #
-      #   @return [String, nil]
-      optional :goal, String
-
       # @!attribute name
       #
       #   @return [String, nil]
       optional :name, String
-
-      # @!attribute options
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :options, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
 
       # @!attribute rewards
       #
@@ -48,7 +38,7 @@ module GrowsurfRuby
       optional :rewards,
                -> { GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::RewardCreateParams] }
 
-      # @!method initialize(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, goal: nil, name: nil, options: nil, rewards: nil, request_options: {})
+      # @!method initialize(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, name: nil, rewards: nil, request_options: {})
       #   @param type [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Type]
       #
       #   @param company_logo_image_url [String]
@@ -57,11 +47,7 @@ module GrowsurfRuby
       #
       #   @param currency_iso [String]
       #
-      #   @param goal [String]
-      #
       #   @param name [String]
-      #
-      #   @param options [Hash{Symbol=>Object}]
       #
       #   @param rewards [Array<GrowsurfRuby::Models::Campaign::RewardCreateParams>]
       #
