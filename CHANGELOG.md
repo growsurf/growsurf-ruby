@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/growsurf/growsurf-ruby/compare/v1.0.0...v1.1.0) (2026-07-08)
+
+
+### Features
+
+* add account webhook and participant APIs ([11738ff](https://github.com/growsurf/growsurf-ruby/commit/11738ffa7138ff8468c4b6c1b4d355c9ae8706b7))
+
 ## [1.0.0](https://github.com/growsurf/growsurf-ruby/compare/v0.8.0...v1.0.0) (2026-07-03)
 
 
