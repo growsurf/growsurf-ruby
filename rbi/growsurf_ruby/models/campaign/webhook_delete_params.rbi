@@ -1,0 +1,48 @@
+# typed: strong
+
+module GrowsurfRuby
+  module Models
+    module Campaign
+      class WebhookDeleteParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        OrHash =
+          T.type_alias do
+            T.any(
+              GrowsurfRuby::Campaign::WebhookDeleteParams,
+              GrowsurfRuby::Internal::AnyHash
+            )
+          end
+
+        sig { returns(String) }
+        attr_accessor :id
+
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
+        sig do
+          params(
+            id: String,
+            webhook_id: String,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(T.attached_class)
+        end
+        def self.new(id:, webhook_id:, request_options: {})
+        end
+
+        sig do
+          override.returns(
+            {
+              id: String,
+              webhook_id: String,
+              request_options: GrowsurfRuby::RequestOptions
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+    end
+  end
+end

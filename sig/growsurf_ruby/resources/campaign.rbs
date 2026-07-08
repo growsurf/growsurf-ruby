@@ -17,6 +17,8 @@ module GrowsurfRuby
 
       attr_reader installation: GrowsurfRuby::Resources::Campaign::Installation
 
+      attr_reader webhooks: GrowsurfRuby::Resources::Campaign::Webhooks
+
       def retrieve: (
         String id,
         ?request_options: GrowsurfRuby::request_opts
@@ -49,6 +51,11 @@ module GrowsurfRuby
         String id,
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::CampaignAPI
+
+      def get_referral_flow_screenshots: (
+        String id,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
 
       def create_mobile_participant_token: (
         String id,
@@ -114,6 +121,8 @@ module GrowsurfRuby
         String id,
         ?days: Integer,
         ?end_date: Integer,
+        ?include: String,
+        ?interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
         ?start_date: Integer,
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse

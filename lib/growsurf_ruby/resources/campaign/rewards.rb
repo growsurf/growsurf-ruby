@@ -4,7 +4,7 @@ module GrowsurfRuby
   module Resources
     class Campaign
       class Rewards
-        # Retrieves the active, visible, and enabled rewards configured for a program.
+        # Retrieves the rewards configured for a program.
         #
         # @overload list(id, request_options: {})
         #
@@ -25,7 +25,7 @@ module GrowsurfRuby
         # Creates a reward for a program. The reward `type` must be compatible with the
         # program type.
         #
-        # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_active: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -35,17 +35,15 @@ module GrowsurfRuby
         #
         # @param conversions_required [Integer] Body param
         #
-        # @param coupon_code [String] Body param
+        # @param coupon_code [String] Body param: Legacy static coupon code shown to the referrer in the reward-won emai
         #
         # @param description [String] Body param
         #
         # @param image_url [String] Body param
         #
-        # @param is_active [Boolean] Body param
+        # @param is_unlimited [Boolean] Body param: Whether the reward can be earned an unlimited number of times. Defaul
         #
-        # @param is_unlimited [Boolean] Body param
-        #
-        # @param is_visible [Boolean] Body param
+        # @param is_visible [Boolean] Body param: Whether the reward is enabled. When `false` the reward is disabled: hi
         #
         # @param limit [Integer] Body param
         #
@@ -53,15 +51,15 @@ module GrowsurfRuby
         #
         # @param metadata [Hash{Symbol=>Object}] Body param: Custom key/value metadata (single-level; values are stored as string
         #
-        # @param next_milestone_prefix [String] Body param
+        # @param next_milestone_prefix [String] Body param: Text shown before a participant's referral count in milestone-prog
         #
-        # @param next_milestone_suffix [String] Body param
+        # @param next_milestone_suffix [String] Body param: Text shown after a participant's referral count in milestone-progr
         #
-        # @param number_of_winners [Integer] Body param
+        # @param number_of_winners [Integer] Body param: The number of winners (`LEADERBOARD` rewards only). With `limitDur
         #
         # @param order [Integer] Body param
         #
-        # @param referral_coupon_code [String] Body param
+        # @param referral_coupon_code [String] Body param: Legacy static coupon code shown to the referred friend (double-si
         #
         # @param referral_description [String] Body param
         #
@@ -92,7 +90,7 @@ module GrowsurfRuby
         # Updates an existing campaign reward. Only the fields you send are changed;
         # `type` is immutable and must not be supplied.
         #
-        # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_active: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
         # @param campaign_reward_id [String] Path param: Campaign reward ID.
         #
@@ -102,17 +100,15 @@ module GrowsurfRuby
         #
         # @param conversions_required [Integer] Body param
         #
-        # @param coupon_code [String] Body param
+        # @param coupon_code [String] Body param: Legacy static coupon code shown to the referrer in the reward-won emai
         #
         # @param description [String] Body param
         #
         # @param image_url [String] Body param
         #
-        # @param is_active [Boolean] Body param
+        # @param is_unlimited [Boolean] Body param: Whether the reward can be earned an unlimited number of times. Defaul
         #
-        # @param is_unlimited [Boolean] Body param
-        #
-        # @param is_visible [Boolean] Body param
+        # @param is_visible [Boolean] Body param: Whether the reward is enabled. When `false` the reward is disabled: hi
         #
         # @param limit [Integer] Body param
         #
@@ -120,15 +116,15 @@ module GrowsurfRuby
         #
         # @param metadata [Hash{Symbol=>Object}] Body param: Custom key/value metadata (single-level; values are stored as string
         #
-        # @param next_milestone_prefix [String] Body param
+        # @param next_milestone_prefix [String] Body param: Text shown before a participant's referral count in milestone-prog
         #
-        # @param next_milestone_suffix [String] Body param
+        # @param next_milestone_suffix [String] Body param: Text shown after a participant's referral count in milestone-progr
         #
-        # @param number_of_winners [Integer] Body param
+        # @param number_of_winners [Integer] Body param: The number of winners (`LEADERBOARD` rewards only). With `limitDur
         #
         # @param order [Integer] Body param
         #
-        # @param referral_coupon_code [String] Body param
+        # @param referral_coupon_code [String] Body param: Legacy static coupon code shown to the referred friend (double-si
         #
         # @param referral_description [String] Body param
         #

@@ -1,0 +1,125 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_bulk_delete_response =
+        {
+          results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result],
+          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+        }
+
+      class ParticipantBulkDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result]
+
+        attr_accessor summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+
+        def initialize: (
+          results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result],
+          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+        ) -> void
+
+        def to_hash: -> {
+          results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result],
+          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+        }
+
+        type result =
+          {
+            identifier: String,
+            index: Integer,
+            status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status,
+            email: String,
+            message: String,
+            participant_id: String
+          }
+
+        class Result < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor identifier: String
+
+          attr_accessor index: Integer
+
+          attr_accessor status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status
+
+          attr_reader email: String?
+
+          def email=: (String) -> String
+
+          attr_reader message: String?
+
+          def message=: (String) -> String
+
+          attr_reader participant_id: String?
+
+          def participant_id=: (String) -> String
+
+          def initialize: (
+            identifier: String,
+            index: Integer,
+            status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status,
+            ?email: String,
+            ?message: String,
+            ?participant_id: String
+          ) -> void
+
+          def to_hash: -> {
+            identifier: String,
+            index: Integer,
+            status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status,
+            email: String,
+            message: String,
+            participant_id: String
+          }
+
+          type status = :DELETED | :NOT_FOUND | :DUPLICATE | :ERROR
+
+          module Status
+            extend GrowsurfRuby::Internal::Type::Enum
+
+            DELETED: :DELETED
+            NOT_FOUND: :NOT_FOUND
+            DUPLICATE: :DUPLICATE
+            ERROR: :ERROR
+
+            def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status]
+          end
+        end
+
+        type summary =
+          {
+            deleted_count: Integer,
+            duplicate_count: Integer,
+            error_count: Integer,
+            not_found_count: Integer,
+            total: Integer
+          }
+
+        class Summary < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor deleted_count: Integer
+
+          attr_accessor duplicate_count: Integer
+
+          attr_accessor error_count: Integer
+
+          attr_accessor not_found_count: Integer
+
+          attr_accessor total: Integer
+
+          def initialize: (
+            deleted_count: Integer,
+            duplicate_count: Integer,
+            error_count: Integer,
+            not_found_count: Integer,
+            total: Integer
+          ) -> void
+
+          def to_hash: -> {
+            deleted_count: Integer,
+            duplicate_count: Integer,
+            error_count: Integer,
+            not_found_count: Integer,
+            total: Integer
+          }
+        end
+      end
+    end
+  end
+end

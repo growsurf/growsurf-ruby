@@ -1,4 +1,10 @@
 module GrowsurfRuby
+  class Account = GrowsurfRuby::Models::Account
+
+  class AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
+
+  class AccountUpdateParams = GrowsurfRuby::Models::AccountUpdateParams
+
   module Campaign = GrowsurfRuby::Models::Campaign
 
   class CampaignAPI = GrowsurfRuby::Models::CampaignAPI
@@ -34,6 +40,8 @@ module GrowsurfRuby
   class ParticipantPayoutList = GrowsurfRuby::Models::ParticipantPayoutList
 
   class ReferralList = GrowsurfRuby::Models::ReferralList
+
+  class ReferralFlowScreenshotsResponse = GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
 
   class RewardTaxValuation = GrowsurfRuby::Models::RewardTaxValuation
 end

@@ -9,7 +9,8 @@ module GrowsurfRuby
         # form, portal/landing pages, theme styling, and summary/status sections).
         #
         # This is a large, deeply nested object whose available fields depend on the
-        # program type. See the API reference for the full field list.
+        # program type; the response includes every field and its current value, which
+        # is the same shape you send back on update.
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -27,13 +28,14 @@ module GrowsurfRuby
           )
         end
 
-        # Updates a program's design configuration. Only the fields you send are changed (a
-        # surgical merge; arrays such as `signup.fields` replace wholesale). Unknown
-        # fields, fields not available for the program type, and invalid values return a
-        # `400`.
+        # Updates a program's design configuration. Only the fields you send are changed;
+        # anything you leave out is untouched (arrays such as `signup.fields` replace
+        # wholesale). Unknown fields, fields not available for the program type, and
+        # invalid values return a `400`.
         #
-        # The request body is a partial {CampaignDesign} object — see the API reference for
-        # the full field list.
+        # The request body is a partial {CampaignDesign} object. To see the full object
+        # with every field and its current value, `GET` this resource, then `PATCH` back
+        # only the fields you want to change.
         #
         # @overload update(id, body, request_options: {})
         #

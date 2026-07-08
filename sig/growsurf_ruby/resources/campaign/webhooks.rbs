@@ -1,0 +1,46 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      class Webhooks
+        def list: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::WebhookListResponse
+
+        def create: (
+          String id,
+          payload_url: String,
+          ?events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          ?is_enabled: bool,
+          ?secret: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::Webhook
+
+        def update: (
+          String webhook_id,
+          id: String,
+          ?events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          ?is_enabled: bool,
+          ?payload_url: String,
+          ?secret: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::Webhook
+
+        def delete: (
+          String webhook_id,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::WebhookDeleteResponse
+
+        def test: (
+          String webhook_id,
+          id: String,
+          ?event: GrowsurfRuby::Models::Campaign::webhook_event,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::WebhookTestResponse
+
+        def initialize: (client: GrowsurfRuby::Client) -> void
+      end
+    end
+  end
+end

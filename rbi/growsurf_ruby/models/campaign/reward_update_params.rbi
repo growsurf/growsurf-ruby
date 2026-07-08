@@ -37,6 +37,9 @@ module GrowsurfRuby
         sig { params(conversions_required: Integer).void }
         attr_writer :conversions_required
 
+        # Legacy static coupon code shown to the referrer in the reward-won email and
+        # webhook. Display text only; superseded by a connected billing integration's
+        # issued coupon when one exists.
         sig { returns(T.nilable(String)) }
         attr_reader :coupon_code
 
@@ -55,18 +58,16 @@ module GrowsurfRuby
         sig { params(image_url: String).void }
         attr_writer :image_url
 
-        sig { returns(T.nilable(T::Boolean)) }
-        attr_reader :is_active
-
-        sig { params(is_active: T::Boolean).void }
-        attr_writer :is_active
-
+        # Whether the reward can be earned an unlimited number of times. Defaults to
+        # `true`, except `MILESTONE` rewards, which can only be earned once.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :is_unlimited
 
         sig { params(is_unlimited: T::Boolean).void }
         attr_writer :is_unlimited
 
+        # Whether the reward is enabled. When `false` the reward is disabled: hidden from
+        # participants and no longer awarded, including those who already earned it.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :is_visible
 
@@ -103,18 +104,25 @@ module GrowsurfRuby
         sig { params(metadata: T::Hash[Symbol, T.anything]).void }
         attr_writer :metadata
 
+        # Text shown before a participant's referral count in milestone-progress copy.
+        # Applies to `MILESTONE` rewards.
         sig { returns(T.nilable(String)) }
         attr_reader :next_milestone_prefix
 
         sig { params(next_milestone_prefix: String).void }
         attr_writer :next_milestone_prefix
 
+        # Text shown after a participant's referral count in milestone-progress copy.
+        # Applies to `MILESTONE` rewards.
         sig { returns(T.nilable(String)) }
         attr_reader :next_milestone_suffix
 
         sig { params(next_milestone_suffix: String).void }
         attr_writer :next_milestone_suffix
 
+        # The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
+        # `PER_MONTH` this many win each month, otherwise this many win in total;
+        # omitting it defaults to `3`.
         sig { returns(T.nilable(Integer)) }
         attr_reader :number_of_winners
 
@@ -127,6 +135,9 @@ module GrowsurfRuby
         sig { params(order: Integer).void }
         attr_writer :order
 
+        # Legacy static coupon code shown to the referred friend (double-sided rewards)
+        # in the reward-won email and webhook. Display text only; superseded by a
+        # connected billing integration's issued coupon when one exists.
         sig { returns(T.nilable(String)) }
         attr_reader :referral_coupon_code
 
@@ -178,7 +189,6 @@ module GrowsurfRuby
             coupon_code: String,
             description: String,
             image_url: String,
-            is_active: T::Boolean,
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
@@ -203,20 +213,36 @@ module GrowsurfRuby
           campaign_reward_id:,
           commission_structure: nil,
           conversions_required: nil,
+          # Legacy static coupon code shown to the referrer in the reward-won email and
+          # webhook. Display text only; superseded by a connected billing integration's
+          # issued coupon when one exists.
           coupon_code: nil,
           description: nil,
           image_url: nil,
-          is_active: nil,
+          # Whether the reward can be earned an unlimited number of times. Defaults to
+          # `true`, except `MILESTONE` rewards, which can only be earned once.
           is_unlimited: nil,
+          # Whether the reward is enabled. When `false` the reward is disabled: hidden from
+          # participants and no longer awarded, including those who already earned it.
           is_visible: nil,
           limit: nil,
           limit_duration: nil,
           # Custom key/value metadata (single-level; values are stored as strings).
           metadata: nil,
+          # Text shown before a participant's referral count in milestone-progress copy.
+          # Applies to `MILESTONE` rewards.
           next_milestone_prefix: nil,
+          # Text shown after a participant's referral count in milestone-progress copy.
+          # Applies to `MILESTONE` rewards.
           next_milestone_suffix: nil,
+          # The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
+          # `PER_MONTH` this many win each month, otherwise this many win in total;
+          # omitting it defaults to `3`.
           number_of_winners: nil,
           order: nil,
+          # Legacy static coupon code shown to the referred friend (double-sided rewards)
+          # in the reward-won email and webhook. Display text only; superseded by a
+          # connected billing integration's issued coupon when one exists.
           referral_coupon_code: nil,
           referral_description: nil,
           referred_reward_upfront: nil,
@@ -241,7 +267,6 @@ module GrowsurfRuby
               coupon_code: String,
               description: String,
               image_url: String,
-              is_active: T::Boolean,
               is_unlimited: T::Boolean,
               is_visible: T::Boolean,
               limit: Integer,

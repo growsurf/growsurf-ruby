@@ -4,7 +4,11 @@ module GrowsurfRuby
       {
         analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
         end_date: Integer,
-        start_date: Integer
+        start_date: Integer,
+        previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
+        rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates,
+        series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series],
+        status_counts: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts
       }
 
     class CampaignRetrieveAnalyticsResponse < GrowsurfRuby::Internal::Type::BaseModel
@@ -14,16 +18,48 @@ module GrowsurfRuby
 
       attr_accessor start_date: Integer
 
+      attr_reader previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod?
+
+      def previous_period=: (
+        GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod
+      ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod
+
+      attr_reader rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates?
+
+      def rates=: (
+        GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates
+      ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates
+
+      attr_reader series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series]?
+
+      def series=: (
+        ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series]
+      ) -> ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series]
+
+      attr_reader status_counts: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts?
+
+      def status_counts=: (
+        GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts
+      ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts
+
       def initialize: (
         analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
         end_date: Integer,
-        start_date: Integer
+        start_date: Integer,
+        ?previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
+        ?rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates,
+        ?series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series],
+        ?status_counts: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts
       ) -> void
 
       def to_hash: -> {
         analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
         end_date: Integer,
-        start_date: Integer
+        start_date: Integer,
+        previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
+        rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates,
+        series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series],
+        status_counts: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts
       }
 
       type analytics =
@@ -232,6 +268,500 @@ module GrowsurfRuby
           wechat_shares: Integer,
           whats_app_shares: Integer
         }
+      end
+
+      type previous_period =
+        {
+          analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
+          end_date: Integer,
+          start_date: Integer
+        }
+
+      class PreviousPeriod < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics
+
+        attr_accessor end_date: Integer
+
+        attr_accessor start_date: Integer
+
+        def initialize: (
+          analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
+          end_date: Integer,
+          start_date: Integer
+        ) -> void
+
+        def to_hash: -> {
+          analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
+          end_date: Integer,
+          start_date: Integer
+        }
+      end
+
+      type rates =
+        {
+          participation_rate: Float,
+          referral_conversion_rate: Float,
+          shares_per_participant: Float
+        }
+
+      class Rates < GrowsurfRuby::Internal::Type::BaseModel
+        attr_reader participation_rate: Float?
+
+        def participation_rate=: (Float) -> Float
+
+        attr_reader referral_conversion_rate: Float?
+
+        def referral_conversion_rate=: (Float) -> Float
+
+        attr_reader shares_per_participant: Float?
+
+        def shares_per_participant=: (Float) -> Float
+
+        def initialize: (
+          ?participation_rate: Float,
+          ?referral_conversion_rate: Float,
+          ?shares_per_participant: Float
+        ) -> void
+
+        def to_hash: -> {
+          participation_rate: Float,
+          referral_conversion_rate: Float,
+          shares_per_participant: Float
+        }
+      end
+
+      type series =
+        {
+          android_native_shares: Integer,
+          bluesky_shares: Integer,
+          copy_ref_link_shares: Integer,
+          email_shares: Integer,
+          facebook_shares: Integer,
+          impressions: Integer,
+          invites: Integer,
+          ios_native_shares: Integer,
+          linked_in_shares: Integer,
+          messenger_shares: Integer,
+          participants: Integer,
+          period_start: Integer,
+          pinterest_shares: Integer,
+          qrcode_shares: Integer,
+          reddit_shares: Integer,
+          referral_credit_expireds: Integer,
+          referral_credit_pendings: Integer,
+          referrals: Integer,
+          sms_shares: Integer,
+          telegram_shares: Integer,
+          threads_shares: Integer,
+          total_commission_count: Integer,
+          total_commissions: Integer,
+          total_revenue: Integer,
+          tumblr_shares: Integer,
+          twitter_shares: Integer,
+          unique_impressions: Integer,
+          wechat_shares: Integer,
+          whats_app_shares: Integer
+        }
+
+      class Series < GrowsurfRuby::Internal::Type::BaseModel
+        attr_reader android_native_shares: Integer?
+
+        def android_native_shares=: (Integer) -> Integer
+
+        attr_reader bluesky_shares: Integer?
+
+        def bluesky_shares=: (Integer) -> Integer
+
+        attr_reader copy_ref_link_shares: Integer?
+
+        def copy_ref_link_shares=: (Integer) -> Integer
+
+        attr_reader email_shares: Integer?
+
+        def email_shares=: (Integer) -> Integer
+
+        attr_reader facebook_shares: Integer?
+
+        def facebook_shares=: (Integer) -> Integer
+
+        attr_reader impressions: Integer?
+
+        def impressions=: (Integer) -> Integer
+
+        attr_reader invites: Integer?
+
+        def invites=: (Integer) -> Integer
+
+        attr_reader ios_native_shares: Integer?
+
+        def ios_native_shares=: (Integer) -> Integer
+
+        attr_reader linked_in_shares: Integer?
+
+        def linked_in_shares=: (Integer) -> Integer
+
+        attr_reader messenger_shares: Integer?
+
+        def messenger_shares=: (Integer) -> Integer
+
+        attr_reader participants: Integer?
+
+        def participants=: (Integer) -> Integer
+
+        attr_reader period_start: Integer?
+
+        def period_start=: (Integer) -> Integer
+
+        attr_reader pinterest_shares: Integer?
+
+        def pinterest_shares=: (Integer) -> Integer
+
+        attr_reader qrcode_shares: Integer?
+
+        def qrcode_shares=: (Integer) -> Integer
+
+        attr_reader reddit_shares: Integer?
+
+        def reddit_shares=: (Integer) -> Integer
+
+        attr_reader referral_credit_expireds: Integer?
+
+        def referral_credit_expireds=: (Integer) -> Integer
+
+        attr_reader referral_credit_pendings: Integer?
+
+        def referral_credit_pendings=: (Integer) -> Integer
+
+        attr_reader referrals: Integer?
+
+        def referrals=: (Integer) -> Integer
+
+        attr_reader sms_shares: Integer?
+
+        def sms_shares=: (Integer) -> Integer
+
+        attr_reader telegram_shares: Integer?
+
+        def telegram_shares=: (Integer) -> Integer
+
+        attr_reader threads_shares: Integer?
+
+        def threads_shares=: (Integer) -> Integer
+
+        attr_reader total_commission_count: Integer?
+
+        def total_commission_count=: (Integer) -> Integer
+
+        attr_reader total_commissions: Integer?
+
+        def total_commissions=: (Integer) -> Integer
+
+        attr_reader total_revenue: Integer?
+
+        def total_revenue=: (Integer) -> Integer
+
+        attr_reader tumblr_shares: Integer?
+
+        def tumblr_shares=: (Integer) -> Integer
+
+        attr_reader twitter_shares: Integer?
+
+        def twitter_shares=: (Integer) -> Integer
+
+        attr_reader unique_impressions: Integer?
+
+        def unique_impressions=: (Integer) -> Integer
+
+        attr_reader wechat_shares: Integer?
+
+        def wechat_shares=: (Integer) -> Integer
+
+        attr_reader whats_app_shares: Integer?
+
+        def whats_app_shares=: (Integer) -> Integer
+
+        def initialize: (
+          ?android_native_shares: Integer,
+          ?bluesky_shares: Integer,
+          ?copy_ref_link_shares: Integer,
+          ?email_shares: Integer,
+          ?facebook_shares: Integer,
+          ?impressions: Integer,
+          ?invites: Integer,
+          ?ios_native_shares: Integer,
+          ?linked_in_shares: Integer,
+          ?messenger_shares: Integer,
+          ?participants: Integer,
+          ?period_start: Integer,
+          ?pinterest_shares: Integer,
+          ?qrcode_shares: Integer,
+          ?reddit_shares: Integer,
+          ?referral_credit_expireds: Integer,
+          ?referral_credit_pendings: Integer,
+          ?referrals: Integer,
+          ?sms_shares: Integer,
+          ?telegram_shares: Integer,
+          ?threads_shares: Integer,
+          ?total_commission_count: Integer,
+          ?total_commissions: Integer,
+          ?total_revenue: Integer,
+          ?tumblr_shares: Integer,
+          ?twitter_shares: Integer,
+          ?unique_impressions: Integer,
+          ?wechat_shares: Integer,
+          ?whats_app_shares: Integer
+        ) -> void
+
+        def to_hash: -> {
+          android_native_shares: Integer,
+          bluesky_shares: Integer,
+          copy_ref_link_shares: Integer,
+          email_shares: Integer,
+          facebook_shares: Integer,
+          impressions: Integer,
+          invites: Integer,
+          ios_native_shares: Integer,
+          linked_in_shares: Integer,
+          messenger_shares: Integer,
+          participants: Integer,
+          period_start: Integer,
+          pinterest_shares: Integer,
+          qrcode_shares: Integer,
+          reddit_shares: Integer,
+          referral_credit_expireds: Integer,
+          referral_credit_pendings: Integer,
+          referrals: Integer,
+          sms_shares: Integer,
+          telegram_shares: Integer,
+          threads_shares: Integer,
+          total_commission_count: Integer,
+          total_commissions: Integer,
+          total_revenue: Integer,
+          tumblr_shares: Integer,
+          twitter_shares: Integer,
+          unique_impressions: Integer,
+          wechat_shares: Integer,
+          whats_app_shares: Integer
+        }
+      end
+
+      type status_counts =
+        {
+          affiliate_status: ::Hash[Symbol, Integer],
+          commission_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus,
+          currency_iso: String,
+          payout_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus,
+          reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+        }
+
+      class StatusCounts < GrowsurfRuby::Internal::Type::BaseModel
+        attr_reader affiliate_status: ::Hash[Symbol, Integer]?
+
+        def affiliate_status=: (
+          ::Hash[Symbol, Integer]
+        ) -> ::Hash[Symbol, Integer]
+
+        attr_reader commission_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus?
+
+        def commission_status=: (
+          GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus
+        ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus
+
+        attr_reader currency_iso: String?
+
+        def currency_iso=: (String) -> String
+
+        attr_reader payout_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus?
+
+        def payout_status=: (
+          GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus
+        ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus
+
+        attr_reader reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus?
+
+        def reward_status=: (
+          GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+        ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+
+        def initialize: (
+          ?affiliate_status: ::Hash[Symbol, Integer],
+          ?commission_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus,
+          ?currency_iso: String,
+          ?payout_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus,
+          ?reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+        ) -> void
+
+        def to_hash: -> {
+          affiliate_status: ::Hash[Symbol, Integer],
+          commission_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus,
+          currency_iso: String,
+          payout_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus,
+          reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+        }
+
+        type commission_status =
+          {
+            approved: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            paid: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            pending: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          }
+
+        class CommissionStatus < GrowsurfRuby::Internal::Type::BaseModel
+          attr_reader approved: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric?
+
+          def approved=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+
+          attr_reader paid: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric?
+
+          def paid=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+
+          attr_reader pending: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric?
+
+          def pending=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+
+          attr_reader reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric?
+
+          def reversed=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+
+          def initialize: (
+            ?approved: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            ?paid: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            ?pending: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            ?reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          ) -> void
+
+          def to_hash: -> {
+            approved: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            paid: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            pending: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric,
+            reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::CommissionStatus::CommissionStatusMetric
+          }
+
+          type commission_status_metric =
+            {
+              count: Integer,
+              total_amount: Integer,
+              total_revenue: Integer
+            }
+
+          class CommissionStatusMetric < GrowsurfRuby::Internal::Type::BaseModel
+            attr_reader count: Integer?
+
+            def count=: (Integer) -> Integer
+
+            attr_reader total_amount: Integer?
+
+            def total_amount=: (Integer) -> Integer
+
+            attr_reader total_revenue: Integer?
+
+            def total_revenue=: (Integer) -> Integer
+
+            def initialize: (
+              ?count: Integer,
+              ?total_amount: Integer,
+              ?total_revenue: Integer
+            ) -> void
+
+            def to_hash: -> {
+              count: Integer,
+              total_amount: Integer,
+              total_revenue: Integer
+            }
+          end
+        end
+
+        type payout_status =
+          {
+            failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          }
+
+        class PayoutStatus < GrowsurfRuby::Internal::Type::BaseModel
+          attr_reader failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric?
+
+          def failed=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+
+          attr_reader issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric?
+
+          def issued=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+
+          attr_reader queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric?
+
+          def queued=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+
+          attr_reader upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric?
+
+          def upcoming=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+
+          def initialize: (
+            ?failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            ?issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            ?queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            ?upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          ) -> void
+
+          def to_hash: -> {
+            failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          }
+
+          type payout_status_metric = { count: Integer, total_amount: Integer }
+
+          class PayoutStatusMetric < GrowsurfRuby::Internal::Type::BaseModel
+            attr_reader count: Integer?
+
+            def count=: (Integer) -> Integer
+
+            attr_reader total_amount: Integer?
+
+            def total_amount=: (Integer) -> Integer
+
+            def initialize: (
+              ?count: Integer,
+              ?total_amount: Integer
+            ) -> void
+
+            def to_hash: -> { count: Integer, total_amount: Integer }
+          end
+        end
+
+        type reward_status = { approved: Integer, pending: Integer }
+
+        class RewardStatus < GrowsurfRuby::Internal::Type::BaseModel
+          attr_reader approved: Integer?
+
+          def approved=: (Integer) -> Integer
+
+          attr_reader pending: Integer?
+
+          def pending=: (Integer) -> Integer
+
+          def initialize: (?approved: Integer, ?pending: Integer) -> void
+
+          def to_hash: -> { approved: Integer, pending: Integer }
+        end
       end
     end
   end

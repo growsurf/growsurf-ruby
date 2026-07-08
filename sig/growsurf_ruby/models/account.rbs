@@ -1,0 +1,67 @@
+module GrowsurfRuby
+  module Models
+    type account =
+      {
+        email: String,
+        id: String,
+        verification_status: GrowsurfRuby::Models::Account::verification_status,
+        company: String?,
+        created_at: Integer?,
+        first_name: String?,
+        last_name: String?,
+        verification_requested_at: Integer?
+      }
+
+    class Account < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor email: String
+
+      attr_accessor id: String
+
+      attr_accessor verification_status: GrowsurfRuby::Models::Account::verification_status
+
+      attr_accessor company: String?
+
+      attr_accessor created_at: Integer?
+
+      attr_accessor first_name: String?
+
+      attr_accessor last_name: String?
+
+      attr_accessor verification_requested_at: Integer?
+
+      def initialize: (
+        email: String,
+        id: String,
+        verification_status: GrowsurfRuby::Models::Account::verification_status,
+        ?company: String?,
+        ?created_at: Integer?,
+        ?first_name: String?,
+        ?last_name: String?,
+        ?verification_requested_at: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        email: String,
+        id: String,
+        verification_status: GrowsurfRuby::Models::Account::verification_status,
+        company: String?,
+        created_at: Integer?,
+        first_name: String?,
+        last_name: String?,
+        verification_requested_at: Integer?
+      }
+
+      type verification_status = :NOT_REQUESTED | :REQUESTED | :VERIFIED
+
+      module VerificationStatus
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        NOT_REQUESTED: :NOT_REQUESTED
+        REQUESTED: :REQUESTED
+        VERIFIED: :VERIFIED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Account::verification_status]
+      end
+    end
+  end
+end

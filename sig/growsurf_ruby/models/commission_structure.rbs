@@ -3,6 +3,7 @@ module GrowsurfRuby
     type commission_structure =
       {
         amount: Integer?,
+        amount_iso: String?,
         approval_required: bool?,
         duration: String?,
         duration_in_months: Integer?,
@@ -25,6 +26,8 @@ module GrowsurfRuby
 
     class CommissionStructure < GrowsurfRuby::Internal::Type::BaseModel
       attr_accessor amount: Integer?
+
+      attr_accessor amount_iso: String?
 
       attr_accessor approval_required: bool?
 
@@ -64,6 +67,7 @@ module GrowsurfRuby
 
       def initialize: (
         ?amount: Integer?,
+        ?amount_iso: String?,
         ?approval_required: bool?,
         ?duration: String?,
         ?duration_in_months: Integer?,
@@ -86,6 +90,7 @@ module GrowsurfRuby
 
       def to_hash: -> {
         amount: Integer?,
+        amount_iso: String?,
         approval_required: bool?,
         duration: String?,
         duration_in_months: Integer?,
@@ -106,13 +111,13 @@ module GrowsurfRuby
         type: GrowsurfRuby::Models::CommissionStructure::type_?
       }
 
-      type type_ = :PERCENT | :AMOUNT
+      type type_ = :PERCENT | :FIXED
 
       module Type
         extend GrowsurfRuby::Internal::Type::Enum
 
         PERCENT: :PERCENT
-        AMOUNT: :AMOUNT
+        FIXED: :FIXED
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::CommissionStructure::type_]
       end

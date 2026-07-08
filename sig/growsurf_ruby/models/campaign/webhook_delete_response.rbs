@@ -1,0 +1,17 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type webhook_delete_response = { id: String, success: bool }
+
+      class WebhookDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor success: bool
+
+        def initialize: (id: String, success: bool) -> void
+
+        def to_hash: -> { id: String, success: bool }
+      end
+    end
+  end
+end

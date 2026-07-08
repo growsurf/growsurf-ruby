@@ -10,6 +10,8 @@ module GrowsurfRuby
 
     attr_reader api_key: String
 
+    attr_reader account: GrowsurfRuby::Resources::Account
+
     attr_reader campaign: GrowsurfRuby::Resources::Campaign
 
     private def auth_headers: -> ::Hash[String, String]

@@ -1,0 +1,52 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type webhook =
+        {
+          auto_disabled_due_to_failures: bool,
+          events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          failure_count: Integer,
+          id: String,
+          is_enabled: bool,
+          last_failure_at: Integer?,
+          payload_url: String?
+        }
+
+      class Webhook < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor auto_disabled_due_to_failures: bool
+
+        attr_accessor events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event]
+
+        attr_accessor failure_count: Integer
+
+        attr_accessor id: String
+
+        attr_accessor is_enabled: bool
+
+        attr_accessor last_failure_at: Integer?
+
+        attr_accessor payload_url: String?
+
+        def initialize: (
+          auto_disabled_due_to_failures: bool,
+          events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          failure_count: Integer,
+          id: String,
+          is_enabled: bool,
+          ?last_failure_at: Integer?,
+          ?payload_url: String?
+        ) -> void
+
+        def to_hash: -> {
+          auto_disabled_due_to_failures: bool,
+          events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          failure_count: Integer,
+          id: String,
+          is_enabled: bool,
+          last_failure_at: Integer?,
+          payload_url: String?
+        }
+      end
+    end
+  end
+end

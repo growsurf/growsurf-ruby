@@ -108,6 +108,9 @@ module GrowsurfRuby
         optional :conversions_required, Integer, api_name: :conversionsRequired, nil?: true
 
         # @!attribute coupon_code
+        #   Legacy static coupon code shown to the referrer in the reward-won email and
+        #   webhook. Display text only; superseded by a connected billing integration's
+        #   issued coupon when one exists.
         #
         #   @return [String, nil]
         optional :coupon_code, String, api_name: :couponCode, nil?: true
@@ -137,16 +140,22 @@ module GrowsurfRuby
                  nil?: true
 
         # @!attribute next_milestone_prefix
+        #   Text shown before a participant's referral count in milestone-progress copy.
+        #   Applies to `MILESTONE` rewards.
         #
         #   @return [String, nil]
         optional :next_milestone_prefix, String, api_name: :nextMilestonePrefix, nil?: true
 
         # @!attribute next_milestone_suffix
+        #   Text shown after a participant's referral count in milestone-progress copy.
+        #   Applies to `MILESTONE` rewards.
         #
         #   @return [String, nil]
         optional :next_milestone_suffix, String, api_name: :nextMilestoneSuffix, nil?: true
 
         # @!attribute number_of_winners
+        #   The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
+        #   `PER_MONTH` this many win each month, otherwise this many win in total.
         #
         #   @return [Integer, nil]
         optional :number_of_winners, Integer, api_name: :numberOfWinners, nil?: true
@@ -157,7 +166,9 @@ module GrowsurfRuby
         optional :order, Integer, nil?: true
 
         # @!attribute referral_coupon_code
-        #   The coupon code delivered to the referred friend (double-sided rewards).
+        #   Legacy static coupon code shown to the referred friend (double-sided rewards)
+        #   in the reward-won email and webhook. Display text only; superseded by a
+        #   connected billing integration's issued coupon when one exists.
         #
         #   @return [String, nil]
         optional :referral_coupon_code, String, api_name: :referralCouponCode, nil?: true
@@ -202,7 +213,7 @@ module GrowsurfRuby
         #
         #   @param conversions_required [Integer, nil]
         #
-        #   @param coupon_code [String, nil]
+        #   @param coupon_code [String, nil] Legacy static coupon code shown to the referrer in the reward-won email and web
         #
         #   @param description [String, nil]
         #
@@ -212,15 +223,15 @@ module GrowsurfRuby
         #
         #   @param limit_duration [Symbol, GrowsurfRuby::Models::CampaignAPI::Reward::LimitDuration, nil]
         #
-        #   @param next_milestone_prefix [String, nil]
+        #   @param next_milestone_prefix [String, nil] Text shown before a participant's referral count in milestone-progress copy. App
         #
-        #   @param next_milestone_suffix [String, nil]
+        #   @param next_milestone_suffix [String, nil] Text shown after a participant's referral count in milestone-progress copy. Appl
         #
-        #   @param number_of_winners [Integer, nil]
+        #   @param number_of_winners [Integer, nil] The number of winners (`LEADERBOARD` rewards only). With `limitDuration` `PER_MO
         #
         #   @param order [Integer, nil]
         #
-        #   @param referral_coupon_code [String, nil] The coupon code delivered to the referred friend (double-sided rewards).
+        #   @param referral_coupon_code [String, nil] Legacy static coupon code shown to the referred friend (double-sided rewards) in
         #
         #   @param referral_description [String, nil]
         #

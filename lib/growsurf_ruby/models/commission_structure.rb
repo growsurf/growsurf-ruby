@@ -8,6 +8,11 @@ module GrowsurfRuby
       #   @return [Integer, nil]
       optional :amount, Integer, nil?: true
 
+      # @!attribute amount_iso
+      #
+      #   @return [String, nil]
+      optional :amount_iso, String, api_name: :amountISO, nil?: true
+
       # @!attribute approval_required
       #
       #   @return [Boolean, nil]
@@ -101,8 +106,9 @@ module GrowsurfRuby
       #   @return [Symbol, GrowsurfRuby::Models::CommissionStructure::Type, nil]
       optional :type, enum: -> { GrowsurfRuby::CommissionStructure::Type }, nil?: true
 
-      # @!method initialize(amount: nil, approval_required: nil, duration: nil, duration_in_months: nil, event: nil, has_intro: nil, has_max_amount: nil, hold_duration: nil, intro_amount: nil, intro_amount_iso: nil, intro_duration: nil, intro_duration_in_months: nil, intro_percent: nil, intro_type: nil, max_amount: nil, max_amount_iso: nil, min_paid_referrals: nil, percent: nil, type: nil)
+      # @!method initialize(amount: nil, amount_iso: nil, approval_required: nil, duration: nil, duration_in_months: nil, event: nil, has_intro: nil, has_max_amount: nil, hold_duration: nil, intro_amount: nil, intro_amount_iso: nil, intro_duration: nil, intro_duration_in_months: nil, intro_percent: nil, intro_type: nil, max_amount: nil, max_amount_iso: nil, min_paid_referrals: nil, percent: nil, type: nil)
       #   @param amount [Integer, nil]
+      #   @param amount_iso [String, nil]
       #   @param approval_required [Boolean, nil]
       #   @param duration [String, nil]
       #   @param duration_in_months [Integer, nil]
@@ -127,7 +133,7 @@ module GrowsurfRuby
         extend GrowsurfRuby::Internal::Type::Enum
 
         PERCENT = :PERCENT
-        AMOUNT = :AMOUNT
+        FIXED = :FIXED
 
         # @!method self.values
         #   @return [Array<Symbol>]

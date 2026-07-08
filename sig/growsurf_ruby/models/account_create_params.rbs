@@ -1,0 +1,42 @@
+module GrowsurfRuby
+  module Models
+    type account_create_params =
+      { email: String, company: String, first_name: String, last_name: String }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class AccountCreateParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor email: String
+
+      attr_reader company: String?
+
+      def company=: (String) -> String
+
+      attr_reader first_name: String?
+
+      def first_name=: (String) -> String
+
+      attr_reader last_name: String?
+
+      def last_name=: (String) -> String
+
+      def initialize: (
+        email: String,
+        ?company: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        email: String,
+        company: String,
+        first_name: String,
+        last_name: String,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+    end
+  end
+end

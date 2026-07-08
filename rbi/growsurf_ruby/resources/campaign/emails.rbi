@@ -5,8 +5,9 @@ module GrowsurfRuby
     class Campaign
       class Emails
         # Retrieves a program's email configuration — the same surface as the dashboard
-        # Program Editor's **Emails** tab. This is a large, nested object. See the API
-        # reference for the full field list.
+        # Program Editor's **Emails** tab. To see the full object with every field and its
+        # current value, `GET` this resource, then `PATCH` back only the fields you want to
+        # change.
         sig do
           params(
             id: String,
@@ -20,9 +21,10 @@ module GrowsurfRuby
         )
         end
 
-        # Updates a program's email configuration. Only the fields you send are changed.
-        # The request body is a partial email configuration object — see the API reference
-        # for the full field list.
+        # Updates a program's email configuration. Only the fields you send are changed;
+        # anything you leave out is untouched. The request body is a partial email
+        # configuration object. To see the full object with every field and its current
+        # value, `GET` this resource, then `PATCH` back only the fields you want to change.
         sig do
           params(
             id: String,

@@ -9,7 +9,6 @@ module GrowsurfRuby
           coupon_code: String,
           description: String,
           image_url: String,
-          is_active: bool,
           is_unlimited: bool,
           is_visible: bool,
           limit: Integer,
@@ -55,10 +54,6 @@ module GrowsurfRuby
         attr_reader image_url: String?
 
         def image_url=: (String) -> String
-
-        attr_reader is_active: bool?
-
-        def is_active=: (bool) -> bool
 
         attr_reader is_unlimited: bool?
 
@@ -133,7 +128,6 @@ module GrowsurfRuby
           ?coupon_code: String,
           ?description: String,
           ?image_url: String,
-          ?is_active: bool,
           ?is_unlimited: bool,
           ?is_visible: bool,
           ?limit: Integer,
@@ -159,7 +153,6 @@ module GrowsurfRuby
           coupon_code: String,
           description: String,
           image_url: String,
-          is_active: bool,
           is_unlimited: bool,
           is_visible: bool,
           limit: Integer,

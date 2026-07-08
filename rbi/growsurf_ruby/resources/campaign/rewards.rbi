@@ -4,7 +4,7 @@ module GrowsurfRuby
   module Resources
     class Campaign
       class Rewards
-        # Retrieves the active, visible, and enabled rewards configured for a program.
+        # Retrieves the rewards configured for a program.
         sig do
           params(
             id: String,
@@ -30,7 +30,6 @@ module GrowsurfRuby
             coupon_code: String,
             description: String,
             image_url: String,
-            is_active: T::Boolean,
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
@@ -59,17 +58,20 @@ module GrowsurfRuby
           commission_structure: nil,
           # Body param
           conversions_required: nil,
-          # Body param
+          # Body param: Legacy static coupon code shown to the referrer in the reward-won
+          # email and webhook. Display text only; superseded by a connected billing
+          # integration's issued coupon when one exists.
           coupon_code: nil,
           # Body param
           description: nil,
           # Body param
           image_url: nil,
-          # Body param
-          is_active: nil,
-          # Body param
+          # Body param: Whether the reward can be earned an unlimited number of times.
+          # Defaults to `true`, except `MILESTONE` rewards, which can only be earned once.
           is_unlimited: nil,
-          # Body param
+          # Body param: Whether the reward is enabled. When `false` the reward is disabled:
+          # hidden from participants and no longer awarded, including those who already
+          # earned it.
           is_visible: nil,
           # Body param
           limit: nil,
@@ -78,15 +80,21 @@ module GrowsurfRuby
           # Body param: Custom key/value metadata (single-level; values are stored as
           # strings).
           metadata: nil,
-          # Body param
+          # Body param: Text shown before a participant's referral count in
+          # milestone-progress copy. Applies to `MILESTONE` rewards.
           next_milestone_prefix: nil,
-          # Body param
+          # Body param: Text shown after a participant's referral count in
+          # milestone-progress copy. Applies to `MILESTONE` rewards.
           next_milestone_suffix: nil,
-          # Body param
+          # Body param: The number of winners (`LEADERBOARD` rewards only). With
+          # `limitDuration` `PER_MONTH` this many win each month, otherwise this many win
+          # in total; omitting it defaults to `3`.
           number_of_winners: nil,
           # Body param
           order: nil,
-          # Body param
+          # Body param: Legacy static coupon code shown to the referred friend
+          # (double-sided rewards) in the reward-won email and webhook. Display text only;
+          # superseded by a connected billing integration's issued coupon when one exists.
           referral_coupon_code: nil,
           # Body param
           referral_description: nil,
@@ -115,7 +123,6 @@ module GrowsurfRuby
             coupon_code: String,
             description: String,
             image_url: String,
-            is_active: T::Boolean,
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
@@ -144,17 +151,20 @@ module GrowsurfRuby
           commission_structure: nil,
           # Body param
           conversions_required: nil,
-          # Body param
+          # Body param: Legacy static coupon code shown to the referrer in the reward-won
+          # email and webhook. Display text only; superseded by a connected billing
+          # integration's issued coupon when one exists.
           coupon_code: nil,
           # Body param
           description: nil,
           # Body param
           image_url: nil,
-          # Body param
-          is_active: nil,
-          # Body param
+          # Body param: Whether the reward can be earned an unlimited number of times.
+          # Defaults to `true`, except `MILESTONE` rewards, which can only be earned once.
           is_unlimited: nil,
-          # Body param
+          # Body param: Whether the reward is enabled. When `false` the reward is disabled:
+          # hidden from participants and no longer awarded, including those who already
+          # earned it.
           is_visible: nil,
           # Body param
           limit: nil,
@@ -163,15 +173,21 @@ module GrowsurfRuby
           # Body param: Custom key/value metadata (single-level; values are stored as
           # strings).
           metadata: nil,
-          # Body param
+          # Body param: Text shown before a participant's referral count in
+          # milestone-progress copy. Applies to `MILESTONE` rewards.
           next_milestone_prefix: nil,
-          # Body param
+          # Body param: Text shown after a participant's referral count in
+          # milestone-progress copy. Applies to `MILESTONE` rewards.
           next_milestone_suffix: nil,
-          # Body param
+          # Body param: The number of winners (`LEADERBOARD` rewards only). With
+          # `limitDuration` `PER_MONTH` this many win each month, otherwise this many win
+          # in total; omitting it defaults to `3`.
           number_of_winners: nil,
           # Body param
           order: nil,
-          # Body param
+          # Body param: Legacy static coupon code shown to the referred friend
+          # (double-sided rewards) in the reward-won email and webhook. Display text only;
+          # superseded by a connected billing integration's issued coupon when one exists.
           referral_coupon_code: nil,
           # Body param
           referral_description: nil,

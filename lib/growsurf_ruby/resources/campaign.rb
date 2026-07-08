@@ -34,6 +34,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Installation]
       attr_reader :installation
 
+      # Program webhook configuration operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Webhooks]
+      attr_reader :webhooks
+
       # Retrieves a program for the given program ID.
       #
       # @overload retrieve(id, request_options: {})
@@ -123,7 +127,7 @@ module GrowsurfRuby
       #
       # @param name [String] Body param
       #
-      # @param status [Symbol, GrowsurfRuby::Models::CampaignUpdateParams::Status] Body param: The program status. Transitions are validated; DELETED is not allowe
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignUpdateParams::Status] Body param: The requested program status. `IN_PROGRESS` publishes or resumes the
       #
       # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -155,6 +159,25 @@ module GrowsurfRuby
           method: :post,
           path: ["campaign/%1$s/clone", id],
           model: GrowsurfRuby::CampaignAPI,
+          options: params[:request_options]
+        )
+      end
+
+      # Captures two preview screenshots for the program: the authenticated referrer
+      # view and the referred-friend view.
+      #
+      # @overload get_referral_flow_screenshots(id, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::ReferralFlowScreenshotsResponse]
+      def get_referral_flow_screenshots(id, params = {})
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/referral-flow-screenshots", id],
+          model: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse,
           options: params[:request_options]
         )
       end
@@ -379,13 +402,17 @@ module GrowsurfRuby
       #
       # Retrieves analytics for a program.
       #
-      # @overload retrieve_analytics(id, days: nil, end_date: nil, start_date: nil, request_options: {})
+      # @overload retrieve_analytics(id, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
       #
       # @param days [Integer] Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
       #
       # @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
+      #
+      # @param include [String] Comma-separated list of optional enrichments (opt-in to keep the default response
+      #
+      # @param interval [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Interval] When set to `day`, `week`, or `month`, the response also includes a `series` array
       #
       # @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
       #
@@ -419,6 +446,7 @@ module GrowsurfRuby
         @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)
         @options = GrowsurfRuby::Resources::Campaign::Options.new(client: client)
         @installation = GrowsurfRuby::Resources::Campaign::Installation.new(client: client)
+        @webhooks = GrowsurfRuby::Resources::Campaign::Webhooks.new(client: client)
       end
     end
   end

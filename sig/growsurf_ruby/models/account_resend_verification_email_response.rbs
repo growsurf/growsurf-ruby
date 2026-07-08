@@ -1,0 +1,35 @@
+module GrowsurfRuby
+  module Models
+    type account_resend_verification_email_response =
+      {
+        status: GrowsurfRuby::Models::AccountResendVerificationEmailResponse::status,
+        success: bool
+      }
+
+    class AccountResendVerificationEmailResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor status: GrowsurfRuby::Models::AccountResendVerificationEmailResponse::status
+
+      attr_accessor success: bool
+
+      def initialize: (
+        status: GrowsurfRuby::Models::AccountResendVerificationEmailResponse::status,
+        success: bool
+      ) -> void
+
+      def to_hash: -> {
+        status: GrowsurfRuby::Models::AccountResendVerificationEmailResponse::status,
+        success: bool
+      }
+
+      type status = :SENT
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        SENT: :SENT
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::AccountResendVerificationEmailResponse::status]
+      end
+    end
+  end
+end

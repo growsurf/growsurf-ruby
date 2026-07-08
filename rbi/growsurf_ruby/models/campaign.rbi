@@ -130,6 +130,9 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_accessor :conversions_required
 
+        # Legacy static coupon code shown to the referrer in the reward-won email and
+        # webhook. Display text only; superseded by a connected billing integration's
+        # issued coupon when one exists.
         sig { returns(T.nilable(String)) }
         attr_accessor :coupon_code
 
@@ -152,19 +155,27 @@ module GrowsurfRuby
         end
         attr_accessor :limit_duration
 
+        # Text shown before a participant's referral count in milestone-progress copy.
+        # Applies to `MILESTONE` rewards.
         sig { returns(T.nilable(String)) }
         attr_accessor :next_milestone_prefix
 
+        # Text shown after a participant's referral count in milestone-progress copy.
+        # Applies to `MILESTONE` rewards.
         sig { returns(T.nilable(String)) }
         attr_accessor :next_milestone_suffix
 
+        # The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
+        # `PER_MONTH` this many win each month, otherwise this many win in total.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :number_of_winners
 
         sig { returns(T.nilable(Integer)) }
         attr_accessor :order
 
-        # The coupon code delivered to the referred friend (double-sided rewards).
+        # Legacy static coupon code shown to the referred friend (double-sided rewards)
+        # in the reward-won email and webhook. Display text only; superseded by a
+        # connected billing integration's issued coupon when one exists.
         sig { returns(T.nilable(String)) }
         attr_accessor :referral_coupon_code
 
@@ -223,8 +234,7 @@ module GrowsurfRuby
             referral_coupon_code: T.nilable(String),
             referral_description: T.nilable(String),
             referred_reward_upfront: T::Boolean,
-            referred_value:
-              T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
+            referred_value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
             value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
           ).returns(T.attached_class)
         end
@@ -236,17 +246,28 @@ module GrowsurfRuby
           type:,
           commission_structure: nil,
           conversions_required: nil,
+          # Legacy static coupon code shown to the referrer in the reward-won email and
+          # webhook. Display text only; superseded by a connected billing integration's
+          # issued coupon when one exists.
           coupon_code: nil,
           description: nil,
           image_url: nil,
           # `-1` represents an unlimited reward in REST responses.
           limit: nil,
           limit_duration: nil,
+          # Text shown before a participant's referral count in milestone-progress copy.
+          # Applies to `MILESTONE` rewards.
           next_milestone_prefix: nil,
+          # Text shown after a participant's referral count in milestone-progress copy.
+          # Applies to `MILESTONE` rewards.
           next_milestone_suffix: nil,
+          # The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
+          # `PER_MONTH` this many win each month, otherwise this many win in total.
           number_of_winners: nil,
           order: nil,
-          # The coupon code delivered to the referred friend (double-sided rewards).
+          # Legacy static coupon code shown to the referred friend (double-sided rewards)
+          # in the reward-won email and webhook. Display text only; superseded by a
+          # connected billing integration's issued coupon when one exists.
           referral_coupon_code: nil,
           referral_description: nil,
           referred_reward_upfront: nil,

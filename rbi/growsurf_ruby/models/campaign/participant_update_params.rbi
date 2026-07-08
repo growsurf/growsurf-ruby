@@ -46,6 +46,21 @@ module GrowsurfRuby
         sig { params(metadata: T::Hash[Symbol, T.anything]).void }
         attr_writer :metadata
 
+        # Freeform internal notes about the participant (internal only, never exposed to
+        # participants).
+        sig { returns(T.nilable(String)) }
+        attr_reader :notes
+
+        sig { params(notes: String).void }
+        attr_writer :notes
+
+        # The participant's PayPal email address, used for affiliate payouts.
+        sig { returns(T.nilable(String)) }
+        attr_reader :paypal_email
+
+        sig { params(paypal_email: String).void }
+        attr_writer :paypal_email
+
         sig do
           returns(
             T.nilable(
@@ -89,6 +104,8 @@ module GrowsurfRuby
             first_name: String,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
+            notes: String,
+            paypal_email: String,
             referral_status:
               GrowsurfRuby::Campaign::ParticipantUpdateParams::ReferralStatus::OrSymbol,
             referred_by: String,
@@ -105,6 +122,11 @@ module GrowsurfRuby
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,
+          # Freeform internal notes about the participant (internal only, never exposed to
+          # participants).
+          notes: nil,
+          # The participant's PayPal email address, used for affiliate payouts.
+          paypal_email: nil,
           referral_status: nil,
           referred_by: nil,
           unsubscribed: nil,
@@ -122,6 +144,8 @@ module GrowsurfRuby
               first_name: String,
               last_name: String,
               metadata: T::Hash[Symbol, T.anything],
+              notes: String,
+              paypal_email: String,
               referral_status:
                 GrowsurfRuby::Campaign::ParticipantUpdateParams::ReferralStatus::OrSymbol,
               referred_by: String,

@@ -125,6 +125,23 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
     end
   end
 
+  def test_bulk_delete_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.bulk_delete("id", participants: ["gavin@hooli.com", "f8g9nl"])
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse
+    end
+
+    assert_pattern do
+      response => {
+        results: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result]),
+        summary: GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary
+      }
+    end
+  end
+
   def test_add_required_params
     skip("Mock server tests are disabled")
 
@@ -354,6 +371,62 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
       response => {
         success: GrowsurfRuby::Internal::Type::Boolean,
         message: String | nil
+      }
+    end
+  end
+
+  def test_email_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.email("participantIdOrEmail", id: "id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantEmailResponse
+    end
+
+    assert_pattern do
+      response => {
+        status: GrowsurfRuby::Models::Campaign::ParticipantEmailResponse::Status,
+        success: GrowsurfRuby::Internal::Type::Boolean
+      }
+    end
+  end
+
+  def test_list_activity_logs_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.list_activity_logs("participantIdOrEmail", id: "id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse
+    end
+
+    assert_pattern do
+      response => {
+        activity_logs: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantActivityLogsResponse::ActivityLog]),
+        limit: Integer,
+        offset: Integer | nil
+      }
+    end
+  end
+
+  def test_retrieve_analytics_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.retrieve_analytics("participantIdOrEmail", id: "id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse
+    end
+
+    assert_pattern do
+      response => {
+        analytics: GrowsurfRuby::Campaign::ParticipantAnalyticsResponse::Analytics,
+        ranks: GrowsurfRuby::Campaign::ParticipantAnalyticsResponse::Ranks,
+        share_count: ^(GrowsurfRuby::Internal::Type::HashOf[Integer]),
+        end_date: Integer | nil,
+        series: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantAnalyticsResponse::Series]) | nil,
+        start_date: Integer | nil
       }
     end
   end

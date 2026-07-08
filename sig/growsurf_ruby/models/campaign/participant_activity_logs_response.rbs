@@ -1,0 +1,59 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_activity_logs_response =
+        {
+          activity_logs: ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse::ActivityLog],
+          limit: Integer,
+          offset: Integer?
+        }
+
+      class ParticipantActivityLogsResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor activity_logs: ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse::ActivityLog]
+
+        attr_accessor limit: Integer
+
+        attr_accessor offset: Integer?
+
+        def initialize: (
+          activity_logs: ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse::ActivityLog],
+          limit: Integer,
+          ?offset: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          activity_logs: ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse::ActivityLog],
+          limit: Integer,
+          offset: Integer?
+        }
+
+        type activity_log =
+          {
+            created_at: Integer,
+            text: String,
+            type: String
+          }
+
+        class ActivityLog < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor created_at: Integer
+
+          attr_accessor text: String
+
+          attr_accessor type: String
+
+          def initialize: (
+            created_at: Integer,
+            text: String,
+            type: String
+          ) -> void
+
+          def to_hash: -> {
+            created_at: Integer,
+            text: String,
+            type: String
+          }
+        end
+      end
+    end
+  end
+end

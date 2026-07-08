@@ -1,0 +1,90 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_retrieve_analytics_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          days: Integer,
+          end_date: Integer,
+          include: :series,
+          interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
+          start_date: Integer
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantRetrieveAnalyticsParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_reader days: Integer?
+
+        def days=: (Integer) -> Integer
+
+        attr_reader end_date: Integer?
+
+        def end_date=: (Integer) -> Integer
+
+        attr_reader include: :series?
+
+        def include=: (:series) -> :series
+
+        attr_reader interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval?
+
+        def interval=: (
+          GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval
+
+        attr_reader start_date: Integer?
+
+        def start_date=: (Integer) -> Integer
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          ?days: Integer,
+          ?end_date: Integer,
+          ?include: :series,
+          ?interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
+          ?start_date: Integer,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          days: Integer,
+          end_date: Integer,
+          include: :series,
+          interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
+          start_date: Integer,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        module Include
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          SERIES: :series
+
+          def self?.values: -> ::Array[:series]
+        end
+
+        type interval = :day | :week | :month
+
+        module Interval
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          DAY: :day
+          WEEK: :week
+          MONTH: :month
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval]
+        end
+      end
+    end
+  end
+end

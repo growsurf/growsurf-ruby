@@ -1,0 +1,54 @@
+module GrowsurfRuby
+  module Models
+    type referral_flow_screenshots_response =
+      {
+        referrer: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
+        referred_friend: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
+        generated_at: Integer
+      }
+
+    class ReferralFlowScreenshotsResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor referrer: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot
+
+      attr_accessor referred_friend: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot
+
+      attr_accessor generated_at: Integer
+
+      def initialize: (
+        referrer: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
+        referred_friend: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
+        generated_at: Integer
+      ) -> void
+
+      def to_hash: -> {
+        referrer: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
+        referred_friend: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
+        generated_at: Integer
+      }
+
+      class ReferralFlowScreenshot < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor view: String
+
+        attr_accessor url: String
+
+        attr_accessor width: Integer
+
+        attr_accessor height: Integer
+
+        def initialize: (
+          view: String,
+          url: String,
+          width: Integer,
+          height: Integer
+        ) -> void
+
+        def to_hash: -> {
+          view: String,
+          url: String,
+          width: Integer,
+          height: Integer
+        }
+      end
+    end
+  end
+end

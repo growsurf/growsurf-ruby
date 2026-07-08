@@ -39,6 +39,12 @@ module GrowsurfRuby
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
+  Account = GrowsurfRuby::Models::Account
+
+  AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
+
+  AccountUpdateParams = GrowsurfRuby::Models::AccountUpdateParams
+
   Campaign = GrowsurfRuby::Models::Campaign
 
   CampaignAPI = GrowsurfRuby::Models::CampaignAPI
@@ -75,6 +81,8 @@ module GrowsurfRuby
   ParticipantPayoutList = GrowsurfRuby::Models::ParticipantPayoutList
 
   ReferralList = GrowsurfRuby::Models::ReferralList
+
+  ReferralFlowScreenshotsResponse = GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
 
   RewardTaxValuation = GrowsurfRuby::Models::RewardTaxValuation
 end

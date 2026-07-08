@@ -31,6 +31,9 @@ module GrowsurfRuby
         optional :conversions_required, Integer, api_name: :conversionsRequired
 
         # @!attribute coupon_code
+        #   Legacy static coupon code shown to the referrer in the reward-won email and
+        #   webhook. Display text only; superseded by a connected billing integration's
+        #   issued coupon when one exists.
         #
         #   @return [String, nil]
         optional :coupon_code, String, api_name: :couponCode
@@ -45,17 +48,16 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :image_url, String, api_name: :imageUrl
 
-        # @!attribute is_active
-        #
-        #   @return [Boolean, nil]
-        optional :is_active, GrowsurfRuby::Internal::Type::Boolean, api_name: :isActive
-
         # @!attribute is_unlimited
+        #   Whether the reward can be earned an unlimited number of times. Defaults to
+        #   `true`, except `MILESTONE` rewards, which can only be earned once.
         #
         #   @return [Boolean, nil]
         optional :is_unlimited, GrowsurfRuby::Internal::Type::Boolean, api_name: :isUnlimited
 
         # @!attribute is_visible
+        #   Whether the reward is enabled. When `false` the reward is disabled: hidden from
+        #   participants and no longer awarded, including those who already earned it.
         #
         #   @return [Boolean, nil]
         optional :is_visible, GrowsurfRuby::Internal::Type::Boolean, api_name: :isVisible
@@ -79,16 +81,23 @@ module GrowsurfRuby
         optional :metadata, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
 
         # @!attribute next_milestone_prefix
+        #   Text shown before a participant's referral count in milestone-progress copy.
+        #   Applies to `MILESTONE` rewards.
         #
         #   @return [String, nil]
         optional :next_milestone_prefix, String, api_name: :nextMilestonePrefix
 
         # @!attribute next_milestone_suffix
+        #   Text shown after a participant's referral count in milestone-progress copy.
+        #   Applies to `MILESTONE` rewards.
         #
         #   @return [String, nil]
         optional :next_milestone_suffix, String, api_name: :nextMilestoneSuffix
 
         # @!attribute number_of_winners
+        #   The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
+        #   `PER_MONTH` this many win each month, otherwise this many win in total;
+        #   omitting it defaults to `3`.
         #
         #   @return [Integer, nil]
         optional :number_of_winners, Integer, api_name: :numberOfWinners
@@ -99,6 +108,9 @@ module GrowsurfRuby
         optional :order, Integer
 
         # @!attribute referral_coupon_code
+        #   Legacy static coupon code shown to the referred friend (double-sided rewards)
+        #   in the reward-won email and webhook. Display text only; superseded by a
+        #   connected billing integration's issued coupon when one exists.
         #
         #   @return [String, nil]
         optional :referral_coupon_code, String, api_name: :referralCouponCode
@@ -136,7 +148,7 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :value, -> { GrowsurfRuby::RewardTaxValuation }
 
-        # @!method initialize(id:, campaign_reward_id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_active: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @!method initialize(id:, campaign_reward_id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::RewardUpdateParams} for more details.
         #
@@ -148,17 +160,15 @@ module GrowsurfRuby
         #
         #   @param conversions_required [Integer]
         #
-        #   @param coupon_code [String]
+        #   @param coupon_code [String] Legacy static coupon code shown to the referrer in the reward-won email and web
         #
         #   @param description [String]
         #
         #   @param image_url [String]
         #
-        #   @param is_active [Boolean]
+        #   @param is_unlimited [Boolean] Whether the reward can be earned an unlimited number of times. Defaults to `true
         #
-        #   @param is_unlimited [Boolean]
-        #
-        #   @param is_visible [Boolean]
+        #   @param is_visible [Boolean] Whether the reward is enabled. When `false` the reward is disabled: hidden from
         #
         #   @param limit [Integer]
         #
@@ -166,15 +176,15 @@ module GrowsurfRuby
         #
         #   @param metadata [Hash{Symbol=>Object}] Custom key/value metadata (single-level; values are stored as strings).
         #
-        #   @param next_milestone_prefix [String]
+        #   @param next_milestone_prefix [String] Text shown before a participant's referral count in milestone-progress copy. App
         #
-        #   @param next_milestone_suffix [String]
+        #   @param next_milestone_suffix [String] Text shown after a participant's referral count in milestone-progress copy. Appl
         #
-        #   @param number_of_winners [Integer]
+        #   @param number_of_winners [Integer] The number of winners (`LEADERBOARD` rewards only). With `limitDuration` `PER_MO
         #
         #   @param order [Integer]
         #
-        #   @param referral_coupon_code [String]
+        #   @param referral_coupon_code [String] Legacy static coupon code shown to the referred friend (double-sided rewards) in
         #
         #   @param referral_description [String]
         #

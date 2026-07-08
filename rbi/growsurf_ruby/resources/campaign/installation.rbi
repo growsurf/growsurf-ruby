@@ -6,8 +6,9 @@ module GrowsurfRuby
       class Installation
         # Retrieves a program's installation configuration — the same surface as the
         # dashboard Program Editor's **Installation** tab. This is a nested object whose
-        # available fields depend on the program type. See the API reference for the full
-        # field list.
+        # available fields depend on the program type. To see the full object with every
+        # field and its current value, `GET` this resource, then `PATCH` back only the
+        # fields you want to change.
         sig do
           params(
             id: String,
@@ -22,8 +23,10 @@ module GrowsurfRuby
         end
 
         # Updates a program's installation configuration. Only the fields you send are
-        # changed. The request body is a partial installation configuration object — see
-        # the API reference for the full field list.
+        # changed; anything you leave out is untouched. The request body is a partial
+        # installation configuration object. To see the full object with every field and
+        # its current value, `GET` this resource, then `PATCH` back only the fields you
+        # want to change.
         sig do
           params(
             id: String,

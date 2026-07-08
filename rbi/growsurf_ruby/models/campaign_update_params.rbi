@@ -91,16 +91,6 @@ module GrowsurfRuby
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        DRAFT =
-          T.let(
-            :DRAFT,
-            GrowsurfRuby::CampaignUpdateParams::Status::TaggedSymbol
-          )
-        PENDING =
-          T.let(
-            :PENDING,
-            GrowsurfRuby::CampaignUpdateParams::Status::TaggedSymbol
-          )
         IN_PROGRESS =
           T.let(
             :IN_PROGRESS,
@@ -109,11 +99,6 @@ module GrowsurfRuby
         COMPLETE =
           T.let(
             :COMPLETE,
-            GrowsurfRuby::CampaignUpdateParams::Status::TaggedSymbol
-          )
-        CANCELLED =
-          T.let(
-            :CANCELLED,
             GrowsurfRuby::CampaignUpdateParams::Status::TaggedSymbol
           )
 

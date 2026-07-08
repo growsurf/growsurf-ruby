@@ -13,7 +13,10 @@ module GrowsurfRuby
         ?is_tax_reportable: bool?
       ) -> void
 
-      def to_hash: -> { fair_market_value_usd: Float?, is_tax_reportable: bool? }
+      def to_hash: -> {
+        fair_market_value_usd: Float?,
+        is_tax_reportable: bool?
+      }
     end
   end
 end

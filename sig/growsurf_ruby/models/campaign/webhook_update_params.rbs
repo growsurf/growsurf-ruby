@@ -1,0 +1,63 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type webhook_update_params =
+        {
+          id: String,
+          webhook_id: String,
+          events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          is_enabled: bool,
+          payload_url: String,
+          secret: String
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class WebhookUpdateParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor webhook_id: String
+
+        attr_reader events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event]?
+
+        def events=: (
+          ::Array[GrowsurfRuby::Models::Campaign::webhook_event]
+        ) -> ::Array[GrowsurfRuby::Models::Campaign::webhook_event]
+
+        attr_reader is_enabled: bool?
+
+        def is_enabled=: (bool) -> bool
+
+        attr_reader payload_url: String?
+
+        def payload_url=: (String) -> String
+
+        attr_reader secret: String?
+
+        def secret=: (String) -> String
+
+        def initialize: (
+          id: String,
+          webhook_id: String,
+          ?events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          ?is_enabled: bool,
+          ?payload_url: String,
+          ?secret: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          webhook_id: String,
+          events: ::Array[GrowsurfRuby::Models::Campaign::webhook_event],
+          is_enabled: bool,
+          payload_url: String,
+          secret: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

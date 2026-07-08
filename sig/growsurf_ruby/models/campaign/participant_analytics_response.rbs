@@ -1,0 +1,407 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_analytics_response =
+        {
+          analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics,
+          ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks,
+          share_count: ::Hash[Symbol, Integer],
+          end_date: Integer,
+          series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series],
+          start_date: Integer
+        }
+
+      class ParticipantAnalyticsResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics
+
+        attr_accessor ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks
+
+        attr_accessor share_count: ::Hash[Symbol, Integer]
+
+        attr_reader end_date: Integer?
+
+        def end_date=: (Integer) -> Integer
+
+        attr_reader series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series]?
+
+        def series=: (
+          ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series]
+        ) -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series]
+
+        attr_reader start_date: Integer?
+
+        def start_date=: (Integer) -> Integer
+
+        def initialize: (
+          analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics,
+          ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks,
+          share_count: ::Hash[Symbol, Integer],
+          ?end_date: Integer,
+          ?series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series],
+          ?start_date: Integer
+        ) -> void
+
+        def to_hash: -> {
+          analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics,
+          ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks,
+          share_count: ::Hash[Symbol, Integer],
+          end_date: Integer,
+          series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series],
+          start_date: Integer
+        }
+
+        type analytics =
+          {
+            currency_iso: String,
+            expired_referrals: Integer,
+            impressions: Integer,
+            invites_sent: Integer,
+            leads: Integer,
+            monthly_referrals: Integer,
+            pending_rewards: Integer,
+            referral_revenue: Integer,
+            referrals: Integer,
+            rewards_earned: Integer,
+            total_commissions: Integer,
+            total_paid_out: Integer,
+            unique_impressions: Integer,
+            upcoming_payout: Integer
+          }
+
+        class Analytics < GrowsurfRuby::Internal::Type::BaseModel
+          attr_reader currency_iso: String?
+
+          def currency_iso=: (String) -> String
+
+          attr_reader expired_referrals: Integer?
+
+          def expired_referrals=: (Integer) -> Integer
+
+          attr_reader impressions: Integer?
+
+          def impressions=: (Integer) -> Integer
+
+          attr_reader invites_sent: Integer?
+
+          def invites_sent=: (Integer) -> Integer
+
+          attr_reader leads: Integer?
+
+          def leads=: (Integer) -> Integer
+
+          attr_reader monthly_referrals: Integer?
+
+          def monthly_referrals=: (Integer) -> Integer
+
+          attr_reader pending_rewards: Integer?
+
+          def pending_rewards=: (Integer) -> Integer
+
+          attr_reader referral_revenue: Integer?
+
+          def referral_revenue=: (Integer) -> Integer
+
+          attr_reader referrals: Integer?
+
+          def referrals=: (Integer) -> Integer
+
+          attr_reader rewards_earned: Integer?
+
+          def rewards_earned=: (Integer) -> Integer
+
+          attr_reader total_commissions: Integer?
+
+          def total_commissions=: (Integer) -> Integer
+
+          attr_reader total_paid_out: Integer?
+
+          def total_paid_out=: (Integer) -> Integer
+
+          attr_reader unique_impressions: Integer?
+
+          def unique_impressions=: (Integer) -> Integer
+
+          attr_reader upcoming_payout: Integer?
+
+          def upcoming_payout=: (Integer) -> Integer
+
+          def initialize: (
+            ?currency_iso: String,
+            ?expired_referrals: Integer,
+            ?impressions: Integer,
+            ?invites_sent: Integer,
+            ?leads: Integer,
+            ?monthly_referrals: Integer,
+            ?pending_rewards: Integer,
+            ?referral_revenue: Integer,
+            ?referrals: Integer,
+            ?rewards_earned: Integer,
+            ?total_commissions: Integer,
+            ?total_paid_out: Integer,
+            ?unique_impressions: Integer,
+            ?upcoming_payout: Integer
+          ) -> void
+
+          def to_hash: -> {
+            currency_iso: String,
+            expired_referrals: Integer,
+            impressions: Integer,
+            invites_sent: Integer,
+            leads: Integer,
+            monthly_referrals: Integer,
+            pending_rewards: Integer,
+            referral_revenue: Integer,
+            referrals: Integer,
+            rewards_earned: Integer,
+            total_commissions: Integer,
+            total_paid_out: Integer,
+            unique_impressions: Integer,
+            upcoming_payout: Integer
+          }
+        end
+
+        type ranks =
+          {
+            monthly_rank: Integer?,
+            prev_monthly_rank: Integer?,
+            rank: Integer?
+          }
+
+        class Ranks < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor monthly_rank: Integer?
+
+          attr_accessor prev_monthly_rank: Integer?
+
+          attr_accessor rank: Integer?
+
+          def initialize: (
+            ?monthly_rank: Integer?,
+            ?prev_monthly_rank: Integer?,
+            ?rank: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            monthly_rank: Integer?,
+            prev_monthly_rank: Integer?,
+            rank: Integer?
+          }
+        end
+
+        type series =
+          {
+            android_native_shares: Integer,
+            bluesky_shares: Integer,
+            copy_ref_link_shares: Integer,
+            email_shares: Integer,
+            facebook_shares: Integer,
+            impressions: Integer,
+            invites: Integer,
+            ios_native_shares: Integer,
+            linked_in_shares: Integer,
+            messenger_shares: Integer,
+            participants: Integer,
+            period_start: Integer,
+            pinterest_shares: Integer,
+            qrcode_shares: Integer,
+            reddit_shares: Integer,
+            referral_credit_expireds: Integer,
+            referral_credit_pendings: Integer,
+            referrals: Integer,
+            sms_shares: Integer,
+            telegram_shares: Integer,
+            threads_shares: Integer,
+            total_commission_count: Integer,
+            total_commissions: Integer,
+            total_revenue: Integer,
+            tumblr_shares: Integer,
+            twitter_shares: Integer,
+            unique_impressions: Integer,
+            wechat_shares: Integer,
+            whats_app_shares: Integer
+          }
+
+        class Series < GrowsurfRuby::Internal::Type::BaseModel
+          attr_reader android_native_shares: Integer?
+
+          def android_native_shares=: (Integer) -> Integer
+
+          attr_reader bluesky_shares: Integer?
+
+          def bluesky_shares=: (Integer) -> Integer
+
+          attr_reader copy_ref_link_shares: Integer?
+
+          def copy_ref_link_shares=: (Integer) -> Integer
+
+          attr_reader email_shares: Integer?
+
+          def email_shares=: (Integer) -> Integer
+
+          attr_reader facebook_shares: Integer?
+
+          def facebook_shares=: (Integer) -> Integer
+
+          attr_reader impressions: Integer?
+
+          def impressions=: (Integer) -> Integer
+
+          attr_reader invites: Integer?
+
+          def invites=: (Integer) -> Integer
+
+          attr_reader ios_native_shares: Integer?
+
+          def ios_native_shares=: (Integer) -> Integer
+
+          attr_reader linked_in_shares: Integer?
+
+          def linked_in_shares=: (Integer) -> Integer
+
+          attr_reader messenger_shares: Integer?
+
+          def messenger_shares=: (Integer) -> Integer
+
+          attr_reader participants: Integer?
+
+          def participants=: (Integer) -> Integer
+
+          attr_reader period_start: Integer?
+
+          def period_start=: (Integer) -> Integer
+
+          attr_reader pinterest_shares: Integer?
+
+          def pinterest_shares=: (Integer) -> Integer
+
+          attr_reader qrcode_shares: Integer?
+
+          def qrcode_shares=: (Integer) -> Integer
+
+          attr_reader reddit_shares: Integer?
+
+          def reddit_shares=: (Integer) -> Integer
+
+          attr_reader referral_credit_expireds: Integer?
+
+          def referral_credit_expireds=: (Integer) -> Integer
+
+          attr_reader referral_credit_pendings: Integer?
+
+          def referral_credit_pendings=: (Integer) -> Integer
+
+          attr_reader referrals: Integer?
+
+          def referrals=: (Integer) -> Integer
+
+          attr_reader sms_shares: Integer?
+
+          def sms_shares=: (Integer) -> Integer
+
+          attr_reader telegram_shares: Integer?
+
+          def telegram_shares=: (Integer) -> Integer
+
+          attr_reader threads_shares: Integer?
+
+          def threads_shares=: (Integer) -> Integer
+
+          attr_reader total_commission_count: Integer?
+
+          def total_commission_count=: (Integer) -> Integer
+
+          attr_reader total_commissions: Integer?
+
+          def total_commissions=: (Integer) -> Integer
+
+          attr_reader total_revenue: Integer?
+
+          def total_revenue=: (Integer) -> Integer
+
+          attr_reader tumblr_shares: Integer?
+
+          def tumblr_shares=: (Integer) -> Integer
+
+          attr_reader twitter_shares: Integer?
+
+          def twitter_shares=: (Integer) -> Integer
+
+          attr_reader unique_impressions: Integer?
+
+          def unique_impressions=: (Integer) -> Integer
+
+          attr_reader wechat_shares: Integer?
+
+          def wechat_shares=: (Integer) -> Integer
+
+          attr_reader whats_app_shares: Integer?
+
+          def whats_app_shares=: (Integer) -> Integer
+
+          def initialize: (
+            ?android_native_shares: Integer,
+            ?bluesky_shares: Integer,
+            ?copy_ref_link_shares: Integer,
+            ?email_shares: Integer,
+            ?facebook_shares: Integer,
+            ?impressions: Integer,
+            ?invites: Integer,
+            ?ios_native_shares: Integer,
+            ?linked_in_shares: Integer,
+            ?messenger_shares: Integer,
+            ?participants: Integer,
+            ?period_start: Integer,
+            ?pinterest_shares: Integer,
+            ?qrcode_shares: Integer,
+            ?reddit_shares: Integer,
+            ?referral_credit_expireds: Integer,
+            ?referral_credit_pendings: Integer,
+            ?referrals: Integer,
+            ?sms_shares: Integer,
+            ?telegram_shares: Integer,
+            ?threads_shares: Integer,
+            ?total_commission_count: Integer,
+            ?total_commissions: Integer,
+            ?total_revenue: Integer,
+            ?tumblr_shares: Integer,
+            ?twitter_shares: Integer,
+            ?unique_impressions: Integer,
+            ?wechat_shares: Integer,
+            ?whats_app_shares: Integer
+          ) -> void
+
+          def to_hash: -> {
+            android_native_shares: Integer,
+            bluesky_shares: Integer,
+            copy_ref_link_shares: Integer,
+            email_shares: Integer,
+            facebook_shares: Integer,
+            impressions: Integer,
+            invites: Integer,
+            ios_native_shares: Integer,
+            linked_in_shares: Integer,
+            messenger_shares: Integer,
+            participants: Integer,
+            period_start: Integer,
+            pinterest_shares: Integer,
+            qrcode_shares: Integer,
+            reddit_shares: Integer,
+            referral_credit_expireds: Integer,
+            referral_credit_pendings: Integer,
+            referrals: Integer,
+            sms_shares: Integer,
+            telegram_shares: Integer,
+            threads_shares: Integer,
+            total_commission_count: Integer,
+            total_commissions: Integer,
+            total_revenue: Integer,
+            tumblr_shares: Integer,
+            twitter_shares: Integer,
+            unique_impressions: Integer,
+            wechat_shares: Integer,
+            whats_app_shares: Integer
+          }
+        end
+      end
+    end
+  end
+end

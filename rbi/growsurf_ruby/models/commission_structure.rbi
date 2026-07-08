@@ -14,6 +14,9 @@ module GrowsurfRuby
       sig { returns(T.nilable(Integer)) }
       attr_accessor :amount
 
+      sig { returns(T.nilable(String)) }
+      attr_accessor :amount_iso
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :approval_required
 
@@ -75,6 +78,7 @@ module GrowsurfRuby
       sig do
         params(
           amount: T.nilable(Integer),
+          amount_iso: T.nilable(String),
           approval_required: T.nilable(T::Boolean),
           duration: T.nilable(String),
           duration_in_months: T.nilable(Integer),
@@ -97,6 +101,7 @@ module GrowsurfRuby
       end
       def self.new(
         amount: nil,
+        amount_iso: nil,
         approval_required: nil,
         duration: nil,
         duration_in_months: nil,
@@ -122,6 +127,7 @@ module GrowsurfRuby
         override.returns(
           {
             amount: T.nilable(Integer),
+            amount_iso: T.nilable(String),
             approval_required: T.nilable(T::Boolean),
             duration: T.nilable(String),
             duration_in_months: T.nilable(Integer),
@@ -158,8 +164,8 @@ module GrowsurfRuby
 
         PERCENT =
           T.let(:PERCENT, GrowsurfRuby::CommissionStructure::Type::TaggedSymbol)
-        AMOUNT =
-          T.let(:AMOUNT, GrowsurfRuby::CommissionStructure::Type::TaggedSymbol)
+        FIXED =
+          T.let(:FIXED, GrowsurfRuby::CommissionStructure::Type::TaggedSymbol)
 
         sig do
           override.returns(

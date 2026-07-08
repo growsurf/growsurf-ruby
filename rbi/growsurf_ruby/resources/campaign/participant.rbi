@@ -30,6 +30,8 @@ module GrowsurfRuby
             first_name: String,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
+            notes: String,
+            paypal_email: String,
             referral_status:
               GrowsurfRuby::Campaign::ParticipantUpdateParams::ReferralStatus::OrSymbol,
             referred_by: String,
@@ -51,6 +53,11 @@ module GrowsurfRuby
           last_name: nil,
           # Body param: Shallow custom metadata object.
           metadata: nil,
+          # Body param: Freeform internal notes about the participant (internal only, never
+          # exposed to participants).
+          notes: nil,
+          # Body param: The participant's PayPal email address, used for affiliate payouts.
+          paypal_email: nil,
           # Body param
           referral_status: nil,
           # Body param
@@ -76,6 +83,32 @@ module GrowsurfRuby
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
+          request_options: {}
+        )
+        end
+
+        # Deletes a list of participants from a program in one request. Each entry in
+        # `participants` is a GrowSurf participant ID or an email address (mixed lists
+        # are allowed). Up to `200` entries per request — chunk larger lists across
+        # multiple calls. The response reports a per-row `status` for every submitted
+        # entry, so a `200` can include rows that were `NOT_FOUND` or failed. Deletion
+        # is permanent and removes the participants' referrals, rewards, commissions,
+        # and payout records.
+        sig do
+          params(
+            id: String,
+            participants: T::Array[String],
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(
+            GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse
+          )
+        end
+        def bulk_delete(
+          # GrowSurf program ID.
+          id,
+          # GrowSurf participant IDs and/or email addresses to delete. Mixed entries are
+          # allowed.
+          participants:,
           request_options: {}
         )
         end
@@ -112,6 +145,10 @@ module GrowsurfRuby
           # for mobile participant creation and mobile participant token flows. The official
           # mobile SDKs generate this as a lowercase UUID.
           mobile_instance_id: nil,
+          # The referral credit status; only meaningful when `referred_by` resolves to a
+          # referrer. When omitted it is derived from the program's referral trigger
+          # (`CREDIT_AWARDED`, `CREDIT_PENDING`, or `CREDIT_EXPIRED`); left unset when no
+          # referrer resolves.
           referral_status: nil,
           # Referrer participant ID or email address.
           referred_by: nil,
@@ -245,6 +282,13 @@ module GrowsurfRuby
 
         # Records a sale made by a referred customer and generates affiliate commissions
         # for their referrer when applicable.
+        #
+        # At least one transaction identifier is required: one of +external_id+,
+        # +transaction_id+, +order_id+, +payment_id+, +invoice_id+, +payment_intent_id+,
+        # or +charge_id+. +customer_id+ and +subscription_id+ do not count, since they
+        # identify the customer or subscription rather than the specific transaction.
+        # Without an identifier, resending the same sale creates a duplicate commission
+        # and double-pays the referrer; the server rejects such requests with HTTP 400.
         sig do
           params(
             participant_id_or_email: String,
@@ -400,6 +444,8 @@ module GrowsurfRuby
         end
 
         # Sends email invites on behalf of a participant to a list of email addresses.
+        # Sending invites via the API requires a verified custom email domain on the
+        # program; the request fails until one is verified.
         sig do
           params(
             participant_id_or_email: String,
@@ -470,6 +516,120 @@ module GrowsurfRuby
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
+          request_options: {}
+        )
+        end
+
+        # Sends an email to a participant. Provide EITHER `email_type` to trigger one of the
+        # program's configured email templates, OR `subject` + `body` for a free-form email.
+        # Free-form emails are sent with the same compliance handling (company name,
+        # postal address, and an unsubscribe link are added automatically, and unsubscribed
+        # participants are suppressed). Sending requires the account to be verified by the
+        # GrowSurf team. Requires a verified custom email domain on the program (set up
+        # in Campaign Editor > 3. Emails > Email Settings). Returns `400` until one is
+        # verified.
+        # The email is accepted for delivery.
+        sig do
+          params(
+            participant_id_or_email: String,
+            id: String,
+            body: String,
+            email_type: String,
+            preheader: String,
+            subject: String,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(GrowsurfRuby::Models::Campaign::ParticipantEmailResponse)
+        end
+        def email(
+          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          participant_id_or_email,
+          # Path param: GrowSurf program ID.
+          id:,
+          # Body param: HTML body for a free-form email. You can personalize it with
+          # dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`.
+          # See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
+          body: nil,
+          # Body param: The program email template to send (template mode). Send the
+          # camelCase key. The valid types depend on the program type; `isEnabled` only
+          # controls automatic sends. Referral programs: `welcomeNonReferred`,
+          # `referralLinkViewedFirstTime`, `referralLinkUsed`, `referredSignup`,
+          # `welcomeReferred`, `goalAchieved`, `campaignEndedWinners`,
+          # `campaignEndedNonWinners`, `progressUpdateMonthly`. Affiliate programs:
+          # `welcomeNonReferred`, `referralLinkViewedFirstTime`, `referredSignup`,
+          # `commissionGenerated`, `commissionAdjusted`, `payoutPending`,
+          # `payoutSentSuccess`, `progressUpdateMonthly`. System/transactional types (login
+          # link, PayPal confirmation, tax) and the invite email cannot be sent.
+          email_type: nil,
+          # Body param: Optional preheader text for a free-form email.
+          preheader: nil,
+          # Body param: Subject line for a free-form email. Supports dynamic text
+          # (`{{...}}` tokens), the same as the body.
+          subject: nil,
+          request_options: {}
+        )
+        end
+
+        # Returns a participant's activity logs, most recent first (offset/limit paginated).
+        sig do
+          params(
+            participant_id_or_email: String,
+            id: String,
+            limit: Integer,
+            offset: Integer,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(
+            GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse
+          )
+        end
+        def list_activity_logs(
+          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          participant_id_or_email,
+          # Path param: GrowSurf program ID.
+          id:,
+          # Query param: Number of logs to return (1–100, default 20).
+          limit: nil,
+          # Query param: Number of logs to skip.
+          offset: nil,
+          request_options: {}
+        )
+        end
+
+        # Retrieves analytics for a single participant — all-time engagement counters,
+        # leaderboard ranks, and per-channel share counts (plus affiliate money metrics for
+        # affiliate programs). Useful for segmenting and re-engaging participants.
+        sig do
+          params(
+            participant_id_or_email: String,
+            id: String,
+            days: Integer,
+            end_date: Integer,
+            include:
+              GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Include::OrSymbol,
+            interval:
+              GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Interval::OrSymbol,
+            start_date: Integer,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(
+            GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse
+          )
+        end
+        def retrieve_analytics(
+          # GrowSurf participant ID or URL-encoded participant email address.
+          participant_id_or_email,
+          # GrowSurf program ID.
+          id:,
+          # Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
+          days: nil,
+          # End date of the analytics timeframe as a Unix timestamp in milliseconds.
+          # Required if `days` is not set.
+          end_date: nil,
+          # Set to `series` to also return this participant's own activity per period.
+          include: nil,
+          # Bucket size for the `series` (only used with `include=series`). Defaults to `day`.
+          interval: nil,
+          # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
+          # Required if `days` is not set.
+          start_date: nil,
           request_options: {}
         )
         end

@@ -8,7 +8,8 @@ module GrowsurfRuby
         # Program Editor's **Emails** tab (per-email templates plus sender, contact, and
         # design settings).
         #
-        # This is a large, nested object. See the API reference for the full field list.
+        # To see the full object with every field and its current value, `GET` this
+        # resource, then `PATCH` back only the fields you want to change.
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -26,11 +27,13 @@ module GrowsurfRuby
           )
         end
 
-        # Updates a program's email configuration. Only the fields you send are changed.
-        # Unknown fields and invalid values return a `400`.
+        # Updates a program's email configuration. Only the fields you send are changed;
+        # anything you leave out is untouched. Unknown fields and invalid values return a
+        # `400`.
         #
-        # The request body is a partial {CampaignEmails} object — see the API reference for
-        # the full field list.
+        # The request body is a partial {CampaignEmails} object. To see the full object
+        # with every field and its current value, `GET` this resource, then `PATCH` back
+        # only the fields you want to change.
         #
         # @overload update(id, body, request_options: {})
         #

@@ -49,11 +49,8 @@ module GrowsurfRuby
       module Status
         extend GrowsurfRuby::Internal::Type::Enum
 
-        DRAFT = :DRAFT
-        PENDING = :PENDING
         IN_PROGRESS = :IN_PROGRESS
         COMPLETE = :COMPLETE
-        CANCELLED = :CANCELLED
 
         # @!method self.values
         #   @return [Array<Symbol>]

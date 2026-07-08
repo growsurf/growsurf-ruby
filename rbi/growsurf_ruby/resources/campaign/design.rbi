@@ -6,8 +6,8 @@ module GrowsurfRuby
       class Design
         # Retrieves a program's design configuration — the same surface as the dashboard
         # Program Editor's **Design** tab. This is a large, deeply nested object whose
-        # available fields depend on the program type. See the API reference for the full
-        # field list.
+        # available fields depend on the program type; the response includes every field
+        # and its current value, which is the same shape you send back on update.
         sig do
           params(
             id: String,
@@ -21,9 +21,11 @@ module GrowsurfRuby
         )
         end
 
-        # Updates a program's design configuration. Only the fields you send are changed.
-        # The request body is a partial design object — see the API reference for the full
-        # field list.
+        # Updates a program's design configuration. Only the fields you send are changed;
+        # anything you leave out is untouched (arrays such as `signup.fields` replace
+        # wholesale). The request body is a partial design object. To see the full object
+        # with every field and its current value, `GET` this resource, then `PATCH` back
+        # only the fields you want to change.
         sig do
           params(
             id: String,

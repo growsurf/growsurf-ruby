@@ -39,6 +39,19 @@ module GrowsurfRuby
         #   @return [Hash{Symbol=>Object}, nil]
         optional :metadata, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
 
+        # @!attribute notes
+        #   Freeform internal notes about the participant (internal only, never exposed to
+        #   participants).
+        #
+        #   @return [String, nil]
+        optional :notes, String
+
+        # @!attribute paypal_email
+        #   The participant's PayPal email address, used for affiliate payouts.
+        #
+        #   @return [String, nil]
+        optional :paypal_email, String, api_name: :paypalEmail
+
         # @!attribute referral_status
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::ReferralStatus, nil]
@@ -61,7 +74,10 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, participant_id_or_email:, email: nil, first_name: nil, last_name: nil, metadata: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        # @!method initialize(id:, participant_id_or_email:, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, paypal_email: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {GrowsurfRuby::Models::Campaign::ParticipantUpdateParams} for more details.
+        #
         #   @param id [String]
         #
         #   @param participant_id_or_email [String]
@@ -73,6 +89,10 @@ module GrowsurfRuby
         #   @param last_name [String]
         #
         #   @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
+        #
+        #   @param notes [String] Freeform internal notes about the participant (internal only, never exposed to pa
+        #
+        #   @param paypal_email [String] The participant's PayPal email address, used for affiliate payouts.
         #
         #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::ReferralStatus]
         #

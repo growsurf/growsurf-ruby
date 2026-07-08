@@ -44,6 +44,10 @@ module GrowsurfRuby
         optional :mobile_instance_id, String, api_name: :mobileInstanceId
 
         # @!attribute referral_status
+        #   The referral credit status; only meaningful when `referred_by` resolves to a
+        #   referrer. When omitted it is derived from the program's referral trigger
+        #   (`CREDIT_AWARDED`, `CREDIT_PENDING`, or `CREDIT_EXPIRED`); left unset when no
+        #   referrer resolves.
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus, nil]
         optional :referral_status,
@@ -74,7 +78,7 @@ module GrowsurfRuby
         #
         #   @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
         #
-        #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus]
+        #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus] The referral credit status; only meaningful when `referred_by` resolves to a ref
         #
         #   @param referred_by [String] Referrer participant ID or email address.
 

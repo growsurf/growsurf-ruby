@@ -1,6 +1,12 @@
 # typed: strong
 
 module GrowsurfRuby
+  Account = GrowsurfRuby::Models::Account
+
+  AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
+
+  AccountUpdateParams = GrowsurfRuby::Models::AccountUpdateParams
+
   Campaign = GrowsurfRuby::Models::Campaign
 
   CampaignAPI = GrowsurfRuby::Models::CampaignAPI
@@ -42,6 +48,9 @@ module GrowsurfRuby
   ParticipantPayoutList = GrowsurfRuby::Models::ParticipantPayoutList
 
   ReferralList = GrowsurfRuby::Models::ReferralList
+
+  ReferralFlowScreenshotsResponse =
+    GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
 
   RewardTaxValuation = GrowsurfRuby::Models::RewardTaxValuation
 end

@@ -1,7 +1,14 @@
 module GrowsurfRuby
   module Models
     type campaign_retrieve_analytics_params =
-      { id: String, days: Integer, end_date: Integer, start_date: Integer }
+      {
+        id: String,
+        days: Integer,
+        end_date: Integer,
+        include: String,
+        interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
+        start_date: Integer
+      }
       & GrowsurfRuby::Internal::Type::request_parameters
 
     class CampaignRetrieveAnalyticsParams < GrowsurfRuby::Internal::Type::BaseModel
@@ -18,6 +25,16 @@ module GrowsurfRuby
 
       def end_date=: (Integer) -> Integer
 
+      attr_reader include: String?
+
+      def include=: (String) -> String
+
+      attr_reader interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval?
+
+      def interval=: (
+        GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval
+      ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval
+
       attr_reader start_date: Integer?
 
       def start_date=: (Integer) -> Integer
@@ -26,6 +43,8 @@ module GrowsurfRuby
         id: String,
         ?days: Integer,
         ?end_date: Integer,
+        ?include: String,
+        ?interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
         ?start_date: Integer,
         ?request_options: GrowsurfRuby::request_opts
       ) -> void
@@ -34,9 +53,24 @@ module GrowsurfRuby
         id: String,
         days: Integer,
         end_date: Integer,
+        include: String,
+        interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
         start_date: Integer,
         request_options: GrowsurfRuby::RequestOptions
       }
+
+      type interval = :day | :week | :month | :total
+
+      module Interval
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        DAY: :day
+        WEEK: :week
+        MONTH: :month
+        TOTAL: :total
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval]
+      end
     end
   end
 end

@@ -1,0 +1,37 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_email_response =
+        {
+          status: GrowsurfRuby::Models::Campaign::ParticipantEmailResponse::status,
+          success: bool
+        }
+
+      class ParticipantEmailResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor status: GrowsurfRuby::Models::Campaign::ParticipantEmailResponse::status
+
+        attr_accessor success: bool
+
+        def initialize: (
+          status: GrowsurfRuby::Models::Campaign::ParticipantEmailResponse::status,
+          success: bool
+        ) -> void
+
+        def to_hash: -> {
+          status: GrowsurfRuby::Models::Campaign::ParticipantEmailResponse::status,
+          success: bool
+        }
+
+        type status = :queued
+
+        module Status
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          QUEUED: :queued
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantEmailResponse::status]
+        end
+      end
+    end
+  end
+end

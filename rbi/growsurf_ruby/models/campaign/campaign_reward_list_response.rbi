@@ -12,7 +12,7 @@ module GrowsurfRuby
             )
           end
 
-        # The program's active, visible, and enabled rewards.
+        # The program's configured rewards.
         sig { returns(T::Array[GrowsurfRuby::Models::Campaign::Reward]) }
         attr_accessor :rewards
 
@@ -23,7 +23,7 @@ module GrowsurfRuby
           ).returns(T.attached_class)
         end
         def self.new(
-          # The program's active, visible, and enabled rewards.
+          # The program's configured rewards.
           rewards:
         )
         end

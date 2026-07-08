@@ -1,0 +1,54 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type webhook_test_response =
+        {
+          success: bool,
+          payload: ::Hash[Symbol, top],
+          response: GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response
+        }
+
+      class WebhookTestResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor success: bool
+
+        attr_reader payload: ::Hash[Symbol, top]?
+
+        def payload=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader response: GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response?
+
+        def response=: (
+          GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response
+        ) -> GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response
+
+        def initialize: (
+          success: bool,
+          ?payload: ::Hash[Symbol, top],
+          ?response: GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response
+        ) -> void
+
+        def to_hash: -> {
+          success: bool,
+          payload: ::Hash[Symbol, top],
+          response: GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response
+        }
+
+        type response = { msg: String, status_code: Integer }
+
+        class Response < GrowsurfRuby::Internal::Type::BaseModel
+          attr_reader msg: String?
+
+          def msg=: (String) -> String
+
+          attr_reader status_code: Integer?
+
+          def status_code=: (Integer) -> Integer
+
+          def initialize: (?msg: String, ?status_code: Integer) -> void
+
+          def to_hash: -> { msg: String, status_code: Integer }
+        end
+      end
+    end
+  end
+end

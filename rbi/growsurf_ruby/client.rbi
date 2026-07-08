@@ -14,6 +14,9 @@ module GrowsurfRuby
     sig { returns(String) }
     attr_reader :api_key
 
+    sig { returns(GrowsurfRuby::Resources::Account) }
+    attr_reader :account
+
     sig { returns(GrowsurfRuby::Resources::Campaign) }
     attr_reader :campaign
 

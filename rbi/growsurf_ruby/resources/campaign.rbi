@@ -34,6 +34,10 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::Installation) }
       attr_reader :installation
 
+      # Program webhook configuration operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Webhooks) }
+      attr_reader :webhooks
+
       # Retrieves a program for the given program ID.
       sig do
         params(
@@ -110,8 +114,8 @@ module GrowsurfRuby
         company_name: nil,
         # Body param
         name: nil,
-        # Body param: The program status. Transitions are validated; DELETED is not
-        # allowed.
+        # Body param: The requested program status. `IN_PROGRESS` publishes or resumes
+        # the program; `COMPLETE` ends it. Any other value returns a `400`.
         status: nil,
         request_options: {}
       )
@@ -125,6 +129,21 @@ module GrowsurfRuby
         ).returns(GrowsurfRuby::CampaignAPI)
       end
       def clone(
+        # GrowSurf program ID.
+        id,
+        request_options: {}
+      )
+      end
+
+      # Captures two preview screenshots for the program: the authenticated referrer
+      # view and the referred-friend view.
+      sig do
+        params(
+          id: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::Models::ReferralFlowScreenshotsResponse)
+      end
+      def get_referral_flow_screenshots(
         # GrowSurf program ID.
         id,
         request_options: {}
@@ -314,6 +333,9 @@ module GrowsurfRuby
           id: String,
           days: Integer,
           end_date: Integer,
+          include: String,
+          interval:
+            GrowsurfRuby::CampaignRetrieveAnalyticsParams::Interval::OrSymbol,
           start_date: Integer,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse)
@@ -326,6 +348,15 @@ module GrowsurfRuby
         # End date of the analytics timeframe as a Unix timestamp in milliseconds.
         # Required if `days` is not set.
         end_date: nil,
+        # Comma-separated list of optional enrichments (opt-in to keep the default response
+        # lean): `previousPeriod` adds totals for the equal-length window immediately before
+        # the requested one; `statusCounts` adds reward (and, for affiliate programs,
+        # affiliate/commission/payout) status breakdowns; `rates` adds derived referral
+        # rates.
+        include: nil,
+        # When set to `day`, `week`, or `month`, the response also includes a `series` array
+        # with per-period totals. Defaults to `total` (no series).
+        interval: nil,
         # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
         # Required if `days` is not set.
         start_date: nil,

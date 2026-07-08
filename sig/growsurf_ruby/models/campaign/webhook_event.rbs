@@ -1,0 +1,28 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type webhook_event =
+        :PARTICIPANT_REACHED_A_GOAL
+        | :NEW_PARTICIPANT_ADDED
+        | :CAMPAIGN_ENDED
+        | :PARTICIPANT_FRAUD_STATUS_UPDATED
+        | :NEW_COMMISSION_ADDED
+        | :COMMISSION_ADJUSTED
+        | :NEW_PAYOUT_ISSUED
+
+      module WebhookEvent
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        PARTICIPANT_REACHED_A_GOAL: :PARTICIPANT_REACHED_A_GOAL
+        NEW_PARTICIPANT_ADDED: :NEW_PARTICIPANT_ADDED
+        CAMPAIGN_ENDED: :CAMPAIGN_ENDED
+        PARTICIPANT_FRAUD_STATUS_UPDATED: :PARTICIPANT_FRAUD_STATUS_UPDATED
+        NEW_COMMISSION_ADDED: :NEW_COMMISSION_ADDED
+        COMMISSION_ADJUSTED: :COMMISSION_ADJUSTED
+        NEW_PAYOUT_ISSUED: :NEW_PAYOUT_ISSUED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::webhook_event]
+      end
+    end
+  end
+end

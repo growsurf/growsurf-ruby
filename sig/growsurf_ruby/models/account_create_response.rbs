@@ -1,0 +1,47 @@
+module GrowsurfRuby
+  module Models
+    type account_create_response =
+      {
+        api_key: String,
+        email: String,
+        id: String,
+        verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
+      }
+
+    class AccountCreateResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor api_key: String
+
+      attr_accessor email: String
+
+      attr_accessor id: String
+
+      attr_accessor verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
+
+      def initialize: (
+        api_key: String,
+        email: String,
+        id: String,
+        verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
+      ) -> void
+
+      def to_hash: -> {
+        api_key: String,
+        email: String,
+        id: String,
+        verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
+      }
+
+      type verification_status = :NOT_REQUESTED | :REQUESTED | :VERIFIED
+
+      module VerificationStatus
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        NOT_REQUESTED: :NOT_REQUESTED
+        REQUESTED: :REQUESTED
+        VERIFIED: :VERIFIED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::AccountCreateResponse::verification_status]
+      end
+    end
+  end
+end

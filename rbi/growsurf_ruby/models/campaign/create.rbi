@@ -55,6 +55,10 @@ module GrowsurfRuby
         sig { params(mobile_instance_id: String).void }
         attr_writer :mobile_instance_id
 
+        # The referral credit status; only meaningful when `referred_by` resolves to a
+        # referrer. When omitted it is derived from the program's referral trigger
+        # (`CREDIT_AWARDED`, `CREDIT_PENDING`, or `CREDIT_EXPIRED`); left unset when no
+        # referrer resolves.
         sig do
           returns(
             T.nilable(GrowsurfRuby::Campaign::Create::ReferralStatus::OrSymbol)
@@ -103,6 +107,10 @@ module GrowsurfRuby
           # for mobile participant creation and mobile participant token flows. The official
           # mobile SDKs generate this as a lowercase UUID.
           mobile_instance_id: nil,
+          # The referral credit status; only meaningful when `referred_by` resolves to a
+          # referrer. When omitted it is derived from the program's referral trigger
+          # (`CREDIT_AWARDED`, `CREDIT_PENDING`, or `CREDIT_EXPIRED`); left unset when no
+          # referrer resolves.
           referral_status: nil,
           # Referrer participant ID or email address.
           referred_by: nil

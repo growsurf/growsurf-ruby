@@ -1,0 +1,42 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type webhook_test_params =
+        {
+          id: String,
+          webhook_id: String,
+          event: GrowsurfRuby::Models::Campaign::webhook_event
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class WebhookTestParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor webhook_id: String
+
+        attr_reader event: GrowsurfRuby::Models::Campaign::webhook_event?
+
+        def event=: (
+          GrowsurfRuby::Models::Campaign::webhook_event
+        ) -> GrowsurfRuby::Models::Campaign::webhook_event
+
+        def initialize: (
+          id: String,
+          webhook_id: String,
+          ?event: GrowsurfRuby::Models::Campaign::webhook_event,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          webhook_id: String,
+          event: GrowsurfRuby::Models::Campaign::webhook_event,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

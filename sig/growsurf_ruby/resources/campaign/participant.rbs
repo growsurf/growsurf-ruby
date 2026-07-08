@@ -15,6 +15,8 @@ module GrowsurfRuby
           ?first_name: String,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
+          ?notes: String,
+          ?paypal_email: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
           ?referred_by: String,
           ?unsubscribed: bool,
@@ -27,6 +29,12 @@ module GrowsurfRuby
           id: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::ParticipantDeleteResponse
+
+        def bulk_delete: (
+          String id,
+          participants: ::Array[String],
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse
 
         def add: (
           String id,
@@ -154,6 +162,35 @@ module GrowsurfRuby
           id: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::ParticipantCancelDelayedReferralResponse
+
+        def email: (
+          String participant_id_or_email,
+          id: String,
+          ?body: String,
+          ?email_type: String,
+          ?preheader: String,
+          ?subject: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantEmailResponse
+
+        def list_activity_logs: (
+          String participant_id_or_email,
+          id: String,
+          ?limit: Integer,
+          ?offset: Integer,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantActivityLogsResponse
+
+        def retrieve_analytics: (
+          String participant_id_or_email,
+          id: String,
+          ?days: Integer,
+          ?end_date: Integer,
+          ?include: :series,
+          ?interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
+          ?start_date: Integer,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse
 
         def initialize: (client: GrowsurfRuby::Client) -> void
       end

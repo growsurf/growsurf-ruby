@@ -1,0 +1,30 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_bulk_delete_params =
+        { id: String, participants: ::Array[String] }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantBulkDeleteParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participants: ::Array[String]
+
+        def initialize: (
+          id: String,
+          participants: ::Array[String],
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participants: ::Array[String],
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end
