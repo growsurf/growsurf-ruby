@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/growsurf/growsurf-ruby/compare/v1.1.0...v1.1.1) (2026-07-09)
+
+
+### Bug Fixes
+
+* remove referral screenshot REST surface ([7d543f7](https://github.com/growsurf/growsurf-ruby/commit/7d543f7a3dfa1db1f3d0ce5c556d897945d844b1))
+
 ## [1.1.0](https://github.com/growsurf/growsurf-ruby/compare/v1.0.0...v1.1.0) (2026-07-08)
 
 
