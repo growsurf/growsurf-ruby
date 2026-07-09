@@ -41,7 +41,5 @@ module GrowsurfRuby
 
   class ReferralList = GrowsurfRuby::Models::ReferralList
 
-  class ReferralFlowScreenshotsResponse = GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
-
   class RewardTaxValuation = GrowsurfRuby::Models::RewardTaxValuation
 end

@@ -163,25 +163,6 @@ module GrowsurfRuby
         )
       end
 
-      # Captures two preview screenshots for the program: the authenticated referrer
-      # view and the referred-friend view.
-      #
-      # @overload get_referral_flow_screenshots(id, request_options: {})
-      #
-      # @param id [String] GrowSurf program ID.
-      #
-      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
-      #
-      # @return [GrowsurfRuby::Models::ReferralFlowScreenshotsResponse]
-      def get_referral_flow_screenshots(id, params = {})
-        @client.request(
-          method: :get,
-          path: ["campaign/%1$s/referral-flow-screenshots", id],
-          model: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse,
-          options: params[:request_options]
-        )
-      end
-
       # Some parameter documentations has been truncated, see
       # {GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams} for more
       # details.

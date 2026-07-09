@@ -82,7 +82,5 @@ module GrowsurfRuby
 
   ReferralList = GrowsurfRuby::Models::ReferralList
 
-  ReferralFlowScreenshotsResponse = GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
-
   RewardTaxValuation = GrowsurfRuby::Models::RewardTaxValuation
 end

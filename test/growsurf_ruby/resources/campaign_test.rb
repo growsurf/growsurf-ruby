@@ -142,24 +142,6 @@ class GrowsurfRuby::Test::Resources::CampaignTest < GrowsurfRuby::Test::Resource
     end
   end
 
-  def test_get_referral_flow_screenshots
-    skip("Mock server tests are disabled")
-
-    response = @growsurf.campaign.get_referral_flow_screenshots("id")
-
-    assert_pattern do
-      response => GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
-    end
-
-    assert_pattern do
-      response => {
-        referrer: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
-        referred_friend: GrowsurfRuby::Models::ReferralFlowScreenshotsResponse::ReferralFlowScreenshot,
-        generated_at: Integer
-      }
-    end
-  end
-
   def test_list_commissions
     skip("Mock server tests are disabled")
 

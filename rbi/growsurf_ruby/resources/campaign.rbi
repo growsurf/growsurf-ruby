@@ -135,21 +135,6 @@ module GrowsurfRuby
       )
       end
 
-      # Captures two preview screenshots for the program: the authenticated referrer
-      # view and the referred-friend view.
-      sig do
-        params(
-          id: String,
-          request_options: GrowsurfRuby::RequestOptions::OrHash
-        ).returns(GrowsurfRuby::Models::ReferralFlowScreenshotsResponse)
-      end
-      def get_referral_flow_screenshots(
-        # GrowSurf program ID.
-        id,
-        request_options: {}
-      )
-      end
-
       # Creates or returns a participant using the same input behavior as Add
       # Participant, then returns a participant-scoped token for GrowSurf mobile SDK
       # participant endpoints. Use this endpoint from your backend after your mobile app

@@ -52,11 +52,6 @@ module GrowsurfRuby
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::CampaignAPI
 
-      def get_referral_flow_screenshots: (
-        String id,
-        ?request_options: GrowsurfRuby::request_opts
-      ) -> GrowsurfRuby::Models::ReferralFlowScreenshotsResponse
-
       def create_mobile_participant_token: (
         String id,
         email: String,
