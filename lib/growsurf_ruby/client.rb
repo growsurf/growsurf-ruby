@@ -84,6 +84,7 @@ module GrowsurfRuby
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
+        idempotency_header: "Idempotency-Key",
         headers: headers
       )
 

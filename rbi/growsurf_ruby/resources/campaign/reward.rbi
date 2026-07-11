@@ -23,7 +23,8 @@ module GrowsurfRuby
         )
         end
 
-        # Approves a manually approved reward earned by a participant.
+        # Approves a manually approved reward earned by a participant. Requires
+        # `reward:write`. Passing `fulfill: true` also requires `reward:fulfill`.
         sig do
           params(
             reward_id: String,
@@ -43,7 +44,7 @@ module GrowsurfRuby
         )
         end
 
-        # Marks an approved participant reward as fulfilled.
+        # Marks an approved participant reward as fulfilled. Requires `reward:fulfill`.
         sig do
           params(
             reward_id: String,

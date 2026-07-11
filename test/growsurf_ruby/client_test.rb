@@ -151,6 +151,23 @@ class GrowsurfRubyTest < Minitest::Test
     end
   end
 
+  def test_api_key_rotation_has_a_retry_stable_idempotency_key
+    stub_request(:post, "http://localhost/account/api-key").to_return_json(
+      status: 200,
+      body: {apiKey: "sk_api_0123456789abcdef0123456789abcdef_newsecret"}
+    )
+    growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: "My API Key")
+
+    growsurf.account.rotate_api_key
+
+    recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
+    assert_equal("/account/api-key", recorded.uri.path)
+    assert_match(
+      /^stainless-ruby-retry-[0-9a-f-]{36}$/,
+      recorded.headers.transform_keys(&:downcase).fetch("idempotency-key")
+    )
+  end
+
   def test_omit_retry_count_header
     stub_request(:get, "http://localhost/campaigns").to_return_json(status: 500, body: {})
 

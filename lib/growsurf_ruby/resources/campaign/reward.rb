@@ -33,7 +33,8 @@ module GrowsurfRuby
           )
         end
 
-        # Approves a manually approved reward earned by a participant.
+        # Approves a manually approved reward earned by a participant. Requires
+        # `reward:write`. Passing `fulfill: true` also requires `reward:fulfill`.
         #
         # @overload approve(reward_id, id:, fulfill: nil, request_options: {})
         #
@@ -63,7 +64,7 @@ module GrowsurfRuby
           )
         end
 
-        # Marks an approved participant reward as fulfilled.
+        # Marks an approved participant reward as fulfilled. Requires `reward:fulfill`.
         #
         # @overload fulfill(reward_id, id:, request_options: {})
         #
