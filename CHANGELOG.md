@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/growsurf/growsurf-ruby/compare/v1.1.1...v1.1.2) (2026-07-11)
+
+
+### Bug Fixes
+
+* support retry-safe API key rotation ([939cd05](https://github.com/growsurf/growsurf-ruby/commit/939cd054446d85e411652ae77d37d4351c1ad6ab))
+
 ## [1.1.1](https://github.com/growsurf/growsurf-ruby/compare/v1.1.0...v1.1.1) (2026-07-09)
 
 
