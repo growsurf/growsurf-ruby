@@ -1,0 +1,31 @@
+module GrowsurfRuby
+  module Models
+    type team_resend_owner_verification_email_response =
+      {
+        status: GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::status,
+        success: bool
+      }
+
+    class TeamResendOwnerVerificationEmailResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor status: GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::status
+      attr_accessor success: bool
+
+      def initialize: (
+        status: GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::status,
+        success: bool
+      ) -> void
+
+      def to_hash: -> GrowsurfRuby::Models::team_resend_owner_verification_email_response
+
+      type status = :SENT
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        SENT: :SENT
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::status]
+      end
+    end
+  end
+end

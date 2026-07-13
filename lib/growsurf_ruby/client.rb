@@ -22,6 +22,9 @@ module GrowsurfRuby
     # @return [GrowsurfRuby::Resources::Account]
     attr_reader :account
 
+    # @return [GrowsurfRuby::Resources::Team]
+    attr_reader :team
+
     # @return [GrowsurfRuby::Resources::Campaign]
     attr_reader :campaign
 
@@ -59,10 +62,6 @@ module GrowsurfRuby
     )
       base_url ||= "https://api.growsurf.com/v2"
 
-      if api_key.nil?
-        raise ArgumentError.new("api_key is required, and can be set via environ: \"GROWSURF_API_KEY\"")
-      end
-
       headers = {}
       custom_headers_env = ENV["GROWSURF_CUSTOM_HEADERS"]
       unless custom_headers_env.nil?
@@ -76,7 +75,7 @@ module GrowsurfRuby
         headers = parsed.merge(headers)
       end
 
-      @api_key = api_key.to_s
+      @api_key = api_key&.to_s
 
       super(
         base_url: base_url,
@@ -89,6 +88,7 @@ module GrowsurfRuby
       )
 
       @account = GrowsurfRuby::Resources::Account.new(client: self)
+      @team = GrowsurfRuby::Resources::Team.new(client: self)
       @campaign = GrowsurfRuby::Resources::Campaign.new(client: self)
     end
   end

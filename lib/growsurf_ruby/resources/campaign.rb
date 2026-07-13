@@ -76,8 +76,8 @@ module GrowsurfRuby
         )
       end
 
-      # Creates a program. Only `type` is required; everything else is
-      # server-defaulted. Editor-tab configuration (design, emails, options,
+      # Creates a program owned by the API key's bound team. Only `type` is required;
+      # everything else is server-defaulted. Editor-tab configuration (design, emails, options,
       # installation) is not accepted here — configure it via the config sub-resources
       # (e.g. `campaign.options.update`) after the program is created.
       #

@@ -1,0 +1,28 @@
+module GrowsurfRuby
+  module Resources
+    class Team
+      def retrieve: (
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::Team
+
+      def update: (
+        name: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::Team
+
+      def rotate_api_key: (
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::TeamRotateAPIKeyResponse
+
+      def request_verification: (
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::Team
+
+      def resend_owner_verification_email: (
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse
+
+      def initialize: (client: GrowsurfRuby::Client) -> void
+    end
+  end
+end

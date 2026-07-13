@@ -2,18 +2,18 @@
 
 module GrowsurfRuby
   module Models
-    class AccountResendVerificationEmailResponse < GrowsurfRuby::Internal::Type::BaseModel
+    class TeamResendOwnerVerificationEmailResponse < GrowsurfRuby::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
-            GrowsurfRuby::Models::AccountResendVerificationEmailResponse,
+            GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse,
             GrowsurfRuby::Internal::AnyHash
           )
         end
 
       sig do
         returns(
-          GrowsurfRuby::Models::AccountResendVerificationEmailResponse::Status::TaggedSymbol
+          GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::Status::TaggedSymbol
         )
       end
       attr_accessor :status
@@ -24,7 +24,7 @@ module GrowsurfRuby
       sig do
         params(
           status:
-            GrowsurfRuby::Models::AccountResendVerificationEmailResponse::Status::OrSymbol,
+            GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::Status::OrSymbol,
           success: T::Boolean
         ).returns(T.attached_class)
       end
@@ -35,7 +35,7 @@ module GrowsurfRuby
         override.returns(
           {
             status:
-              GrowsurfRuby::Models::AccountResendVerificationEmailResponse::Status::TaggedSymbol,
+              GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::Status::TaggedSymbol,
             success: T::Boolean
           }
         )
@@ -50,24 +50,14 @@ module GrowsurfRuby
           T.type_alias do
             T.all(
               Symbol,
-              GrowsurfRuby::Models::AccountResendVerificationEmailResponse::Status
+              GrowsurfRuby::Models::TeamResendOwnerVerificationEmailResponse::Status
             )
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        SENT =
-          T.let(
-            :SENT,
-            GrowsurfRuby::Models::AccountResendVerificationEmailResponse::Status::TaggedSymbol
-          )
+        SENT = T.let(:SENT, TaggedSymbol)
 
-        sig do
-          override.returns(
-            T::Array[
-              GrowsurfRuby::Models::AccountResendVerificationEmailResponse::Status::TaggedSymbol
-            ]
-          )
-        end
+        sig { override.returns(T::Array[TaggedSymbol]) }
         def self.values
         end
       end

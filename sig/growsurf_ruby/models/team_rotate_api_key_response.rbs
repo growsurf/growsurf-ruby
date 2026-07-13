@@ -1,8 +1,8 @@
 module GrowsurfRuby
   module Models
-    type account_rotate_api_key_response = { api_key: String }
+    type team_rotate_api_key_response = { api_key: String }
 
-    class AccountRotateAPIKeyResponse < GrowsurfRuby::Internal::Type::BaseModel
+    class TeamRotateAPIKeyResponse < GrowsurfRuby::Internal::Type::BaseModel
       attr_accessor api_key: String
 
       def initialize: (api_key: String) -> void

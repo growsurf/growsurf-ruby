@@ -1,0 +1,23 @@
+module GrowsurfRuby
+  module Models
+    type team_update_params =
+      { name: String } & GrowsurfRuby::Internal::Type::request_parameters
+
+    class TeamUpdateParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor name: String
+
+      def initialize: (
+        name: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+    end
+  end
+end

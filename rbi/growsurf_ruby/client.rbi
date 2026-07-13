@@ -11,11 +11,14 @@ module GrowsurfRuby
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
     # GrowSurf REST API key supplied as `Authorization: Bearer <api_key>`.
-    sig { returns(String) }
+    sig { returns(T.nilable(String)) }
     attr_reader :api_key
 
     sig { returns(GrowsurfRuby::Resources::Account) }
     attr_reader :account
+
+    sig { returns(GrowsurfRuby::Resources::Team) }
+    attr_reader :team
 
     sig { returns(GrowsurfRuby::Resources::Campaign) }
     attr_reader :campaign

@@ -2,24 +2,20 @@
 
 module GrowsurfRuby
   module Models
-    class AccountRotateAPIKeyResponse < GrowsurfRuby::Internal::Type::BaseModel
+    class TeamRotateAPIKeyResponse < GrowsurfRuby::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
-            GrowsurfRuby::Models::AccountRotateAPIKeyResponse,
+            GrowsurfRuby::Models::TeamRotateAPIKeyResponse,
             GrowsurfRuby::Internal::AnyHash
           )
         end
 
-      # The new API key. Store it now; the key used for rotation stops working immediately.
       sig { returns(String) }
       attr_accessor :api_key
 
       sig { params(api_key: String).returns(T.attached_class) }
-      def self.new(
-        # The new API key. Store it now; the key used for rotation stops working immediately.
-        api_key:
-      )
+      def self.new(api_key:)
       end
 
       sig { override.returns({ api_key: String }) }

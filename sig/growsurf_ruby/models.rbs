@@ -1,9 +1,9 @@
 module GrowsurfRuby
-  class Account = GrowsurfRuby::Models::Account
-
   class AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
 
-  class AccountUpdateParams = GrowsurfRuby::Models::AccountUpdateParams
+  class Team = GrowsurfRuby::Models::Team
+
+  class TeamUpdateParams = GrowsurfRuby::Models::TeamUpdateParams
 
   module Campaign = GrowsurfRuby::Models::Campaign
 

@@ -1,0 +1,36 @@
+module GrowsurfRuby
+  module Models
+    type team =
+      {
+        name: String,
+        verification_status: GrowsurfRuby::Models::Team::verification_status,
+        verification_requested_at: Integer?
+      }
+
+    class Team < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor name: String
+      attr_accessor verification_status: GrowsurfRuby::Models::Team::verification_status
+      attr_accessor verification_requested_at: Integer?
+
+      def initialize: (
+        name: String,
+        verification_status: GrowsurfRuby::Models::Team::verification_status,
+        verification_requested_at: Integer?
+      ) -> void
+
+      def to_hash: -> GrowsurfRuby::Models::team
+
+      type verification_status = :NOT_REQUESTED | :REQUESTED | :VERIFIED
+
+      module VerificationStatus
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        NOT_REQUESTED: :NOT_REQUESTED
+        REQUESTED: :REQUESTED
+        VERIFIED: :VERIFIED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Team::verification_status]
+      end
+    end
+  end
+end

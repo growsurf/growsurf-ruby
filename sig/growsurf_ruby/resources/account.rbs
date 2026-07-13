@@ -9,29 +9,6 @@ module GrowsurfRuby
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::Models::AccountCreateResponse
 
-      def retrieve: (
-        ?request_options: GrowsurfRuby::request_opts
-      ) -> GrowsurfRuby::Account
-
-      def update: (
-        ?company: String,
-        ?first_name: String,
-        ?last_name: String,
-        ?request_options: GrowsurfRuby::request_opts
-      ) -> GrowsurfRuby::Account
-
-      def rotate_api_key: (
-        ?request_options: GrowsurfRuby::request_opts
-      ) -> GrowsurfRuby::Models::AccountRotateAPIKeyResponse
-
-      def request_verification: (
-        ?request_options: GrowsurfRuby::request_opts
-      ) -> GrowsurfRuby::Account
-
-      def resend_verification_email: (
-        ?request_options: GrowsurfRuby::request_opts
-      ) -> GrowsurfRuby::Models::AccountResendVerificationEmailResponse
-
       def initialize: (client: GrowsurfRuby::Client) -> void
     end
   end

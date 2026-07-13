@@ -21,10 +21,6 @@ module GrowsurfRuby
       sig { returns(String) }
       attr_accessor :email
 
-      # The new account's unique identifier.
-      sig { returns(String) }
-      attr_accessor :id
-
       # GrowSurf account verification state. `VERIFIED` is required before a program
       # can send participant emails.
       sig do
@@ -38,7 +34,6 @@ module GrowsurfRuby
         params(
           api_key: String,
           email: String,
-          id: String,
           verification_status:
             GrowsurfRuby::Models::AccountCreateResponse::VerificationStatus::OrSymbol
         ).returns(T.attached_class)
@@ -50,8 +45,6 @@ module GrowsurfRuby
         # dashboard.
         api_key:,
         email:,
-        # The new account's unique identifier.
-        id:,
         # GrowSurf account verification state. `VERIFIED` is required before a program
         # can send participant emails.
         verification_status:
@@ -63,7 +56,6 @@ module GrowsurfRuby
           {
             api_key: String,
             email: String,
-            id: String,
             verification_status:
               GrowsurfRuby::Models::AccountCreateResponse::VerificationStatus::TaggedSymbol
           }

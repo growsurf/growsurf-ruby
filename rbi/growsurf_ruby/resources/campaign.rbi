@@ -62,8 +62,9 @@ module GrowsurfRuby
       end
 
       # Creates a program. Only `type` is required; everything else is server-defaulted.
-      # Editor-tab configuration (design, emails, options, installation) is not accepted
-      # here — configure it via the config sub-resources after the program is created.
+      # The new program is owned by the API key's bound team. Editor-tab configuration
+      # (design, emails, options, installation) is not accepted here — configure it via
+      # the config sub-resources after the program is created.
       sig do
         params(
           type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,

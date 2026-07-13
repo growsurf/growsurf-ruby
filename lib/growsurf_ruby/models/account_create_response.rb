@@ -14,18 +14,13 @@ module GrowsurfRuby
       required :api_key, String, api_name: :apiKey
 
       # @!attribute email
+      #   Email address for the new account.
       #
       #   @return [String]
       required :email, String
 
-      # @!attribute id
-      #   The new account's unique identifier.
-      #
-      #   @return [String]
-      required :id, String
-
       # @!attribute verification_status
-      #   GrowSurf account verification state. `VERIFIED` is required before a program
+      #   GrowSurf team verification state. `VERIFIED` is required before a program
       #   can send participant emails.
       #
       #   @return [Symbol, GrowsurfRuby::Models::AccountCreateResponse::VerificationStatus]
@@ -33,7 +28,7 @@ module GrowsurfRuby
                enum: -> { GrowsurfRuby::Models::AccountCreateResponse::VerificationStatus },
                api_name: :verificationStatus
 
-      # @!method initialize(api_key:, email:, id:, verification_status:)
+      # @!method initialize(api_key:, email:, verification_status:)
       #   Some parameter documentations has been truncated, see
       #   {GrowsurfRuby::Models::AccountCreateResponse} for more details.
       #
@@ -41,11 +36,9 @@ module GrowsurfRuby
       #
       #   @param email [String]
       #
-      #   @param id [String] The new account's unique identifier.
-      #
-      #   @param verification_status [Symbol, GrowsurfRuby::Models::AccountCreateResponse::VerificationStatus] GrowSurf account verification state. `VERIFIED` is required before a program can
+      #   @param verification_status [Symbol, GrowsurfRuby::Models::AccountCreateResponse::VerificationStatus] GrowSurf team verification state. `VERIFIED` is required before a program can
 
-      # GrowSurf account verification state. `VERIFIED` is required before a program
+      # GrowSurf team verification state. `VERIFIED` is required before a program
       # can send participant emails.
       #
       # @see GrowsurfRuby::Models::AccountCreateResponse#verification_status

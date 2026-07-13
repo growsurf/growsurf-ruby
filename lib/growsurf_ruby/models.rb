@@ -39,11 +39,11 @@ module GrowsurfRuby
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
-  Account = GrowsurfRuby::Models::Account
-
   AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
 
-  AccountUpdateParams = GrowsurfRuby::Models::AccountUpdateParams
+  Team = GrowsurfRuby::Models::Team
+
+  TeamUpdateParams = GrowsurfRuby::Models::TeamUpdateParams
 
   Campaign = GrowsurfRuby::Models::Campaign
 

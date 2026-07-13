@@ -27,11 +27,35 @@ class GrowsurfRubyTest < Minitest::Test
     super
   end
 
-  def test_raises_on_missing_non_nullable_opts
-    e = assert_raises(ArgumentError) do
-      GrowsurfRuby::Client.new
+  def test_allows_a_keyless_client
+    original_api_key = ENV.delete("GROWSURF_API_KEY")
+
+    client = GrowsurfRuby::Client.new
+
+    assert_nil(client.api_key)
+  ensure
+    ENV["GROWSURF_API_KEY"] = original_api_key unless original_api_key.nil?
+  end
+
+  def test_account_creation_never_sends_authorization
+    stub_request(:post, "http://localhost/accounts").to_return_json(
+      status: 200,
+      body: {email: "richard@piedpiper.com", apiKey: "new_key", verificationStatus: "NOT_REQUESTED"}
+    )
+
+    [nil, "My API Key"].each do |api_key|
+      growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: api_key)
+      growsurf.account.create(email: "richard@piedpiper.com")
     end
-    assert_match(/is required/, e.message)
+
+    assert_requested(:post, "http://localhost/accounts", times: 2) do |request|
+      request.headers.keys.none? { _1.downcase == "authorization" }
+    end
+    recorded = WebMock::RequestRegistry.instance.requested_signatures.hash.keys
+    assert_equal(2, recorded.length)
+    recorded.each do |request|
+      refute_includes(request.headers.keys.map(&:downcase), "authorization")
+    end
   end
 
   def test_client_default_request_default_retry_attempts
@@ -152,16 +176,16 @@ class GrowsurfRubyTest < Minitest::Test
   end
 
   def test_api_key_rotation_has_a_retry_stable_idempotency_key
-    stub_request(:post, "http://localhost/account/api-key").to_return_json(
+    stub_request(:post, "http://localhost/api-key/rotate").to_return_json(
       status: 200,
       body: {apiKey: "sk_api_0123456789abcdef0123456789abcdef_newsecret"}
     )
     growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    growsurf.account.rotate_api_key
+    growsurf.team.rotate_api_key
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
-    assert_equal("/account/api-key", recorded.uri.path)
+    assert_equal("/api-key/rotate", recorded.uri.path)
     assert_match(
       /^stainless-ruby-retry-[0-9a-f-]{36}$/,
       recorded.headers.transform_keys(&:downcase).fetch("idempotency-key")

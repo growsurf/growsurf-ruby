@@ -1,11 +1,11 @@
 # typed: strong
 
 module GrowsurfRuby
-  Account = GrowsurfRuby::Models::Account
-
   AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
 
-  AccountUpdateParams = GrowsurfRuby::Models::AccountUpdateParams
+  Team = GrowsurfRuby::Models::Team
+
+  TeamUpdateParams = GrowsurfRuby::Models::TeamUpdateParams
 
   Campaign = GrowsurfRuby::Models::Campaign
 

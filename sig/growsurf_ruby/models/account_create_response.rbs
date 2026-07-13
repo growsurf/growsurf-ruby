@@ -4,7 +4,6 @@ module GrowsurfRuby
       {
         api_key: String,
         email: String,
-        id: String,
         verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
       }
 
@@ -13,21 +12,17 @@ module GrowsurfRuby
 
       attr_accessor email: String
 
-      attr_accessor id: String
-
       attr_accessor verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
 
       def initialize: (
         api_key: String,
         email: String,
-        id: String,
         verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
       ) -> void
 
       def to_hash: -> {
         api_key: String,
         email: String,
-        id: String,
         verification_status: GrowsurfRuby::Models::AccountCreateResponse::verification_status
       }
 
