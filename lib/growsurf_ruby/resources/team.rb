@@ -3,9 +3,7 @@
 module GrowsurfRuby
   module Resources
     class Team
-      # Retrieves the team bound to the API key or OAuth connection. A credential that
-      # can act across multiple teams cannot use this operation because it has no single
-      # Team resource.
+      # Retrieves the team bound to the API key or OAuth connection.
       #
       # @overload retrieve(request_options: {})
       #
