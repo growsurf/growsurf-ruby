@@ -5,7 +5,7 @@ module GrowsurfRuby
     class Campaign
       # Affiliate transaction, commission, and payout operations.
       class Commission
-        # Removes a pending participant commission.
+        # **Affiliate programs only.** Removes a pending participant commission.
         sig do
           params(
             commission_id: String,
@@ -22,7 +22,8 @@ module GrowsurfRuby
         )
         end
 
-        # Approves a pending participant commission so it can become eligible for payout.
+        # **Affiliate programs only.** Approves a pending participant commission so it can
+        # become eligible for payout.
         sig do
           params(
             commission_id: String,

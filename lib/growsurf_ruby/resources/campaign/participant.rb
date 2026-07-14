@@ -110,12 +110,12 @@ module GrowsurfRuby
         # {GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteParams} for more details.
         #
         # Deletes a list of participants from a program in one request. Each entry in
-        # `participants` is a GrowSurf participant ID or an email address (mixed lists
-        # are allowed). Up to `200` entries per request — chunk larger lists across
-        # multiple calls. The response reports a per-row `status` for every submitted
-        # entry, so a `200` can include rows that were `NOT_FOUND` or failed. Deletion
-        # is permanent and removes the participants' referrals, rewards, commissions,
-        # and payout records.
+        # `participants` is a GrowSurf participant ID or an email address (mixed lists are
+        # allowed). Up to `200` entries per request — chunk larger lists across multiple
+        # calls. The response reports a per-row `status` for every submitted entry, so a
+        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent
+        # and removes the participants' referrals, rewards, commissions, and payout
+        # records.
         #
         # @overload bulk_delete(id, participants:, request_options: {})
         #
@@ -183,7 +183,8 @@ module GrowsurfRuby
           )
         end
 
-        # Retrieves a paged list of commissions earned by a participant.
+        # **Affiliate programs only.** Retrieves a paged list of commissions earned by a
+        # participant.
         #
         # @overload list_commissions(participant_id_or_email, id:, limit: nil, next_id: nil, status: nil, request_options: {})
         #
@@ -218,7 +219,8 @@ module GrowsurfRuby
           )
         end
 
-        # Retrieves a paged list of payouts that belong to a participant.
+        # **Affiliate programs only.** Retrieves a paged list of payouts that belong to a
+        # participant.
         #
         # @overload list_payouts(participant_id_or_email, id:, limit: nil, next_id: nil, status: nil, request_options: {})
         #
@@ -339,15 +341,12 @@ module GrowsurfRuby
           )
         end
 
-        # Records a sale made by a referred customer and generates affiliate commissions
-        # for their referrer when applicable.
-        #
-        # At least one transaction identifier is required: one of +external_id+,
-        # +transaction_id+, +order_id+, +payment_id+, +invoice_id+, +payment_intent_id+,
-        # or +charge_id+. +customer_id+ and +subscription_id+ do not count, since they
-        # identify the customer or subscription rather than the specific transaction.
-        # Without an identifier, resending the same sale creates a duplicate commission
-        # and double-pays the referrer; the server rejects such requests with HTTP 400.
+        # **Affiliate programs only.** Records a sale made by a referred customer and
+        # generates affiliate commissions for their referrer when applicable. Requires at
+        # least one transaction identifier (externalId, transactionId, orderId, paymentId,
+        # invoiceId, paymentIntentId, or chargeId) so repeated requests can be
+        # de-duplicated — without one, a resent sale would create a second commission.
+        # Reuse the same identifier(s) when refunding.
         #
         # @overload record_transaction(participant_id_or_email, id:, currency:, gross_amount:, amount_cash_net: nil, amount_paid: nil, charge_id: nil, customer_id: nil, description: nil, external_id: nil, invoice_id: nil, invoice_subtotal_excluding_tax: nil, invoice_total: nil, invoice_total_excluding_tax: nil, net_amount: nil, order_id: nil, paid_at: nil, payment_id: nil, payment_intent_id: nil, subscription_id: nil, tax_amount: nil, total_tax_amount: nil, total_tax_amounts: nil, total_taxes: nil, transaction_id: nil, request_options: {})
         #
@@ -421,9 +420,12 @@ module GrowsurfRuby
           )
         end
 
-        # Records an amendment (refund, partial refund, refund cancellation, or
-        # chargeback) against a previously recorded transaction and reverses or adjusts
-        # the referrer's commission.
+        # **Affiliate programs only.** Records an amendment (refund, partial refund,
+        # refund cancellation, or chargeback) against a previously recorded transaction
+        # and reverses or adjusts the referrer's commission. The inverse of Record
+        # Affiliate Transaction. Identify the original transaction with the same
+        # identifier(s) you sent when recording it. Commissions already paid out to the
+        # affiliate are not clawed back; the amendment is recorded for tax reporting only.
         #
         # @overload refund_transaction(participant_id_or_email, id:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
         #
@@ -482,7 +484,7 @@ module GrowsurfRuby
         end
 
         # Sends email invites on behalf of a participant to a list of email addresses.
-        # Sending invites via the API requires a verified custom email domain on the
+        # Sending invites via the API requires a **verified custom email domain** on the
         # program; the request fails until one is verified.
         #
         # @overload send_invites(participant_id_or_email, id:, email_addresses:, message_text:, subject_text:, request_options: {})
@@ -522,7 +524,10 @@ module GrowsurfRuby
         # details.
         #
         # Triggers referral credit for an existing referred participant by GrowSurf
-        # participant ID or email address.
+        # participant ID or email address. Optionally pass `delayInDays` to hold the
+        # credit for a number of days before it is awarded (for example, to cover your own
+        # refund window). A delayed trigger can be cancelled before it is awarded with the
+        # Cancel delayed referral trigger request (DELETE on this same path).
         #
         # @overload trigger_referral(participant_id_or_email, id:, delay_in_days: nil, request_options: {})
         #
@@ -552,8 +557,11 @@ module GrowsurfRuby
           )
         end
 
-        # Cancels a pending delayed referral trigger for an existing referred participant
-        # by GrowSurf participant ID or email address.
+        # Cancels a pending delayed referral trigger for a participant (the companion to a
+        # delayed Trigger referral request). Use this to undo a scheduled referral credit
+        # before it is awarded, for example when a refund occurs inside your refund
+        # window. If the participant has no pending delayed trigger, `success` is returned
+        # as `false`.
         #
         # @overload cancel_delayed_referral(participant_id_or_email, id:, request_options: {})
         #
@@ -580,15 +588,14 @@ module GrowsurfRuby
           )
         end
 
-        # Sends an email to a participant. Provide EITHER `email_type` to trigger one of the
-        # program's configured email templates, OR `subject` + `body` for a free-form email.
-        # Free-form emails are sent with the same compliance handling (company name,
-        # postal address, and an unsubscribe link are added automatically, and unsubscribed
-        # participants are suppressed). Sending requires the team to be verified by
-        # GrowSurf. Requires a verified custom email domain on the program (set up
-        # in Campaign Editor > 3. Emails > Email Settings). Returns `400` until one is
-        # verified.
-        # The email is accepted for delivery.
+        # Sends an email to a participant. Provide EITHER `emailType` to trigger one of
+        # the program's configured email templates, OR `subject` + `body` for a free-form
+        # email. Free-form emails are sent with the same compliance handling (company
+        # name, postal address, and an unsubscribe link are added automatically, and
+        # unsubscribed participants are suppressed). Sending requires the team to be
+        # verified by GrowSurf. Requires a **verified custom email domain** on the program
+        # (which can be completed in *Campaign Editor > 3. Emails > Email Settings*).
+        # Returns `400` until one is verified. The email is accepted for delivery.
         #
         # @overload email(participant_id_or_email, id:, body: nil, email_type: nil, preheader: nil, subject: nil, request_options: {})
         #
@@ -624,7 +631,8 @@ module GrowsurfRuby
           )
         end
 
-        # Returns a participant's activity logs, most recent first (offset/limit paginated).
+        # Returns a participant's activity logs, most recent first (offset/limit
+        # paginated).
         #
         # @overload list_activity_logs(participant_id_or_email, id:, limit: nil, offset: nil, request_options: {})
         #
@@ -662,8 +670,9 @@ module GrowsurfRuby
         # details.
         #
         # Retrieves analytics for a single participant — all-time engagement counters,
-        # leaderboard ranks, and per-channel share counts (plus affiliate money metrics for
-        # affiliate programs). Useful for segmenting and re-engaging participants.
+        # leaderboard ranks, and per-channel share counts (plus affiliate money metrics
+        # for affiliate programs). Useful for segmenting and re-engaging participants.
+        # Pass `include=series` to also get this participant's own activity over time.
         #
         # @overload retrieve_analytics(participant_id_or_email, id:, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
         #

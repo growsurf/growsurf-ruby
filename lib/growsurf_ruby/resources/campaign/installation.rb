@@ -5,12 +5,9 @@ module GrowsurfRuby
     class Campaign
       class Installation
         # Retrieves a program's installation configuration — the same surface as the
-        # dashboard Program Editor's **Installation** tab (signup and mobile SDK
-        # installation settings).
-        #
-        # This is a nested object whose available fields depend on the program type. To
-        # see the full object with every field and its current value, `GET` this
-        # resource, then `PATCH` back only the fields you want to change.
+        # dashboard Program Editor's **Installation** tab (plus the Mobile SDK settings).
+        # Includes the referral trigger (referral programs only), signup tracking method,
+        # share URL and whitelist, custom-form signup settings, and mobile SDK settings.
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -29,12 +26,11 @@ module GrowsurfRuby
         end
 
         # Updates a program's installation configuration. Only the fields you send are
-        # changed; anything you leave out is untouched. Unknown fields, fields not
-        # available for the program type, and invalid values return a `400`.
-        #
-        # The request body is a partial {CampaignInstallation} object. To see the full
-        # object with every field and its current value, `GET` this resource, then
-        # `PATCH` back only the fields you want to change.
+        # changed; omitted fields are left untouched. `referralTrigger` is only available
+        # for referral programs. `mobile.publicKey` is read-only; if no key exists yet,
+        # enabling `mobile.isEnabled` creates one. Changing `shareUrl` re-resolves its
+        # redirect destinations, which may take a moment to complete. URLs must include an
+        # explicit `http://` or `https://` scheme.
         #
         # @overload update(id, body, request_options: {})
         #

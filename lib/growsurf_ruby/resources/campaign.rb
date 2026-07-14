@@ -76,10 +76,8 @@ module GrowsurfRuby
         )
       end
 
-      # Creates a program owned by the API key's bound team. Only `type` is required;
-      # everything else is server-defaulted. Editor-tab configuration (design, emails, options,
-      # installation) is not accepted here — configure it via the config sub-resources
-      # (e.g. `campaign.options.update`) after the program is created.
+      # Creates a new program, plus any optional program rewards. The new program is
+      # created in `DRAFT` status and owned by the API key's bound team.
       #
       # @overload create(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, name: nil, rewards: nil, request_options: {})
       #
@@ -111,11 +109,11 @@ module GrowsurfRuby
         )
       end
 
-      # Updates a program's identity and lifecycle. Only the fields you send are changed.
-      # `type`, `urlId`, and `currencyISO` are immutable. Editor-tab configuration (design, emails,
-      # options, installation) is edited via the dedicated config sub-resources
-      # (`campaign.design`, `campaign.emails`, `campaign.options`, `campaign.installation`),
-      # not here.
+      # Updates a program's identity and lifecycle. Only the fields you send are
+      # changed. `type`, `urlId`, and `currencyISO` are immutable. Editor-tab
+      # configuration (design, emails, options, installation) is edited via the
+      # dedicated config sub-resources, not here. The program cannot be deleted via this
+      # endpoint.
       #
       # @overload update(id, company_logo_image_url: nil, company_name: nil, name: nil, status: nil, request_options: {})
       #
@@ -145,7 +143,8 @@ module GrowsurfRuby
         )
       end
 
-      # Clones an existing program, returning the newly created program.
+      # Clones an existing program into a new `DRAFT` program. Integrations and
+      # credentials are not copied; active rewards are cloned.
       #
       # @overload clone(id, request_options: {})
       #
@@ -210,7 +209,8 @@ module GrowsurfRuby
         )
       end
 
-      # Retrieves a paged list of all participant commissions in an affiliate program.
+      # **Affiliate programs only.** Retrieves a paged list of all participant
+      # commissions in an affiliate program.
       #
       # @overload list_commissions(id, limit: nil, next_id: nil, status: nil, request_options: {})
       #
@@ -301,7 +301,8 @@ module GrowsurfRuby
         )
       end
 
-      # Retrieves a paged list of all participant payouts in an affiliate program.
+      # **Affiliate programs only.** Retrieves a paged list of all participant payouts
+      # in an affiliate program.
       #
       # @overload list_payouts(id, limit: nil, next_id: nil, status: nil, request_options: {})
       #
@@ -381,7 +382,9 @@ module GrowsurfRuby
       # Some parameter documentations has been truncated, see
       # {GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams} for more details.
       #
-      # Retrieves analytics for a program.
+      # Retrieves analytics for a program. Pass `interval` to also get a time-series
+      # (`series`) alongside the totals, and `include` to add previous-period totals,
+      # status breakdowns, or derived rates — useful for detecting trends over time.
       #
       # @overload retrieve_analytics(id, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
       #

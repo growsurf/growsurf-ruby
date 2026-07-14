@@ -5,7 +5,7 @@ module GrowsurfRuby
     class Campaign
       # Affiliate transaction, commission, and payout operations.
       class Commission
-        # Removes a pending participant commission.
+        # **Affiliate programs only.** Removes a pending participant commission.
         #
         # @overload delete(commission_id, id:, request_options: {})
         #
@@ -32,7 +32,8 @@ module GrowsurfRuby
           )
         end
 
-        # Approves a pending participant commission so it can become eligible for payout.
+        # **Affiliate programs only.** Approves a pending participant commission so it can
+        # become eligible for payout.
         #
         # @overload approve(commission_id, id:, request_options: {})
         #

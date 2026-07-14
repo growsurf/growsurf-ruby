@@ -61,10 +61,8 @@ module GrowsurfRuby
       def list(request_options: {})
       end
 
-      # Creates a program. Only `type` is required; everything else is server-defaulted.
-      # The new program is owned by the API key's bound team. Editor-tab configuration
-      # (design, emails, options, installation) is not accepted here — configure it via
-      # the config sub-resources after the program is created.
+      # Creates a new program, plus any optional program rewards. The new program is
+      # created in `DRAFT` status and owned by the API key's bound team.
       sig do
         params(
           type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,
@@ -92,10 +90,11 @@ module GrowsurfRuby
       )
       end
 
-      # Updates a program's identity and lifecycle. Only the fields you send are changed.
-      # `type`, `urlId`, and `currencyISO` are immutable. Editor-tab configuration (design, emails,
-      # options, installation) is edited via the dedicated config sub-resources, not
-      # here.
+      # Updates a program's identity and lifecycle. Only the fields you send are
+      # changed. `type`, `urlId`, and `currencyISO` are immutable. Editor-tab
+      # configuration (design, emails, options, installation) is edited via the
+      # dedicated config sub-resources, not here. The program cannot be deleted via this
+      # endpoint.
       sig do
         params(
           id: String,
@@ -122,7 +121,8 @@ module GrowsurfRuby
       )
       end
 
-      # Clones an existing program, returning the newly created program.
+      # Clones an existing program into a new `DRAFT` program. Integrations and
+      # credentials are not copied; active rewards are cloned.
       sig do
         params(
           id: String,
@@ -179,7 +179,8 @@ module GrowsurfRuby
       )
       end
 
-      # Retrieves a paged list of all participant commissions in an affiliate program.
+      # **Affiliate programs only.** Retrieves a paged list of all participant
+      # commissions in an affiliate program.
       sig do
         params(
           id: String,
@@ -249,7 +250,8 @@ module GrowsurfRuby
       )
       end
 
-      # Retrieves a paged list of all participant payouts in an affiliate program.
+      # **Affiliate programs only.** Retrieves a paged list of all participant payouts
+      # in an affiliate program.
       sig do
         params(
           id: String,
@@ -313,7 +315,9 @@ module GrowsurfRuby
       )
       end
 
-      # Retrieves analytics for a program.
+      # Retrieves analytics for a program. Pass `interval` to also get a time-series
+      # (`series`) alongside the totals, and `include` to add previous-period totals,
+      # status breakdowns, or derived rates — useful for detecting trends over time.
       sig do
         params(
           id: String,

@@ -4,12 +4,11 @@ module GrowsurfRuby
   module Resources
     class Campaign
       class Options
-        # Retrieves a program's options configuration — the same surface as the dashboard
-        # Program Editor's **Options** tab (fraud/reCAPTCHA, tax documentation,
-        # notification emails, and other program settings).
-        #
-        # To see the full object with every field and its current value, `GET` this
-        # resource, then `PATCH` back only the fields you want to change.
+        # Retrieves a program's options — the same surface as the dashboard Program
+        # Editor's **Options** tab. Includes reward/fraud approval, anti-fraud lists +
+        # toggles, referral cookie/credit windows, reCAPTCHA, payout threshold + tax
+        # settings (affiliate only), and notification-email settings.
+        # `fraud.recaptcha.secretKey` is never returned.
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -27,13 +26,12 @@ module GrowsurfRuby
           )
         end
 
-        # Updates a program's options configuration. Only the fields you send are changed;
-        # anything you leave out is untouched. Unknown fields and invalid values return a
-        # `400`.
-        #
-        # The request body is a partial {CampaignOptions} object. To see the full object
-        # with every field and its current value, `GET` this resource, then `PATCH` back
-        # only the fields you want to change.
+        # Updates a program's options. Only the fields you send are changed. Some fields
+        # are program-type specific (`requireManualRewardApproval`/`autoFulfillRewards`
+        # are referral-only; `payoutThreshold`/`taxDocumentation` are affiliate-only, and
+        # affiliate programs require `requireParticipantAuth: true`).
+        # `fraud.recaptcha.secretKey` is write-only. `referralCreditWindowDays: null`
+        # means "never expires".
         #
         # @overload update(id, body, request_options: {})
         #

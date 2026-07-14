@@ -4,7 +4,9 @@ module GrowsurfRuby
   module Resources
     class Campaign
       class Rewards
-        # Retrieves the rewards configured for a program.
+        # Retrieves the list of a program's configured rewards (`CampaignReward`s) — the
+        # same set embedded in the `rewards` array of the campaign response. Delete a
+        # reward with `DELETE /campaign/{id}/reward-configs/{campaignRewardId}`.
         #
         # @overload list(id, request_options: {})
         #
@@ -22,8 +24,11 @@ module GrowsurfRuby
           )
         end
 
-        # Creates a reward for a program. The reward `type` must be compatible with the
-        # program type.
+        # Creates a new campaign reward (`CampaignReward`) with a GrowSurf-assigned ID.
+        # The reward type must be compatible with the program type (affiliate programs
+        # support only `AFFILIATE` rewards; referral programs support all other types).
+        # Enabling an active reward of a type automatically enables that reward type on
+        # the program.
         #
         # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
@@ -87,8 +92,11 @@ module GrowsurfRuby
           )
         end
 
-        # Updates an existing campaign reward. Only the fields you send are changed;
-        # `type` is immutable and must not be supplied.
+        # Updates an existing campaign reward (`CampaignReward`). The reward `type` is
+        # immutable and cannot be changed. When the update replaces `metadata`, renamed
+        # keys automatically rewrite any `{{campaignReward[…]}}` references in campaign
+        # copy; removing a key that campaign copy still references returns a `409` listing
+        # the referencing fields.
         #
         # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
@@ -156,7 +164,11 @@ module GrowsurfRuby
           )
         end
 
-        # Deletes a campaign reward.
+        # Deletes a campaign reward (`CampaignReward`). The reward is deactivated, removed
+        # from the program's reward set, and any connected upfront-discount coupons are
+        # cleaned up. If campaign copy still references any of the reward's metadata keys
+        # via `{{campaignReward[…]}}` tokens, the delete returns a `409` listing the
+        # referencing fields — update those fields first.
         #
         # @overload delete(campaign_reward_id, id:, request_options: {})
         #
