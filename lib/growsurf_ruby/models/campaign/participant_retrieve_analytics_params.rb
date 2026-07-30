@@ -32,13 +32,19 @@ module GrowsurfRuby
         optional :end_date, Integer
 
         # @!attribute include
-        #   Set to `series` to also return this participant's own activity per period.
+        #   Comma-separated optional data. `series` returns this participant's own activity
+        #   per period; `email` returns `sent`, `delivered`, `opened`, `clicked`, `bounced`,
+        #   `spamComplaints`, and per-email-type metrics attributed to the participant for
+        #   the requested analytics window (including invitations they sent). Request both
+        #   in either order to add email counts to every series item for emails sent during
+        #   that period. Only documented tokens are accepted; an unknown token returns `400`.
         #
-        #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Include, nil]
-        optional :include, enum: -> { GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Include }
+        #   @return [String, nil]
+        optional :include, String
 
         # @!attribute interval
-        #   Bucket size for the `series` (only used with `include=series`). Defaults to `day`.
+        #   Bucket size for the `series` (only used when `include` contains `series`).
+        #   Defaults to `day`.
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval, nil]
         optional :interval, enum: -> { GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Interval }
@@ -63,25 +69,16 @@ module GrowsurfRuby
         #
         #   @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
         #
-        #   @param include [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Include] Set to `series` to also return this participant's own activity per period.
+        #   @param include [String] Comma-separated optional data. `series` returns this participant's own activity
         #
-        #   @param interval [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval] Bucket size for the `series` (only used with `include=series`). Defaults to `day`.
+        #   @param interval [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval] Bucket size for the `series` (only used when `include` contains `series`).
         #
         #   @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
         #
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 
-        # Set to `series` to also return this participant's own activity per period.
-        module Include
-          extend GrowsurfRuby::Internal::Type::Enum
-
-          SERIES = :series
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-
-        # Bucket size for the `series` (only used with `include=series`). Defaults to `day`.
+        # Bucket size for the `series` (only used when `include` contains `series`).
+        # Defaults to `day`.
         module Interval
           extend GrowsurfRuby::Internal::Type::Enum
 

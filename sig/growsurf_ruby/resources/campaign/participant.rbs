@@ -11,12 +11,12 @@ module GrowsurfRuby
         def update: (
           String participant_id_or_email,
           id: String,
+          ?affiliate_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status,
           ?email: String,
           ?first_name: String,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
           ?notes: String,
-          ?paypal_email: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
           ?referred_by: String,
           ?unsubscribed: bool,
@@ -42,6 +42,7 @@ module GrowsurfRuby
           ?fingerprint: String,
           ?first_name: String,
           ?ip_address: String,
+          ?is_affiliate: bool,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
           ?mobile_instance_id: String,
@@ -186,11 +187,24 @@ module GrowsurfRuby
           id: String,
           ?days: Integer,
           ?end_date: Integer,
-          ?include: :series,
+          ?include: String,
           ?interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
           ?start_date: Integer,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse
+
+        def get_payout_destination: (
+          String participant_id_or_email,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse
+
+        def request_payout_destination_confirmation: (
+          String participant_id_or_email,
+          id: String,
+          provider: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::provider,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse
 
         def initialize: (client: GrowsurfRuby::Client) -> void
       end

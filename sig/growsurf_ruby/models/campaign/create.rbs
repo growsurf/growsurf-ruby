@@ -7,6 +7,7 @@ module GrowsurfRuby
           fingerprint: String,
           first_name: String,
           ip_address: String,
+          is_affiliate: bool,
           last_name: String,
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String,
@@ -28,6 +29,10 @@ module GrowsurfRuby
         attr_reader ip_address: String?
 
         def ip_address=: (String) -> String
+
+        attr_reader is_affiliate: bool?
+
+        def is_affiliate=: (bool) -> bool
 
         attr_reader last_name: String?
 
@@ -56,6 +61,7 @@ module GrowsurfRuby
           ?fingerprint: String,
           ?first_name: String,
           ?ip_address: String,
+          ?is_affiliate: bool,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
           ?mobile_instance_id: String,
@@ -68,6 +74,7 @@ module GrowsurfRuby
           fingerprint: String,
           first_name: String,
           ip_address: String,
+          is_affiliate: bool,
           last_name: String,
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String,

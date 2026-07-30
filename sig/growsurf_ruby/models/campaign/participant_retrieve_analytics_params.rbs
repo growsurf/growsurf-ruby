@@ -7,7 +7,7 @@ module GrowsurfRuby
           participant_id_or_email: String,
           days: Integer,
           end_date: Integer,
-          include: :series,
+          include: String,
           interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
           start_date: Integer
         }
@@ -29,9 +29,9 @@ module GrowsurfRuby
 
         def end_date=: (Integer) -> Integer
 
-        attr_reader include: :series?
+        attr_reader include: String?
 
-        def include=: (:series) -> :series
+        def include=: (String) -> String
 
         attr_reader interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval?
 
@@ -48,7 +48,7 @@ module GrowsurfRuby
           participant_id_or_email: String,
           ?days: Integer,
           ?end_date: Integer,
-          ?include: :series,
+          ?include: String,
           ?interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
           ?start_date: Integer,
           ?request_options: GrowsurfRuby::request_opts
@@ -59,19 +59,11 @@ module GrowsurfRuby
           participant_id_or_email: String,
           days: Integer,
           end_date: Integer,
-          include: :series,
+          include: String,
           interval: GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::interval,
           start_date: Integer,
           request_options: GrowsurfRuby::RequestOptions
         }
-
-        module Include
-          extend GrowsurfRuby::Internal::Type::Enum
-
-          SERIES: :series
-
-          def self?.values: -> ::Array[:series]
-        end
 
         type interval = :day | :week | :month
 

@@ -21,6 +21,26 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :participant_id_or_email
 
+        # Affiliate programs only. Sets the affiliate status. `APPROVED` also enrolls a
+        # participant who is not yet an affiliate. `SUSPENDED` and `BANNED` are rejected
+        # for non-affiliates.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol
+            )
+          )
+        end
+        attr_reader :affiliate_status
+
+        sig do
+          params(
+            affiliate_status:
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol
+          ).void
+        end
+        attr_writer :affiliate_status
+
         sig { returns(T.nilable(String)) }
         attr_reader :email
 
@@ -53,13 +73,6 @@ module GrowsurfRuby
 
         sig { params(notes: String).void }
         attr_writer :notes
-
-        # The participant's PayPal email address, used for affiliate payouts.
-        sig { returns(T.nilable(String)) }
-        attr_reader :paypal_email
-
-        sig { params(paypal_email: String).void }
-        attr_writer :paypal_email
 
         sig do
           returns(
@@ -100,12 +113,13 @@ module GrowsurfRuby
           params(
             id: String,
             participant_id_or_email: String,
+            affiliate_status:
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             notes: String,
-            paypal_email: String,
             referral_status:
               GrowsurfRuby::Campaign::ParticipantUpdateParams::ReferralStatus::OrSymbol,
             referred_by: String,
@@ -117,6 +131,10 @@ module GrowsurfRuby
         def self.new(
           id:,
           participant_id_or_email:,
+          # Affiliate programs only. Sets the affiliate status. `APPROVED` also enrolls a
+          # participant who is not yet an affiliate. `SUSPENDED` and `BANNED` are rejected
+          # for non-affiliates.
+          affiliate_status: nil,
           email: nil,
           first_name: nil,
           last_name: nil,
@@ -125,8 +143,6 @@ module GrowsurfRuby
           # Freeform internal notes about the participant (internal only, never exposed to
           # participants).
           notes: nil,
-          # The participant's PayPal email address, used for affiliate payouts.
-          paypal_email: nil,
           referral_status: nil,
           referred_by: nil,
           unsubscribed: nil,
@@ -140,12 +156,13 @@ module GrowsurfRuby
             {
               id: String,
               participant_id_or_email: String,
+              affiliate_status:
+                GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
               email: String,
               first_name: String,
               last_name: String,
               metadata: T::Hash[Symbol, T.anything],
               notes: String,
-              paypal_email: String,
               referral_status:
                 GrowsurfRuby::Campaign::ParticipantUpdateParams::ReferralStatus::OrSymbol,
               referred_by: String,
@@ -156,6 +173,45 @@ module GrowsurfRuby
           )
         end
         def to_hash
+        end
+
+        module AffiliateStatus
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          APPROVED =
+            T.let(
+              :APPROVED,
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::TaggedSymbol
+            )
+          SUSPENDED =
+            T.let(
+              :SUSPENDED,
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::TaggedSymbol
+            )
+          BANNED =
+            T.let(
+              :BANNED,
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
 
         module ReferralStatus

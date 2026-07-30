@@ -1,0 +1,79 @@
+module GrowsurfRuby
+  module Models
+    type campaign_review_affiliate_application_params =
+      {
+        id: String,
+        application_id: String,
+        allow_immediate_reapply: bool,
+        reapply_allowed_at: Integer,
+        rejection_reason: String,
+        review_note: String,
+        status: GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status
+      }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignReviewAffiliateApplicationParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor application_id: String
+
+      attr_reader allow_immediate_reapply: bool?
+
+      def allow_immediate_reapply=: (bool) -> bool
+
+      attr_reader reapply_allowed_at: Integer?
+
+      def reapply_allowed_at=: (Integer) -> Integer
+
+      attr_reader rejection_reason: String?
+
+      def rejection_reason=: (String) -> String
+
+      attr_reader review_note: String?
+
+      def review_note=: (String) -> String
+
+      attr_reader status: GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status?
+
+      def status=: (
+        GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status
+      ) -> GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status
+
+      def initialize: (
+        id: String,
+        application_id: String,
+        ?allow_immediate_reapply: bool,
+        ?reapply_allowed_at: Integer,
+        ?rejection_reason: String,
+        ?review_note: String,
+        ?status: GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        application_id: String,
+        allow_immediate_reapply: bool,
+        reapply_allowed_at: Integer,
+        rejection_reason: String,
+        review_note: String,
+        status: GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+
+      type status = :APPROVED | :DENIED
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        APPROVED: :APPROVED
+        DENIED: :DENIED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::status]
+      end
+    end
+  end
+end

@@ -24,6 +24,15 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :ip_address, String, api_name: :ipAddress
 
+        # @!attribute is_affiliate
+        #   Affiliate programs only. Controls affiliate enrollment for a new participant.
+        #   `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates
+        #   a non-affiliate without `affiliateStatus`. Existing participants are returned
+        #   unchanged.
+        #
+        #   @return [Boolean, nil]
+        optional :is_affiliate, GrowsurfRuby::Internal::Type::Boolean, api_name: :isAffiliate
+
         # @!attribute last_name
         #
         #   @return [String, nil]
@@ -60,7 +69,7 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :referred_by, String, api_name: :referredBy
 
-        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil)
+        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::Create} for more details.
         #
@@ -71,6 +80,8 @@ module GrowsurfRuby
         #   @param first_name [String]
         #
         #   @param ip_address [String]
+        #
+        #   @param is_affiliate [Boolean] Affiliate programs only. Controls affiliate enrollment for a new participant.
         #
         #   @param last_name [String]
         #

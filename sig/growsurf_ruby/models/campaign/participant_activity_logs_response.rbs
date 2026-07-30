@@ -27,12 +27,7 @@ module GrowsurfRuby
           offset: Integer?
         }
 
-        type activity_log =
-          {
-            created_at: Integer,
-            text: String,
-            type: String
-          }
+        type activity_log = { created_at: Integer, text: String, type: String }
 
         class ActivityLog < GrowsurfRuby::Internal::Type::BaseModel
           attr_accessor created_at: Integer
@@ -47,11 +42,7 @@ module GrowsurfRuby
             type: String
           ) -> void
 
-          def to_hash: -> {
-            created_at: Integer,
-            text: String,
-            type: String
-          }
+          def to_hash: -> { created_at: Integer, text: String, type: String }
         end
       end
     end

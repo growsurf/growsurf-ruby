@@ -3,6 +3,35 @@
 require_relative "../../test_helper"
 
 class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::Test::ResourceTest
+  def test_affiliate_control_params
+    add_params =
+      GrowsurfRuby::Campaign::ParticipantAddParams.new(
+        id: "campaign",
+        email: "affiliate@example.com",
+        is_affiliate: true
+      )
+    update_params =
+      GrowsurfRuby::Campaign::ParticipantUpdateParams.new(
+        id: "campaign",
+        participant_id_or_email: "participant",
+        affiliate_status: :APPROVED
+      )
+
+    assert_equal(true, add_params.is_affiliate)
+    assert_equal(:APPROVED, update_params.affiliate_status)
+  end
+
+  def test_retrieve_analytics_include_accepts_future_tokens
+    params =
+      GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams.new(
+        id: "campaign",
+        participant_id_or_email: "participant",
+        include: "email,futureEnrichment"
+      )
+
+    assert_equal("email,futureEnrichment", params.include)
+  end
+
   def test_retrieve_required_params
     skip("Mock server tests are disabled")
 
@@ -22,6 +51,8 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         referral_count: Integer,
         rewards: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantReward]),
         share_url: String,
+        affiliate_enrollment_source: String | nil,
+        affiliate_status: String | nil,
         all_matching_fraudsters: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]]) | nil,
         created_at: Integer | nil,
         fingerprint: String | nil,
@@ -31,6 +62,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         impression_count: Integer | nil,
         invite_count: Integer | nil,
         ip_address: String | nil,
+        is_affiliate: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_new: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_winner: GrowsurfRuby::Internal::Type::Boolean | nil,
         last_name: String | nil,
@@ -38,6 +70,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         mobile_instance_id: String | nil,
         monthly_referrals: ^(GrowsurfRuby::Internal::Type::ArrayOf[String]) | nil,
         notes: String | nil,
+        payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings | nil,
         paypal_email_address: String | nil,
         prev_monthly_rank: Integer | nil,
         prev_monthly_referral_count: Integer | nil,
@@ -75,6 +108,8 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         referral_count: Integer,
         rewards: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantReward]),
         share_url: String,
+        affiliate_enrollment_source: String | nil,
+        affiliate_status: String | nil,
         all_matching_fraudsters: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]]) | nil,
         created_at: Integer | nil,
         fingerprint: String | nil,
@@ -84,6 +119,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         impression_count: Integer | nil,
         invite_count: Integer | nil,
         ip_address: String | nil,
+        is_affiliate: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_new: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_winner: GrowsurfRuby::Internal::Type::Boolean | nil,
         last_name: String | nil,
@@ -91,6 +127,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         mobile_instance_id: String | nil,
         monthly_referrals: ^(GrowsurfRuby::Internal::Type::ArrayOf[String]) | nil,
         notes: String | nil,
+        payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings | nil,
         paypal_email_address: String | nil,
         prev_monthly_rank: Integer | nil,
         prev_monthly_referral_count: Integer | nil,
@@ -161,6 +198,8 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         referral_count: Integer,
         rewards: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantReward]),
         share_url: String,
+        affiliate_enrollment_source: String | nil,
+        affiliate_status: String | nil,
         all_matching_fraudsters: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]]) | nil,
         created_at: Integer | nil,
         fingerprint: String | nil,
@@ -170,6 +209,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         impression_count: Integer | nil,
         invite_count: Integer | nil,
         ip_address: String | nil,
+        is_affiliate: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_new: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_winner: GrowsurfRuby::Internal::Type::Boolean | nil,
         last_name: String | nil,
@@ -177,6 +217,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         mobile_instance_id: String | nil,
         monthly_referrals: ^(GrowsurfRuby::Internal::Type::ArrayOf[String]) | nil,
         notes: String | nil,
+        payout_settings: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings | nil,
         paypal_email_address: String | nil,
         prev_monthly_rank: Integer | nil,
         prev_monthly_referral_count: Integer | nil,
@@ -427,6 +468,48 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         end_date: Integer | nil,
         series: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantAnalyticsResponse::Series]) | nil,
         start_date: Integer | nil
+      }
+    end
+  end
+
+  def test_get_payout_destination_required_params
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.participant.get_payout_destination("participantIdOrEmail", id: "id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse
+    end
+
+    assert_pattern do
+      response => {
+        active_provider: String | nil,
+        destinations: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantGetPayoutDestinationResponse::Destination]) | nil,
+        enabled_providers: ^(GrowsurfRuby::Internal::Type::ArrayOf[String]) | nil
+      }
+    end
+  end
+
+  def test_request_payout_destination_confirmation_required_params
+    skip("Mock server tests are disabled")
+
+    response =
+      @growsurf.campaign.participant.request_payout_destination_confirmation(
+        "participantIdOrEmail",
+        id: "id",
+        provider: "PAYPAL"
+      )
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse
+    end
+
+    assert_pattern do
+      response => {
+        expires_at: Integer | nil,
+        provider: String | nil,
+        provider_display_name: String | nil,
+        status: GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status | nil
       }
     end
   end

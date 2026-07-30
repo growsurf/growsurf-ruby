@@ -51,7 +51,7 @@ module GrowsurfRuby
           request_options: GrowsurfRuby::RequestOptions
         }
 
-        type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED
+        type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED | :REVERSED
 
         module Status
           extend GrowsurfRuby::Internal::Type::Enum
@@ -60,6 +60,7 @@ module GrowsurfRuby
           QUEUED: :QUEUED
           ISSUED: :ISSUED
           FAILED: :FAILED
+          REVERSED: :REVERSED
 
           def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams::status]
         end

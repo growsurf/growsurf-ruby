@@ -33,8 +33,24 @@ module GrowsurfRuby
         sig { returns(T::Array[GrowsurfRuby::Campaign::ParticipantReward]) }
         attr_accessor :rewards
 
-        sig { returns(String) }
-        attr_accessor :share_url
+        # The unique share URL of the participant. Omitted for affiliate program
+        # participants who are not approved affiliates.
+        sig { returns(T.nilable(String)) }
+        attr_reader :share_url
+
+        sig { params(share_url: String).void }
+        attr_writer :share_url
+
+        # Affiliate programs only. How the affiliate enrolled (`OPEN_ENROLLMENT`,
+        # `APPLICATION`, `PARTICIPANT_AUTH`, `INVITE`, `REST_API`, `CSV`, or `DASHBOARD`).
+        # `null` when not recorded.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :affiliate_enrollment_source
+
+        # Affiliate programs only. The enrolled affiliate's status (`APPROVED`,
+        # `SUSPENDED`, or `BANNED`). `null` for participants who are not affiliates.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :affiliate_status
 
         sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
         attr_reader :all_matching_fraudsters
@@ -93,6 +109,14 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :ip_address
 
+        # Affiliate programs only. Whether this participant is an enrolled affiliate. A
+        # referred customer who has not joined the program is `false`.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_affiliate
+
+        sig { params(is_affiliate: T::Boolean).void }
+        attr_writer :is_affiliate
+
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :is_new
 
@@ -129,6 +153,26 @@ module GrowsurfRuby
 
         sig { returns(T.nilable(String)) }
         attr_accessor :notes
+
+        # Payout-related actions the participant must complete before a payout can be
+        # released (e.g. configuring a payout destination or submitting a W-9/W-8 tax form).
+        # Always present; the requiredActions array is empty when no action is required.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings
+            )
+          )
+        end
+        attr_reader :payout_settings
+
+        sig do
+          params(
+            payout_settings:
+              GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::OrHash
+          ).void
+        end
+        attr_writer :payout_settings
 
         sig { returns(T.nilable(String)) }
         attr_reader :paypal_email_address
@@ -252,6 +296,8 @@ module GrowsurfRuby
             rewards:
               T::Array[GrowsurfRuby::Campaign::ParticipantReward::OrHash],
             share_url: String,
+            affiliate_enrollment_source: T.nilable(String),
+            affiliate_status: T.nilable(String),
             all_matching_fraudsters: T::Array[T::Hash[Symbol, T.anything]],
             created_at: Integer,
             fingerprint: T.nilable(String),
@@ -261,6 +307,7 @@ module GrowsurfRuby
             impression_count: Integer,
             invite_count: Integer,
             ip_address: T.nilable(String),
+            is_affiliate: T::Boolean,
             is_new: T::Boolean,
             is_winner: T::Boolean,
             last_name: T.nilable(String),
@@ -268,6 +315,8 @@ module GrowsurfRuby
             mobile_instance_id: T.nilable(String),
             monthly_referrals: T::Array[String],
             notes: T.nilable(String),
+            payout_settings:
+              GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::OrHash,
             paypal_email_address: String,
             prev_monthly_rank: Integer,
             prev_monthly_referral_count: Integer,
@@ -295,7 +344,16 @@ module GrowsurfRuby
           rank:,
           referral_count:,
           rewards:,
-          share_url:,
+          # The unique share URL of the participant. Omitted for affiliate program
+          # participants who are not approved affiliates.
+          share_url: nil,
+          # Affiliate programs only. How the affiliate enrolled (`OPEN_ENROLLMENT`,
+          # `APPLICATION`, `PARTICIPANT_AUTH`, `INVITE`, `REST_API`, `CSV`, or `DASHBOARD`).
+          # `null` when not recorded.
+          affiliate_enrollment_source: nil,
+          # Affiliate programs only. The enrolled affiliate's status (`APPROVED`,
+          # `SUSPENDED`, or `BANNED`). `null` for participants who are not affiliates.
+          affiliate_status: nil,
           all_matching_fraudsters: nil,
           created_at: nil,
           fingerprint: nil,
@@ -305,6 +363,9 @@ module GrowsurfRuby
           impression_count: nil,
           invite_count: nil,
           ip_address: nil,
+          # Affiliate programs only. Whether this participant is an enrolled affiliate. A
+          # referred customer who has not joined the program is `false`.
+          is_affiliate: nil,
           is_new: nil,
           is_winner: nil,
           last_name: nil,
@@ -316,6 +377,10 @@ module GrowsurfRuby
           mobile_instance_id: nil,
           monthly_referrals: nil,
           notes: nil,
+          # Payout-related actions the participant must complete before a payout can be
+          # released (e.g. configuring a payout destination or submitting a W-9/W-8 tax form).
+          # Always present; the requiredActions array is empty when no action is required.
+          payout_settings: nil,
           paypal_email_address: nil,
           prev_monthly_rank: nil,
           prev_monthly_referral_count: nil,
@@ -344,6 +409,8 @@ module GrowsurfRuby
               referral_count: Integer,
               rewards: T::Array[GrowsurfRuby::Campaign::ParticipantReward],
               share_url: String,
+              affiliate_enrollment_source: T.nilable(String),
+              affiliate_status: T.nilable(String),
               all_matching_fraudsters: T::Array[T::Hash[Symbol, T.anything]],
               created_at: Integer,
               fingerprint: T.nilable(String),
@@ -354,6 +421,7 @@ module GrowsurfRuby
               impression_count: Integer,
               invite_count: Integer,
               ip_address: T.nilable(String),
+              is_affiliate: T::Boolean,
               is_new: T::Boolean,
               is_winner: T::Boolean,
               last_name: T.nilable(String),
@@ -361,6 +429,8 @@ module GrowsurfRuby
               mobile_instance_id: T.nilable(String),
               monthly_referrals: T::Array[String],
               notes: T.nilable(String),
+              payout_settings:
+                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
               paypal_email_address: String,
               prev_monthly_rank: Integer,
               prev_monthly_referral_count: Integer,
@@ -384,6 +454,102 @@ module GrowsurfRuby
           )
         end
         def to_hash
+        end
+
+        class PayoutSettings < GrowsurfRuby::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings,
+                GrowsurfRuby::Internal::AnyHash
+              )
+            end
+
+          # Actions the participant must complete before payouts can be sent.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[
+                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
+                ]
+              )
+            )
+          end
+          attr_reader :required_actions
+
+          sig do
+            params(
+              required_actions:
+                T::Array[
+                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::OrSymbol
+                ]
+            ).void
+          end
+          attr_writer :required_actions
+
+          # Payout-related actions the participant must complete before a payout can be
+          # released (e.g. configuring a payout destination or submitting a W-9/W-8 tax form).
+          # Always present; the requiredActions array is empty when no action is required.
+          sig do
+            params(
+              required_actions:
+                T::Array[
+                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::OrSymbol
+                ]
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Actions the participant must complete before payouts can be sent.
+            required_actions: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                required_actions:
+                  T::Array[
+                    GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
+                  ]
+              }
+            )
+          end
+          def to_hash
+          end
+
+          module RequiredAction
+            extend GrowsurfRuby::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            PAYOUT_DESTINATION =
+              T.let(
+                :PAYOUT_DESTINATION,
+                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
+              )
+            TAX_INFO =
+              T.let(
+                :TAX_INFO,
+                GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
         end
 
         class Referrer < GrowsurfRuby::Internal::Type::BaseModel

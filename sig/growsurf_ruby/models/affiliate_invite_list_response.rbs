@@ -1,0 +1,39 @@
+module GrowsurfRuby
+  module Models
+    type affiliate_invite_list_response =
+      {
+        invites: ::Array[GrowsurfRuby::AffiliateInvite],
+        total: Integer,
+        limit: Integer,
+        offset: Integer
+      }
+
+    class AffiliateInviteListResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor invites: ::Array[GrowsurfRuby::AffiliateInvite]
+
+      attr_accessor total: Integer
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader offset: Integer?
+
+      def offset=: (Integer) -> Integer
+
+      def initialize: (
+        invites: ::Array[GrowsurfRuby::AffiliateInvite],
+        total: Integer,
+        ?limit: Integer,
+        ?offset: Integer
+      ) -> void
+
+      def to_hash: -> {
+        invites: ::Array[GrowsurfRuby::AffiliateInvite],
+        total: Integer,
+        limit: Integer,
+        offset: Integer
+      }
+    end
+  end
+end

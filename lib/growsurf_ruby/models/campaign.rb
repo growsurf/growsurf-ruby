@@ -186,7 +186,7 @@ module GrowsurfRuby
                  api_name: :referredRewardUpfront
 
         # @!attribute referred_value
-        #   Tax valuation for the referred friend's side of a double-sided reward.
+        #   Tax treatment override for the referred friend's side of a double-sided reward.
         #
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :referred_value,
@@ -237,7 +237,7 @@ module GrowsurfRuby
         #
         #   @param referred_reward_upfront [Boolean]
         #
-        #   @param referred_value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax valuation for the referred friend's side of a double-sided reward.
+        #   @param referred_value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax treatment override for the referred friend's side of a double-sided reward.
         #
         #   @param value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax valuation for the reward (the referrer's side of a double-sided reward).
 

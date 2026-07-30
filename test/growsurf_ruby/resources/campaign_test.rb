@@ -3,6 +3,40 @@
 require_relative "../test_helper"
 
 class GrowsurfRuby::Test::Resources::CampaignTest < GrowsurfRuby::Test::ResourceTest
+  def test_email_analytics_model
+    by_type = GrowsurfRuby::Models::EmailAnalytics::ByType.new(
+      email_type: "INVITE",
+      sent: 2,
+      delivered: 1,
+      opened: 1,
+      clicked: 0,
+      bounced: 1,
+      spam_complaints: 0,
+      delivery_rate: 0.5,
+      open_rate: 1.0,
+      click_rate: 0.0,
+      bounce_rate: 0.5
+    )
+    analytics = GrowsurfRuby::Models::EmailAnalytics.new(
+      sent: 2,
+      delivered: 1,
+      opened: 1,
+      clicked: 0,
+      bounced: 1,
+      spam_complaints: 0,
+      delivery_rate: 0.5,
+      open_rate: 1.0,
+      click_rate: 0.0,
+      bounce_rate: 0.5,
+      by_type: [by_type],
+      coverage_start_date: nil,
+      is_partial: false
+    )
+
+    assert_equal(2, analytics.sent)
+    assert_equal("INVITE", analytics.by_type.first.email_type)
+  end
+
   def test_retrieve
     skip("Mock server tests are disabled")
 

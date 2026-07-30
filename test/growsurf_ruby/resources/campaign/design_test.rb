@@ -16,7 +16,10 @@ class GrowsurfRuby::Test::Resources::Campaign::DesignTest < GrowsurfRuby::Test::
   def test_update_required_params
     skip("Mock server tests are disabled")
 
-    response = @growsurf.campaign.design.update("id", {})
+    response = @growsurf.campaign.design.update(
+      "id",
+      {payoutDestinationConfirmation: {headline: "Confirm your {{payoutProvider}} payout email"}}
+    )
 
     assert_pattern do
       response => ^(GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown])

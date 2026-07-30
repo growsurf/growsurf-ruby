@@ -1,0 +1,28 @@
+module GrowsurfRuby
+  module Models
+    type campaign_resend_affiliate_invite_params =
+      { id: String, invite_id: String }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignResendAffiliateInviteParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor invite_id: String
+
+      def initialize: (
+        id: String,
+        invite_id: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        invite_id: String,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+    end
+  end
+end

@@ -41,6 +41,10 @@ module GrowsurfRuby
 
   AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
 
+  AffiliateApplication = GrowsurfRuby::Models::AffiliateApplication
+
+  AffiliateInvite = GrowsurfRuby::Models::AffiliateInvite
+
   Team = GrowsurfRuby::Models::Team
 
   TeamUpdateParams = GrowsurfRuby::Models::TeamUpdateParams
@@ -49,10 +53,16 @@ module GrowsurfRuby
 
   CampaignAPI = GrowsurfRuby::Models::CampaignAPI
 
+  CampaignCreateAffiliateInviteParams = GrowsurfRuby::Models::CampaignCreateAffiliateInviteParams
+
   CampaignCreateMobileParticipantTokenParams =
     GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams
 
   CampaignCreateParams = GrowsurfRuby::Models::CampaignCreateParams
+
+  CampaignListAffiliateApplicationsParams = GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams
+
+  CampaignListAffiliateInvitesParams = GrowsurfRuby::Models::CampaignListAffiliateInvitesParams
 
   CampaignListCommissionsParams = GrowsurfRuby::Models::CampaignListCommissionsParams
 
@@ -66,9 +76,18 @@ module GrowsurfRuby
 
   CampaignListReferralsParams = GrowsurfRuby::Models::CampaignListReferralsParams
 
+  CampaignResendAffiliateInviteParams = GrowsurfRuby::Models::CampaignResendAffiliateInviteParams
+
+  CampaignRetrieveAffiliateApplicationParams =
+    GrowsurfRuby::Models::CampaignRetrieveAffiliateApplicationParams
+
   CampaignRetrieveAnalyticsParams = GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams
 
   CampaignRetrieveParams = GrowsurfRuby::Models::CampaignRetrieveParams
+
+  CampaignReviewAffiliateApplicationParams = GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams
+
+  CampaignRevokeAffiliateInviteParams = GrowsurfRuby::Models::CampaignRevokeAffiliateInviteParams
 
   CampaignUpdateParams = GrowsurfRuby::Models::CampaignUpdateParams
 

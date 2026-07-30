@@ -10,17 +10,18 @@ module GrowsurfRuby
       #   @return [Float, nil]
       optional :fair_market_value_usd, Float, api_name: :fairMarketValueUSD, nil?: true
 
-      # @!attribute is_tax_reportable
-      #   Whether the reward's value counts toward 1099 thresholds/totals. `null` = use
-      #   the smart default for the reward's source.
+      # @!attribute tax_character
+      #   The reason the recipient earns this reward. `null` inherits the program's
+      #   confirmed tax treatment for configurable non-commission rewards. Commission
+      #   rewards always use `NONEMPLOYEE_SERVICES`.
       #
-      #   @return [Boolean, nil]
-      optional :is_tax_reportable,
-               GrowsurfRuby::Internal::Type::Boolean,
-               api_name: :isTaxReportable,
+      #   @return [Symbol, GrowsurfRuby::Models::RewardTaxValuation::TaxCharacter, nil]
+      optional :tax_character,
+               enum: -> { GrowsurfRuby::RewardTaxValuation::TaxCharacter },
+               api_name: :taxCharacter,
                nil?: true
 
-      # @!method initialize(fair_market_value_usd: nil, is_tax_reportable: nil)
+      # @!method initialize(fair_market_value_usd: nil, tax_character: nil)
       #   Some parameter documentations has been truncated, see
       #   {GrowsurfRuby::Models::RewardTaxValuation} for more details.
       #
@@ -29,7 +30,21 @@ module GrowsurfRuby
       #
       #   @param fair_market_value_usd [Float, nil] Manual fair-market value in USD (major units) used as the fallback when the rewa
       #
-      #   @param is_tax_reportable [Boolean, nil] Whether the reward's value counts toward 1099 thresholds/totals. `null` = use th
+      #   @param tax_character [Symbol, GrowsurfRuby::Models::RewardTaxValuation::TaxCharacter, nil] The reason the recipient earns this reward. `null` inherits the program's
+
+      # The U.S. federal tax character of a reward.
+      module TaxCharacter
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        NONEMPLOYEE_SERVICES = :NONEMPLOYEE_SERVICES
+        PRIZE_OR_AWARD = :PRIZE_OR_AWARD
+        PURCHASE_REBATE = :PURCHASE_REBATE
+        OTHER_INCOME = :OTHER_INCOME
+        REVIEW_REQUIRED = :REVIEW_REQUIRED
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

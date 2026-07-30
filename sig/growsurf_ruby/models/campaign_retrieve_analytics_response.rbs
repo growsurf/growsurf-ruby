@@ -647,11 +647,7 @@ module GrowsurfRuby
           }
 
           type commission_status_metric =
-            {
-              count: Integer,
-              total_amount: Integer,
-              total_revenue: Integer
-            }
+            { count: Integer, total_amount: Integer, total_revenue: Integer }
 
           class CommissionStatusMetric < GrowsurfRuby::Internal::Type::BaseModel
             attr_reader count: Integer?
@@ -685,6 +681,7 @@ module GrowsurfRuby
             failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
           }
 
@@ -707,6 +704,12 @@ module GrowsurfRuby
             GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
           ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
 
+          attr_reader reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric?
+
+          def reversed=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+
           attr_reader upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric?
 
           def upcoming=: (
@@ -717,6 +720,7 @@ module GrowsurfRuby
             ?failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             ?issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             ?queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            ?reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             ?upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
           ) -> void
 
@@ -724,6 +728,7 @@ module GrowsurfRuby
             failed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             issued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             queued: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+            reversed: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
             upcoming: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
           }
 
@@ -738,10 +743,7 @@ module GrowsurfRuby
 
             def total_amount=: (Integer) -> Integer
 
-            def initialize: (
-              ?count: Integer,
-              ?total_amount: Integer
-            ) -> void
+            def initialize: (?count: Integer, ?total_amount: Integer) -> void
 
             def to_hash: -> { count: Integer, total_amount: Integer }
           end

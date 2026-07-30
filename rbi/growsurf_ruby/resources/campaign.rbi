@@ -61,7 +61,7 @@ module GrowsurfRuby
       def list(request_options: {})
       end
 
-      # Creates a new program, plus any optional program rewards. The new program is
+      # Creates a new program, plus any optional campaign rewards. The new program is
       # created in `DRAFT` status and owned by the API key's bound team.
       sig do
         params(
@@ -136,6 +136,31 @@ module GrowsurfRuby
       )
       end
 
+      # Invites someone to join the affiliate program. GrowSurf emails them a single-use
+      # accept link; accepting it enrolls them as an approved affiliate without going
+      # through the public application. One active invite can exist per email address.
+      sig do
+        params(
+          id: String,
+          email: String,
+          first_name: String,
+          last_name: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::AffiliateInvite)
+      end
+      def create_affiliate_invite(
+        # GrowSurf program ID.
+        id,
+        # Valid email address to invite. Maximum 255 characters.
+        email:,
+        # Invitee first name, used in the invite email. Maximum 255 characters.
+        first_name: nil,
+        # Invitee last name. Maximum 255 characters.
+        last_name: nil,
+        request_options: {}
+      )
+      end
+
       # Creates or returns a participant using the same input behavior as Add
       # Participant, then returns a participant-scoped token for GrowSurf mobile SDK
       # participant endpoints. Use this endpoint from your backend after your mobile app
@@ -175,6 +200,57 @@ module GrowsurfRuby
         referral_status: nil,
         # Referrer participant ID or email address.
         referred_by: nil,
+        request_options: {}
+      )
+      end
+
+      # Lists an affiliate program's applications, newest first. Applications exist on
+      # programs that review public signups (an `affiliateApplicationMode` of
+      # `MANUAL_REVIEW` or `AUTO_APPROVE`). A pending applicant is not a participant
+      # until their application is approved.
+      sig do
+        params(
+          id: String,
+          limit: Integer,
+          offset: Integer,
+          status:
+            GrowsurfRuby::CampaignListAffiliateApplicationsParams::Status::OrSymbol,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::Models::AffiliateApplicationListResponse)
+      end
+      def list_affiliate_applications(
+        # GrowSurf program ID.
+        id,
+        # How many applications to return per page (1-100).
+        limit: nil,
+        # Offset number used to skip through a result set.
+        offset: nil,
+        # Only return applications with this status.
+        status: nil,
+        request_options: {}
+      )
+      end
+
+      # Lists an affiliate program's enrollment invites, newest first.
+      sig do
+        params(
+          id: String,
+          limit: Integer,
+          offset: Integer,
+          status:
+            GrowsurfRuby::CampaignListAffiliateInvitesParams::Status::OrSymbol,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::Models::AffiliateInviteListResponse)
+      end
+      def list_affiliate_invites(
+        # GrowSurf program ID.
+        id,
+        # How many invites to return per page (1-100).
+        limit: nil,
+        # Offset number used to skip through a result set.
+        offset: nil,
+        # Only return invites with this status.
+        status: nil,
         request_options: {}
       )
       end
@@ -315,9 +391,47 @@ module GrowsurfRuby
       )
       end
 
-      # Retrieves analytics for a program. Pass `interval` to also get a time-series
-      # (`series`) alongside the totals, and `include` to add previous-period totals,
-      # status breakdowns, or derived rates — useful for detecting trends over time.
+      # Re-sends a pending invite with a fresh accept link (the previous link stops working).
+      # Resends are rate limited per invite; retry after a few minutes if a resend was just sent.
+      sig do
+        params(
+          invite_id: String,
+          id: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::AffiliateInvite)
+      end
+      def resend_affiliate_invite(
+        # Affiliate invite ID.
+        invite_id,
+        # GrowSurf program ID.
+        id:,
+        request_options: {}
+      )
+      end
+
+      # Returns one affiliate application, including its submitted form answers.
+      sig do
+        params(
+          application_id: String,
+          id: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::AffiliateApplication)
+      end
+      def retrieve_affiliate_application(
+        # Affiliate application ID.
+        application_id,
+        # GrowSurf program ID.
+        id:,
+        request_options: {}
+      )
+      end
+
+      # Retrieves analytics for a program. Pass `interval` to also get a time-series (`series`)
+      # alongside the totals, and `include` to add previous-period totals, status breakdowns,
+      # derived rates, or email performance. Add `email` to `include` for `sent` (accepted for
+      # delivery), `delivered`, `opened`, `clicked`, `bounced`, and `spamComplaints` metrics plus
+      # per-email-type breakdowns. Email rates are ratios from `0` to `1`, and `isPartial`
+      # identifies windows that begin before complete coverage.
       sig do
         params(
           id: String,
@@ -338,11 +452,14 @@ module GrowsurfRuby
         # End date of the analytics timeframe as a Unix timestamp in milliseconds.
         # Required if `days` is not set.
         end_date: nil,
-        # Comma-separated list of optional enrichments (opt-in to keep the default response
-        # lean): `previousPeriod` adds totals for the equal-length window immediately before
-        # the requested one; `statusCounts` adds reward (and, for affiliate programs,
-        # affiliate/commission/payout) status breakdowns; `rates` adds derived referral
-        # rates.
+        # Comma-separated list of optional data to include: `previousPeriod` adds totals for the
+        # equal-length window immediately before the requested one; `statusCounts` adds reward
+        # (and, for affiliate programs, affiliate/commission/payout) status breakdowns; `rates`
+        # adds derived referral rates; `email` adds `sent`, `delivered`, `opened`, `clicked`,
+        # `bounced`, `spamComplaints`, and per-email-type metrics. When `email` and an interval
+        # are both requested, each `series` item also contains counts for emails sent during that
+        # period. Combine `email` with `previousPeriod` to include the same email metrics in both
+        # windows.
         include: nil,
         # When set to `day`, `week`, or `month`, the response also includes a `series` array
         # with per-period totals. Defaults to `total` (no series).
@@ -350,6 +467,67 @@ module GrowsurfRuby
         # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
         # Required if `days` is not set.
         start_date: nil,
+        request_options: {}
+      )
+      end
+
+      # Decides a pending application. Set `status` to `APPROVED` to enroll the applicant
+      # (this creates the participant, or upgrades an existing participant with the same
+      # email), or to `DENIED` with an optional `rejectionReason`. A denied applicant may
+      # reapply after the program's reapplication cooldown; send an earlier
+      # `reapplyAllowedAt` (without `status`) to shorten that wait for one applicant.
+      # Provide exactly one of `status` or `reapplyAllowedAt`. Denial-only fields are
+      # only valid with `status` set to `DENIED`. Approval is idempotent: repeating it
+      # returns the same participant.
+      sig do
+        params(
+          application_id: String,
+          id: String,
+          allow_immediate_reapply: T::Boolean,
+          reapply_allowed_at: Integer,
+          rejection_reason: String,
+          review_note: String,
+          status:
+            GrowsurfRuby::CampaignReviewAffiliateApplicationParams::Status::OrSymbol,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::AffiliateApplication)
+      end
+      def review_affiliate_application(
+        # Affiliate application ID.
+        application_id,
+        # GrowSurf program ID.
+        id:,
+        # Only valid when `status` is `DENIED`; let the applicant reapply right away.
+        allow_immediate_reapply: nil,
+        # For an already-denied application, move the reapplication window to this earlier
+        # time, in Unix milliseconds. Send without `status`.
+        reapply_allowed_at: nil,
+        # Short reason recorded with a denial. Only valid when `status` is `DENIED`.
+        # Maximum 255 characters.
+        rejection_reason: nil,
+        # Private note recorded with a denial. Only valid when `status` is `DENIED`; never
+        # shown to the applicant. Maximum 500 characters.
+        review_note: nil,
+        # The decision. `APPROVED` enrolls the applicant as an affiliate; `DENIED` closes
+        # the application.
+        status: nil,
+        request_options: {}
+      )
+      end
+
+      # Revokes a pending invite. Its emailed accept link stops working immediately.
+      sig do
+        params(
+          invite_id: String,
+          id: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::AffiliateInvite)
+      end
+      def revoke_affiliate_invite(
+        # Affiliate invite ID.
+        invite_id,
+        # GrowSurf program ID.
+        id:,
         request_options: {}
       )
       end

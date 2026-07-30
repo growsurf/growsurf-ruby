@@ -1,22 +1,44 @@
 module GrowsurfRuby
   module Models
     type reward_tax_valuation =
-      { fair_market_value_usd: Float?, is_tax_reportable: bool? }
+      {
+        fair_market_value_usd: Float?,
+        tax_character: GrowsurfRuby::Models::RewardTaxValuation::tax_character?
+      }
 
     class RewardTaxValuation < GrowsurfRuby::Internal::Type::BaseModel
       attr_accessor fair_market_value_usd: Float?
 
-      attr_accessor is_tax_reportable: bool?
+      attr_accessor tax_character: GrowsurfRuby::Models::RewardTaxValuation::tax_character?
 
       def initialize: (
         ?fair_market_value_usd: Float?,
-        ?is_tax_reportable: bool?
+        ?tax_character: GrowsurfRuby::Models::RewardTaxValuation::tax_character?
       ) -> void
 
       def to_hash: -> {
         fair_market_value_usd: Float?,
-        is_tax_reportable: bool?
+        tax_character: GrowsurfRuby::Models::RewardTaxValuation::tax_character?
       }
+
+      type tax_character =
+        :NONEMPLOYEE_SERVICES
+        | :PRIZE_OR_AWARD
+        | :PURCHASE_REBATE
+        | :OTHER_INCOME
+        | :REVIEW_REQUIRED
+
+      module TaxCharacter
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        NONEMPLOYEE_SERVICES: :NONEMPLOYEE_SERVICES
+        PRIZE_OR_AWARD: :PRIZE_OR_AWARD
+        PURCHASE_REBATE: :PURCHASE_REBATE
+        OTHER_INCOME: :OTHER_INCOME
+        REVIEW_REQUIRED: :REVIEW_REQUIRED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::RewardTaxValuation::tax_character]
+      end
     end
   end
 end

@@ -12,6 +12,7 @@ module GrowsurfRuby
           coupon_code: String?,
           description: String?,
           image_url: String?,
+          is_visible: bool,
           limit: Integer?,
           limit_duration: GrowsurfRuby::Models::Campaign::Reward::limit_duration?,
           next_milestone_prefix: String?,
@@ -22,6 +23,7 @@ module GrowsurfRuby
           referral_description: String?,
           referred_reward_upfront: bool,
           referred_value: GrowsurfRuby::RewardTaxValuation?,
+          title: String?,
           value: GrowsurfRuby::RewardTaxValuation?
         }
 
@@ -43,6 +45,10 @@ module GrowsurfRuby
         attr_accessor description: String?
 
         attr_accessor image_url: String?
+
+        attr_reader is_visible: bool?
+
+        def is_visible=: (bool) -> bool
 
         attr_accessor limit: Integer?
 
@@ -66,6 +72,8 @@ module GrowsurfRuby
 
         attr_accessor referred_value: GrowsurfRuby::RewardTaxValuation?
 
+        attr_accessor title: String?
+
         attr_accessor value: GrowsurfRuby::RewardTaxValuation?
 
         def initialize: (
@@ -78,6 +86,7 @@ module GrowsurfRuby
           ?coupon_code: String?,
           ?description: String?,
           ?image_url: String?,
+          ?is_visible: bool,
           ?limit: Integer?,
           ?limit_duration: GrowsurfRuby::Models::Campaign::Reward::limit_duration?,
           ?next_milestone_prefix: String?,
@@ -88,6 +97,7 @@ module GrowsurfRuby
           ?referral_description: String?,
           ?referred_reward_upfront: bool,
           ?referred_value: GrowsurfRuby::RewardTaxValuation?,
+          ?title: String?,
           ?value: GrowsurfRuby::RewardTaxValuation?
         ) -> void
 
@@ -101,6 +111,7 @@ module GrowsurfRuby
           coupon_code: String?,
           description: String?,
           image_url: String?,
+          is_visible: bool,
           limit: Integer?,
           limit_duration: GrowsurfRuby::Models::Campaign::Reward::limit_duration?,
           next_milestone_prefix: String?,
@@ -111,6 +122,7 @@ module GrowsurfRuby
           referral_description: String?,
           referred_reward_upfront: bool,
           referred_value: GrowsurfRuby::RewardTaxValuation?,
+          title: String?,
           value: GrowsurfRuby::RewardTaxValuation?
         }
 

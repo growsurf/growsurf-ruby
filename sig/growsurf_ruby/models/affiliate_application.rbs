@@ -1,0 +1,192 @@
+module GrowsurfRuby
+  module Models
+    type affiliate_application =
+      {
+        answers: ::Array[GrowsurfRuby::AffiliateApplication::Answer],
+        created_at: Integer,
+        decided_at: Integer?,
+        email: String?,
+        first_name: String?,
+        id: String,
+        last_name: String?,
+        participant_id: String?,
+        reapply_allowed_at: Integer?,
+        rejection_reason: String?,
+        reviewed_at: Integer?,
+        risk_level: GrowsurfRuby::Models::AffiliateApplication::risk_level?,
+        status: GrowsurfRuby::Models::AffiliateApplication::status,
+        terms_accepted_at: Integer?
+      }
+
+    class AffiliateApplication < GrowsurfRuby::Internal::Type::BaseModel
+      attr_reader answers: ::Array[GrowsurfRuby::AffiliateApplication::Answer]
+
+      def answers=: (
+        ::Array[GrowsurfRuby::AffiliateApplication::Answer]
+      ) -> ::Array[GrowsurfRuby::AffiliateApplication::Answer]
+
+      attr_reader created_at: Integer
+
+      def created_at=: (Integer) -> Integer
+
+      attr_accessor decided_at: Integer?
+
+      attr_accessor email: String?
+
+      attr_accessor first_name: String?
+
+      attr_reader id: String
+
+      def id=: (String) -> String
+
+      attr_accessor last_name: String?
+
+      attr_accessor participant_id: String?
+
+      attr_accessor reapply_allowed_at: Integer?
+
+      attr_accessor rejection_reason: String?
+
+      attr_accessor reviewed_at: Integer?
+
+      attr_accessor risk_level: GrowsurfRuby::Models::AffiliateApplication::risk_level?
+
+      attr_reader status: GrowsurfRuby::Models::AffiliateApplication::status
+
+      def status=: (
+        GrowsurfRuby::Models::AffiliateApplication::status
+      ) -> GrowsurfRuby::Models::AffiliateApplication::status
+
+      attr_reader terms_accepted_at: Integer?
+
+      def terms_accepted_at=: (Integer?) -> Integer?
+
+      def initialize: (
+        answers: ::Array[GrowsurfRuby::AffiliateApplication::Answer],
+        created_at: Integer,
+        decided_at: Integer?,
+        email: String?,
+        first_name: String?,
+        id: String,
+        last_name: String?,
+        participant_id: String?,
+        reapply_allowed_at: Integer?,
+        rejection_reason: String?,
+        reviewed_at: Integer?,
+        risk_level: GrowsurfRuby::Models::AffiliateApplication::risk_level?,
+        status: GrowsurfRuby::Models::AffiliateApplication::status,
+        terms_accepted_at: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        answers: ::Array[GrowsurfRuby::AffiliateApplication::Answer],
+        created_at: Integer,
+        decided_at: Integer?,
+        email: String?,
+        first_name: String?,
+        id: String,
+        last_name: String?,
+        participant_id: String?,
+        reapply_allowed_at: Integer?,
+        rejection_reason: String?,
+        reviewed_at: Integer?,
+        risk_level: GrowsurfRuby::Models::AffiliateApplication::risk_level?,
+        status: GrowsurfRuby::Models::AffiliateApplication::status,
+        terms_accepted_at: Integer?
+      }
+
+      type answer =
+        {
+          field_id: String,
+          label: String,
+          type: GrowsurfRuby::Models::AffiliateApplication::answer_type,
+          value: String | Integer | Float | bool
+        }
+
+      class Answer < GrowsurfRuby::Internal::Type::BaseModel
+        attr_reader field_id: String
+
+        def field_id=: (String) -> String
+
+        attr_reader label: String
+
+        def label=: (String) -> String
+
+        attr_reader type: GrowsurfRuby::Models::AffiliateApplication::answer_type
+
+        def type=: (
+          GrowsurfRuby::Models::AffiliateApplication::answer_type
+        ) -> GrowsurfRuby::Models::AffiliateApplication::answer_type
+
+        attr_reader value: String | Integer | Float | bool
+
+        def value=: (
+          String | Integer | Float | bool
+        ) -> (String | Integer | Float | bool)
+
+        def initialize: (
+          field_id: String,
+          label: String,
+          type: GrowsurfRuby::Models::AffiliateApplication::answer_type,
+          value: String | Integer | Float | bool
+        ) -> void
+
+        def to_hash: -> {
+          field_id: String,
+          label: String,
+          type: GrowsurfRuby::Models::AffiliateApplication::answer_type,
+          value: String | Integer | Float | bool
+        }
+
+        module Type
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TEXT: :text
+          TEXTAREA: :textarea
+          URL: :url
+          COUNTRY: :country
+          NUMBER: :number
+          DROPDOWN: :dropdown
+          RADIO: :radio
+          CHECKBOX: :checkbox
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::AffiliateApplication::answer_type]
+        end
+      end
+
+      type answer_type =
+        :text
+        | :textarea
+        | :url
+        | :country
+        | :number
+        | :dropdown
+        | :radio
+        | :checkbox
+
+      type risk_level = :LOW | :MEDIUM | :HIGH
+
+      module RiskLevel
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        LOW: :LOW
+        MEDIUM: :MEDIUM
+        HIGH: :HIGH
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::AffiliateApplication::risk_level]
+      end
+
+      type status = :PENDING | :APPROVED | :DENIED
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        PENDING: :PENDING
+        APPROVED: :APPROVED
+        DENIED: :DENIED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::AffiliateApplication::status]
+      end
+    end
+  end
+end

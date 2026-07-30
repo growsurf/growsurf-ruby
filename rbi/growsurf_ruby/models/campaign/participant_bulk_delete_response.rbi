@@ -23,7 +23,9 @@ module GrowsurfRuby
         attr_accessor :results
 
         sig do
-          returns(GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary)
+          returns(
+            GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary
+          )
         end
         attr_reader :summary
 

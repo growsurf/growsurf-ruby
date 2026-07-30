@@ -1226,6 +1226,23 @@ module GrowsurfRuby
               )
             )
           end
+          attr_reader :reversed
+
+          sig do
+            params(
+              reversed:
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash
+            ).void
+          end
+          attr_writer :reversed
+
+          sig do
+            returns(
+              T.nilable(
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+              )
+            )
+          end
           attr_reader :upcoming
 
           sig do
@@ -1245,11 +1262,19 @@ module GrowsurfRuby
                 GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash,
               queued:
                 GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash,
+              reversed:
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash,
               upcoming:
                 GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash
             ).returns(T.attached_class)
           end
-          def self.new(failed: nil, issued: nil, queued: nil, upcoming: nil)
+          def self.new(
+            failed: nil,
+            issued: nil,
+            queued: nil,
+            reversed: nil,
+            upcoming: nil
+          )
           end
 
           sig do
@@ -1260,6 +1285,8 @@ module GrowsurfRuby
                 issued:
                   GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
                 queued:
+                  GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
+                reversed:
                   GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
                 upcoming:
                   GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
@@ -1303,9 +1330,7 @@ module GrowsurfRuby
             )
             end
 
-            sig do
-              override.returns({ count: Integer, total_amount: Integer })
-            end
+            sig { override.returns({ count: Integer, total_amount: Integer }) }
             def to_hash
             end
           end

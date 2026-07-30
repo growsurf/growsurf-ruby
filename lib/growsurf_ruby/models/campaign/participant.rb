@@ -41,9 +41,26 @@ module GrowsurfRuby
         required :rewards, -> { GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::ParticipantReward] }
 
         # @!attribute share_url
+        #   The unique share URL of the participant. Omitted for affiliate program
+        #   participants who are not approved affiliates.
         #
-        #   @return [String]
-        required :share_url, String, api_name: :shareUrl
+        #   @return [String, nil]
+        optional :share_url, String, api_name: :shareUrl
+
+        # @!attribute affiliate_enrollment_source
+        #   Affiliate programs only. How the affiliate enrolled (`OPEN_ENROLLMENT`,
+        #   `APPLICATION`, `PARTICIPANT_AUTH`, `INVITE`, `REST_API`, `CSV`, or `DASHBOARD`).
+        #   `null` when not recorded.
+        #
+        #   @return [String, nil]
+        optional :affiliate_enrollment_source, String, api_name: :affiliateEnrollmentSource, nil?: true
+
+        # @!attribute affiliate_status
+        #   Affiliate programs only. The enrolled affiliate's status (`APPROVED`,
+        #   `SUSPENDED`, or `BANNED`). `null` for participants who are not affiliates.
+        #
+        #   @return [String, nil]
+        optional :affiliate_status, String, api_name: :affiliateStatus, nil?: true
 
         # @!attribute all_matching_fraudsters
         #
@@ -96,6 +113,13 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :ip_address, String, api_name: :ipAddress, nil?: true
 
+        # @!attribute is_affiliate
+        #   Affiliate programs only. Whether this participant is an enrolled affiliate. A
+        #   referred customer who has not joined the program is `false`.
+        #
+        #   @return [Boolean, nil]
+        optional :is_affiliate, GrowsurfRuby::Internal::Type::Boolean, api_name: :isAffiliate
+
         # @!attribute is_new
         #
         #   @return [Boolean, nil]
@@ -136,6 +160,16 @@ module GrowsurfRuby
         #
         #   @return [String, nil]
         optional :notes, String, nil?: true
+
+        # @!attribute payout_settings
+        #   Payout-related actions the participant must complete before a payout can be
+        #   released (e.g. configuring a payout destination or submitting a W-9/W-8 tax form).
+        #   Always present; the requiredActions array is empty when no action is required.
+        #
+        #   @return [GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings, nil]
+        optional :payout_settings,
+                 -> { GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings },
+                 api_name: :payoutSettings
 
         # @!attribute paypal_email_address
         #
@@ -215,7 +249,7 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url:, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_new: nil, is_winner: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
+        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::CampaignParticipant} for more details.
         #
@@ -233,7 +267,12 @@ module GrowsurfRuby
         #
         #   @param rewards [Array<GrowsurfRuby::Models::Campaign::ParticipantReward>]
         #
-        #   @param share_url [String]
+        #   @param share_url [String, nil] The unique share URL of the participant. Omitted for
+        #     affiliate program participants who are not approved affiliates.
+        #
+        #   @param affiliate_enrollment_source [String, nil] Affiliate programs only. How the affiliate enrolled (`OPEN_ENROLLMENT`,
+        #
+        #   @param affiliate_status [String, nil] Affiliate programs only. The enrolled affiliate's status (`APPROVED`,
         #
         #   @param all_matching_fraudsters [Array<Hash{Symbol=>Object}>]
         #
@@ -253,6 +292,8 @@ module GrowsurfRuby
         #
         #   @param ip_address [String, nil]
         #
+        #   @param is_affiliate [Boolean] Affiliate programs only. Whether this participant is an enrolled affiliate. A
+        #
         #   @param is_new [Boolean]
         #
         #   @param is_winner [Boolean]
@@ -266,6 +307,8 @@ module GrowsurfRuby
         #   @param monthly_referrals [Array<String>]
         #
         #   @param notes [String, nil]
+        #
+        #   @param payout_settings [GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings] Payout-related actions the participant must complete before a payout can be
         #
         #   @param paypal_email_address [String]
         #
@@ -294,6 +337,38 @@ module GrowsurfRuby
         #   @param unsubscribed [Boolean]
         #
         #   @param vanity_keys [Array<String>]
+
+        # @see GrowsurfRuby::Models::Campaign::CampaignParticipant#payout_settings
+        class PayoutSettings < GrowsurfRuby::Internal::Type::BaseModel
+          # @!attribute required_actions
+          #   Actions the participant must complete before payouts can be sent.
+          #
+          #   @return [Array<Symbol, GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::RequiredAction>, nil]
+          optional :required_actions,
+                   -> {
+                     GrowsurfRuby::Internal::Type::ArrayOf[
+                       enum: GrowsurfRuby::Campaign::CampaignParticipant::PayoutSettings::RequiredAction
+                     ]
+                   },
+                   api_name: :requiredActions
+
+          # @!method initialize(required_actions: nil)
+          #   Payout-related actions the participant must complete before a payout can be
+          #   released (e.g. configuring a payout destination or submitting a W-9/W-8 tax form).
+          #   Always present; the requiredActions array is empty when no action is required.
+          #
+          #   @param required_actions [Array<Symbol, GrowsurfRuby::Models::Campaign::CampaignParticipant::PayoutSettings::RequiredAction>] Actions the participant must complete before payouts can be sent.
+
+          module RequiredAction
+            extend GrowsurfRuby::Internal::Type::Enum
+
+            PAYOUT_DESTINATION = :PAYOUT_DESTINATION
+            TAX_INFO = :TAX_INFO
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
 
         # @see GrowsurfRuby::Models::Campaign::CampaignParticipant#referrer
         class Referrer < GrowsurfRuby::Internal::Type::BaseModel

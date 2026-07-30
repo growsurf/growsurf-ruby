@@ -70,7 +70,7 @@ module GrowsurfRuby
         #
         # @param referred_reward_upfront [Boolean] Body param
         #
-        # @param referred_value [GrowsurfRuby::Models::RewardTaxValuation] Body param: Tax valuation for the referred friend's side of a double-sided rewa
+        # @param referred_value [GrowsurfRuby::Models::RewardTaxValuation] Body param: Tax treatment override for the referred friend's side of a double-sided rewa
         #
         # @param title [String] Body param
         #
@@ -138,7 +138,7 @@ module GrowsurfRuby
         #
         # @param referred_reward_upfront [Boolean] Body param
         #
-        # @param referred_value [GrowsurfRuby::Models::RewardTaxValuation] Body param: Tax valuation for the referred friend's side of a double-sided rewa
+        # @param referred_value [GrowsurfRuby::Models::RewardTaxValuation] Body param: Tax treatment override for the referred friend's side of a double-sided rewa
         #
         # @param title [String] Body param
         #

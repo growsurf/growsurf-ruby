@@ -1,0 +1,57 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_request_payout_destination_confirmation_response =
+        {
+          expires_at: Integer?,
+          provider: String,
+          provider_display_name: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
+        }
+
+      class ParticipantRequestPayoutDestinationConfirmationResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor expires_at: Integer?
+
+        attr_reader provider: String?
+
+        def provider=: (
+          String
+        ) -> String
+
+        attr_reader provider_display_name: String?
+
+        def provider_display_name=: (String) -> String
+
+        attr_reader status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status?
+
+        def status=: (
+          GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
+
+        def initialize: (
+          ?expires_at: Integer?,
+          ?provider: String,
+          ?provider_display_name: String,
+          ?status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
+        ) -> void
+
+        def to_hash: -> {
+          expires_at: Integer?,
+          provider: String,
+          provider_display_name: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
+        }
+
+        type status = :CONFIRMATION_REQUESTED
+
+        module Status
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          CONFIRMATION_REQUESTED: :CONFIRMATION_REQUESTED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status]
+        end
+      end
+    end
+  end
+end

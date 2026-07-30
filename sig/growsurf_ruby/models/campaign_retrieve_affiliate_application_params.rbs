@@ -1,0 +1,28 @@
+module GrowsurfRuby
+  module Models
+    type campaign_retrieve_affiliate_application_params =
+      { id: String, application_id: String }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignRetrieveAffiliateApplicationParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor application_id: String
+
+      def initialize: (
+        id: String,
+        application_id: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        application_id: String,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+    end
+  end
+end
