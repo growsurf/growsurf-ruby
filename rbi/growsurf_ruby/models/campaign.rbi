@@ -188,7 +188,7 @@ module GrowsurfRuby
         sig { params(referred_reward_upfront: T::Boolean).void }
         attr_writer :referred_reward_upfront
 
-        # Tax valuation for the referred friend's side of a double-sided reward.
+        # Tax treatment override for the referred friend's side of a double-sided reward.
         sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
         attr_reader :referred_value
 
@@ -271,7 +271,7 @@ module GrowsurfRuby
           referral_coupon_code: nil,
           referral_description: nil,
           referred_reward_upfront: nil,
-          # Tax valuation for the referred friend's side of a double-sided reward.
+          # Tax treatment override for the referred friend's side of a double-sided reward.
           referred_value: nil,
           # Tax valuation for the reward (the referrer's side of a double-sided reward).
           value: nil

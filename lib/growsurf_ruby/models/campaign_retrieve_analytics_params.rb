@@ -26,11 +26,14 @@ module GrowsurfRuby
       optional :end_date, Integer
 
       # @!attribute include
-      #   Comma-separated list of optional enrichments (opt-in to keep the default response
-      #   lean): `previousPeriod` adds totals for the equal-length window immediately before
-      #   the requested one; `statusCounts` adds reward (and, for affiliate programs,
-      #   affiliate/commission/payout) status breakdowns; `rates` adds derived referral
-      #   rates.
+      #   Comma-separated list of optional data to include: `previousPeriod` adds totals for
+      #   the equal-length window immediately before the requested one; `statusCounts` adds
+      #   reward (and, for affiliate programs, affiliate/commission/payout) status breakdowns;
+      #   `rates` adds derived referral rates; `email` adds `sent`, `delivered`, `opened`,
+      #   `clicked`, `bounced`, `spamComplaints`, and per-email-type metrics. When `email` and
+      #   an interval are both requested, each `series` item also contains counts for emails
+      #   sent during that period. Combine `email` with `previousPeriod` to include the same
+      #   email metrics in both windows.
       #
       #   @return [String, nil]
       optional :include, String
@@ -59,7 +62,7 @@ module GrowsurfRuby
       #
       #   @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
       #
-      #   @param include [String] Comma-separated list of optional enrichments (opt-in to keep the default response
+      #   @param include [String] Comma-separated list of optional data to include: `previousPeriod` adds totals for
       #
       #   @param interval [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Interval] When set to `day`, `week`, or `month`, the response also includes a `series` array
       #

@@ -1,0 +1,92 @@
+module GrowsurfRuby
+  module Models
+    type affiliate_invite =
+      {
+        accepted_at: Integer?,
+        created_at: Integer,
+        email: String,
+        expires_at: Integer,
+        first_name: String?,
+        id: String,
+        last_name: String?,
+        last_sent_at: Integer,
+        revoked_at: Integer?,
+        status: GrowsurfRuby::Models::AffiliateInvite::status
+      }
+
+    class AffiliateInvite < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor accepted_at: Integer?
+
+      attr_reader created_at: Integer?
+
+      def created_at=: (Integer) -> Integer
+
+      attr_reader email: String?
+
+      def email=: (String) -> String
+
+      attr_reader expires_at: Integer?
+
+      def expires_at=: (Integer) -> Integer
+
+      attr_accessor first_name: String?
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_accessor last_name: String?
+
+      attr_reader last_sent_at: Integer?
+
+      def last_sent_at=: (Integer) -> Integer
+
+      attr_accessor revoked_at: Integer?
+
+      attr_reader status: GrowsurfRuby::Models::AffiliateInvite::status?
+
+      def status=: (
+        GrowsurfRuby::Models::AffiliateInvite::status
+      ) -> GrowsurfRuby::Models::AffiliateInvite::status
+
+      def initialize: (
+        ?accepted_at: Integer?,
+        ?created_at: Integer,
+        ?email: String,
+        ?expires_at: Integer,
+        ?first_name: String?,
+        ?id: String,
+        ?last_name: String?,
+        ?last_sent_at: Integer,
+        ?revoked_at: Integer?,
+        ?status: GrowsurfRuby::Models::AffiliateInvite::status
+      ) -> void
+
+      def to_hash: -> {
+        accepted_at: Integer?,
+        created_at: Integer,
+        email: String,
+        expires_at: Integer,
+        first_name: String?,
+        id: String,
+        last_name: String?,
+        last_sent_at: Integer,
+        revoked_at: Integer?,
+        status: GrowsurfRuby::Models::AffiliateInvite::status
+      }
+
+      type status = :PENDING | :ACCEPTED | :EXPIRED | :REVOKED
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        PENDING: :PENDING
+        ACCEPTED: :ACCEPTED
+        EXPIRED: :EXPIRED
+        REVOKED: :REVOKED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::AffiliateInvite::status]
+      end
+    end
+  end
+end

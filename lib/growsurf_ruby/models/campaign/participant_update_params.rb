@@ -18,6 +18,16 @@ module GrowsurfRuby
         #   @return [String]
         required :participant_id_or_email, String
 
+        # @!attribute affiliate_status
+        #   Affiliate programs only. Sets the affiliate status. `APPROVED` also enrolls a
+        #   participant who is not yet an affiliate. `SUSPENDED` and `BANNED` are rejected
+        #   for non-affiliates.
+        #
+        #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::AffiliateStatus, nil]
+        optional :affiliate_status,
+                 enum: -> { GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus },
+                 api_name: :affiliateStatus
+
         # @!attribute email
         #
         #   @return [String, nil]
@@ -46,12 +56,6 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :notes, String
 
-        # @!attribute paypal_email
-        #   The participant's PayPal email address, used for affiliate payouts.
-        #
-        #   @return [String, nil]
-        optional :paypal_email, String, api_name: :paypalEmail
-
         # @!attribute referral_status
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::ReferralStatus, nil]
@@ -74,13 +78,15 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, participant_id_or_email:, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, paypal_email: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        # @!method initialize(id:, participant_id_or_email:, affiliate_status: nil, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::ParticipantUpdateParams} for more details.
         #
         #   @param id [String]
         #
         #   @param participant_id_or_email [String]
+        #
+        #   @param affiliate_status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::AffiliateStatus] Affiliate programs only. Sets the affiliate status.
         #
         #   @param email [String]
         #
@@ -92,8 +98,6 @@ module GrowsurfRuby
         #
         #   @param notes [String] Freeform internal notes about the participant (internal only, never exposed to pa
         #
-        #   @param paypal_email [String] The participant's PayPal email address, used for affiliate payouts.
-        #
         #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::ReferralStatus]
         #
         #   @param referred_by [String]
@@ -103,6 +107,18 @@ module GrowsurfRuby
         #   @param vanity_keys [Array<String>]
         #
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
+
+        # @see GrowsurfRuby::Models::Campaign::ParticipantUpdateParams#affiliate_status
+        module AffiliateStatus
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          APPROVED = :APPROVED
+          SUSPENDED = :SUSPENDED
+          BANNED = :BANNED
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         module ReferralStatus
           extend GrowsurfRuby::Internal::Type::Enum

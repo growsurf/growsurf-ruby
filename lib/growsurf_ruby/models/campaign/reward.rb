@@ -57,6 +57,13 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :image_url, String, api_name: :imageUrl, nil?: true
 
+        # @!attribute is_visible
+        #   Whether the reward is enabled. When `false` the reward is disabled: hidden from
+        #   participants and no longer awarded, including those who already earned it.
+        #
+        #   @return [Boolean, nil]
+        optional :is_visible, GrowsurfRuby::Internal::Type::Boolean, api_name: :isVisible
+
         # @!attribute limit
         #   `-1` represents an unlimited reward in REST responses.
         #
@@ -118,7 +125,7 @@ module GrowsurfRuby
                  api_name: :referredRewardUpfront
 
         # @!attribute referred_value
-        #   Tax valuation for the referred friend's side of a double-sided reward.
+        #   Tax treatment override for the referred friend's side of a double-sided reward.
         #
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :referred_value,
@@ -126,13 +133,19 @@ module GrowsurfRuby
                  api_name: :referredValue,
                  nil?: true
 
+        # @!attribute title
+        #   The reward title (internal label).
+        #
+        #   @return [String, nil]
+        optional :title, String, nil?: true
+
         # @!attribute value
         #   Tax valuation for the reward (the referrer's side of a double-sided reward).
         #
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
 
-        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, value: nil)
+        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_visible: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil)
         #   @param id [String]
         #
         #   @param is_unlimited [Boolean]
@@ -150,6 +163,8 @@ module GrowsurfRuby
         #   @param description [String, nil]
         #
         #   @param image_url [String, nil]
+        #
+        #   @param is_visible [Boolean] Whether the reward is enabled. When `false` the reward is disabled: hidden from
         #
         #   @param limit [Integer, nil] `-1` represents an unlimited reward in REST responses.
         #
@@ -169,7 +184,9 @@ module GrowsurfRuby
         #
         #   @param referred_reward_upfront [Boolean]
         #
-        #   @param referred_value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax valuation for the referred friend's side of a double-sided reward.
+        #   @param referred_value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax treatment override for the referred friend's side of a double-sided reward.
+        #
+        #   @param title [String, nil] The reward title (internal label).
         #
         #   @param value [GrowsurfRuby::Models::RewardTaxValuation, nil] Tax valuation for the reward (the referrer's side of a double-sided reward).
 

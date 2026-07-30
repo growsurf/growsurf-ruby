@@ -23,8 +23,11 @@ module GrowsurfRuby
                  GrowsurfRuby::Internal::Type::HashOf[Integer],
                  api_name: :shareCount
 
+        # Present only when `include` contains `email`.
+        optional :email, -> { GrowsurfRuby::Models::EmailAnalytics }
+
         # @!attribute end_date
-        #   Present only with `include=series`. Window end (Unix ms).
+        #   Present only when `include` contains `series` or `email`. Window end (Unix ms).
         #
         #   @return [Integer, nil]
         optional :end_date, Integer, api_name: :endDate
@@ -43,7 +46,7 @@ module GrowsurfRuby
                  }
 
         # @!attribute start_date
-        #   Present only with `include=series`. Window start (Unix ms).
+        #   Present only when `include` contains `series` or `email`. Window start (Unix ms).
         #
         #   @return [Integer, nil]
         optional :start_date, Integer, api_name: :startDate
@@ -58,11 +61,11 @@ module GrowsurfRuby
         #
         #   @param share_count [Hash{Symbol=>Integer}] Per-channel share counts (e.g. `email`, `facebook`, `twitter`, ...).
         #
-        #   @param end_date [Integer] Present only with `include=series`. Window end (Unix ms).
+        #   @param end_date [Integer] Present only when `include` contains `series` or `email`. Window end (Unix ms).
         #
         #   @param series [Array<GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series>] Present only when `include=series`. This participant's own referral-link activity
         #
-        #   @param start_date [Integer] Present only with `include=series`. Window start (Unix ms).
+        #   @param start_date [Integer] Present only when `include` contains `series` or `email`. Window start (Unix ms).
 
         # @see GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse#analytics
         class Analytics < GrowsurfRuby::Internal::Type::BaseModel
@@ -221,6 +224,9 @@ module GrowsurfRuby
           #
           #   @return [Integer, nil]
           optional :email_shares, Integer, api_name: :emailShares
+
+          # Per-period email counts when both `series` and `email` are requested.
+          optional :email, -> { GrowsurfRuby::Models::EmailAnalytics::Counts }
 
           # @!attribute facebook_shares
           #

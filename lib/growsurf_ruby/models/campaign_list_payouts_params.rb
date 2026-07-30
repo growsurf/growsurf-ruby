@@ -49,6 +49,7 @@ module GrowsurfRuby
         QUEUED = :QUEUED
         ISSUED = :ISSUED
         FAILED = :FAILED
+        REVERSED = :REVERSED
 
         # @!method self.values
         #   @return [Array<Symbol>]

@@ -1,0 +1,61 @@
+module GrowsurfRuby
+  module Models
+    type campaign_list_affiliate_applications_params =
+      {
+        id: String,
+        limit: Integer,
+        offset: Integer,
+        status: GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status
+      }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignListAffiliateApplicationsParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader offset: Integer?
+
+      def offset=: (Integer) -> Integer
+
+      attr_reader status: GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status?
+
+      def status=: (
+        GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status
+      ) -> GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status
+
+      def initialize: (
+        id: String,
+        ?limit: Integer,
+        ?offset: Integer,
+        ?status: GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        limit: Integer,
+        offset: Integer,
+        status: GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status,
+        request_options: GrowsurfRuby::RequestOptions
+      }
+
+      type status = :PENDING | :APPROVED | :DENIED
+
+      module Status
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        PENDING: :PENDING
+        APPROVED: :APPROVED
+        DENIED: :DENIED
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::status]
+      end
+    end
+  end
+end

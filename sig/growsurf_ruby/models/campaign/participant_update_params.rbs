@@ -5,12 +5,12 @@ module GrowsurfRuby
         {
           id: String,
           participant_id_or_email: String,
+          affiliate_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status,
           email: String,
           first_name: String,
           last_name: String,
           metadata: ::Hash[Symbol, top],
           notes: String,
-          paypal_email: String,
           referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
           referred_by: String,
           unsubscribed: bool,
@@ -25,6 +25,12 @@ module GrowsurfRuby
         attr_accessor id: String
 
         attr_accessor participant_id_or_email: String
+
+        attr_reader affiliate_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status?
+
+        def affiliate_status=: (
+          GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status
 
         attr_reader email: String?
 
@@ -45,10 +51,6 @@ module GrowsurfRuby
         attr_reader notes: String?
 
         def notes=: (String) -> String
-
-        attr_reader paypal_email: String?
-
-        def paypal_email=: (String) -> String
 
         attr_reader referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status?
 
@@ -71,12 +73,12 @@ module GrowsurfRuby
         def initialize: (
           id: String,
           participant_id_or_email: String,
+          ?affiliate_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status,
           ?email: String,
           ?first_name: String,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
           ?notes: String,
-          ?paypal_email: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
           ?referred_by: String,
           ?unsubscribed: bool,
@@ -87,18 +89,30 @@ module GrowsurfRuby
         def to_hash: -> {
           id: String,
           participant_id_or_email: String,
+          affiliate_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status,
           email: String,
           first_name: String,
           last_name: String,
           metadata: ::Hash[Symbol, top],
           notes: String,
-          paypal_email: String,
           referral_status: GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::referral_status,
           referred_by: String,
           unsubscribed: bool,
           vanity_keys: ::Array[String],
           request_options: GrowsurfRuby::RequestOptions
         }
+
+        type affiliate_status = :APPROVED | :SUSPENDED | :BANNED
+
+        module AffiliateStatus
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          APPROVED: :APPROVED
+          SUSPENDED: :SUSPENDED
+          BANNED: :BANNED
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::affiliate_status]
+        end
 
         type referral_status =
           :CREDIT_PENDING | :CREDIT_AWARDED | :CREDIT_EXPIRED

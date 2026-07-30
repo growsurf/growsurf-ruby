@@ -28,7 +28,7 @@ module GrowsurfRuby
         sig { returns(T::Hash[Symbol, Integer]) }
         attr_accessor :share_count
 
-        # Present only with `include=series`. Window end (Unix ms).
+        # Present only when `include` contains `series` or `email`. Window end (Unix ms).
         sig { returns(T.nilable(Integer)) }
         attr_reader :end_date
 
@@ -59,7 +59,7 @@ module GrowsurfRuby
         end
         attr_writer :series
 
-        # Present only with `include=series`. Window start (Unix ms).
+        # Present only when `include` contains `series` or `email`. Window start (Unix ms).
         sig { returns(T.nilable(Integer)) }
         attr_reader :start_date
 
@@ -86,13 +86,13 @@ module GrowsurfRuby
           ranks:,
           # Per-channel share counts (e.g. `email`, `facebook`, `twitter`, ...).
           share_count:,
-          # Present only with `include=series`. Window end (Unix ms).
+          # Present only when `include` contains `series` or `email`. Window end (Unix ms).
           end_date: nil,
           # Present only when `include=series`. This participant's own referral-link activity
           # per period (ascending), windowed by `days`/`startDate`/`endDate` and bucketed by
           # `interval`.
           series: nil,
-          # Present only with `include=series`. Window start (Unix ms).
+          # Present only when `include` contains `series` or `email`. Window start (Unix ms).
           start_date: nil
         )
         end

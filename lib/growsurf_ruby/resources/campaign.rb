@@ -76,7 +76,7 @@ module GrowsurfRuby
         )
       end
 
-      # Creates a new program, plus any optional program rewards. The new program is
+      # Creates a new program, plus any optional campaign rewards. The new program is
       # created in `DRAFT` status and owned by the API key's bound team.
       #
       # @overload create(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, name: nil, rewards: nil, request_options: {})
@@ -162,6 +162,36 @@ module GrowsurfRuby
         )
       end
 
+      # Invites someone to join the affiliate program. GrowSurf emails them a single-use
+      # accept link; accepting it enrolls them as an approved affiliate without going
+      # through the public application. One active invite can exist per email address.
+      #
+      # @overload create_affiliate_invite(id, email:, first_name: nil, last_name: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param email [String] Valid email address to invite. Maximum 255 characters.
+      #
+      # @param first_name [String] Invitee first name, used in the invite email. Maximum 255 characters.
+      #
+      # @param last_name [String] Invitee last name. Maximum 255 characters.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateInvite]
+      #
+      # @see GrowsurfRuby::Models::CampaignCreateAffiliateInviteParams
+      def create_affiliate_invite(id, params)
+        parsed, options = GrowsurfRuby::CampaignCreateAffiliateInviteParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["campaign/%1$s/affiliate-invites", id],
+          body: parsed,
+          model: GrowsurfRuby::AffiliateInvite,
+          options: options
+        )
+      end
+
       # Some parameter documentations has been truncated, see
       # {GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenParams} for more
       # details.
@@ -205,6 +235,67 @@ module GrowsurfRuby
           path: ["campaign/%1$s/mobile-participant-token", id],
           body: parsed,
           model: GrowsurfRuby::Models::CampaignCreateMobileParticipantTokenResponse,
+          options: options
+        )
+      end
+
+      # Lists an affiliate program's applications, newest first. Applications exist on
+      # programs that review public signups (an `affiliateApplicationMode` of
+      # `MANUAL_REVIEW` or `AUTO_APPROVE`). A pending applicant is not a participant
+      # until their application is approved.
+      #
+      # @overload list_affiliate_applications(id, limit: nil, offset: nil, status: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param limit [Integer] How many applications to return per page (1-100).
+      #
+      # @param offset [Integer] Offset number used to skip through a result set.
+      #
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams::Status] Only return applications with this status.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateApplicationListResponse]
+      #
+      # @see GrowsurfRuby::Models::CampaignListAffiliateApplicationsParams
+      def list_affiliate_applications(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListAffiliateApplicationsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/affiliate-applications", id],
+          query: query,
+          model: GrowsurfRuby::Models::AffiliateApplicationListResponse,
+          options: options
+        )
+      end
+
+      # Lists an affiliate program's enrollment invites, newest first.
+      #
+      # @overload list_affiliate_invites(id, limit: nil, offset: nil, status: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param limit [Integer] How many invites to return per page (1-100).
+      #
+      # @param offset [Integer] Offset number used to skip through a result set.
+      #
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignListAffiliateInvitesParams::Status] Only return invites with this status.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateInviteListResponse]
+      #
+      # @see GrowsurfRuby::Models::CampaignListAffiliateInvitesParams
+      def list_affiliate_invites(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignListAffiliateInvitesParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/affiliate-invites", id],
+          query: query,
+          model: GrowsurfRuby::Models::AffiliateInviteListResponse,
           options: options
         )
       end
@@ -379,12 +470,72 @@ module GrowsurfRuby
         )
       end
 
+      # Re-sends a pending invite with a fresh accept link (the previous link stops
+      # working). Resends are rate limited per invite; retry after a few minutes if a
+      # resend was just sent.
+      #
+      # @overload resend_affiliate_invite(invite_id, id:, request_options: {})
+      #
+      # @param invite_id [String] Affiliate invite ID.
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateInvite]
+      #
+      # @see GrowsurfRuby::Models::CampaignResendAffiliateInviteParams
+      def resend_affiliate_invite(invite_id, params)
+        parsed, options = GrowsurfRuby::CampaignResendAffiliateInviteParams.dump_request(params)
+        id =
+          parsed.delete(:id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :post,
+          path: ["campaign/%1$s/affiliate-invites/%2$s/resend", id, invite_id],
+          model: GrowsurfRuby::AffiliateInvite,
+          options: options
+        )
+      end
+
+      # Returns one affiliate application, including its submitted form answers.
+      #
+      # @overload retrieve_affiliate_application(application_id, id:, request_options: {})
+      #
+      # @param application_id [String] Affiliate application ID.
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateApplication]
+      #
+      # @see GrowsurfRuby::Models::CampaignRetrieveAffiliateApplicationParams
+      def retrieve_affiliate_application(application_id, params)
+        parsed, options = GrowsurfRuby::CampaignRetrieveAffiliateApplicationParams.dump_request(params)
+        id =
+          parsed.delete(:id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/affiliate-applications/%2$s", id, application_id],
+          model: GrowsurfRuby::AffiliateApplication,
+          options: options
+        )
+      end
+
       # Some parameter documentations has been truncated, see
       # {GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams} for more details.
       #
       # Retrieves analytics for a program. Pass `interval` to also get a time-series
       # (`series`) alongside the totals, and `include` to add previous-period totals,
-      # status breakdowns, or derived rates — useful for detecting trends over time.
+      # status breakdowns, derived rates, or email performance. Add `email` to `include`
+      # for `sent` (accepted for delivery), `delivered`, `opened`, `clicked`, `bounced`,
+      # and `spamComplaints` metrics plus per-email-type breakdowns. Email rates are
+      # ratios from `0` to `1`, and `isPartial` identifies windows that begin before
+      # complete coverage.
       #
       # @overload retrieve_analytics(id, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
       #
@@ -394,7 +545,7 @@ module GrowsurfRuby
       #
       # @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
       #
-      # @param include [String] Comma-separated list of optional enrichments (opt-in to keep the default response
+      # @param include [String] Comma-separated list of optional data to include: `previousPeriod` adds totals for
       #
       # @param interval [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Interval] When set to `day`, `week`, or `month`, the response also includes a `series` array
       #
@@ -413,6 +564,82 @@ module GrowsurfRuby
           path: ["campaign/%1$s/analytics", id],
           query: query.transform_keys(end_date: "endDate", start_date: "startDate"),
           model: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams} for more
+      # details.
+      #
+      # Decides a pending application. Set `status` to `APPROVED` to enroll the applicant
+      # (this creates the participant, or upgrades an existing participant with the same
+      # email), or to `DENIED` with an optional `rejectionReason`. A denied applicant may
+      # reapply after the program's reapplication cooldown; send an earlier
+      # `reapplyAllowedAt` (without `status`) to shorten that wait for one applicant.
+      # Provide exactly one of `status` or `reapplyAllowedAt`. Denial-only fields are
+      # only valid with `status` set to `DENIED`. Approval is idempotent: repeating it
+      # returns the same participant.
+      #
+      # @overload review_affiliate_application(application_id, id:, allow_immediate_reapply: nil, reapply_allowed_at: nil, rejection_reason: nil, review_note: nil, status: nil, request_options: {})
+      #
+      # @param application_id [String] Affiliate application ID.
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param allow_immediate_reapply [Boolean] Only valid when `status` is `DENIED`; let the applicant reapply right away
+      #
+      # @param reapply_allowed_at [Integer] For an already-denied application, move the reapplication window to this earlier
+      #
+      # @param rejection_reason [String] Short reason recorded with a denial. Only valid when `status` is `DENIED`. Maximum 255 characters.
+      #
+      # @param review_note [String] Private note recorded with a denial. Only valid when `status` is `DENIED`; never shown to the applicant. Maximum 500 characters.
+      #
+      # @param status [Symbol, GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams::Status] The decision. `APPROVED` enrolls the applicant as an affiliate; `DENIED` closes
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateApplication]
+      #
+      # @see GrowsurfRuby::Models::CampaignReviewAffiliateApplicationParams
+      def review_affiliate_application(application_id, params)
+        parsed, options = GrowsurfRuby::CampaignReviewAffiliateApplicationParams.dump_request(params)
+        id =
+          parsed.delete(:id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :patch,
+          path: ["campaign/%1$s/affiliate-applications/%2$s", id, application_id],
+          body: parsed,
+          model: GrowsurfRuby::AffiliateApplication,
+          options: options
+        )
+      end
+
+      # Revokes a pending invite. Its emailed accept link stops working immediately.
+      #
+      # @overload revoke_affiliate_invite(invite_id, id:, request_options: {})
+      #
+      # @param invite_id [String] Affiliate invite ID.
+      #
+      # @param id [String] GrowSurf program ID.
+      #
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [GrowsurfRuby::Models::AffiliateInvite]
+      #
+      # @see GrowsurfRuby::Models::CampaignRevokeAffiliateInviteParams
+      def revoke_affiliate_invite(invite_id, params)
+        parsed, options = GrowsurfRuby::CampaignRevokeAffiliateInviteParams.dump_request(params)
+        id =
+          parsed.delete(:id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :delete,
+          path: ["campaign/%1$s/affiliate-invites/%2$s", id, invite_id],
+          model: GrowsurfRuby::AffiliateInvite,
           options: options
         )
       end

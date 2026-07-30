@@ -1,0 +1,49 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_request_payout_destination_confirmation_params =
+        {
+          id: String,
+          participant_id_or_email: String,
+          provider: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::provider
+        }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ParticipantRequestPayoutDestinationConfirmationParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor participant_id_or_email: String
+
+        attr_accessor provider: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::provider
+
+        def initialize: (
+          id: String,
+          participant_id_or_email: String,
+          provider: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::provider,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          participant_id_or_email: String,
+          provider: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::provider,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+
+        type provider = :PAYPAL | :WISECOM
+
+        module Provider
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          PAYPAL: :PAYPAL
+          WISECOM: :WISECOM
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::provider]
+        end
+      end
+    end
+  end
+end

@@ -82,11 +82,9 @@ module GrowsurfRuby
           attr_accessor :type
 
           sig do
-            params(
-              created_at: Integer,
-              text: String,
-              type: String
-            ).returns(T.attached_class)
+            params(created_at: Integer, text: String, type: String).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # When the activity occurred, as a Unix timestamp in milliseconds.

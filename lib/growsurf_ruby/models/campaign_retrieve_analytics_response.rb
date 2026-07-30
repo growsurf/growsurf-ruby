@@ -19,6 +19,9 @@ module GrowsurfRuby
       #   @return [Integer]
       required :start_date, Integer, api_name: :startDate
 
+      # Present only when `include` contains `email`.
+      optional :email, -> { GrowsurfRuby::Models::EmailAnalytics }
+
       # @!attribute previous_period
       #   Present only when `include` contains `previousPeriod`.
       #
@@ -283,6 +286,9 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics]
         required :analytics, -> { GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics }
 
+        # Present when the parent request includes both `previousPeriod` and `email`.
+        optional :email, -> { GrowsurfRuby::Models::EmailAnalytics }
+
         # @!attribute end_date
         #
         #   @return [Integer]
@@ -354,6 +360,9 @@ module GrowsurfRuby
         #
         #   @return [Integer, nil]
         optional :email_shares, Integer, api_name: :emailShares
+
+        # Per-period email counts. Present only when `include` contains `email`.
+        optional :email, -> { GrowsurfRuby::Models::EmailAnalytics::Counts }
 
         # @!attribute facebook_shares
         #
@@ -711,6 +720,14 @@ module GrowsurfRuby
                      GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
                    }
 
+          # @!attribute reversed
+          #
+          #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric, nil]
+          optional :reversed,
+                   -> {
+                     GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+                   }
+
           # @!attribute upcoming
           #
           #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric, nil]
@@ -719,7 +736,7 @@ module GrowsurfRuby
                      GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
                    }
 
-          # @!method initialize(failed: nil, issued: nil, queued: nil, upcoming: nil)
+          # @!method initialize(failed: nil, issued: nil, queued: nil, reversed: nil, upcoming: nil)
           #   Affiliate only. Payout counts and amounts by status.
           #
           #   @param failed [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric]
@@ -727,6 +744,8 @@ module GrowsurfRuby
           #   @param issued [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric]
           #
           #   @param queued [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric]
+          #
+          #   @param reversed [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric]
           #
           #   @param upcoming [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric]
 

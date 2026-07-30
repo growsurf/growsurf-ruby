@@ -115,6 +115,12 @@ module GrowsurfRuby
         sig { params(queued_at: Integer).void }
         attr_writer :queued_at
 
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :reversed_at
+
+        sig { params(reversed_at: Integer).void }
+        attr_writer :reversed_at
+
         sig do
           params(
             id: String,
@@ -133,7 +139,8 @@ module GrowsurfRuby
             fx_error: T.nilable(String),
             issued_at: Integer,
             provider: T.nilable(String),
-            queued_at: Integer
+            queued_at: Integer,
+            reversed_at: Integer
           ).returns(T.attached_class)
         end
         def self.new(
@@ -152,7 +159,8 @@ module GrowsurfRuby
           fx_error: nil,
           issued_at: nil,
           provider: nil,
-          queued_at: nil
+          queued_at: nil,
+          reversed_at: nil
         )
         end
 
@@ -175,7 +183,8 @@ module GrowsurfRuby
               fx_error: T.nilable(String),
               issued_at: Integer,
               provider: T.nilable(String),
-              queued_at: Integer
+              queued_at: Integer,
+              reversed_at: Integer
             }
           )
         end
@@ -209,6 +218,11 @@ module GrowsurfRuby
           FAILED =
             T.let(
               :FAILED,
+              GrowsurfRuby::ParticipantPayoutList::Payout::Status::TaggedSymbol
+            )
+          REVERSED =
+            T.let(
+              :REVERSED,
               GrowsurfRuby::ParticipantPayoutList::Payout::Status::TaggedSymbol
             )
 

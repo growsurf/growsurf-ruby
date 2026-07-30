@@ -31,13 +31,19 @@ module GrowsurfRuby
           )
         end
 
-        # Updates a participant by GrowSurf participant ID or email address.
+        # Updates a participant by GrowSurf participant ID or email address. For affiliate
+        # programs, set `affiliateStatus` to `APPROVED`, `SUSPENDED`, or `BANNED`.
+        # `APPROVED` enrolls the participant as an affiliate. `SUSPENDED` and `BANNED`
+        # require an existing affiliate. This endpoint does not accept `isAffiliate`, and
+        # affiliate enrollment cannot be removed through REST.
         #
-        # @overload update(participant_id_or_email, id:, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, paypal_email: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        # @overload update(participant_id_or_email, id:, affiliate_status: nil, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
         #
         # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
         #
         # @param id [String] Path param: GrowSurf program ID.
+        #
+        # @param affiliate_status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::AffiliateStatus] Body param: Affiliate programs only. Sets the affiliate status. `APPROVED` also enrolls a participant who is not yet an affiliate. `SUSPENDED` and `BANNED` are rejected for non-affiliates.
         #
         # @param email [String] Body param
         #
@@ -48,8 +54,6 @@ module GrowsurfRuby
         # @param metadata [Hash{Symbol=>Object}] Body param: Shallow custom metadata object.
         #
         # @param notes [String] Body param: Freeform internal notes about the participant (internal only, never ex
-        #
-        # @param paypal_email [String] Body param: The participant's PayPal email address, used for affiliate payouts.
         #
         # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantUpdateParams::ReferralStatus] Body param
         #
@@ -143,9 +147,15 @@ module GrowsurfRuby
         # {GrowsurfRuby::Models::Campaign::ParticipantAddParams} for more details.
         #
         # Adds a new participant to the program. If the email already exists, the existing
-        # participant is returned.
+        # participant is returned unchanged. For affiliate programs, set `isAffiliate` to
+        # `true` to enroll a new participant as an approved affiliate or `false` to create
+        # a non-affiliate. If you omit `isAffiliate`, a valid `referredBy` creates a
+        # referred non-affiliate; without a valid referrer, the new participant is enrolled
+        # as an approved affiliate. You can send a valid `referredBy` with
+        # `isAffiliate: true` to keep the referral attribution and enroll the participant
+        # as an affiliate.
         #
-        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
+        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -156,6 +166,8 @@ module GrowsurfRuby
         # @param first_name [String]
         #
         # @param ip_address [String]
+        #
+        # @param is_affiliate [Boolean] Affiliate programs only. Controls affiliate enrollment for a new participant. `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates a non-affiliate without `affiliateStatus`. Existing participants are returned unchanged.
         #
         # @param last_name [String]
         #
@@ -670,9 +682,12 @@ module GrowsurfRuby
         # details.
         #
         # Retrieves analytics for a single participant — all-time engagement counters,
-        # leaderboard ranks, and per-channel share counts (plus affiliate money metrics
-        # for affiliate programs). Useful for segmenting and re-engaging participants.
-        # Pass `include=series` to also get this participant's own activity over time.
+        # leaderboard ranks, and per-channel share counts (plus affiliate revenue,
+        # commission, and payout metrics for affiliate programs). Pass `include=email`
+        # for `sent` (accepted for delivery), `delivered`, `opened`, `clicked`,
+        # `bounced`, and `spamComplaints` metrics attributed to this participant,
+        # including invitations they sent. Use `include=email,series` to include the
+        # same counts in each UTC series bucket.
         #
         # @overload retrieve_analytics(participant_id_or_email, id:, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
         #
@@ -684,9 +699,9 @@ module GrowsurfRuby
         #
         # @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
         #
-        # @param include [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Include] Set to `series` to also return this participant's own activity per period.
+        # @param include [String] Comma-separated optional data. `series` returns this participant's own activity
         #
-        # @param interval [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval] Bucket size for the `series` (only used with `include=series`). Defaults to `day`.
+        # @param interval [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval] Bucket size for the `series` (only used when `include` contains `series`).
         #
         # @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
         #
@@ -707,6 +722,76 @@ module GrowsurfRuby
             path: ["campaign/%1$s/participant/%2$s/analytics", id, participant_id_or_email],
             query: query.transform_keys(end_date: "endDate", start_date: "startDate"),
             model: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse,
+            options: options
+          )
+        end
+
+        # Returns a participant's payout-destination status across every payout provider
+        # enabled for the program (PayPal and/or Wise). For each provider it reports the
+        # current status, the confirmed claim email, the legal recipient type, and — when a
+        # delivery bounced or a recipient was invalidated — the repair reason.
+        # `activeProvider` is the provider that currently gets paid, or `null` until the
+        # participant confirms one.
+        #
+        # @overload get_payout_destination(participant_id_or_email, id:, request_options: {})
+        #
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        #
+        # @param id [String] Path param: GrowSurf program ID.
+        #
+        # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationParams
+        def get_payout_destination(participant_id_or_email, params)
+          parsed, options = GrowsurfRuby::Campaign::ParticipantGetPayoutDestinationParams.dump_request(params)
+          id =
+            parsed.delete(:id) do
+              raise ArgumentError.new("missing required path argument #{_1}")
+            end
+          @client.request(
+            method: :get,
+            path: ["campaign/%1$s/participant/%2$s/payout-destination", id, participant_id_or_email],
+            model: GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse,
+            options: options
+          )
+        end
+
+        # Sends the participant a one-time link to confirm their payout destination for
+        # the chosen provider. Only the participant can open the link and confirm — this
+        # endpoint just triggers the message. The provider must be enabled for the
+        # program.
+        #
+        # @overload request_payout_destination_confirmation(participant_id_or_email, id:, provider:, request_options: {})
+        #
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        #
+        # @param id [String] Path param: GrowSurf program ID.
+        #
+        # @param provider [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider] Body param: The payout provider the participant should confirm a destination for.
+        #
+        # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams
+        def request_payout_destination_confirmation(participant_id_or_email, params)
+          parsed, options =
+            GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationParams.dump_request(params)
+          id =
+            parsed.delete(:id) do
+              raise ArgumentError.new("missing required path argument #{_1}")
+            end
+          @client.request(
+            method: :post,
+            path: [
+              "campaign/%1$s/participant/%2$s/payout-destination/request-confirmation",
+              id,
+              participant_id_or_email
+            ],
+            body: parsed,
+            model: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse,
             options: options
           )
         end

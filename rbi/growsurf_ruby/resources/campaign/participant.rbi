@@ -21,17 +21,22 @@ module GrowsurfRuby
         )
         end
 
-        # Updates a participant by GrowSurf participant ID or email address.
+        # Updates a participant by GrowSurf participant ID or email address. For affiliate
+        # programs, set `affiliateStatus` to `APPROVED`, `SUSPENDED`, or `BANNED`.
+        # `APPROVED` enrolls the participant as an affiliate. `SUSPENDED` and `BANNED`
+        # require an existing affiliate. This endpoint does not accept `isAffiliate`, and
+        # affiliate enrollment cannot be removed through REST.
         sig do
           params(
             participant_id_or_email: String,
             id: String,
+            affiliate_status:
+              GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             notes: String,
-            paypal_email: String,
             referral_status:
               GrowsurfRuby::Campaign::ParticipantUpdateParams::ReferralStatus::OrSymbol,
             referred_by: String,
@@ -45,6 +50,10 @@ module GrowsurfRuby
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
+          # Body param: Affiliate programs only. Sets the affiliate status. `APPROVED` also
+          # enrolls a participant who is not yet an affiliate. `SUSPENDED` and `BANNED`
+          # are rejected for non-affiliates.
+          affiliate_status: nil,
           # Body param
           email: nil,
           # Body param
@@ -56,8 +65,6 @@ module GrowsurfRuby
           # Body param: Freeform internal notes about the participant (internal only, never
           # exposed to participants).
           notes: nil,
-          # Body param: The participant's PayPal email address, used for affiliate payouts.
-          paypal_email: nil,
           # Body param
           referral_status: nil,
           # Body param
@@ -114,7 +121,13 @@ module GrowsurfRuby
         end
 
         # Adds a new participant to the program. If the email already exists, the existing
-        # participant is returned.
+        # participant is returned unchanged. For affiliate programs, set `isAffiliate` to
+        # `true` to enroll a new participant as an approved affiliate or `false` to create
+        # a non-affiliate. If you omit `isAffiliate`, a valid `referredBy` creates a
+        # referred non-affiliate; without a valid referrer, the new participant is enrolled
+        # as an approved affiliate. You can send a valid `referredBy` with
+        # `isAffiliate: true` to keep the referral attribution and enroll the participant
+        # as an affiliate.
         sig do
           params(
             id: String,
@@ -122,6 +135,7 @@ module GrowsurfRuby
             fingerprint: String,
             first_name: String,
             ip_address: String,
+            is_affiliate: T::Boolean,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             mobile_instance_id: String,
@@ -138,6 +152,11 @@ module GrowsurfRuby
           fingerprint: nil,
           first_name: nil,
           ip_address: nil,
+          # Affiliate programs only. Controls affiliate enrollment for a new participant.
+          # `true` enrolls the participant with `affiliateStatus: APPROVED`; `false`
+          # creates a non-affiliate without `affiliateStatus`. Existing participants are
+          # returned unchanged.
+          is_affiliate: nil,
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,
@@ -602,18 +621,19 @@ module GrowsurfRuby
         )
         end
 
-        # Retrieves analytics for a single participant — all-time engagement counters,
-        # leaderboard ranks, and per-channel share counts (plus affiliate money metrics
-        # for affiliate programs). Useful for segmenting and re-engaging participants.
-        # Pass `include=series` to also get this participant's own activity over time.
+        # Retrieves analytics for a single participant — all-time engagement counters, leaderboard
+        # ranks, and per-channel share counts (plus affiliate revenue, commission, and payout
+        # metrics for affiliate programs). Pass `include=email` for `sent` (accepted for
+        # delivery), `delivered`, `opened`, `clicked`, `bounced`, and `spamComplaints` metrics
+        # attributed to this participant, including invitations they sent. Use
+        # `include=email,series` to include the same counts in each UTC series bucket.
         sig do
           params(
             participant_id_or_email: String,
             id: String,
             days: Integer,
             end_date: Integer,
-            include:
-              GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Include::OrSymbol,
+            include: String,
             interval:
               GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Interval::OrSymbol,
             start_date: Integer,
@@ -632,13 +652,69 @@ module GrowsurfRuby
           # End date of the analytics timeframe as a Unix timestamp in milliseconds.
           # Required if `days` is not set.
           end_date: nil,
-          # Set to `series` to also return this participant's own activity per period.
+          # Comma-separated optional data. `series` returns this participant's own activity per
+          # period; `email` returns `sent`, `delivered`, `opened`, `clicked`, `bounced`,
+          # `spamComplaints`, and per-email-type metrics attributed to the participant for the
+          # requested analytics window (including invitations they sent). Request both in either
+          # order to add email counts to every series item for emails sent during that period.
+          # Only documented tokens are accepted; an unknown token returns `400`.
           include: nil,
-          # Bucket size for the `series` (only used with `include=series`). Defaults to `day`.
+          # Bucket size for the `series` (only used when `include` contains `series`). Defaults to
+          # `day`.
           interval: nil,
           # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
           # Required if `days` is not set.
           start_date: nil,
+          request_options: {}
+        )
+        end
+
+        # Returns a participant's payout-destination status across every payout provider
+        # enabled for the program (PayPal and/or Wise). For each provider it reports the
+        # current status, the confirmed claim email, the legal recipient type, and — when a
+        # delivery bounced or a recipient was invalidated — the repair reason.
+        # `activeProvider` is the provider that currently gets paid, or `null` until the
+        # participant confirms one.
+        sig do
+          params(
+            participant_id_or_email: String,
+            id: String,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(
+            GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse
+          )
+        end
+        def get_payout_destination(
+          # GrowSurf participant ID or URL-encoded participant email address.
+          participant_id_or_email,
+          # GrowSurf program ID.
+          id:,
+          request_options: {}
+        )
+        end
+
+        # Sends the participant a one-time link to confirm their payout destination for
+        # the chosen provider. Only the participant can open the link and confirm — this
+        # endpoint just triggers the message. The provider must be enabled for the
+        # program.
+        sig do
+          params(
+            participant_id_or_email: String,
+            id: String,
+            provider:
+              GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider::OrSymbol,
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(
+            GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse
+          )
+        end
+        def request_payout_destination_confirmation(
+          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          participant_id_or_email,
+          # Path param: GrowSurf program ID.
+          id:,
+          # Body param: The payout provider the participant should confirm a destination for.
+          provider:,
           request_options: {}
         )
         end

@@ -53,6 +53,14 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :image_url
 
+        # Whether the reward is enabled. When `false` the reward is disabled: hidden from
+        # participants and no longer awarded, including those who already earned it.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_visible
+
+        sig { params(is_visible: T::Boolean).void }
+        attr_writer :is_visible
+
         # `-1` represents an unlimited reward in REST responses.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :limit
@@ -99,7 +107,7 @@ module GrowsurfRuby
         sig { params(referred_reward_upfront: T::Boolean).void }
         attr_writer :referred_reward_upfront
 
-        # Tax valuation for the referred friend's side of a double-sided reward.
+        # Tax treatment override for the referred friend's side of a double-sided reward.
         sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
         attr_reader :referred_value
 
@@ -109,6 +117,10 @@ module GrowsurfRuby
           ).void
         end
         attr_writer :referred_value
+
+        # The reward title (internal label).
+        sig { returns(T.nilable(String)) }
+        attr_accessor :title
 
         # Tax valuation for the reward (the referrer's side of a double-sided reward).
         sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
@@ -133,6 +145,7 @@ module GrowsurfRuby
             coupon_code: T.nilable(String),
             description: T.nilable(String),
             image_url: T.nilable(String),
+            is_visible: T::Boolean,
             limit: T.nilable(Integer),
             limit_duration:
               T.nilable(
@@ -146,6 +159,7 @@ module GrowsurfRuby
             referral_description: T.nilable(String),
             referred_reward_upfront: T::Boolean,
             referred_value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
+            title: T.nilable(String),
             value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
           ).returns(T.attached_class)
         end
@@ -163,6 +177,9 @@ module GrowsurfRuby
           coupon_code: nil,
           description: nil,
           image_url: nil,
+          # Whether the reward is enabled. When `false` the reward is disabled: hidden from
+          # participants and no longer awarded, including those who already earned it.
+          is_visible: nil,
           # `-1` represents an unlimited reward in REST responses.
           limit: nil,
           limit_duration: nil,
@@ -182,8 +199,10 @@ module GrowsurfRuby
           referral_coupon_code: nil,
           referral_description: nil,
           referred_reward_upfront: nil,
-          # Tax valuation for the referred friend's side of a double-sided reward.
+          # Tax treatment override for the referred friend's side of a double-sided reward.
           referred_value: nil,
+          # The reward title (internal label).
+          title: nil,
           # Tax valuation for the reward (the referrer's side of a double-sided reward).
           value: nil
         )
@@ -202,6 +221,7 @@ module GrowsurfRuby
               coupon_code: T.nilable(String),
               description: T.nilable(String),
               image_url: T.nilable(String),
+              is_visible: T::Boolean,
               limit: T.nilable(Integer),
               limit_duration:
                 T.nilable(
@@ -215,6 +235,7 @@ module GrowsurfRuby
               referral_description: T.nilable(String),
               referred_reward_upfront: T::Boolean,
               referred_value: T.nilable(GrowsurfRuby::RewardTaxValuation),
+              title: T.nilable(String),
               value: T.nilable(GrowsurfRuby::RewardTaxValuation)
             }
           )

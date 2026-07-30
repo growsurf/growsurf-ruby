@@ -106,7 +106,12 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :queued_at, Integer, api_name: :queuedAt
 
-        # @!method initialize(id:, amount:, commission_ids:, created_at:, currency_iso:, participant_id:, status:, amount_in_campaign_currency: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, failed_at: nil, fx_error: nil, issued_at: nil, provider: nil, queued_at: nil)
+        # @!attribute reversed_at
+        #
+        #   @return [Integer, nil]
+        optional :reversed_at, Integer, api_name: :reversedAt
+
+        # @!method initialize(id:, amount:, commission_ids:, created_at:, currency_iso:, participant_id:, status:, amount_in_campaign_currency: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, failed_at: nil, fx_error: nil, issued_at: nil, provider: nil, queued_at: nil, reversed_at: nil)
         #   @param id [String]
         #   @param amount [Integer]
         #   @param commission_ids [Array<String>]
@@ -123,6 +128,7 @@ module GrowsurfRuby
         #   @param issued_at [Integer]
         #   @param provider [String, nil]
         #   @param queued_at [Integer]
+        #   @param reversed_at [Integer]
 
         # @see GrowsurfRuby::Models::ParticipantPayoutList::Payout#status
         module Status
@@ -132,6 +138,7 @@ module GrowsurfRuby
           QUEUED = :QUEUED
           ISSUED = :ISSUED
           FAILED = :FAILED
+          REVERSED = :REVERSED
 
           # @!method self.values
           #   @return [Array<Symbol>]

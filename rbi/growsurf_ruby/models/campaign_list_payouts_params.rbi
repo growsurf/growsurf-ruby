@@ -111,6 +111,11 @@ module GrowsurfRuby
             :FAILED,
             GrowsurfRuby::CampaignListPayoutsParams::Status::TaggedSymbol
           )
+        REVERSED =
+          T.let(
+            :REVERSED,
+            GrowsurfRuby::CampaignListPayoutsParams::Status::TaggedSymbol
+          )
 
         sig do
           override.returns(

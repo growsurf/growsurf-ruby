@@ -33,6 +33,16 @@ module GrowsurfRuby
         sig { params(ip_address: String).void }
         attr_writer :ip_address
 
+        # Affiliate programs only. Controls affiliate enrollment for a new participant.
+        # `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates
+        # a non-affiliate without `affiliateStatus`. Existing participants are returned
+        # unchanged.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_affiliate
+
+        sig { params(is_affiliate: T::Boolean).void }
+        attr_writer :is_affiliate
+
         sig { returns(T.nilable(String)) }
         attr_reader :last_name
 
@@ -87,6 +97,7 @@ module GrowsurfRuby
             fingerprint: String,
             first_name: String,
             ip_address: String,
+            is_affiliate: T::Boolean,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             mobile_instance_id: String,
@@ -100,6 +111,11 @@ module GrowsurfRuby
           fingerprint: nil,
           first_name: nil,
           ip_address: nil,
+          # Affiliate programs only. Controls affiliate enrollment for a new participant.
+          # `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates
+          # a non-affiliate without `affiliateStatus`. Existing participants are returned
+          # unchanged.
+          is_affiliate: nil,
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,
@@ -124,6 +140,7 @@ module GrowsurfRuby
               fingerprint: String,
               first_name: String,
               ip_address: String,
+              is_affiliate: T::Boolean,
               last_name: String,
               metadata: T::Hash[Symbol, T.anything],
               mobile_instance_id: String,

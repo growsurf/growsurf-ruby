@@ -43,7 +43,8 @@ module GrowsurfRuby
           fx_error: String?,
           issued_at: Integer,
           provider: String?,
-          queued_at: Integer
+          queued_at: Integer,
+          reversed_at: Integer
         }
 
       class Payout < GrowsurfRuby::Internal::Type::BaseModel
@@ -87,6 +88,10 @@ module GrowsurfRuby
 
         def queued_at=: (Integer) -> Integer
 
+        attr_reader reversed_at: Integer?
+
+        def reversed_at=: (Integer) -> Integer
+
         def initialize: (
           id: String,
           amount: Integer,
@@ -103,7 +108,8 @@ module GrowsurfRuby
           ?fx_error: String?,
           ?issued_at: Integer,
           ?provider: String?,
-          ?queued_at: Integer
+          ?queued_at: Integer,
+          ?reversed_at: Integer
         ) -> void
 
         def to_hash: -> {
@@ -122,10 +128,11 @@ module GrowsurfRuby
           fx_error: String?,
           issued_at: Integer,
           provider: String?,
-          queued_at: Integer
+          queued_at: Integer,
+          reversed_at: Integer
         }
 
-        type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED
+        type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED | :REVERSED
 
         module Status
           extend GrowsurfRuby::Internal::Type::Enum
@@ -134,6 +141,7 @@ module GrowsurfRuby
           QUEUED: :QUEUED
           ISSUED: :ISSUED
           FAILED: :FAILED
+          REVERSED: :REVERSED
 
           def self?.values: -> ::Array[GrowsurfRuby::Models::ParticipantPayoutList::Payout::status]
         end
