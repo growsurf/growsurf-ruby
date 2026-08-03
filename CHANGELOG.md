@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/growsurf/growsurf-ruby/compare/v1.2.0...v1.2.1) (2026-07-14)
+
+
+### Bug Fixes
+
+* align method docs with the REST v2 contract ([11967f2](https://github.com/growsurf/growsurf-ruby/commit/11967f2d1b95266e921775b921db970fc11e3cbb))
+
 ## [1.2.0](https://github.com/growsurf/growsurf-ruby/compare/v1.1.2...v1.2.0) (2026-07-13)
 
 
