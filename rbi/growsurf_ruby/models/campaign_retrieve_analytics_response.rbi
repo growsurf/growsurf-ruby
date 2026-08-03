@@ -1345,32 +1345,38 @@ module GrowsurfRuby
               )
             end
 
+          # Approved rewards that are fulfilled.
           sig { returns(T.nilable(Integer)) }
-          attr_reader :approved
+          attr_reader :completed
 
-          sig { params(approved: Integer).void }
-          attr_writer :approved
+          sig { params(completed: Integer).void }
+          attr_writer :completed
 
-          # Unapproved rewards awaiting fulfillment.
+          # Unapproved rewards awaiting review.
           sig { returns(T.nilable(Integer)) }
-          attr_reader :pending
+          attr_reader :unapproved
 
-          sig { params(pending: Integer).void }
-          attr_writer :pending
+          sig { params(unapproved: Integer).void }
+          attr_writer :unapproved
+
+          # Rewards that are approved but not fulfilled.
+          sig { returns(T.nilable(Integer)) }
+          attr_reader :unfulfilled
+
+          sig { params(unfulfilled: Integer).void }
+          attr_writer :unfulfilled
 
           sig do
-            params(approved: Integer, pending: Integer).returns(
-              T.attached_class
-            )
+            params(completed: Integer, unapproved: Integer, unfulfilled: Integer).returns(T.attached_class)
           end
           def self.new(
-            approved: nil,
-            # Unapproved rewards awaiting fulfillment.
-            pending: nil
+            completed: nil,
+            unapproved: nil,
+            unfulfilled: nil
           )
           end
 
-          sig { override.returns({ approved: Integer, pending: Integer }) }
+          sig { override.returns({ completed: Integer, unapproved: Integer, unfulfilled: Integer }) }
           def to_hash
           end
         end

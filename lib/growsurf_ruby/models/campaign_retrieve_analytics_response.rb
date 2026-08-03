@@ -770,21 +770,30 @@ module GrowsurfRuby
 
         # @see GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts#reward_status
         class RewardStatus < GrowsurfRuby::Internal::Type::BaseModel
-          # @!attribute approved
+          # @!attribute completed
+          #   Approved rewards that are fulfilled.
           #
           #   @return [Integer, nil]
-          optional :approved, Integer
+          optional :completed, Integer
 
-          # @!attribute pending
-          #   Unapproved rewards awaiting fulfillment.
+          # @!attribute unapproved
+          #   Unapproved rewards awaiting review.
           #
           #   @return [Integer, nil]
-          optional :pending, Integer
+          optional :unapproved, Integer
 
-          # @!method initialize(approved: nil, pending: nil)
-          #   @param approved [Integer]
+          # @!attribute unfulfilled
+          #   Rewards that are approved but not fulfilled.
           #
-          #   @param pending [Integer] Unapproved rewards awaiting fulfillment.
+          #   @return [Integer, nil]
+          optional :unfulfilled, Integer
+
+          # @!method initialize(completed: nil, unapproved: nil, unfulfilled: nil)
+          #   @param completed [Integer] Approved rewards that are fulfilled.
+          #
+          #   @param unapproved [Integer] Unapproved rewards awaiting review.
+          #
+          #   @param unfulfilled [Integer] Rewards that are approved but not fulfilled.
         end
       end
     end

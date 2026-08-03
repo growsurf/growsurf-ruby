@@ -749,20 +749,24 @@ module GrowsurfRuby
           end
         end
 
-        type reward_status = { approved: Integer, pending: Integer }
+        type reward_status = { completed: Integer, unapproved: Integer, unfulfilled: Integer }
 
         class RewardStatus < GrowsurfRuby::Internal::Type::BaseModel
-          attr_reader approved: Integer?
+          attr_reader completed: Integer?
 
-          def approved=: (Integer) -> Integer
+          def completed=: (Integer) -> Integer
 
-          attr_reader pending: Integer?
+          attr_reader unapproved: Integer?
 
-          def pending=: (Integer) -> Integer
+          def unapproved=: (Integer) -> Integer
 
-          def initialize: (?approved: Integer, ?pending: Integer) -> void
+          attr_reader unfulfilled: Integer?
 
-          def to_hash: -> { approved: Integer, pending: Integer }
+          def unfulfilled=: (Integer) -> Integer
+
+          def initialize: (?completed: Integer, ?unapproved: Integer, ?unfulfilled: Integer) -> void
+
+          def to_hash: -> { completed: Integer, unapproved: Integer, unfulfilled: Integer }
         end
       end
     end

@@ -58,10 +58,9 @@ module GrowsurfRuby
             invites_sent: Integer,
             leads: Integer,
             monthly_referrals: Integer,
-            pending_rewards: Integer,
             referral_revenue: Integer,
             referrals: Integer,
-            rewards_earned: Integer,
+            reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus,
             total_commissions: Integer,
             total_paid_out: Integer,
             unique_impressions: Integer,
@@ -93,9 +92,9 @@ module GrowsurfRuby
 
           def monthly_referrals=: (Integer) -> Integer
 
-          attr_reader pending_rewards: Integer?
+          attr_reader reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus?
 
-          def pending_rewards=: (Integer) -> Integer
+          def reward_status=: (GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
 
           attr_reader referral_revenue: Integer?
 
@@ -104,10 +103,6 @@ module GrowsurfRuby
           attr_reader referrals: Integer?
 
           def referrals=: (Integer) -> Integer
-
-          attr_reader rewards_earned: Integer?
-
-          def rewards_earned=: (Integer) -> Integer
 
           attr_reader total_commissions: Integer?
 
@@ -132,10 +127,9 @@ module GrowsurfRuby
             ?invites_sent: Integer,
             ?leads: Integer,
             ?monthly_referrals: Integer,
-            ?pending_rewards: Integer,
             ?referral_revenue: Integer,
             ?referrals: Integer,
-            ?rewards_earned: Integer,
+            ?reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus,
             ?total_commissions: Integer,
             ?total_paid_out: Integer,
             ?unique_impressions: Integer,
@@ -149,10 +143,9 @@ module GrowsurfRuby
             invites_sent: Integer,
             leads: Integer,
             monthly_referrals: Integer,
-            pending_rewards: Integer,
             referral_revenue: Integer,
             referrals: Integer,
-            rewards_earned: Integer,
+            reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus,
             total_commissions: Integer,
             total_paid_out: Integer,
             unique_impressions: Integer,

@@ -99,10 +99,12 @@ module GrowsurfRuby
           #   @return [Integer, nil]
           optional :monthly_referrals, Integer, api_name: :monthlyReferrals
 
-          # @!attribute pending_rewards
+          # @!attribute reward_status
           #
-          #   @return [Integer, nil]
-          optional :pending_rewards, Integer, api_name: :pendingRewards
+          #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus, nil]
+          optional :reward_status,
+                   -> { GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus },
+                   api_name: :rewardStatus
 
           # @!attribute referral_revenue
           #   Affiliate only. Revenue attributed to this participant's referrals, in minor
@@ -115,11 +117,6 @@ module GrowsurfRuby
           #
           #   @return [Integer, nil]
           optional :referrals, Integer
-
-          # @!attribute rewards_earned
-          #
-          #   @return [Integer, nil]
-          optional :rewards_earned, Integer, api_name: :rewardsEarned
 
           # @!attribute total_commissions
           #   Affiliate only. Total commissions earned, in minor currency units.
@@ -144,7 +141,7 @@ module GrowsurfRuby
           #   @return [Integer, nil]
           optional :upcoming_payout, Integer, api_name: :upcomingPayout
 
-          # @!method initialize(currency_iso: nil, expired_referrals: nil, impressions: nil, invites_sent: nil, leads: nil, monthly_referrals: nil, pending_rewards: nil, referral_revenue: nil, referrals: nil, rewards_earned: nil, total_commissions: nil, total_paid_out: nil, unique_impressions: nil, upcoming_payout: nil)
+          # @!method initialize(currency_iso: nil, expired_referrals: nil, impressions: nil, invites_sent: nil, leads: nil, monthly_referrals: nil, referral_revenue: nil, referrals: nil, reward_status: nil, total_commissions: nil, total_paid_out: nil, unique_impressions: nil, upcoming_payout: nil)
           #   Some parameter documentations has been truncated, see
           #   {GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics} for
           #   more details.
@@ -161,13 +158,11 @@ module GrowsurfRuby
           #
           #   @param monthly_referrals [Integer]
           #
-          #   @param pending_rewards [Integer]
-          #
           #   @param referral_revenue [Integer] Affiliate only. Revenue attributed to this participant's referrals, in minor curr
           #
           #   @param referrals [Integer]
           #
-          #   @param rewards_earned [Integer]
+          #   @param reward_status [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus]
           #
           #   @param total_commissions [Integer] Affiliate only. Total commissions earned, in minor currency units.
           #
