@@ -162,11 +162,23 @@ module GrowsurfRuby
           sig { params(monthly_referrals: Integer).void }
           attr_writer :monthly_referrals
 
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :pending_rewards
+          # This participant's reward counts grouped by review and fulfillment status.
+          sig do
+            returns(
+              T.nilable(
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+              )
+            )
+          end
+          attr_reader :reward_status
 
-          sig { params(pending_rewards: Integer).void }
-          attr_writer :pending_rewards
+          sig do
+            params(
+              reward_status:
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+            ).void
+          end
+          attr_writer :reward_status
 
           # Affiliate only. Revenue attributed to this participant's referrals, in minor
           # currency units.
@@ -181,12 +193,6 @@ module GrowsurfRuby
 
           sig { params(referrals: Integer).void }
           attr_writer :referrals
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :rewards_earned
-
-          sig { params(rewards_earned: Integer).void }
-          attr_writer :rewards_earned
 
           # Affiliate only. Total commissions earned, in minor currency units.
           sig { returns(T.nilable(Integer)) }
@@ -223,10 +229,10 @@ module GrowsurfRuby
               invites_sent: Integer,
               leads: Integer,
               monthly_referrals: Integer,
-              pending_rewards: Integer,
               referral_revenue: Integer,
               referrals: Integer,
-              rewards_earned: Integer,
+              reward_status:
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus,
               total_commissions: Integer,
               total_paid_out: Integer,
               unique_impressions: Integer,
@@ -240,12 +246,12 @@ module GrowsurfRuby
             invites_sent: nil,
             leads: nil,
             monthly_referrals: nil,
-            pending_rewards: nil,
             # Affiliate only. Revenue attributed to this participant's referrals, in minor
             # currency units.
             referral_revenue: nil,
             referrals: nil,
-            rewards_earned: nil,
+            # This participant's reward counts grouped by review and fulfillment status.
+            reward_status: nil,
             # Affiliate only. Total commissions earned, in minor currency units.
             total_commissions: nil,
             # Affiliate only. Total paid out, in minor currency units.
@@ -265,10 +271,10 @@ module GrowsurfRuby
                 invites_sent: Integer,
                 leads: Integer,
                 monthly_referrals: Integer,
-                pending_rewards: Integer,
                 referral_revenue: Integer,
                 referrals: Integer,
-                rewards_earned: Integer,
+                reward_status:
+                  GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus,
                 total_commissions: Integer,
                 total_paid_out: Integer,
                 unique_impressions: Integer,
@@ -498,6 +504,12 @@ module GrowsurfRuby
           attr_writer :twitter_shares
 
           sig { returns(T.nilable(Integer)) }
+          attr_reader :unique_commission_referrals
+
+          sig { params(unique_commission_referrals: Integer).void }
+          attr_writer :unique_commission_referrals
+
+          sig { returns(T.nilable(Integer)) }
           attr_reader :unique_impressions
 
           sig { params(unique_impressions: Integer).void }
@@ -543,6 +555,7 @@ module GrowsurfRuby
               total_revenue: Integer,
               tumblr_shares: Integer,
               twitter_shares: Integer,
+              unique_commission_referrals: Integer,
               unique_impressions: Integer,
               wechat_shares: Integer,
               whats_app_shares: Integer
@@ -580,6 +593,7 @@ module GrowsurfRuby
             total_revenue: nil,
             tumblr_shares: nil,
             twitter_shares: nil,
+            unique_commission_referrals: nil,
             unique_impressions: nil,
             wechat_shares: nil,
             whats_app_shares: nil
@@ -615,6 +629,7 @@ module GrowsurfRuby
                 total_revenue: Integer,
                 tumblr_shares: Integer,
                 twitter_shares: Integer,
+                unique_commission_referrals: Integer,
                 unique_impressions: Integer,
                 wechat_shares: Integer,
                 whats_app_shares: Integer

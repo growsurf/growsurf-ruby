@@ -1,13 +1,16 @@
 module GrowsurfRuby
   module Models
     module Campaign
-      type referral_source = :DIRECT | :PARTICIPANT
+      type referral_source = :DIRECT | :PARTICIPANT | :DELETED_PARTICIPANT | :IMPORT | :MANUAL
 
       module ReferralSource
         extend GrowsurfRuby::Internal::Type::Enum
 
         DIRECT: :DIRECT
         PARTICIPANT: :PARTICIPANT
+        DELETED_PARTICIPANT: :DELETED_PARTICIPANT
+        IMPORT: :IMPORT
+        MANUAL: :MANUAL
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::referral_source]
       end

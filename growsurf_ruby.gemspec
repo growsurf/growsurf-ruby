@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Growsurf"]
   s.email = ""
   s.homepage = "https://gemdocs.org/gems/growsurf-ruby"
+  s.license = "Apache-2.0"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/growsurf/growsurf-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
@@ -19,11 +20,13 @@ Gem::Specification.new do |s|
     "rbi/**/*.rbi",
     "sig/**/*.rbs",
     "manifest.yaml",
+    "LICENSE",
+    "README.md",
     "SECURITY.md",
     "CHANGELOG.md",
     ".ignore"
   ]
-  s.extra_rdoc_files = ["README.md"]
+  s.extra_rdoc_files = ["LICENSE", "README.md"]
   s.add_dependency "cgi"
   s.add_dependency "connection_pool"
 end
