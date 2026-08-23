@@ -100,6 +100,7 @@ module GrowsurfRuby
           optional :monthly_referrals, Integer, api_name: :monthlyReferrals
 
           # @!attribute reward_status
+          #   This participant's reward counts grouped by review and fulfillment status.
           #
           #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus, nil]
           optional :reward_status,
@@ -162,7 +163,7 @@ module GrowsurfRuby
           #
           #   @param referrals [Integer]
           #
-          #   @param reward_status [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus]
+          #   @param reward_status [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus] This participant's reward counts grouped by review and fulfillment status.
           #
           #   @param total_commissions [Integer] Affiliate only. Total commissions earned, in minor currency units.
           #
@@ -338,6 +339,13 @@ module GrowsurfRuby
           #   @return [Integer, nil]
           optional :twitter_shares, Integer, api_name: :twitterShares
 
+          # @!attribute unique_commission_referrals
+          #   Affiliate programs only. Number of unique referred participants represented by
+          #   commissions in the requested timeframe.
+          #
+          #   @return [Integer, nil]
+          optional :unique_commission_referrals, Integer, api_name: :uniqueCommissionReferrals
+
           # @!attribute unique_impressions
           #
           #   @return [Integer, nil]
@@ -353,7 +361,7 @@ module GrowsurfRuby
           #   @return [Integer, nil]
           optional :whats_app_shares, Integer, api_name: :whatsAppShares
 
-          # @!method initialize(android_native_shares: nil, bluesky_shares: nil, copy_ref_link_shares: nil, email_shares: nil, facebook_shares: nil, impressions: nil, invites: nil, ios_native_shares: nil, linked_in_shares: nil, messenger_shares: nil, participants: nil, period_start: nil, pinterest_shares: nil, qrcode_shares: nil, reddit_shares: nil, referral_credit_expireds: nil, referral_credit_pendings: nil, referrals: nil, sms_shares: nil, telegram_shares: nil, threads_shares: nil, total_commission_count: nil, total_commissions: nil, total_revenue: nil, tumblr_shares: nil, twitter_shares: nil, unique_impressions: nil, wechat_shares: nil, whats_app_shares: nil)
+          # @!method initialize(android_native_shares: nil, bluesky_shares: nil, copy_ref_link_shares: nil, email_shares: nil, facebook_shares: nil, impressions: nil, invites: nil, ios_native_shares: nil, linked_in_shares: nil, messenger_shares: nil, participants: nil, period_start: nil, pinterest_shares: nil, qrcode_shares: nil, reddit_shares: nil, referral_credit_expireds: nil, referral_credit_pendings: nil, referrals: nil, sms_shares: nil, telegram_shares: nil, threads_shares: nil, total_commission_count: nil, total_commissions: nil, total_revenue: nil, tumblr_shares: nil, twitter_shares: nil, unique_commission_referrals: nil, unique_impressions: nil, wechat_shares: nil, whats_app_shares: nil)
           #   Some parameter documentations has been truncated, see
           #   {GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series} for more
           #   details.
@@ -409,6 +417,8 @@ module GrowsurfRuby
           #   @param tumblr_shares [Integer]
           #
           #   @param twitter_shares [Integer]
+          #
+          #   @param unique_commission_referrals [Integer] Affiliate programs only. Number of unique referred participants represented by commissions in the requested timeframe.
           #
           #   @param unique_impressions [Integer]
           #

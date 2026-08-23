@@ -17,6 +17,15 @@ module GrowsurfRuby
             :PARTICIPANT,
             GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol
           )
+        DELETED_PARTICIPANT =
+          T.let(
+            :DELETED_PARTICIPANT,
+            GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol
+          )
+        IMPORT =
+          T.let(:IMPORT, GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol)
+        MANUAL =
+          T.let(:MANUAL, GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol)
 
         sig do
           override.returns(

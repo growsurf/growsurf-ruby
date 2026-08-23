@@ -89,6 +89,7 @@ module GrowsurfRuby
           total_revenue: Integer,
           tumblr_shares: Integer,
           twitter_shares: Integer,
+          unique_commission_referrals: Integer,
           unique_impressions: Integer,
           wechat_shares: Integer,
           whats_app_shares: Integer
@@ -195,6 +196,10 @@ module GrowsurfRuby
 
         def twitter_shares=: (Integer) -> Integer
 
+        attr_reader unique_commission_referrals: Integer?
+
+        def unique_commission_referrals=: (Integer) -> Integer
+
         attr_reader unique_impressions: Integer?
 
         def unique_impressions=: (Integer) -> Integer
@@ -233,6 +238,7 @@ module GrowsurfRuby
           ?total_revenue: Integer,
           ?tumblr_shares: Integer,
           ?twitter_shares: Integer,
+          ?unique_commission_referrals: Integer,
           ?unique_impressions: Integer,
           ?wechat_shares: Integer,
           ?whats_app_shares: Integer
@@ -264,6 +270,7 @@ module GrowsurfRuby
           total_revenue: Integer,
           tumblr_shares: Integer,
           twitter_shares: Integer,
+          unique_commission_referrals: Integer,
           unique_impressions: Integer,
           wechat_shares: Integer,
           whats_app_shares: Integer
@@ -358,6 +365,7 @@ module GrowsurfRuby
           total_revenue: Integer,
           tumblr_shares: Integer,
           twitter_shares: Integer,
+          unique_commission_referrals: Integer,
           unique_impressions: Integer,
           wechat_shares: Integer,
           whats_app_shares: Integer
@@ -468,6 +476,10 @@ module GrowsurfRuby
 
         def twitter_shares=: (Integer) -> Integer
 
+        attr_reader unique_commission_referrals: Integer?
+
+        def unique_commission_referrals=: (Integer) -> Integer
+
         attr_reader unique_impressions: Integer?
 
         def unique_impressions=: (Integer) -> Integer
@@ -507,6 +519,7 @@ module GrowsurfRuby
           ?total_revenue: Integer,
           ?tumblr_shares: Integer,
           ?twitter_shares: Integer,
+          ?unique_commission_referrals: Integer,
           ?unique_impressions: Integer,
           ?wechat_shares: Integer,
           ?whats_app_shares: Integer
@@ -539,6 +552,7 @@ module GrowsurfRuby
           total_revenue: Integer,
           tumblr_shares: Integer,
           twitter_shares: Integer,
+          unique_commission_referrals: Integer,
           unique_impressions: Integer,
           wechat_shares: Integer,
           whats_app_shares: Integer

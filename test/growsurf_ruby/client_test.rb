@@ -52,7 +52,7 @@ class GrowsurfRubyTest < Minitest::Test
       request.headers.keys.none? { _1.downcase == "authorization" }
     end
     recorded = WebMock::RequestRegistry.instance.requested_signatures.hash.keys
-    assert_equal(2, recorded.length)
+    assert_equal(1, recorded.length)
     recorded.each do |request|
       refute_includes(request.headers.keys.map(&:downcase), "authorization")
     end
@@ -192,6 +192,56 @@ class GrowsurfRubyTest < Minitest::Test
     )
   end
 
+  def test_api_key_rotation_retries_with_the_default_base_url
+    original_base_url = ENV.delete("GROWSURF_BASE_URL")
+    stub_request(:post, "https://api.growsurf.com/v2/api-key/rotate")
+      .to_return_json(status: 500, body: {})
+      .then
+      .to_return_json(
+        status: 200,
+        body: {apiKey: "sk_api_0123456789abcdef0123456789abcdef_newsecret"}
+      )
+    growsurf = GrowsurfRuby::Client.new(api_key: "My API Key")
+
+    growsurf.team.rotate_api_key
+
+    requests = WebMock::RequestRegistry.instance.requested_signatures.hash.keys
+    assert_equal(2, requests.length)
+    assert_equal(["/v2/api-key/rotate"], requests.map { _1.uri.path }.uniq)
+    assert_equal(
+      1,
+      requests.map { _1.headers.transform_keys(&:downcase).fetch("idempotency-key") }.uniq.length
+    )
+  ensure
+    ENV["GROWSURF_BASE_URL"] = original_base_url unless original_base_url.nil?
+  end
+
+  def test_non_idempotent_mutation_is_not_retried
+    stub_request(:post, "http://localhost/campaign/p36rol/participant/p_1/email")
+      .to_return_json(status: 500, body: {})
+    growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: "My API Key")
+
+    assert_raises(GrowsurfRuby::Errors::InternalServerError) do
+      growsurf.campaign.participant.email("p_1", id: "p36rol", email_type: "welcome")
+    end
+
+    assert_requested(:post, "http://localhost/campaign/p36rol/participant/p_1/email", times: 1) do |request|
+      refute_includes(request.headers.keys.map(&:downcase), "idempotency-key")
+    end
+  end
+
+  def test_delete_mutation_is_not_retried
+    stub_request(:delete, "http://localhost/campaigns/p36rol")
+      .to_return_json(status: 500, body: {})
+    growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: "My API Key")
+
+    assert_raises(GrowsurfRuby::Errors::InternalServerError) do
+      growsurf.request(method: :delete, path: "campaigns/p36rol")
+    end
+
+    assert_requested(:delete, "http://localhost/campaigns/p36rol", times: 1)
+  end
+
   def test_omit_retry_count_header
     stub_request(:get, "http://localhost/campaigns").to_return_json(status: 500, body: {})
 
@@ -239,11 +289,10 @@ class GrowsurfRubyTest < Minitest::Test
 
     assert_requested(:any, "http://localhost/redirected", times: GrowsurfRuby::Client::MAX_REDIRECTS) do
       assert_equal(recorded.method, _1.method)
-      assert_equal(recorded.body, _1.body)
-      assert_equal(
-        recorded.headers.transform_keys(&:downcase)["content-type"],
-        _1.headers.transform_keys(&:downcase)["content-type"]
-      )
+      assert_nil(recorded.body)
+      assert_nil(_1.body)
+      assert_nil(recorded.headers.transform_keys(&:downcase)["content-type"])
+      assert_nil(_1.headers.transform_keys(&:downcase)["content-type"])
     end
   end
 

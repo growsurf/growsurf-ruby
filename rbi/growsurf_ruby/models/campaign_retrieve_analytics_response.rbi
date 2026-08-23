@@ -330,6 +330,12 @@ module GrowsurfRuby
         attr_writer :twitter_shares
 
         sig { returns(T.nilable(Integer)) }
+        attr_reader :unique_commission_referrals
+
+        sig { params(unique_commission_referrals: Integer).void }
+        attr_writer :unique_commission_referrals
+
+        sig { returns(T.nilable(Integer)) }
         attr_reader :unique_impressions
 
         sig { params(unique_impressions: Integer).void }
@@ -374,6 +380,7 @@ module GrowsurfRuby
             total_revenue: Integer,
             tumblr_shares: Integer,
             twitter_shares: Integer,
+            unique_commission_referrals: Integer,
             unique_impressions: Integer,
             wechat_shares: Integer,
             whats_app_shares: Integer
@@ -409,6 +416,7 @@ module GrowsurfRuby
           total_revenue: nil,
           tumblr_shares: nil,
           twitter_shares: nil,
+          unique_commission_referrals: nil,
           unique_impressions: nil,
           wechat_shares: nil,
           whats_app_shares: nil
@@ -443,6 +451,7 @@ module GrowsurfRuby
               total_revenue: Integer,
               tumblr_shares: Integer,
               twitter_shares: Integer,
+              unique_commission_referrals: Integer,
               unique_impressions: Integer,
               wechat_shares: Integer,
               whats_app_shares: Integer
@@ -742,6 +751,12 @@ module GrowsurfRuby
         attr_writer :twitter_shares
 
         sig { returns(T.nilable(Integer)) }
+        attr_reader :unique_commission_referrals
+
+        sig { params(unique_commission_referrals: Integer).void }
+        attr_writer :unique_commission_referrals
+
+        sig { returns(T.nilable(Integer)) }
         attr_reader :unique_impressions
 
         sig { params(unique_impressions: Integer).void }
@@ -787,6 +802,7 @@ module GrowsurfRuby
             total_revenue: Integer,
             tumblr_shares: Integer,
             twitter_shares: Integer,
+            unique_commission_referrals: Integer,
             unique_impressions: Integer,
             wechat_shares: Integer,
             whats_app_shares: Integer
@@ -824,6 +840,7 @@ module GrowsurfRuby
           total_revenue: nil,
           tumblr_shares: nil,
           twitter_shares: nil,
+          unique_commission_referrals: nil,
           unique_impressions: nil,
           wechat_shares: nil,
           whats_app_shares: nil
@@ -859,6 +876,7 @@ module GrowsurfRuby
               total_revenue: Integer,
               tumblr_shares: Integer,
               twitter_shares: Integer,
+              unique_commission_referrals: Integer,
               unique_impressions: Integer,
               wechat_shares: Integer,
               whats_app_shares: Integer
@@ -1366,6 +1384,7 @@ module GrowsurfRuby
           sig { params(unfulfilled: Integer).void }
           attr_writer :unfulfilled
 
+          # Reward counts grouped by review and fulfillment status.
           sig do
             params(completed: Integer, unapproved: Integer, unfulfilled: Integer).returns(T.attached_class)
           end

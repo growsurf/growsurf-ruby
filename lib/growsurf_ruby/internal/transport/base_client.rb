@@ -69,11 +69,22 @@ module GrowsurfRuby
 
           # @api private
           #
+          # Returns whether replaying this request cannot duplicate a customer-visible mutation.
+          def retry_safe_request?(request)
+            method, operation_path = request.fetch_values(:method, :operation_path)
+            %w[get head].include?(method.to_s.downcase) ||
+              (method.to_s.casecmp?("post") && operation_path == "/api-key/rotate")
+          end
+
+          # @api private
+          #
           # @param request [Hash{Symbol=>Object}] .
           #
           #   @option request [Symbol] :method
           #
           #   @option request [URI::Generic] :url
+          #
+          #   @option request [String] :operation_path
           #
           #   @option request [Hash{String=>String}] :headers
           #
@@ -281,9 +292,11 @@ module GrowsurfRuby
             opts[:extra_headers].to_h
           )
 
+          normalized_path = "/#{path.sub(%r{/$}, '').delete_prefix('/')}"
+          retry_safe_rotation = method.to_s.casecmp?("post") && normalized_path == "/api-key/rotate"
           if @idempotency_header &&
              !headers.key?(@idempotency_header) &&
-             (!Net::HTTP::IDEMPOTENT_METHODS_.include?(method.to_s.upcase) || opts.key?(:idempotency_key))
+             (retry_safe_rotation || opts.key?(:idempotency_key))
             headers[@idempotency_header] = opts.fetch(:idempotency_key) { generate_idempotency_key }
           end
 
@@ -319,6 +332,7 @@ module GrowsurfRuby
           {
             method: method,
             url: url,
+            operation_path: normalized_path,
             headers: headers,
             body: encoded,
             max_retries: opts.fetch(:max_retries, @max_retries),
@@ -347,7 +361,7 @@ module GrowsurfRuby
           end
           return span if span
 
-          scale = retry_count**2
+          scale = 2**retry_count
           jitter = 1 - (0.25 * rand)
           (@initial_retry_delay * scale * jitter).clamp(0, @max_retry_delay)
         end
@@ -409,9 +423,12 @@ module GrowsurfRuby
               retry_count: retry_count,
               send_retry_header: send_retry_header
             )
-          in GrowsurfRuby::Errors::APIConnectionError if retry_count >= max_retries
+          in GrowsurfRuby::Errors::APIConnectionError if retry_count >= max_retries ||
+            !self.class.retry_safe_request?(request)
             raise status
-          in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: headers)
+          in (400..) if retry_count >= max_retries ||
+            !self.class.retry_safe_request?(request) ||
+            !self.class.should_retry?(status, headers: headers)
             decoded = Kernel.then do
               GrowsurfRuby::Internal::Util.decode_content(headers, stream: stream, suppress_error: true)
             ensure

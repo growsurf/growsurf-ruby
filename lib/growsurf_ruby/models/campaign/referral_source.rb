@@ -8,6 +8,9 @@ module GrowsurfRuby
 
         DIRECT = :DIRECT
         PARTICIPANT = :PARTICIPANT
+        DELETED_PARTICIPANT = :DELETED_PARTICIPANT
+        IMPORT = :IMPORT
+        MANUAL = :MANUAL
 
         # @!method self.values
         #   @return [Array<Symbol>]

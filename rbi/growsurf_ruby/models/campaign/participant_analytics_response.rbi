@@ -162,6 +162,7 @@ module GrowsurfRuby
           sig { params(monthly_referrals: Integer).void }
           attr_writer :monthly_referrals
 
+          # This participant's reward counts grouped by review and fulfillment status.
           sig do
             returns(
               T.nilable(
@@ -249,6 +250,7 @@ module GrowsurfRuby
             # currency units.
             referral_revenue: nil,
             referrals: nil,
+            # This participant's reward counts grouped by review and fulfillment status.
             reward_status: nil,
             # Affiliate only. Total commissions earned, in minor currency units.
             total_commissions: nil,
@@ -502,6 +504,12 @@ module GrowsurfRuby
           attr_writer :twitter_shares
 
           sig { returns(T.nilable(Integer)) }
+          attr_reader :unique_commission_referrals
+
+          sig { params(unique_commission_referrals: Integer).void }
+          attr_writer :unique_commission_referrals
+
+          sig { returns(T.nilable(Integer)) }
           attr_reader :unique_impressions
 
           sig { params(unique_impressions: Integer).void }
@@ -547,6 +555,7 @@ module GrowsurfRuby
               total_revenue: Integer,
               tumblr_shares: Integer,
               twitter_shares: Integer,
+              unique_commission_referrals: Integer,
               unique_impressions: Integer,
               wechat_shares: Integer,
               whats_app_shares: Integer
@@ -584,6 +593,7 @@ module GrowsurfRuby
             total_revenue: nil,
             tumblr_shares: nil,
             twitter_shares: nil,
+            unique_commission_referrals: nil,
             unique_impressions: nil,
             wechat_shares: nil,
             whats_app_shares: nil
@@ -619,6 +629,7 @@ module GrowsurfRuby
                 total_revenue: Integer,
                 tumblr_shares: Integer,
                 twitter_shares: Integer,
+                unique_commission_referrals: Integer,
                 unique_impressions: Integer,
                 wechat_shares: Integer,
                 whats_app_shares: Integer

@@ -20,4 +20,24 @@ class GrowsurfRuby::Test::AnalyticsRewardStatusTest < Minitest::Test
     refute_respond_to(participant_analytics, :pending_rewards)
     refute_respond_to(participant_analytics, :rewards_earned)
   end
+
+  def test_analytics_models_expose_unique_commission_referrals
+    campaign_analytics = GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics.new(
+      unique_commission_referrals: 4
+    )
+    campaign_series = GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series.new(
+      unique_commission_referrals: 3
+    )
+    participant_series = GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series.new(
+      unique_commission_referrals: 2
+    )
+
+    assert_equal(4, campaign_analytics.unique_commission_referrals)
+    assert_equal(3, campaign_series.unique_commission_referrals)
+    assert_equal(2, participant_series.unique_commission_referrals)
+    assert_equal(
+      {uniqueCommissionReferrals: 4},
+      GrowsurfRuby::Internal::Type::Converter.dump(campaign_analytics.class, campaign_analytics)
+    )
+  end
 end

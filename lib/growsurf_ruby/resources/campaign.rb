@@ -89,7 +89,7 @@ module GrowsurfRuby
       #
       # @param currency_iso [String] ISO 4217 currency code. Defaults to USD. Chosen when the program is created and immutable afterward — it cannot be changed on update.
       #
-      # @param name [String] The program name. Defaults to "Untitled Program".
+      # @param name [String] The program name. Defaults to a generated friendly label plus the creation date.
       #
       # @param rewards [Array<GrowsurfRuby::Models::Campaign::RewardCreateParams>] Optional inline rewards to create with the program.
       #

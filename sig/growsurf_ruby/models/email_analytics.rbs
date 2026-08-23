@@ -1,0 +1,92 @@
+module GrowsurfRuby
+  module Models
+    type email_analytics =
+      {
+        sent: Integer,
+        delivered: Integer,
+        opened: Integer,
+        clicked: Integer,
+        bounced: Integer,
+        spam_complaints: Integer,
+        delivery_rate: Float,
+        open_rate: Float,
+        click_rate: Float,
+        bounce_rate: Float,
+        by_type: Array[GrowsurfRuby::Models::EmailAnalytics::ByType],
+        coverage_start_date: Integer?,
+        is_partial: bool
+      }
+
+    class EmailAnalytics < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor sent: Integer
+      attr_accessor delivered: Integer
+      attr_accessor opened: Integer
+      attr_accessor clicked: Integer
+      attr_accessor bounced: Integer
+      attr_accessor spam_complaints: Integer
+      attr_accessor delivery_rate: Float
+      attr_accessor open_rate: Float
+      attr_accessor click_rate: Float
+      attr_accessor bounce_rate: Float
+      attr_accessor by_type: Array[GrowsurfRuby::Models::EmailAnalytics::ByType]
+      attr_accessor coverage_start_date: Integer?
+      attr_accessor is_partial: bool
+
+      def initialize: (
+        sent: Integer,
+        delivered: Integer,
+        opened: Integer,
+        clicked: Integer,
+        bounced: Integer,
+        spam_complaints: Integer,
+        delivery_rate: Float,
+        open_rate: Float,
+        click_rate: Float,
+        bounce_rate: Float,
+        by_type: Array[GrowsurfRuby::Models::EmailAnalytics::ByType],
+        coverage_start_date: Integer?,
+        is_partial: bool
+      ) -> void
+
+      class Counts < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor sent: Integer
+        attr_accessor delivered: Integer
+        attr_accessor opened: Integer
+        attr_accessor clicked: Integer
+        attr_accessor bounced: Integer
+        attr_accessor spam_complaints: Integer
+
+        def initialize: (
+          sent: Integer,
+          delivered: Integer,
+          opened: Integer,
+          clicked: Integer,
+          bounced: Integer,
+          spam_complaints: Integer
+        ) -> void
+      end
+
+      class ByType < GrowsurfRuby::Models::EmailAnalytics::Counts
+        attr_accessor email_type: String
+        attr_accessor delivery_rate: Float
+        attr_accessor open_rate: Float
+        attr_accessor click_rate: Float
+        attr_accessor bounce_rate: Float
+
+        def initialize: (
+          sent: Integer,
+          delivered: Integer,
+          opened: Integer,
+          clicked: Integer,
+          bounced: Integer,
+          spam_complaints: Integer,
+          email_type: String,
+          delivery_rate: Float,
+          open_rate: Float,
+          click_rate: Float,
+          bounce_rate: Float
+        ) -> void
+      end
+    end
+  end
+end

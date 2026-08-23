@@ -82,7 +82,7 @@ module GrowsurfRuby
         # ISO 4217 currency code. Defaults to USD. Chosen when the program is created and
         # immutable afterward — it cannot be changed on update.
         currency_iso: nil,
-        # The program name. Defaults to "Untitled Program".
+        # The program name. Defaults to a generated friendly label plus the creation date.
         name: nil,
         # Optional inline rewards to create with the program.
         rewards: nil,
