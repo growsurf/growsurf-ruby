@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/growsurf/growsurf-ruby/compare/v1.2.1...v1.3.0) (2026-08-23)
+
+
+### Features
+
+* **api:** add affiliate and payout destination APIs ([1b34978](https://github.com/growsurf/growsurf-ruby/commit/1b34978709f715124c85d8bf77c25b6bb6488e77))
+* **api:** add affiliate and payout destination APIs ([c2ffa2c](https://github.com/growsurf/growsurf-ruby/commit/c2ffa2cb4c0247044dcfcda433d64a824f261e79))
+* v1.3.0 — safer retries, analytics additions, packaging and CI updates ([70bf8c3](https://github.com/growsurf/growsurf-ruby/commit/70bf8c3e858c692bfa8836ea04c0f81218926631))
+
+
+### Bug Fixes
+
+* **api:** align analytics reward status models ([28bd123](https://github.com/growsurf/growsurf-ruby/commit/28bd123324b6d21547abc511e0be864a0a998f8e))
+
 ## [1.2.1](https://github.com/growsurf/growsurf-ruby/compare/v1.2.0...v1.2.1) (2026-07-14)
 
 
