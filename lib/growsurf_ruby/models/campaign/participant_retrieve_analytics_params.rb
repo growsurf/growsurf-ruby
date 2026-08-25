@@ -19,14 +19,16 @@ module GrowsurfRuby
         required :participant_id_or_email, String
 
         # @!attribute days
-        #   Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
+        #   Last number of days for optional `series` and `email` analytics. Defaults to
+        #   365. Maximum 1825. Does not filter the top-level all-time totals.
         #
         #   @return [Integer, nil]
         optional :days, Integer
 
         # @!attribute end_date
-        #   End date of the analytics timeframe as a Unix timestamp in milliseconds.
-        #   Required if `days` is not set.
+        #   End of a custom `series` and `email` analytics window as a Unix timestamp in
+        #   milliseconds. Set it together with `startDate`. Does not filter the top-level
+        #   all-time totals.
         #
         #   @return [Integer, nil]
         optional :end_date, Integer
@@ -50,8 +52,9 @@ module GrowsurfRuby
         optional :interval, enum: -> { GrowsurfRuby::Campaign::ParticipantRetrieveAnalyticsParams::Interval }
 
         # @!attribute start_date
-        #   Start date of the analytics timeframe as a Unix timestamp in milliseconds.
-        #   Required if `days` is not set.
+        #   Start of a custom `series` and `email` analytics window as a Unix timestamp in
+        #   milliseconds. Set it together with `endDate`. Does not filter the top-level
+        #   all-time totals.
         #
         #   @return [Integer, nil]
         optional :start_date, Integer
@@ -65,15 +68,15 @@ module GrowsurfRuby
         #
         #   @param participant_id_or_email [String]
         #
-        #   @param days [Integer] Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
+        #   @param days [Integer] Last number of days for optional `series` and `email` analytics. Defaults to 365. Maxi
         #
-        #   @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
+        #   @param end_date [Integer] End of a custom `series` and `email` analytics window as a Unix timestamp in milli
         #
         #   @param include [String] Comma-separated optional data. `series` returns this participant's own activity
         #
         #   @param interval [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval] Bucket size for the `series` (only used when `include` contains `series`).
         #
-        #   @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
+        #   @param start_date [Integer] Start of a custom `series` and `email` analytics window as a Unix timestamp in mi
         #
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 

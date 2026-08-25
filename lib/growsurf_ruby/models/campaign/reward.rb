@@ -52,6 +52,14 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :description, String, nil?: true
 
+        # @!attribute event
+        #   The referral event that earns this Campaign Reward. Present only for
+        #   `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. Legacy Campaign
+        #   Rewards return `CONVERSION`.
+        #
+        #   @return [Symbol, GrowsurfRuby::Models::Campaign::Reward::Event, nil]
+        optional :event, enum: -> { GrowsurfRuby::Campaign::Reward::Event }, nil?: true
+
         # @!attribute image_url
         #
         #   @return [String, nil]
@@ -145,7 +153,7 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
 
-        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_visible: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil)
+        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_visible: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil)
         #   @param id [String]
         #
         #   @param is_unlimited [Boolean]
@@ -161,6 +169,8 @@ module GrowsurfRuby
         #   @param coupon_code [String, nil] Legacy static coupon code shown to the referrer in the reward-won email and web
         #
         #   @param description [String, nil]
+        #
+        #   @param event [Symbol, GrowsurfRuby::Models::Campaign::Reward::Event, nil] The referral event that earns this Campaign Reward.
         #
         #   @param image_url [String, nil]
         #
@@ -199,6 +209,17 @@ module GrowsurfRuby
           MILESTONE = :MILESTONE
           LEADERBOARD = :LEADERBOARD
           AFFILIATE = :AFFILIATE
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @see GrowsurfRuby::Models::Campaign::Reward#event
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          LEAD = :LEAD
+          CONVERSION = :CONVERSION
 
           # @!method self.values
           #   @return [Array<Symbol>]

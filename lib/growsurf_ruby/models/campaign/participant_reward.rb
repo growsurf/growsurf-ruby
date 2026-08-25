@@ -93,6 +93,7 @@ module GrowsurfRuby
 
           PENDING = :PENDING
           FULFILLED = :FULFILLED
+          CANCELLED = :CANCELLED
 
           # @!method self.values
           #   @return [Array<Symbol>]

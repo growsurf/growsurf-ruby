@@ -626,7 +626,9 @@ module GrowsurfRuby
         # metrics for affiliate programs). Pass `include=email` for `sent` (accepted for
         # delivery), `delivered`, `opened`, `clicked`, `bounced`, and `spamComplaints` metrics
         # attributed to this participant, including invitations they sent. Use
-        # `include=email,series` to include the same counts in each UTC series bucket.
+        # `include=email,series` to include the same counts in each UTC series bucket. `days`,
+        # `startDate`, and `endDate` filter only the optional `series` and `email` data. They do
+        # not filter the top-level `analytics`, `ranks`, or `shareCount` values.
         sig do
           params(
             participant_id_or_email: String,
@@ -647,10 +649,12 @@ module GrowsurfRuby
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
-          # Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
+          # Last number of days for optional `series` and `email` analytics. Defaults to 365.
+          # Maximum 1825. Does not filter the top-level all-time totals.
           days: nil,
-          # End date of the analytics timeframe as a Unix timestamp in milliseconds.
-          # Required if `days` is not set.
+          # End of a custom `series` and `email` analytics window as a Unix timestamp in
+          # milliseconds. Set it together with `startDate`. Does not filter the top-level
+          # all-time totals.
           end_date: nil,
           # Comma-separated optional data. `series` returns this participant's own activity per
           # period; `email` returns `sent`, `delivered`, `opened`, `clicked`, `bounced`,
@@ -662,8 +666,9 @@ module GrowsurfRuby
           # Bucket size for the `series` (only used when `include` contains `series`). Defaults to
           # `day`.
           interval: nil,
-          # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
-          # Required if `days` is not set.
+          # Start of a custom `series` and `email` analytics window as a Unix timestamp in
+          # milliseconds. Set it together with `endDate`. Does not filter the top-level
+          # all-time totals.
           start_date: nil,
           request_options: {}
         )

@@ -52,6 +52,27 @@ module GrowsurfRuby
         sig { params(description: String).void }
         attr_writer :description
 
+        # The referral event that earns this Campaign Reward. Use `LEAD` or
+        # `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to
+        # be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and
+        # `MILESTONE` rewards. When omitted, the stored event is preserved.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol
+            )
+          )
+        end
+        attr_reader :event
+
+        sig do
+          params(
+            event:
+              GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol
+          ).void
+        end
+        attr_writer :event
+
         sig { returns(T.nilable(String)) }
         attr_reader :image_url
 
@@ -188,6 +209,8 @@ module GrowsurfRuby
             conversions_required: Integer,
             coupon_code: String,
             description: String,
+            event:
+              GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
             image_url: String,
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
@@ -218,6 +241,11 @@ module GrowsurfRuby
           # issued coupon when one exists.
           coupon_code: nil,
           description: nil,
+          # The referral event that earns this Campaign Reward. Use `LEAD` or
+          # `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to
+          # be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and
+          # `MILESTONE` rewards. When omitted, the stored event is preserved.
+          event: nil,
           image_url: nil,
           # Whether the reward can be earned an unlimited number of times. Defaults to
           # `true`, except `MILESTONE` rewards, which can only be earned once.
@@ -266,6 +294,8 @@ module GrowsurfRuby
               conversions_required: Integer,
               coupon_code: String,
               description: String,
+              event:
+                GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
               image_url: String,
               is_unlimited: T::Boolean,
               is_visible: T::Boolean,
@@ -288,6 +318,40 @@ module GrowsurfRuby
           )
         end
         def to_hash
+        end
+
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          LEAD =
+            T.let(
+              :LEAD,
+              GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::TaggedSymbol
+            )
+          CONVERSION =
+            T.let(
+              :CONVERSION,
+              GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
 
         module LimitDuration

@@ -687,7 +687,9 @@ module GrowsurfRuby
         # for `sent` (accepted for delivery), `delivered`, `opened`, `clicked`,
         # `bounced`, and `spamComplaints` metrics attributed to this participant,
         # including invitations they sent. Use `include=email,series` to include the
-        # same counts in each UTC series bucket.
+        # same counts in each UTC series bucket. `days`, `startDate`, and `endDate`
+        # filter only the optional `series` and `email` data. They do not filter the
+        # top-level `analytics`, `ranks`, or `shareCount` values.
         #
         # @overload retrieve_analytics(participant_id_or_email, id:, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
         #
@@ -695,15 +697,15 @@ module GrowsurfRuby
         #
         # @param id [String] GrowSurf program ID.
         #
-        # @param days [Integer] Last number of days to retrieve analytics for. Defaults to 365. Maximum 1825.
+        # @param days [Integer] Last number of days for optional `series` and `email` analytics. Defaults to 365. Maxi
         #
-        # @param end_date [Integer] End date of the analytics timeframe as a Unix timestamp in milliseconds. Require
+        # @param end_date [Integer] End of a custom `series` and `email` analytics window as a Unix timestamp in milli
         #
         # @param include [String] Comma-separated optional data. `series` returns this participant's own activity
         #
         # @param interval [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRetrieveAnalyticsParams::Interval] Bucket size for the `series` (only used when `include` contains `series`).
         #
-        # @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
+        # @param start_date [Integer] Start of a custom `series` and `email` analytics window as a Unix timestamp in mi
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #

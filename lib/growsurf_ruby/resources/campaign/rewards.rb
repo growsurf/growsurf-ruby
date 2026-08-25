@@ -30,7 +30,7 @@ module GrowsurfRuby
         # Enabling an active reward of a type automatically enables that reward type on
         # the program.
         #
-        # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -43,6 +43,8 @@ module GrowsurfRuby
         # @param coupon_code [String] Body param: Legacy static coupon code shown to the referrer in the reward-won emai
         #
         # @param description [String] Body param
+        #
+        # @param event [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::Event] Body param: The referral event that earns this Campaign Reward. Use `LEAD` or `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. When omitted, it defaults to `CONVERSION`.
         #
         # @param image_url [String] Body param
         #
@@ -98,7 +100,7 @@ module GrowsurfRuby
         # copy; removing a key that campaign copy still references returns a `409` listing
         # the referencing fields.
         #
-        # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
         # @param campaign_reward_id [String] Path param: Campaign reward ID.
         #
@@ -111,6 +113,8 @@ module GrowsurfRuby
         # @param coupon_code [String] Body param: Legacy static coupon code shown to the referrer in the reward-won emai
         #
         # @param description [String] Body param
+        #
+        # @param event [Symbol, GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event] Body param: The referral event that earns this Campaign Reward. Use `LEAD` or `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. When omitted, the stored event is preserved.
         #
         # @param image_url [String] Body param
         #

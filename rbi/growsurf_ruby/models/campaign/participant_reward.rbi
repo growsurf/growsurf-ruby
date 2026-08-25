@@ -168,6 +168,11 @@ module GrowsurfRuby
               :FULFILLED,
               GrowsurfRuby::Campaign::ParticipantReward::Status::TaggedSymbol
             )
+          CANCELLED =
+            T.let(
+              :CANCELLED,
+              GrowsurfRuby::Campaign::ParticipantReward::Status::TaggedSymbol
+            )
 
           sig do
             override.returns(

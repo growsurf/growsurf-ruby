@@ -7,7 +7,7 @@ module GrowsurfRuby
         approval_required: bool?,
         duration: String?,
         duration_in_months: Integer?,
-        event: String?,
+        event: GrowsurfRuby::Models::CommissionStructure::event?,
         has_intro: bool?,
         has_max_amount: bool?,
         hold_duration: Integer?,
@@ -35,7 +35,7 @@ module GrowsurfRuby
 
       attr_accessor duration_in_months: Integer?
 
-      attr_accessor event: String?
+      attr_accessor event: GrowsurfRuby::Models::CommissionStructure::event?
 
       attr_accessor has_intro: bool?
 
@@ -71,7 +71,7 @@ module GrowsurfRuby
         ?approval_required: bool?,
         ?duration: String?,
         ?duration_in_months: Integer?,
-        ?event: String?,
+        ?event: GrowsurfRuby::Models::CommissionStructure::event?,
         ?has_intro: bool?,
         ?has_max_amount: bool?,
         ?hold_duration: Integer?,
@@ -94,7 +94,7 @@ module GrowsurfRuby
         approval_required: bool?,
         duration: String?,
         duration_in_months: Integer?,
-        event: String?,
+        event: GrowsurfRuby::Models::CommissionStructure::event?,
         has_intro: bool?,
         has_max_amount: bool?,
         hold_duration: Integer?,
@@ -110,6 +110,18 @@ module GrowsurfRuby
         percent: Float?,
         type: GrowsurfRuby::Models::CommissionStructure::type_?
       }
+
+      type event = :CLICK | :LEAD | :SALE
+
+      module Event
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        CLICK: :CLICK
+        LEAD: :LEAD
+        SALE: :SALE
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CommissionStructure::event]
+      end
 
       type type_ = :PERCENT | :FIXED
 

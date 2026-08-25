@@ -32,6 +32,7 @@ module GrowsurfRuby
           amount: Integer?,
           created_at: Integer,
           currency_iso: String,
+          event: GrowsurfRuby::Models::ParticipantCommissionList::Commission::event,
           referred_id: String,
           referrer_id: String,
           sale_amount: Integer?,
@@ -58,6 +59,8 @@ module GrowsurfRuby
         attr_accessor created_at: Integer
 
         attr_accessor currency_iso: String
+
+        attr_accessor event: GrowsurfRuby::Models::ParticipantCommissionList::Commission::event
 
         attr_accessor referred_id: String
 
@@ -106,6 +109,7 @@ module GrowsurfRuby
           amount: Integer?,
           created_at: Integer,
           currency_iso: String,
+          event: GrowsurfRuby::Models::ParticipantCommissionList::Commission::event,
           referred_id: String,
           referrer_id: String,
           sale_amount: Integer?,
@@ -129,6 +133,7 @@ module GrowsurfRuby
           amount: Integer?,
           created_at: Integer,
           currency_iso: String,
+          event: GrowsurfRuby::Models::ParticipantCommissionList::Commission::event,
           referred_id: String,
           referrer_id: String,
           sale_amount: Integer?,
@@ -146,6 +151,17 @@ module GrowsurfRuby
           reversed_at: Integer,
           sale_amount_in_campaign_currency: Integer?
         }
+
+        type event = :LEAD | :SALE
+
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          LEAD: :LEAD
+          SALE: :SALE
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::ParticipantCommissionList::Commission::event]
+        end
 
         type status = :PENDING | :APPROVED | :PAID | :REVERSED | :DELETED
 

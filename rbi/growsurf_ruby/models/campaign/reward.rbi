@@ -50,6 +50,18 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
+        # The referral event that earns this Campaign Reward. Present only for
+        # `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. Legacy Campaign
+        # Rewards return `CONVERSION`.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Models::Campaign::Reward::Event::TaggedSymbol
+            )
+          )
+        end
+        attr_accessor :event
+
         sig { returns(T.nilable(String)) }
         attr_accessor :image_url
 
@@ -144,6 +156,10 @@ module GrowsurfRuby
             conversions_required: T.nilable(Integer),
             coupon_code: T.nilable(String),
             description: T.nilable(String),
+            event:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::Reward::Event::OrSymbol
+              ),
             image_url: T.nilable(String),
             is_visible: T::Boolean,
             limit: T.nilable(Integer),
@@ -176,6 +192,10 @@ module GrowsurfRuby
           # issued coupon when one exists.
           coupon_code: nil,
           description: nil,
+          # The referral event that earns this Campaign Reward. Present only for
+          # `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. Legacy Campaign
+          # Rewards return `CONVERSION`.
+          event: nil,
           image_url: nil,
           # Whether the reward is enabled. When `false` the reward is disabled: hidden from
           # participants and no longer awarded, including those who already earned it.
@@ -220,6 +240,10 @@ module GrowsurfRuby
               conversions_required: T.nilable(Integer),
               coupon_code: T.nilable(String),
               description: T.nilable(String),
+              event:
+                T.nilable(
+                  GrowsurfRuby::Models::Campaign::Reward::Event::TaggedSymbol
+                ),
               image_url: T.nilable(String),
               is_visible: T::Boolean,
               limit: T.nilable(Integer),
@@ -282,6 +306,37 @@ module GrowsurfRuby
             override.returns(
               T::Array[
                 GrowsurfRuby::Models::Campaign::Reward::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, GrowsurfRuby::Models::Campaign::Reward::Event)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          LEAD =
+            T.let(
+              :LEAD,
+              GrowsurfRuby::Models::Campaign::Reward::Event::TaggedSymbol
+            )
+          CONVERSION =
+            T.let(
+              :CONVERSION,
+              GrowsurfRuby::Models::Campaign::Reward::Event::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::Models::Campaign::Reward::Event::TaggedSymbol
               ]
             )
           end
