@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/growsurf/growsurf-ruby/compare/v1.3.0...v1.4.0) (2026-08-25)
+
+
+### Features
+
+* **api:** add reward and commission event support ([a9d672f](https://github.com/growsurf/growsurf-ruby/commit/a9d672ff9fd34198b8919adbf207436a023841b4))
+
 ## [1.3.0](https://github.com/growsurf/growsurf-ruby/compare/v1.2.1...v1.3.0) (2026-08-23)
 
 
