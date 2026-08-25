@@ -46,6 +46,12 @@ module GrowsurfRuby
         #   @return [String]
         required :currency_iso, String, api_name: :currencyISO
 
+        # @!attribute event
+        #   The event that generated this commission. Legacy commissions return `SALE`.
+        #
+        #   @return [Symbol, GrowsurfRuby::Models::ParticipantCommissionList::Commission::Event]
+        required :event, enum: -> { GrowsurfRuby::ParticipantCommissionList::Commission::Event }
+
         # @!attribute referred_id
         #
         #   @return [String]
@@ -129,11 +135,12 @@ module GrowsurfRuby
                  api_name: :saleAmountInCampaignCurrency,
                  nil?: true
 
-        # @!method initialize(id:, amount:, created_at:, currency_iso:, referred_id:, referrer_id:, sale_amount:, status:, amount_in_campaign_currency: nil, approved_at: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, fx_error: nil, hold_duration: nil, paid_at: nil, payout_queued_at: nil, provider: nil, reversed_at: nil, sale_amount_in_campaign_currency: nil)
+        # @!method initialize(id:, amount:, created_at:, currency_iso:, event:, referred_id:, referrer_id:, sale_amount:, status:, amount_in_campaign_currency: nil, approved_at: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, fx_error: nil, hold_duration: nil, paid_at: nil, payout_queued_at: nil, provider: nil, reversed_at: nil, sale_amount_in_campaign_currency: nil)
         #   @param id [String]
         #   @param amount [Integer, nil]
         #   @param created_at [Integer]
         #   @param currency_iso [String]
+        #   @param event [Symbol, GrowsurfRuby::Models::ParticipantCommissionList::Commission::Event] The event that generated this commission. Legacy commissions return `SALE`.
         #   @param referred_id [String]
         #   @param referrer_id [String]
         #   @param sale_amount [Integer, nil]
@@ -150,6 +157,17 @@ module GrowsurfRuby
         #   @param provider [String, nil]
         #   @param reversed_at [Integer]
         #   @param sale_amount_in_campaign_currency [Integer, nil]
+
+        # @see GrowsurfRuby::Models::ParticipantCommissionList::Commission#event
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          LEAD = :LEAD
+          SALE = :SALE
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # @see GrowsurfRuby::Models::ParticipantCommissionList::Commission#status
         module Status

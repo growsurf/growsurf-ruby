@@ -95,13 +95,14 @@ module GrowsurfRuby
           unread: bool
         }
 
-        type status = :PENDING | :FULFILLED
+        type status = :PENDING | :FULFILLED | :CANCELLED
 
         module Status
           extend GrowsurfRuby::Internal::Type::Enum
 
           PENDING: :PENDING
           FULFILLED: :FULFILLED
+          CANCELLED: :CANCELLED
 
           def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantReward::status]
         end

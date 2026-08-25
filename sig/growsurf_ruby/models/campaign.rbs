@@ -78,6 +78,7 @@ module GrowsurfRuby
           conversions_required: Integer?,
           coupon_code: String?,
           description: String?,
+          event: GrowsurfRuby::Models::CampaignAPI::Reward::event?,
           image_url: String?,
           limit: Integer?,
           limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?,
@@ -108,6 +109,8 @@ module GrowsurfRuby
         attr_accessor coupon_code: String?
 
         attr_accessor description: String?
+
+        attr_accessor event: GrowsurfRuby::Models::CampaignAPI::Reward::event?
 
         attr_accessor image_url: String?
 
@@ -144,6 +147,7 @@ module GrowsurfRuby
           ?conversions_required: Integer?,
           ?coupon_code: String?,
           ?description: String?,
+          ?event: GrowsurfRuby::Models::CampaignAPI::Reward::event?,
           ?image_url: String?,
           ?limit: Integer?,
           ?limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?,
@@ -167,6 +171,7 @@ module GrowsurfRuby
           conversions_required: Integer?,
           coupon_code: String?,
           description: String?,
+          event: GrowsurfRuby::Models::CampaignAPI::Reward::event?,
           image_url: String?,
           limit: Integer?,
           limit_duration: GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration?,
@@ -194,6 +199,17 @@ module GrowsurfRuby
           AFFILIATE: :AFFILIATE
 
           def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::Reward::type_]
+        end
+
+        type event = :LEAD | :CONVERSION
+
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          LEAD: :LEAD
+          CONVERSION: :CONVERSION
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::Reward::event]
         end
 
         type limit_duration = :IN_TOTAL | :PER_MONTH

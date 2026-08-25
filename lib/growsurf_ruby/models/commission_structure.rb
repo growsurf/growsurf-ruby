@@ -32,9 +32,10 @@ module GrowsurfRuby
       optional :duration_in_months, Integer, api_name: :durationInMonths, nil?: true
 
       # @!attribute event
+      #   The event that generates a commission. Missing legacy values read as `SALE`.
       #
-      #   @return [String, nil]
-      optional :event, String, nil?: true
+      #   @return [Symbol, GrowsurfRuby::Models::CommissionStructure::Event, nil]
+      optional :event, enum: -> { GrowsurfRuby::CommissionStructure::Event }, nil?: true
 
       # @!attribute has_intro
       #
@@ -112,7 +113,7 @@ module GrowsurfRuby
       #   @param approval_required [Boolean, nil]
       #   @param duration [String, nil]
       #   @param duration_in_months [Integer, nil]
-      #   @param event [String, nil]
+      #   @param event [Symbol, GrowsurfRuby::Models::CommissionStructure::Event, nil]
       #   @param has_intro [Boolean, nil]
       #   @param has_max_amount [Boolean, nil]
       #   @param hold_duration [Integer, nil]
@@ -127,6 +128,18 @@ module GrowsurfRuby
       #   @param min_paid_referrals [Integer, nil]
       #   @param percent [Float, nil]
       #   @param type [Symbol, GrowsurfRuby::Models::CommissionStructure::Type, nil]
+
+      # @see GrowsurfRuby::Models::CommissionStructure#event
+      module Event
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        CLICK = :CLICK
+        LEAD = :LEAD
+        SALE = :SALE
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # @see GrowsurfRuby::Models::CommissionStructure#type
       module Type

@@ -26,7 +26,12 @@ module GrowsurfRuby
       sig { returns(T.nilable(Integer)) }
       attr_accessor :duration_in_months
 
-      sig { returns(T.nilable(String)) }
+      # The event that generates a commission. Missing legacy values read as `SALE`.
+      sig do
+        returns(
+          T.nilable(GrowsurfRuby::CommissionStructure::Event::TaggedSymbol)
+        )
+      end
       attr_accessor :event
 
       sig { returns(T.nilable(T::Boolean)) }
@@ -82,7 +87,7 @@ module GrowsurfRuby
           approval_required: T.nilable(T::Boolean),
           duration: T.nilable(String),
           duration_in_months: T.nilable(Integer),
-          event: T.nilable(String),
+          event: T.nilable(GrowsurfRuby::CommissionStructure::Event::OrSymbol),
           has_intro: T.nilable(T::Boolean),
           has_max_amount: T.nilable(T::Boolean),
           hold_duration: T.nilable(Integer),
@@ -131,7 +136,8 @@ module GrowsurfRuby
             approval_required: T.nilable(T::Boolean),
             duration: T.nilable(String),
             duration_in_months: T.nilable(Integer),
-            event: T.nilable(String),
+            event:
+              T.nilable(GrowsurfRuby::CommissionStructure::Event::TaggedSymbol),
             has_intro: T.nilable(T::Boolean),
             has_max_amount: T.nilable(T::Boolean),
             hold_duration: T.nilable(Integer),
@@ -151,6 +157,31 @@ module GrowsurfRuby
         )
       end
       def to_hash
+      end
+
+      module Event
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, GrowsurfRuby::CommissionStructure::Event)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CLICK =
+          T.let(:CLICK, GrowsurfRuby::CommissionStructure::Event::TaggedSymbol)
+        LEAD =
+          T.let(:LEAD, GrowsurfRuby::CommissionStructure::Event::TaggedSymbol)
+        SALE =
+          T.let(:SALE, GrowsurfRuby::CommissionStructure::Event::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[GrowsurfRuby::CommissionStructure::Event::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
 
       module Type

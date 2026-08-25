@@ -34,6 +34,8 @@ module GrowsurfRuby
             conversions_required: Integer,
             coupon_code: String,
             description: String,
+            event:
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
             image_url: String,
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
@@ -69,6 +71,11 @@ module GrowsurfRuby
           coupon_code: nil,
           # Body param
           description: nil,
+          # Body param: The referral event that earns this Campaign Reward. Use `LEAD` or
+          # `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to
+          # be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and
+          # `MILESTONE` rewards. When omitted, it defaults to `CONVERSION`.
+          event: nil,
           # Body param
           image_url: nil,
           # Body param: Whether the reward can be earned an unlimited number of times.
@@ -130,6 +137,8 @@ module GrowsurfRuby
             conversions_required: Integer,
             coupon_code: String,
             description: String,
+            event:
+              GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
             image_url: String,
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
@@ -165,6 +174,11 @@ module GrowsurfRuby
           coupon_code: nil,
           # Body param
           description: nil,
+          # Body param: The referral event that earns this Campaign Reward. Use `LEAD` or
+          # `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to
+          # be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and
+          # `MILESTONE` rewards. When omitted, the stored event is preserved.
+          event: nil,
           # Body param
           image_url: nil,
           # Body param: Whether the reward can be earned an unlimited number of times.

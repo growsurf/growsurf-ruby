@@ -69,6 +69,14 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :currency_iso
 
+        # The event that generated this commission. Legacy commissions return `SALE`.
+        sig do
+          returns(
+            GrowsurfRuby::ParticipantCommissionList::Commission::Event::TaggedSymbol
+          )
+        end
+        attr_accessor :event
+
         sig { returns(String) }
         attr_accessor :referred_id
 
@@ -142,6 +150,8 @@ module GrowsurfRuby
             amount: T.nilable(Integer),
             created_at: Integer,
             currency_iso: String,
+            event:
+              GrowsurfRuby::ParticipantCommissionList::Commission::Event::OrSymbol,
             referred_id: String,
             referrer_id: String,
             sale_amount: T.nilable(Integer),
@@ -166,6 +176,8 @@ module GrowsurfRuby
           amount:,
           created_at:,
           currency_iso:,
+          # The event that generated this commission. Legacy commissions return `SALE`.
+          event:,
           referred_id:,
           referrer_id:,
           sale_amount:,
@@ -192,6 +204,8 @@ module GrowsurfRuby
               amount: T.nilable(Integer),
               created_at: Integer,
               currency_iso: String,
+              event:
+                GrowsurfRuby::ParticipantCommissionList::Commission::Event::TaggedSymbol,
               referred_id: String,
               referrer_id: String,
               sale_amount: T.nilable(Integer),
@@ -213,6 +227,40 @@ module GrowsurfRuby
           )
         end
         def to_hash
+        end
+
+        module Event
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                GrowsurfRuby::ParticipantCommissionList::Commission::Event
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          LEAD =
+            T.let(
+              :LEAD,
+              GrowsurfRuby::ParticipantCommissionList::Commission::Event::TaggedSymbol
+            )
+          SALE =
+            T.let(
+              :SALE,
+              GrowsurfRuby::ParticipantCommissionList::Commission::Event::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::ParticipantCommissionList::Commission::Event::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
 
         module Status
