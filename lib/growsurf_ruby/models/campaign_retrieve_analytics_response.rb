@@ -22,6 +22,9 @@ module GrowsurfRuby
       # Present only when `include` contains `email`.
       optional :email, -> { GrowsurfRuby::Models::EmailAnalytics }
 
+      # Present only when `include` contains `engagement`.
+      optional :engagement, -> { GrowsurfRuby::Models::CampaignEngagementAnalytics }
+
       # @!attribute previous_period
       #   Present only when `include` contains `previousPeriod`.
       #

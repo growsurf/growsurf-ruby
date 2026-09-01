@@ -26,7 +26,9 @@ module GrowsurfRuby
       sig { returns(T.nilable(Integer)) }
       attr_accessor :duration_in_months
 
-      # The event that generates a commission. Missing legacy values read as `SALE`.
+      # The event that generates a commission. `CLICK` and `LEAD` require `FIXED` with
+      # a positive `amount`; `amountISO` defaults to the program currency when omitted.
+      # `SALE` supports `FIXED` or `PERCENT`. Missing legacy values read as `SALE`.
       sig do
         returns(
           T.nilable(GrowsurfRuby::CommissionStructure::Event::TaggedSymbol)

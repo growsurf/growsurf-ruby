@@ -28,6 +28,23 @@ module GrowsurfRuby
         sig { returns(T::Hash[Symbol, Integer]) }
         attr_accessor :share_count
 
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics
+            )
+          )
+        end
+        attr_reader :activation
+
+        sig do
+          params(
+            activation:
+              GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::OrHash
+          ).void
+        end
+        attr_writer :activation
+
         # Present only when `include` contains `series` or `email`. Window end (Unix ms).
         sig { returns(T.nilable(Integer)) }
         attr_reader :end_date
@@ -73,6 +90,8 @@ module GrowsurfRuby
             ranks:
               GrowsurfRuby::Campaign::ParticipantAnalyticsResponse::Ranks::OrHash,
             share_count: T::Hash[Symbol, Integer],
+            activation:
+              GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::OrHash,
             end_date: Integer,
             series:
               T::Array[
@@ -86,6 +105,8 @@ module GrowsurfRuby
           ranks:,
           # Per-channel share counts (e.g. `email`, `facebook`, `twitter`, ...).
           share_count:,
+          # Present only when `include` contains `activation`.
+          activation: nil,
           # Present only when `include` contains `series` or `email`. Window end (Unix ms).
           end_date: nil,
           # Present only when `include=series`. This participant's own referral-link activity
@@ -105,6 +126,8 @@ module GrowsurfRuby
               ranks:
                 GrowsurfRuby::Campaign::ParticipantAnalyticsResponse::Ranks,
               share_count: T::Hash[Symbol, Integer],
+              activation:
+                GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics,
               end_date: Integer,
               series:
                 T::Array[
@@ -422,6 +445,9 @@ module GrowsurfRuby
           attr_writer :pinterest_shares
 
           sig { returns(T.nilable(Integer)) }
+          attr_accessor :portal_views
+
+          sig { returns(T.nilable(Integer)) }
           attr_reader :qrcode_shares
 
           sig { params(qrcode_shares: Integer).void }
@@ -456,6 +482,9 @@ module GrowsurfRuby
 
           sig { params(sms_shares: Integer).void }
           attr_writer :sms_shares
+
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :share_actions
 
           sig { returns(T.nilable(Integer)) }
           attr_reader :telegram_shares
@@ -542,12 +571,14 @@ module GrowsurfRuby
               participants: Integer,
               period_start: Integer,
               pinterest_shares: Integer,
+              portal_views: T.nilable(Integer),
               qrcode_shares: Integer,
               reddit_shares: Integer,
               referral_credit_expireds: Integer,
               referral_credit_pendings: Integer,
               referrals: Integer,
               sms_shares: Integer,
+              share_actions: T.nilable(Integer),
               telegram_shares: Integer,
               threads_shares: Integer,
               total_commission_count: Integer,
@@ -576,12 +607,14 @@ module GrowsurfRuby
             # Start of the period, as a Unix timestamp in milliseconds (UTC).
             period_start: nil,
             pinterest_shares: nil,
+            portal_views: nil,
             qrcode_shares: nil,
             reddit_shares: nil,
             referral_credit_expireds: nil,
             referral_credit_pendings: nil,
             referrals: nil,
             sms_shares: nil,
+            share_actions: nil,
             telegram_shares: nil,
             threads_shares: nil,
             # Affiliate programs only. Number of commission records.
@@ -616,12 +649,14 @@ module GrowsurfRuby
                 participants: Integer,
                 period_start: Integer,
                 pinterest_shares: Integer,
+                portal_views: T.nilable(Integer),
                 qrcode_shares: Integer,
                 reddit_shares: Integer,
                 referral_credit_expireds: Integer,
                 referral_credit_pendings: Integer,
                 referrals: Integer,
                 sms_shares: Integer,
+                share_actions: T.nilable(Integer),
                 telegram_shares: Integer,
                 threads_shares: Integer,
                 total_commission_count: Integer,

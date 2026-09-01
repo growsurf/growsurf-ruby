@@ -8,7 +8,8 @@ module GrowsurfRuby
         # Program Editor's **Emails** tab. Returns each editable email template
         # (`subject`, `preheader`, `body`, `isEnabled`) plus the `settings` block (sender,
         # contact, and design). The set of email templates returned depends on the program
-        # type (referral vs affiliate).
+        # type (referral vs affiliate). `offerClaimed` is available to both program types and sends
+        # while the Claim Offer Popup is enabled.
         sig do
           params(
             id: String,

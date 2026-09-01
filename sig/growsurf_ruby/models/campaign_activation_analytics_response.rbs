@@ -1,0 +1,177 @@
+module GrowsurfRuby
+  module Models
+    class CampaignActivationAnalyticsResponse < GrowsurfRuby::Internal::Type::BaseModel
+      type program_type = :REFERRAL | :AFFILIATE
+      type cohort_interval = :day | :week | :month
+      type portal_viewed_label =
+        :"Referral portal viewed" | :"Affiliate portal viewed"
+      type stage_key =
+        :ELIGIBLE
+        | :PORTAL_VIEWED
+        | :SHARE_ACTION
+        | :UNIQUE_REFERRAL_VISIT
+        | :LEAD
+        | :CREDITED_REFERRAL
+      type stalled_segment_key =
+        :ELIGIBLE_NO_PORTAL_VIEW
+        | :PORTAL_VIEWED_NO_SHARE_ACTION
+        | :SHARED_NO_UNIQUE_REFERRAL_VISIT
+        | :UNIQUE_VISIT_NO_LEAD
+        | :LEAD_NO_CREDITED_REFERRAL
+      type improvement_area_key =
+        :PORTAL_ACCESS
+        | :SHARING_EXPERIENCE
+        | :SHARE_EFFECTIVENESS
+        | :VISITOR_SIGNUP
+        | :ATTRIBUTION_AND_QUALIFICATION
+      type anchor_field = :enrolledAsAdvocateAt | :approvedAsAffiliateAt
+
+      attr_accessor coverage_start_at: Integer?
+      attr_accessor metric_contract_version: Integer
+      attr_accessor program_type: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::program_type
+      attr_accessor timezone: String
+      attr_accessor cohort_interval: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::cohort_interval
+      attr_accessor observation_window_days: Integer
+      attr_accessor portal_viewed_label: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::portal_viewed_label
+      attr_accessor portal_viewed_helper_text: String
+      attr_accessor aggregate: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::CohortResult
+      attr_accessor cohorts: ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::CohortResult]
+      def initialize: (**untyped) -> void
+
+      module ProgramType
+        extend GrowsurfRuby::Internal::Type::Enum
+        REFERRAL: :REFERRAL
+        AFFILIATE: :AFFILIATE
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::program_type]
+      end
+
+      module CohortInterval
+        extend GrowsurfRuby::Internal::Type::Enum
+        DAY: :day
+        WEEK: :week
+        MONTH: :month
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::cohort_interval]
+      end
+
+      module PortalViewedLabel
+        extend GrowsurfRuby::Internal::Type::Enum
+        REFERRAL: :"Referral portal viewed"
+        AFFILIATE: :"Affiliate portal viewed"
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::portal_viewed_label]
+      end
+
+      module StageKey
+        extend GrowsurfRuby::Internal::Type::Enum
+        ELIGIBLE: :ELIGIBLE
+        PORTAL_VIEWED: :PORTAL_VIEWED
+        SHARE_ACTION: :SHARE_ACTION
+        UNIQUE_REFERRAL_VISIT: :UNIQUE_REFERRAL_VISIT
+        LEAD: :LEAD
+        CREDITED_REFERRAL: :CREDITED_REFERRAL
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stage_key]
+      end
+
+      module StalledSegmentKey
+        extend GrowsurfRuby::Internal::Type::Enum
+        ELIGIBLE_NO_PORTAL_VIEW: :ELIGIBLE_NO_PORTAL_VIEW
+        PORTAL_VIEWED_NO_SHARE_ACTION: :PORTAL_VIEWED_NO_SHARE_ACTION
+        SHARED_NO_UNIQUE_REFERRAL_VISIT: :SHARED_NO_UNIQUE_REFERRAL_VISIT
+        UNIQUE_VISIT_NO_LEAD: :UNIQUE_VISIT_NO_LEAD
+        LEAD_NO_CREDITED_REFERRAL: :LEAD_NO_CREDITED_REFERRAL
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_key]
+      end
+
+      module ImprovementAreaKey
+        extend GrowsurfRuby::Internal::Type::Enum
+        PORTAL_ACCESS: :PORTAL_ACCESS
+        SHARING_EXPERIENCE: :SHARING_EXPERIENCE
+        SHARE_EFFECTIVENESS: :SHARE_EFFECTIVENESS
+        VISITOR_SIGNUP: :VISITOR_SIGNUP
+        ATTRIBUTION_AND_QUALIFICATION: :ATTRIBUTION_AND_QUALIFICATION
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::improvement_area_key]
+      end
+
+      module AnchorField
+        extend GrowsurfRuby::Internal::Type::Enum
+        ENROLLED_AS_ADVOCATE_AT: :enrolledAsAdvocateAt
+        APPROVED_AS_AFFILIATE_AT: :approvedAsAffiliateAt
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::anchor_field]
+      end
+
+      class Stage < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor key: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stage_key
+        attr_accessor count: Integer
+        attr_accessor conversion_rate_from_prior: Float?
+        attr_accessor conversion_rate_from_eligible: Float?
+        attr_accessor drop_off_count: Integer?
+        attr_accessor drop_off_rate: Float?
+        attr_accessor median_time_to_stage_ms: Float?
+        attr_accessor stalled_segment_key: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_key?
+        def initialize: (**untyped) -> void
+      end
+
+      class StageCounts < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor eligible: Integer
+        attr_accessor portal_viewed: Integer
+        attr_accessor share_action: Integer
+        attr_accessor unique_referral_visit: Integer
+        attr_accessor lead: Integer
+        attr_accessor credited_referral: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class StalledSegment < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor key: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_key
+        attr_accessor from_stage: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stage_key
+        attr_accessor to_stage: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stage_key
+        attr_accessor count: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class OutcomeCount < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor count: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class Outcomes < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor first_reward: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::OutcomeCount?
+        attr_accessor first_commission: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::OutcomeCount?
+        attr_accessor payout_setup_completed: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::OutcomeCount?
+        def initialize: (**untyped) -> void
+      end
+
+      class LargestDrop < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor from_stage: String
+        attr_accessor to_stage: String
+        attr_accessor count: Integer
+        attr_accessor rate: Float
+        attr_accessor stalled_segment_key: String
+        attr_accessor improvement_area_key: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::improvement_area_key
+        attr_accessor improvement_area: String
+        def initialize: (**untyped) -> void
+      end
+
+      class CohortBounds < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor from: Integer
+        attr_accessor to: Integer
+        attr_accessor effective_from: Integer?
+        attr_accessor matured_at: Integer
+        attr_accessor as_of: Integer
+        attr_accessor anchor_field: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::anchor_field
+        def initialize: (**untyped) -> void
+      end
+
+      class CohortResult < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor state: GrowsurfRuby::Models::analytics_availability
+        attr_accessor reason: GrowsurfRuby::Models::analytics_unavailable_reason?
+        attr_accessor cohort: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::CohortBounds
+        attr_accessor strict_stages: ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::Stage]?
+        attr_accessor raw_stage_counts: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::StageCounts?
+        attr_accessor stalled_segments: ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::StalledSegment]?
+        attr_accessor outcomes: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::Outcomes?
+        attr_accessor largest_drop: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::LargestDrop?
+        def initialize: (**untyped) -> void
+      end
+    end
+  end
+end

@@ -18,6 +18,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Rewards]
       attr_reader :rewards
 
+      # Program Resource management and secure FILE upload operations.
+      # @return [GrowsurfRuby::Resources::Campaign::ProgramResources]
+      attr_reader :resources
+
       # Program Editor "Design" tab configuration operations.
       # @return [GrowsurfRuby::Resources::Campaign::Design]
       attr_reader :design
@@ -531,13 +535,11 @@ module GrowsurfRuby
       #
       # Retrieves analytics for a program. Pass `interval` to also get a time-series
       # (`series`) alongside the totals, and `include` to add previous-period totals,
-      # status breakdowns, derived rates, or email performance. Add `email` to `include`
-      # for `sent` (accepted for delivery), `delivered`, `opened`, `clicked`, `bounced`,
-      # and `spamComplaints` metrics plus per-email-type breakdowns. Email rates are
-      # ratios from `0` to `1`, and `isPartial` identifies windows that begin before
-      # complete coverage.
+      # status breakdowns, derived rates, email performance, or participant engagement.
+      # Add `engagement` for covered activity totals, comparisons, series, and breakdowns.
+      # Unknown coverage returns explicit unavailable states rather than zeroes.
       #
-      # @overload retrieve_analytics(id, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
+      # @overload retrieve_analytics(id, days: nil, end_date: nil, include: nil, interval: nil, platform: nil, start_date: nil, timezone: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
       #
@@ -549,7 +551,11 @@ module GrowsurfRuby
       #
       # @param interval [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Interval] When set to `day`, `week`, or `month`, the response also includes a `series` array
       #
+      # @param platform [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Platform] Limits engagement events to one client platform.
+      #
       # @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
+      #
+      # @param timezone [String] IANA timezone used for engagement interval boundaries and distinct-day calculations.
       #
       # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -564,6 +570,38 @@ module GrowsurfRuby
           path: ["campaign/%1$s/analytics", id],
           query: query.transform_keys(end_date: "endDate", start_date: "startDate"),
           model: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse,
+          options: options
+        )
+      end
+
+      # Retrieves activation cohorts for a program. Each cohort follows eligible
+      # participants through portal views, sharing, referral visits, leads, and credited
+      # referrals. Coverage states distinguish unknown values from zeroes.
+      #
+      # @overload retrieve_activation_analytics(id, cohort_from: nil, cohort_to: nil, cohort_interval: nil, observation_window_days: nil, timezone: nil, request_options: {})
+      #
+      # @param id [String] GrowSurf program ID.
+      # @param cohort_from [Integer] Inclusive cohort enrollment start, as a Unix timestamp in milliseconds.
+      # @param cohort_to [Integer] Exclusive cohort enrollment end, as a Unix timestamp in milliseconds.
+      # @param cohort_interval [Symbol, GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::CohortInterval] Cohort bucket size. Defaults to `day`.
+      # @param observation_window_days [Integer] Days after enrollment allowed for each participant to reach a stage. Use `7` or `30`.
+      # @param timezone [String] IANA timezone used for cohort bounds. Defaults to `UTC`.
+      # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+      # @return [GrowsurfRuby::Models::CampaignActivationAnalyticsResponse]
+      # @see GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams
+      def retrieve_activation_analytics(id, params = {})
+        parsed, options = GrowsurfRuby::CampaignRetrieveActivationAnalyticsParams.dump_request(params)
+        query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(
+          method: :get,
+          path: ["campaign/%1$s/analytics/activation", id],
+          query: query.transform_keys(
+            cohort_from: "cohortFrom",
+            cohort_to: "cohortTo",
+            cohort_interval: "cohortInterval",
+            observation_window_days: "observationWindowDays"
+          ),
+          model: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse,
           options: options
         )
       end
@@ -653,6 +691,7 @@ module GrowsurfRuby
         @reward = GrowsurfRuby::Resources::Campaign::Reward.new(client: client)
         @commission = GrowsurfRuby::Resources::Campaign::Commission.new(client: client)
         @rewards = GrowsurfRuby::Resources::Campaign::Rewards.new(client: client)
+        @resources = GrowsurfRuby::Resources::Campaign::ProgramResources.new(client: client)
         @design = GrowsurfRuby::Resources::Campaign::Design.new(client: client)
         @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)
         @options = GrowsurfRuby::Resources::Campaign::Options.new(client: client)

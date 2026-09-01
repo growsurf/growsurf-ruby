@@ -437,7 +437,8 @@ module GrowsurfRuby
         # and reverses or adjusts the referrer's commission. The inverse of Record
         # Affiliate Transaction. Identify the original transaction with the same
         # identifier(s) you sent when recording it. Commissions already paid out to the
-        # affiliate are not clawed back; the amendment is recorded for tax reporting only.
+        # affiliate are not clawed back. The amendment still updates the sale revenue used
+        # in program reporting; full refunds and chargebacks also update tax reporting.
         #
         # @overload refund_transaction(participant_id_or_email, id:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
         #
@@ -686,10 +687,10 @@ module GrowsurfRuby
         # commission, and payout metrics for affiliate programs). Pass `include=email`
         # for `sent` (accepted for delivery), `delivered`, `opened`, `clicked`,
         # `bounced`, and `spamComplaints` metrics attributed to this participant,
-        # including invitations they sent. Use `include=email,series` to include the
-        # same counts in each UTC series bucket. `days`, `startDate`, and `endDate`
-        # filter only the optional `series` and `email` data. They do not filter the
-        # top-level `analytics`, `ranks`, or `shareCount` values.
+        # including invitations they sent. Add `activation` for the cohort anchor and
+        # covered first milestones. Use `include=activation,series` to add covered portal
+        # views and share actions to each series bucket. Unknown history stays `null` with
+        # an explicit coverage state.
         #
         # @overload retrieve_analytics(participant_id_or_email, id:, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
         #

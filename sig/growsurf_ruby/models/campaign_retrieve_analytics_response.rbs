@@ -5,6 +5,7 @@ module GrowsurfRuby
         analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
         end_date: Integer,
         start_date: Integer,
+        engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics,
         previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
         rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates,
         series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series],
@@ -17,6 +18,12 @@ module GrowsurfRuby
       attr_accessor end_date: Integer
 
       attr_accessor start_date: Integer
+
+      attr_reader engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics?
+
+      def engagement=: (
+        GrowsurfRuby::Models::CampaignEngagementAnalytics
+      ) -> GrowsurfRuby::Models::CampaignEngagementAnalytics
 
       attr_reader previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod?
 
@@ -46,6 +53,7 @@ module GrowsurfRuby
         analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
         end_date: Integer,
         start_date: Integer,
+        ?engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics,
         ?previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
         ?rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates,
         ?series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series],
@@ -56,6 +64,7 @@ module GrowsurfRuby
         analytics: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
         end_date: Integer,
         start_date: Integer,
+        engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics,
         previous_period: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
         rates: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Rates,
         series: ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Series],
@@ -763,7 +772,8 @@ module GrowsurfRuby
           end
         end
 
-        type reward_status = { completed: Integer, unapproved: Integer, unfulfilled: Integer }
+        type reward_status =
+          { completed: Integer, unapproved: Integer, unfulfilled: Integer }
 
         class RewardStatus < GrowsurfRuby::Internal::Type::BaseModel
           attr_reader completed: Integer?
@@ -778,9 +788,17 @@ module GrowsurfRuby
 
           def unfulfilled=: (Integer) -> Integer
 
-          def initialize: (?completed: Integer, ?unapproved: Integer, ?unfulfilled: Integer) -> void
+          def initialize: (
+            ?completed: Integer,
+            ?unapproved: Integer,
+            ?unfulfilled: Integer
+          ) -> void
 
-          def to_hash: -> { completed: Integer, unapproved: Integer, unfulfilled: Integer }
+          def to_hash: -> {
+            completed: Integer,
+            unapproved: Integer,
+            unfulfilled: Integer
+          }
         end
       end
     end

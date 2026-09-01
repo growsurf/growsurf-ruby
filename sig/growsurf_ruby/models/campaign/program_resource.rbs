@@ -1,0 +1,94 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type program_resource_file =
+        {
+          file_name: String,
+          mime_type: String,
+          bytes: Integer,
+          format: String,
+          moderation_status: ProgramResourceFile::moderation_status
+        }
+
+      class ProgramResourceFile < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor file_name: String
+        attr_accessor mime_type: String
+        attr_accessor bytes: Integer
+        attr_accessor format: String
+        attr_accessor moderation_status: moderation_status
+        def initialize: (
+          file_name: String,
+          mime_type: String,
+          bytes: Integer,
+          format: String,
+          moderation_status: moderation_status
+        ) -> void
+        def to_hash: -> program_resource_file
+
+        type moderation_status = :PENDING | :APPROVED | :REJECTED
+        module ModerationStatus
+          extend GrowsurfRuby::Internal::Type::Enum
+          PENDING: :PENDING
+          APPROVED: :APPROVED
+          REJECTED: :REJECTED
+          def self?.values: -> ::Array[moderation_status]
+        end
+      end
+
+      type program_resource =
+        {
+          id: String,
+          type: ProgramResource::type_,
+          title: String,
+          description: String?,
+          category: String?,
+          url: String?,
+          text: String?,
+          file: ProgramResourceFile?,
+          is_published: bool,
+          position: Integer,
+          created_at: Integer,
+          updated_at: Integer
+        }
+
+      class ProgramResource < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+        attr_accessor type: type_
+        attr_accessor title: String
+        attr_accessor description: String?
+        attr_accessor category: String?
+        attr_accessor url: String?
+        attr_accessor text: String?
+        attr_accessor file: ProgramResourceFile?
+        attr_accessor is_published: bool
+        attr_accessor position: Integer
+        attr_accessor created_at: Integer
+        attr_accessor updated_at: Integer
+        def initialize: (
+          id: String,
+          type: type_,
+          title: String,
+          description: String?,
+          category: String?,
+          url: String?,
+          text: String?,
+          file: ProgramResourceFile?,
+          is_published: bool,
+          position: Integer,
+          created_at: Integer,
+          updated_at: Integer
+        ) -> void
+        def to_hash: -> program_resource
+
+        type type_ = :FILE | :LINK | :TEXT
+        module Type
+          extend GrowsurfRuby::Internal::Type::Enum
+          FILE: :FILE
+          LINK: :LINK
+          TEXT: :TEXT
+          def self?.values: -> ::Array[type_]
+        end
+      end
+    end
+  end
+end

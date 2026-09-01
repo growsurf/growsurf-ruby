@@ -32,7 +32,10 @@ module GrowsurfRuby
       optional :duration_in_months, Integer, api_name: :durationInMonths, nil?: true
 
       # @!attribute event
-      #   The event that generates a commission. Missing legacy values read as `SALE`.
+      #   The event that generates a commission. `CLICK` and `LEAD` require `FIXED`
+      #   with a positive `amount`; `amountISO` defaults to the program currency when
+      #   omitted. `SALE` supports `FIXED` or `PERCENT`. Missing legacy values read as
+      #   `SALE`.
       #
       #   @return [Symbol, GrowsurfRuby::Models::CommissionStructure::Event, nil]
       optional :event, enum: -> { GrowsurfRuby::CommissionStructure::Event }, nil?: true

@@ -46,7 +46,9 @@ module GrowsurfRuby
       attr_writer :include
 
       # When set to `day`, `week`, or `month`, the response also includes a `series` array
-      # with per-period totals. Defaults to `total` (no series).
+      # with per-period totals and uses the same bucket size for `engagement.series`.
+      # Defaults to `total` (no legacy series); `engagement.series` uses daily buckets when
+      # `interval` is `total` or omitted.
       sig do
         returns(
           T.nilable(
@@ -64,6 +66,23 @@ module GrowsurfRuby
       end
       attr_writer :interval
 
+      sig do
+        returns(
+          T.nilable(
+            GrowsurfRuby::CampaignRetrieveAnalyticsParams::Platform::OrSymbol
+          )
+        )
+      end
+      attr_reader :platform
+
+      sig do
+        params(
+          platform:
+            GrowsurfRuby::CampaignRetrieveAnalyticsParams::Platform::OrSymbol
+        ).void
+      end
+      attr_writer :platform
+
       # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
       # Required if `days` is not set.
       sig { returns(T.nilable(Integer)) }
@@ -71,6 +90,12 @@ module GrowsurfRuby
 
       sig { params(start_date: Integer).void }
       attr_writer :start_date
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :timezone
+
+      sig { params(timezone: String).void }
+      attr_writer :timezone
 
       sig do
         params(
@@ -80,7 +105,10 @@ module GrowsurfRuby
           include: String,
           interval:
             GrowsurfRuby::CampaignRetrieveAnalyticsParams::Interval::OrSymbol,
+          platform:
+            GrowsurfRuby::CampaignRetrieveAnalyticsParams::Platform::OrSymbol,
           start_date: Integer,
+          timezone: String,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -101,11 +129,17 @@ module GrowsurfRuby
         # windows.
         include: nil,
         # When set to `day`, `week`, or `month`, the response also includes a `series` array
-        # with per-period totals. Defaults to `total` (no series).
+        # with per-period totals and uses the same bucket size for `engagement.series`.
+        # Defaults to `total` (no legacy series); `engagement.series` uses daily buckets when
+        # `interval` is `total` or omitted.
         interval: nil,
+        # Participant platform used for `engagement`. Defaults to `ALL`.
+        platform: nil,
         # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
         # Required if `days` is not set.
         start_date: nil,
+        # IANA timezone used for engagement periods and buckets. Defaults to `UTC`.
+        timezone: nil,
         request_options: {}
       )
       end
@@ -119,7 +153,10 @@ module GrowsurfRuby
             include: String,
             interval:
               GrowsurfRuby::CampaignRetrieveAnalyticsParams::Interval::OrSymbol,
+            platform:
+              GrowsurfRuby::CampaignRetrieveAnalyticsParams::Platform::OrSymbol,
             start_date: Integer,
+            timezone: String,
             request_options: GrowsurfRuby::RequestOptions
           }
         )
@@ -128,7 +165,9 @@ module GrowsurfRuby
       end
 
       # When set to `day`, `week`, or `month`, the response also includes a `series` array
-      # with per-period totals. Defaults to `total` (no series).
+      # with per-period totals and uses the same bucket size for `engagement.series`.
+      # Defaults to `total` (no legacy series); `engagement.series` uses daily buckets when
+      # `interval` is `total` or omitted.
       module Interval
         extend GrowsurfRuby::Internal::Type::Enum
 
@@ -169,6 +208,20 @@ module GrowsurfRuby
             ]
           )
         end
+        def self.values
+        end
+      end
+
+      module Platform
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+        ALL = T.let(:ALL, Symbol)
+        WEB = T.let(:WEB, Symbol)
+        IOS = T.let(:IOS, Symbol)
+        ANDROID = T.let(:ANDROID, Symbol)
+
+        sig { override.returns(T::Array[Symbol]) }
         def self.values
         end
       end

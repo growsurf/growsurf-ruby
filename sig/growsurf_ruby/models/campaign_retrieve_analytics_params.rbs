@@ -7,7 +7,9 @@ module GrowsurfRuby
         end_date: Integer,
         include: String,
         interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
-        start_date: Integer
+        platform: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform,
+        start_date: Integer,
+        timezone: String
       }
       & GrowsurfRuby::Internal::Type::request_parameters
 
@@ -35,9 +37,19 @@ module GrowsurfRuby
         GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval
       ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval
 
+      attr_reader platform: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform?
+
+      def platform=: (
+        GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform
+      ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform
+
       attr_reader start_date: Integer?
 
       def start_date=: (Integer) -> Integer
+
+      attr_reader timezone: String?
+
+      def timezone=: (String) -> String
 
       def initialize: (
         id: String,
@@ -45,7 +57,9 @@ module GrowsurfRuby
         ?end_date: Integer,
         ?include: String,
         ?interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
+        ?platform: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform,
         ?start_date: Integer,
+        ?timezone: String,
         ?request_options: GrowsurfRuby::request_opts
       ) -> void
 
@@ -55,11 +69,15 @@ module GrowsurfRuby
         end_date: Integer,
         include: String,
         interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
+        platform: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform,
         start_date: Integer,
+        timezone: String,
         request_options: GrowsurfRuby::RequestOptions
       }
 
       type interval = :day | :week | :month | :total
+
+      type platform = :ALL | :WEB | :IOS | :ANDROID
 
       module Interval
         extend GrowsurfRuby::Internal::Type::Enum
@@ -70,6 +88,17 @@ module GrowsurfRuby
         TOTAL: :total
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval]
+      end
+
+      module Platform
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        ALL: :ALL
+        WEB: :WEB
+        IOS: :IOS
+        ANDROID: :ANDROID
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform]
       end
     end
   end

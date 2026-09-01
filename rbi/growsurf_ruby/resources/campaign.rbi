@@ -18,6 +18,10 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::Rewards) }
       attr_reader :rewards
 
+      # Program Resource management and secure FILE upload operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::ProgramResources) }
+      attr_reader :resources
+
       # Program Editor "Design" tab configuration operations.
       sig { returns(GrowsurfRuby::Resources::Campaign::Design) }
       attr_reader :design
@@ -428,10 +432,9 @@ module GrowsurfRuby
 
       # Retrieves analytics for a program. Pass `interval` to also get a time-series (`series`)
       # alongside the totals, and `include` to add previous-period totals, status breakdowns,
-      # derived rates, or email performance. Add `email` to `include` for `sent` (accepted for
-      # delivery), `delivered`, `opened`, `clicked`, `bounced`, and `spamComplaints` metrics plus
-      # per-email-type breakdowns. Email rates are ratios from `0` to `1`, and `isPartial`
-      # identifies windows that begin before complete coverage.
+      # derived rates, email performance, or participant engagement. Add `engagement` for
+      # covered activity totals, comparisons, series, and breakdowns. Unknown coverage returns
+      # explicit unavailable states rather than zeroes.
       sig do
         params(
           id: String,
@@ -440,7 +443,10 @@ module GrowsurfRuby
           include: String,
           interval:
             GrowsurfRuby::CampaignRetrieveAnalyticsParams::Interval::OrSymbol,
+          platform:
+            GrowsurfRuby::CampaignRetrieveAnalyticsParams::Platform::OrSymbol,
           start_date: Integer,
+          timezone: String,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse)
       end
@@ -462,11 +468,43 @@ module GrowsurfRuby
         # windows.
         include: nil,
         # When set to `day`, `week`, or `month`, the response also includes a `series` array
-        # with per-period totals. Defaults to `total` (no series).
+        # with per-period totals and uses the same bucket size for `engagement.series`.
+        # Defaults to `total` (no legacy series); `engagement.series` uses daily buckets when
+        # `interval` is `total` or omitted.
         interval: nil,
+        # Participant platform used for `engagement`. Defaults to `ALL`.
+        platform: nil,
         # Start date of the analytics timeframe as a Unix timestamp in milliseconds.
         # Required if `days` is not set.
         start_date: nil,
+        # IANA timezone used for engagement periods and buckets. Defaults to `UTC`.
+        timezone: nil,
+        request_options: {}
+      )
+      end
+
+      # Retrieves activation cohorts for a program. Coverage states distinguish unknown values
+      # from zeroes.
+      sig do
+        params(
+          id: String,
+          cohort_from: Integer,
+          cohort_to: Integer,
+          cohort_interval:
+            GrowsurfRuby::CampaignRetrieveActivationAnalyticsParams::CohortInterval::OrSymbol,
+          observation_window_days:
+            GrowsurfRuby::CampaignRetrieveActivationAnalyticsParams::ObservationWindowDays::OrInteger,
+          timezone: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(GrowsurfRuby::Models::CampaignActivationAnalyticsResponse)
+      end
+      def retrieve_activation_analytics(
+        id,
+        cohort_from: nil,
+        cohort_to: nil,
+        cohort_interval: nil,
+        observation_window_days: nil,
+        timezone: nil,
         request_options: {}
       )
       end

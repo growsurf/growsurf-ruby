@@ -32,6 +32,18 @@ module GrowsurfRuby
       sig { returns(Integer) }
       attr_accessor :start_date
 
+      sig do
+        returns(T.nilable(GrowsurfRuby::Models::CampaignEngagementAnalytics))
+      end
+      attr_reader :engagement
+
+      sig do
+        params(
+          engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics::OrHash
+        ).void
+      end
+      attr_writer :engagement
+
       # Present only when `include` contains `previousPeriod`.
       sig do
         returns(
@@ -115,6 +127,7 @@ module GrowsurfRuby
             GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics::OrHash,
           end_date: Integer,
           start_date: Integer,
+          engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics::OrHash,
           previous_period:
             GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod::OrHash,
           rates:
@@ -131,6 +144,8 @@ module GrowsurfRuby
         analytics:,
         end_date:,
         start_date:,
+        # Present only when `include` contains `engagement`.
+        engagement: nil,
         # Present only when `include` contains `previousPeriod`.
         previous_period: nil,
         # Present only when `include` contains `rates`.
@@ -150,6 +165,7 @@ module GrowsurfRuby
               GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::Analytics,
             end_date: Integer,
             start_date: Integer,
+            engagement: GrowsurfRuby::Models::CampaignEngagementAnalytics,
             previous_period:
               GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::PreviousPeriod,
             rates:
@@ -1386,16 +1402,20 @@ module GrowsurfRuby
 
           # Reward counts grouped by review and fulfillment status.
           sig do
-            params(completed: Integer, unapproved: Integer, unfulfilled: Integer).returns(T.attached_class)
+            params(
+              completed: Integer,
+              unapproved: Integer,
+              unfulfilled: Integer
+            ).returns(T.attached_class)
           end
-          def self.new(
-            completed: nil,
-            unapproved: nil,
-            unfulfilled: nil
-          )
+          def self.new(completed: nil, unapproved: nil, unfulfilled: nil)
           end
 
-          sig { override.returns({ completed: Integer, unapproved: Integer, unfulfilled: Integer }) }
+          sig do
+            override.returns(
+              { completed: Integer, unapproved: Integer, unfulfilled: Integer }
+            )
+          end
           def to_hash
           end
         end

@@ -1,0 +1,58 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      class ProgramResources
+        def list: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::ProgramResourceListResponse
+
+        def create: (
+          String id,
+          type: GrowsurfRuby::Campaign::ProgramResourceCreateParams::type_,
+          title: String,
+          ?description: String?,
+          ?category: String?,
+          ?is_published: bool,
+          ?url: String,
+          ?text: String,
+          ?upload_ticket: String,
+          ?upload_result: GrowsurfRuby::Campaign::ProgramResourceUploadResult | GrowsurfRuby::Campaign::program_resource_upload_result,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::ProgramResource
+
+        def update: (
+          String resource_id,
+          id: String,
+          ?type: GrowsurfRuby::Campaign::ProgramResourceUpdateParams::type_,
+          ?title: String,
+          ?description: String?,
+          ?category: String?,
+          ?is_published: bool,
+          ?position: Integer,
+          ?url: String,
+          ?text: String,
+          ?upload_ticket: String,
+          ?upload_result: GrowsurfRuby::Campaign::ProgramResourceUploadResult | GrowsurfRuby::Campaign::program_resource_upload_result,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::ProgramResource
+
+        def delete: (
+          String resource_id,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::DeleteProgramResourceResponse
+
+        def create_upload_ticket: (
+          String id,
+          file_name: String,
+          mime_type: String,
+          bytes: Integer,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::ProgramResourceUploadTicket
+
+        def initialize: (client: GrowsurfRuby::Client) -> void
+      end
+    end
+  end
+end

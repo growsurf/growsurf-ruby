@@ -2,6 +2,24 @@ module GrowsurfRuby
   module Resources
     class Campaign
       class Design
+        # Icon configuration for the participant Resources destination.
+        type resources_icon = {
+          type?: "DEFAULT" | "IMAGE" | "NONE",
+          imageUrl?: String
+        }
+
+        # Participant presentation settings for Resources. Each label is limited to 100
+        # characters; imageUrl is limited to 500. Resource items use Program Resources operations.
+        type resources = {
+          isPublicDisplayed?: bool,
+          title?: String,
+          viewResourcesLinkText?: String,
+          backLinkText?: String,
+          copyButtonText?: String,
+          copiedText?: String,
+          icon?: resources_icon
+        }
+
         def retrieve: (
           String id,
           ?request_options: GrowsurfRuby::request_opts

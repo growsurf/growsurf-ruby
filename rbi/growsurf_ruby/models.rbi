@@ -3,6 +3,10 @@
 module GrowsurfRuby
   AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
 
+  AnalyticsAvailability = GrowsurfRuby::Models::AnalyticsAvailability
+
+  AnalyticsUnavailableReason = GrowsurfRuby::Models::AnalyticsUnavailableReason
+
   AffiliateApplication = GrowsurfRuby::Models::AffiliateApplication
 
   AffiliateInvite = GrowsurfRuby::Models::AffiliateInvite
@@ -50,6 +54,9 @@ module GrowsurfRuby
 
   CampaignRetrieveAffiliateApplicationParams =
     GrowsurfRuby::Models::CampaignRetrieveAffiliateApplicationParams
+
+  CampaignRetrieveActivationAnalyticsParams =
+    GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams
 
   CampaignRetrieveAnalyticsParams =
     GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams

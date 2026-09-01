@@ -1,0 +1,58 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type program_resource_upload_result =
+        {
+          asset_id: String?,
+          public_id: String,
+          version: Integer,
+          signature: String,
+          resource_type: ProgramResourceUploadResult::resource_type,
+          type: ProgramResourceUploadResult::type_,
+          bytes: Integer,
+          secure_url: String,
+          format: String?
+        }
+
+      class ProgramResourceUploadResult < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor asset_id: String?
+        attr_accessor public_id: String
+        attr_accessor version: Integer
+        attr_accessor signature: String
+        attr_accessor resource_type: resource_type
+        attr_accessor type: type_
+        attr_accessor bytes: Integer
+        attr_accessor secure_url: String
+        attr_accessor format: String?
+        def initialize: (
+          public_id: String,
+          version: Integer,
+          signature: String,
+          resource_type: resource_type,
+          type: type_,
+          bytes: Integer,
+          secure_url: String,
+          ?asset_id: String,
+          ?format: String
+        ) -> void
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type resource_type = :image | :raw
+        module ResourceType
+          extend GrowsurfRuby::Internal::Type::Enum
+          IMAGE: :image
+          RAW: :raw
+          def self?.values: -> ::Array[resource_type]
+        end
+
+
+        type type_ = :authenticated
+        module Type
+          extend GrowsurfRuby::Internal::Type::Enum
+          AUTHENTICATED: :authenticated
+          def self?.values: -> ::Array[type_]
+        end
+      end
+    end
+  end
+end

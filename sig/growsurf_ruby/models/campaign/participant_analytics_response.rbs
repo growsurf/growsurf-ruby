@@ -6,6 +6,7 @@ module GrowsurfRuby
           analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics,
           ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks,
           share_count: ::Hash[Symbol, Integer],
+          activation: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics,
           end_date: Integer,
           series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series],
           start_date: Integer
@@ -17,6 +18,12 @@ module GrowsurfRuby
         attr_accessor ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks
 
         attr_accessor share_count: ::Hash[Symbol, Integer]
+
+        attr_reader activation: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics?
+
+        def activation=: (
+          GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics
 
         attr_reader end_date: Integer?
 
@@ -36,6 +43,7 @@ module GrowsurfRuby
           analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics,
           ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks,
           share_count: ::Hash[Symbol, Integer],
+          ?activation: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics,
           ?end_date: Integer,
           ?series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series],
           ?start_date: Integer
@@ -45,6 +53,7 @@ module GrowsurfRuby
           analytics: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Analytics,
           ranks: GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Ranks,
           share_count: ::Hash[Symbol, Integer],
+          activation: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics,
           end_date: Integer,
           series: ::Array[GrowsurfRuby::Models::Campaign::ParticipantAnalyticsResponse::Series],
           start_date: Integer
@@ -94,7 +103,9 @@ module GrowsurfRuby
 
           attr_reader reward_status: GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus?
 
-          def reward_status=: (GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+          def reward_status=: (
+            GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
+          ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::RewardStatus
 
           attr_reader referral_revenue: Integer?
 
@@ -195,12 +206,14 @@ module GrowsurfRuby
             participants: Integer,
             period_start: Integer,
             pinterest_shares: Integer,
+            portal_views: Integer?,
             qrcode_shares: Integer,
             reddit_shares: Integer,
             referral_credit_expireds: Integer,
             referral_credit_pendings: Integer,
             referrals: Integer,
             sms_shares: Integer,
+            share_actions: Integer?,
             telegram_shares: Integer,
             threads_shares: Integer,
             total_commission_count: Integer,
@@ -267,6 +280,8 @@ module GrowsurfRuby
 
           def pinterest_shares=: (Integer) -> Integer
 
+          attr_accessor portal_views: Integer?
+
           attr_reader qrcode_shares: Integer?
 
           def qrcode_shares=: (Integer) -> Integer
@@ -290,6 +305,8 @@ module GrowsurfRuby
           attr_reader sms_shares: Integer?
 
           def sms_shares=: (Integer) -> Integer
+
+          attr_accessor share_actions: Integer?
 
           attr_reader telegram_shares: Integer?
 
@@ -349,12 +366,14 @@ module GrowsurfRuby
             ?participants: Integer,
             ?period_start: Integer,
             ?pinterest_shares: Integer,
+            ?portal_views: Integer?,
             ?qrcode_shares: Integer,
             ?reddit_shares: Integer,
             ?referral_credit_expireds: Integer,
             ?referral_credit_pendings: Integer,
             ?referrals: Integer,
             ?sms_shares: Integer,
+            ?share_actions: Integer?,
             ?telegram_shares: Integer,
             ?threads_shares: Integer,
             ?total_commission_count: Integer,
@@ -382,12 +401,14 @@ module GrowsurfRuby
             participants: Integer,
             period_start: Integer,
             pinterest_shares: Integer,
+            portal_views: Integer?,
             qrcode_shares: Integer,
             reddit_shares: Integer,
             referral_credit_expireds: Integer,
             referral_credit_pendings: Integer,
             referrals: Integer,
             sms_shares: Integer,
+            share_actions: Integer?,
             telegram_shares: Integer,
             threads_shares: Integer,
             total_commission_count: Integer,

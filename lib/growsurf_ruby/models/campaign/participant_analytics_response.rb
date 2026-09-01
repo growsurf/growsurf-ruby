@@ -23,6 +23,9 @@ module GrowsurfRuby
                  GrowsurfRuby::Internal::Type::HashOf[Integer],
                  api_name: :shareCount
 
+        # Present only when `include` contains `activation`.
+        optional :activation, -> { GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics }
+
         # Present only when `include` contains `email`.
         optional :email, -> { GrowsurfRuby::Models::EmailAnalytics }
 
@@ -270,6 +273,10 @@ module GrowsurfRuby
           #   @return [Integer, nil]
           optional :pinterest_shares, Integer, api_name: :pinterestShares
 
+          # Covered portal views when both `activation` and `series` are requested.
+          # Unknown history is `nil`.
+          optional :portal_views, Integer, api_name: :portalViews, nil?: true
+
           # @!attribute qrcode_shares
           #
           #   @return [Integer, nil]
@@ -299,6 +306,10 @@ module GrowsurfRuby
           #
           #   @return [Integer, nil]
           optional :sms_shares, Integer, api_name: :smsShares
+
+          # Covered share actions when both `activation` and `series` are requested.
+          # Unknown history is `nil`.
+          optional :share_actions, Integer, api_name: :shareActions, nil?: true
 
           # @!attribute telegram_shares
           #

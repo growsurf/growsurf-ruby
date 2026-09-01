@@ -1,0 +1,96 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      class ParticipantActivationAnalytics < GrowsurfRuby::Internal::Type::BaseModel
+        type program_type = :REFERRAL | :AFFILIATE
+        type anchor_field = :enrolledAsAdvocateAt | :approvedAsAffiliateAt
+        type share_channel =
+          :email
+          | :facebook
+          | :twitter
+          | :linkedin
+          | :pinterest
+          | :threads
+          | :bluesky
+          | :sms
+          | :messenger
+          | :whatsapp
+          | :wechat
+          | :telegram
+          | :reddit
+          | :tumblr
+          | :qrcode
+          | :copyRefLink
+          | :iosNativeShare
+          | :androidNativeShare
+
+        attr_accessor coverage_start_at: Integer?
+        attr_accessor metric_contract_version: Integer
+        attr_accessor program_type: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::program_type
+        attr_accessor state: GrowsurfRuby::Models::analytics_availability
+        attr_accessor reason: GrowsurfRuby::Models::analytics_unavailable_reason?
+        attr_accessor cohort: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::Cohort
+        attr_accessor enrolled_as_advocate_at: Integer?
+        attr_accessor milestones: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::Milestones
+        def initialize: (**untyped) -> void
+
+        module ProgramType
+          extend GrowsurfRuby::Internal::Type::Enum
+          REFERRAL: :REFERRAL
+          AFFILIATE: :AFFILIATE
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::program_type]
+        end
+
+        module AnchorField
+          extend GrowsurfRuby::Internal::Type::Enum
+          ENROLLED_AS_ADVOCATE_AT: :enrolledAsAdvocateAt
+          APPROVED_AS_AFFILIATE_AT: :approvedAsAffiliateAt
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::anchor_field]
+        end
+
+        module ShareChannel
+          extend GrowsurfRuby::Internal::Type::Enum
+          EMAIL: :email
+          FACEBOOK: :facebook
+          TWITTER: :twitter
+          LINKEDIN: :linkedin
+          PINTEREST: :pinterest
+          THREADS: :threads
+          BLUESKY: :bluesky
+          SMS: :sms
+          MESSENGER: :messenger
+          WHATSAPP: :whatsapp
+          WECHAT: :wechat
+          TELEGRAM: :telegram
+          REDDIT: :reddit
+          TUMBLR: :tumblr
+          QRCODE: :qrcode
+          COPY_REF_LINK: :copyRefLink
+          IOS_NATIVE_SHARE: :iosNativeShare
+          ANDROID_NATIVE_SHARE: :androidNativeShare
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::share_channel]
+        end
+
+        class Cohort < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor anchor_field: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::anchor_field
+          attr_accessor anchor_at: Integer?
+          def initialize: (**untyped) -> void
+        end
+
+        class Milestones < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor first_portal_viewed_at: Integer?
+          attr_accessor first_referral_link_copied_at: Integer?
+          attr_accessor first_share_at: Integer?
+          attr_accessor first_share_channel: GrowsurfRuby::Models::Campaign::ParticipantActivationAnalytics::share_channel?
+          attr_accessor first_unique_click_at: Integer?
+          attr_accessor first_lead_at: Integer?
+          attr_accessor first_referral_at: Integer?
+          attr_accessor first_reward_at: Integer?
+          attr_accessor first_commission_at: Integer?
+          attr_accessor payout_setup_completed_at: Integer?
+          def initialize: (**untyped) -> void
+        end
+      end
+    end
+  end
+end

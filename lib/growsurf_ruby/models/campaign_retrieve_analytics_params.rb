@@ -33,17 +33,26 @@ module GrowsurfRuby
       #   `clicked`, `bounced`, `spamComplaints`, and per-email-type metrics. When `email` and
       #   an interval are both requested, each `series` item also contains counts for emails
       #   sent during that period. Combine `email` with `previousPeriod` to include the same
-      #   email metrics in both windows.
+      #   email metrics in both windows. `engagement` adds covered participant activity
+      #   totals, comparisons, series, and breakdowns.
       #
       #   @return [String, nil]
       optional :include, String
 
       # @!attribute interval
       #   When set to `day`, `week`, or `month`, the response also includes a `series` array
-      #   with per-period totals. Defaults to `total` (no series).
+      #   with per-period totals and uses the same bucket size for `engagement.series`.
+      #   Defaults to `total` (no legacy series); `engagement.series` uses daily buckets when
+      #   `interval` is `total` or omitted.
       #
       #   @return [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Interval, nil]
       optional :interval, enum: -> { GrowsurfRuby::CampaignRetrieveAnalyticsParams::Interval }
+
+      # @!attribute platform
+      #   Participant platform used for `engagement`. Defaults to `ALL`.
+      #
+      #   @return [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Platform, nil]
+      optional :platform, enum: -> { GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Platform }
 
       # @!attribute start_date
       #   Start date of the analytics timeframe as a Unix timestamp in milliseconds.
@@ -52,7 +61,13 @@ module GrowsurfRuby
       #   @return [Integer, nil]
       optional :start_date, Integer
 
-      # @!method initialize(id:, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
+      # @!attribute timezone
+      #   IANA timezone used for engagement periods and buckets. Defaults to `UTC`.
+      #
+      #   @return [String, nil]
+      optional :timezone, String
+
+      # @!method initialize(id:, days: nil, end_date: nil, include: nil, interval: nil, platform: nil, start_date: nil, timezone: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams} for more details.
       #
@@ -66,12 +81,18 @@ module GrowsurfRuby
       #
       #   @param interval [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Interval] When set to `day`, `week`, or `month`, the response also includes a `series` array
       #
+      #   @param platform [Symbol, GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::Platform] Participant platform used for `engagement`. Defaults to `ALL`.
+      #
       #   @param start_date [Integer] Start date of the analytics timeframe as a Unix timestamp in milliseconds. Requi
+      #
+      #   @param timezone [String] IANA timezone used for engagement periods and buckets. Defaults to `UTC`.
       #
       #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 
       # When set to `day`, `week`, or `month`, the response also includes a `series` array
-      # with per-period totals. Defaults to `total` (no series).
+      # with per-period totals and uses the same bucket size for `engagement.series`.
+      # Defaults to `total` (no legacy series); `engagement.series` uses daily buckets when
+      # `interval` is `total` or omitted.
       module Interval
         extend GrowsurfRuby::Internal::Type::Enum
 
@@ -79,6 +100,18 @@ module GrowsurfRuby
         WEEK = :week
         MONTH = :month
         TOTAL = :total
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      module Platform
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        ALL = :ALL
+        WEB = :WEB
+        IOS = :IOS
+        ANDROID = :ANDROID
 
         # @!method self.values
         #   @return [Array<Symbol>]

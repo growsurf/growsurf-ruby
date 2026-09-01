@@ -1,0 +1,29 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type program_resource_upload_parameter = String | Integer | Float | bool
+
+      type program_resource_upload_ticket =
+        {
+          ticket: String,
+          expires_in: Integer,
+          upload_url: String,
+          upload_parameters: ::Hash[Symbol, program_resource_upload_parameter]
+        }
+
+      class ProgramResourceUploadTicket < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor ticket: String
+        attr_accessor expires_in: Integer
+        attr_accessor upload_url: String
+        attr_accessor upload_parameters: ::Hash[Symbol, program_resource_upload_parameter]
+        def initialize: (
+          ticket: String,
+          expires_in: Integer,
+          upload_url: String,
+          upload_parameters: ::Hash[Symbol, program_resource_upload_parameter]
+        ) -> void
+        def to_hash: -> program_resource_upload_ticket
+      end
+    end
+  end
+end

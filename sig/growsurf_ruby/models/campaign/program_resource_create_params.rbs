@@ -1,0 +1,45 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type program_resource_create_params =
+        { type: ProgramResourceCreateParams::type_, title: String }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ProgramResourceCreateParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+        attr_accessor type: type_
+        attr_accessor title: String
+        attr_accessor description: String?
+        attr_accessor category: String?
+        attr_accessor is_published: bool?
+        attr_accessor url: String?
+        attr_accessor text: String?
+        attr_accessor upload_ticket: String?
+        attr_accessor upload_result: ProgramResourceUploadResult?
+        def initialize: (
+          type: type_,
+          title: String,
+          ?description: String?,
+          ?category: String?,
+          ?is_published: bool,
+          ?url: String,
+          ?text: String,
+          ?upload_ticket: String,
+          ?upload_result: ProgramResourceUploadResult | program_resource_upload_result,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type type_ = :FILE | :LINK | :TEXT
+        module Type
+          extend GrowsurfRuby::Internal::Type::Enum
+          FILE: :FILE
+          LINK: :LINK
+          TEXT: :TEXT
+          def self?.values: -> ::Array[type_]
+        end
+      end
+    end
+  end
+end

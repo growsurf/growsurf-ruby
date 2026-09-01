@@ -1,0 +1,184 @@
+module GrowsurfRuby
+  module Models
+    class CampaignEngagementAnalytics < GrowsurfRuby::Internal::Type::BaseModel
+      type program_type = :REFERRAL | :AFFILIATE
+      type interval = :day | :week | :month
+      type platform_value = :ALL | :WEB | :IOS | :ANDROID
+      type breakdown_platform = :WEB | :IOS | :ANDROID
+      type portal_source =
+        :DEFAULT_LAUNCHER
+        | :SDK_OPEN
+        | :CSS_CLASS
+        | :HOSTED_PORTAL
+        | :NATIVE_WINDOW
+        | :UNKNOWN
+
+      attr_accessor coverage_start_at: Integer?
+      attr_accessor metric_contract_version: Integer
+      attr_accessor program_type: GrowsurfRuby::Models::CampaignEngagementAnalytics::program_type
+      attr_accessor timezone: String
+      attr_accessor interval: GrowsurfRuby::Models::CampaignEngagementAnalytics::interval
+      attr_accessor platform: GrowsurfRuby::Models::CampaignEngagementAnalytics::PlatformFilter
+      attr_accessor period: GrowsurfRuby::Models::CampaignEngagementAnalytics::Period
+      attr_accessor state: GrowsurfRuby::Models::analytics_availability
+      attr_accessor reason: GrowsurfRuby::Models::analytics_unavailable_reason?
+      attr_accessor totals: GrowsurfRuby::Models::CampaignEngagementAnalytics::Totals
+      attr_accessor previous_period: GrowsurfRuby::Models::CampaignEngagementAnalytics::PreviousPeriod
+      attr_accessor comparison: GrowsurfRuby::Models::CampaignEngagementAnalytics::Comparison
+      attr_accessor series: ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::SeriesPoint]
+      attr_accessor breakdowns: GrowsurfRuby::Models::CampaignEngagementAnalytics::Breakdowns
+
+      def initialize: (**untyped) -> void
+
+      module ProgramType
+        extend GrowsurfRuby::Internal::Type::Enum
+        REFERRAL: :REFERRAL
+        AFFILIATE: :AFFILIATE
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::program_type]
+      end
+
+      module Interval
+        extend GrowsurfRuby::Internal::Type::Enum
+        DAY: :day
+        WEEK: :week
+        MONTH: :month
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::interval]
+      end
+
+      module Platform
+        extend GrowsurfRuby::Internal::Type::Enum
+        ALL: :ALL
+        WEB: :WEB
+        IOS: :IOS
+        ANDROID: :ANDROID
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::platform_value]
+      end
+
+      module BreakdownPlatform
+        extend GrowsurfRuby::Internal::Type::Enum
+        WEB: :WEB
+        IOS: :IOS
+        ANDROID: :ANDROID
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::breakdown_platform]
+      end
+
+      module PortalSource
+        extend GrowsurfRuby::Internal::Type::Enum
+        DEFAULT_LAUNCHER: :DEFAULT_LAUNCHER
+        SDK_OPEN: :SDK_OPEN
+        CSS_CLASS: :CSS_CLASS
+        HOSTED_PORTAL: :HOSTED_PORTAL
+        NATIVE_WINDOW: :NATIVE_WINDOW
+        UNKNOWN: :UNKNOWN
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::portal_source]
+      end
+
+      class Metric < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor state: GrowsurfRuby::Models::analytics_availability
+        attr_accessor value: Float?
+        attr_accessor reason: GrowsurfRuby::Models::analytics_unavailable_reason?
+        attr_accessor delta: Float?
+        def initialize: (**untyped) -> void
+      end
+
+      class Totals < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor active_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor sharing_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor sharing_rate: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor repeat_active_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor repeat_sharing_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor retained_active_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor portal_views: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        attr_accessor share_actions: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric
+        def initialize: (**untyped) -> void
+      end
+
+      class Period < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor from: Integer
+        attr_accessor to: Integer
+        attr_accessor effective_from: Integer?
+        attr_accessor previous_from: Integer
+        attr_accessor previous_to: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class PlatformFilter < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor requested: GrowsurfRuby::Models::CampaignEngagementAnalytics::platform_value
+        attr_accessor applied: GrowsurfRuby::Models::CampaignEngagementAnalytics::platform_value
+        attr_accessor state: GrowsurfRuby::Models::analytics_availability
+        def initialize: (**untyped) -> void
+      end
+
+      class PreviousPeriod < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor state: GrowsurfRuby::Models::analytics_availability
+        attr_accessor reason: GrowsurfRuby::Models::analytics_unavailable_reason?
+        attr_accessor totals: GrowsurfRuby::Models::CampaignEngagementAnalytics::Totals?
+        def initialize: (**untyped) -> void
+      end
+
+      class ComparisonMetrics < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor active_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric?
+        attr_accessor sharing_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric?
+        attr_accessor repeat_active_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric?
+        attr_accessor repeat_sharing_participants: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric?
+        attr_accessor portal_views: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric?
+        attr_accessor share_actions: GrowsurfRuby::Models::CampaignEngagementAnalytics::Metric?
+        def initialize: (**untyped) -> void
+      end
+
+      class Comparison < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor state: GrowsurfRuby::Models::analytics_availability
+        attr_accessor reason: GrowsurfRuby::Models::analytics_unavailable_reason?
+        attr_accessor metrics: GrowsurfRuby::Models::CampaignEngagementAnalytics::ComparisonMetrics?
+        def initialize: (**untyped) -> void
+      end
+
+      class SeriesPoint < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor from: Integer
+        attr_accessor to: Integer
+        attr_accessor active_participants: Integer
+        attr_accessor sharing_participants: Integer
+        attr_accessor portal_views: Integer
+        attr_accessor share_actions: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class PlatformBreakdown < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor key: GrowsurfRuby::Models::CampaignEngagementAnalytics::breakdown_platform
+        attr_accessor active_participants: Integer
+        attr_accessor sharing_participants: Integer
+        attr_accessor portal_views: Integer
+        attr_accessor share_actions: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class PortalSourceBreakdown < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor key: GrowsurfRuby::Models::CampaignEngagementAnalytics::portal_source
+        attr_accessor active_participants: Integer
+        attr_accessor portal_views: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class ShareChannelBreakdown < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor key: String
+        attr_accessor sharing_participants: Integer
+        attr_accessor share_actions: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class FirstShareChannelBreakdown < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor key: String
+        attr_accessor sharing_participants: Integer
+        def initialize: (**untyped) -> void
+      end
+
+      class Breakdowns < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor platforms: ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::PlatformBreakdown]
+        attr_accessor portal_view_sources: ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::PortalSourceBreakdown]
+        attr_accessor share_channels: ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::ShareChannelBreakdown]
+        attr_accessor first_share_channels: ::Array[GrowsurfRuby::Models::CampaignEngagementAnalytics::FirstShareChannelBreakdown]
+        def initialize: (**untyped) -> void
+      end
+    end
+  end
+end

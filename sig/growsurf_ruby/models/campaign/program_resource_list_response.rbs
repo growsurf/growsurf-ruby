@@ -1,0 +1,14 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type program_resource_list_response =
+        { resources: ::Array[ProgramResource] }
+
+      class ProgramResourceListResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor resources: ::Array[ProgramResource]
+        def initialize: (resources: ::Array[ProgramResource]) -> void
+        def to_hash: -> program_resource_list_response
+      end
+    end
+  end
+end

@@ -9,6 +9,8 @@ module GrowsurfRuby
 
       attr_reader rewards: GrowsurfRuby::Resources::Campaign::Rewards
 
+      attr_reader resources: GrowsurfRuby::Resources::Campaign::ProgramResources
+
       attr_reader design: GrowsurfRuby::Resources::Campaign::Design
 
       attr_reader emails: GrowsurfRuby::Resources::Campaign::Emails
@@ -154,9 +156,21 @@ module GrowsurfRuby
         ?end_date: Integer,
         ?include: String,
         ?interval: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::interval,
+        ?platform: GrowsurfRuby::Models::CampaignRetrieveAnalyticsParams::platform,
         ?start_date: Integer,
+        ?timezone: String,
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse
+
+      def retrieve_activation_analytics: (
+        String id,
+        ?cohort_from: Integer,
+        ?cohort_to: Integer,
+        ?cohort_interval: GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::cohort_interval,
+        ?observation_window_days: GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::observation_window_days,
+        ?timezone: String,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::CampaignActivationAnalyticsResponse
 
       def review_affiliate_application: (
         String application_id,

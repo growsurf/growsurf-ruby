@@ -18,7 +18,19 @@ class GrowsurfRuby::Test::Resources::Campaign::DesignTest < GrowsurfRuby::Test::
 
     response = @growsurf.campaign.design.update(
       "id",
-      {payoutDestinationConfirmation: {headline: "Confirm your {{payoutProvider}} payout email"}}
+      {
+        participantAvatarStyle: "CHARACTERS",
+        resources: {
+          isPublicDisplayed: true,
+          title: "Resources",
+          viewResourcesLinkText: "View resources",
+          backLinkText: "Back",
+          copyButtonText: "Copy",
+          copiedText: "Copied",
+          icon: {type: "IMAGE", imageUrl: "https://example.com/resources-icon.png"}
+        },
+        payoutDestinationConfirmation: {headline: "Confirm your {{payoutProvider}} payout email"}
+      }
     )
 
     assert_pattern do

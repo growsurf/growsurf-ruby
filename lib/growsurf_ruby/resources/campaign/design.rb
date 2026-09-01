@@ -7,8 +7,11 @@ module GrowsurfRuby
         # Retrieves a program's configured design fields: the dashboard Program Editor's **Design**
         # tab plus the payout-destination confirmation page copy configured from payout integration
         # cards. This includes the GrowSurf window layout, header, share channels and invites,
-        # signup form, portal and landing pages, theme styling, and referral or affiliate summary
-        # and status sections. The available fields depend on the program type.
+        # signup form, Resources presentation, portal and landing pages, theme styling, and referral
+        # or affiliate summary and status sections. `referredExperience` includes the Claim Offer Popup for both program
+        # types, with its colors under `theme.referredExperienceOfferPopup`.
+        # `participantAvatarStyle` is `CHARACTERS`, `INITIALS`, `ANIMALS`, or `GRADIENT`; missing or
+        # unknown values mean `INITIALS`.
         # `payoutDestinationConfirmation` is omitted when no confirmation fields are stored. Stored
         # `null` fields are returned as `null`; omitted and `null` fields use localized defaults.
         #
@@ -29,7 +32,8 @@ module GrowsurfRuby
         end
 
         # Updates a program's design configuration, including the payout-destination confirmation
-        # page copy configured from payout integration cards. Only the fields you send are changed;
+        # page copy and the Claim Offer Popup under `referredExperience`. Only the fields you send
+        # are changed;
         # anything you leave out is untouched (arrays such as `signup.fields` replace wholesale).
         # Unknown fields, fields not available for the program type, and invalid values return a
         # `400`. Landing-page custom code and JavaScript are not editable via the API.
@@ -38,8 +42,10 @@ module GrowsurfRuby
         #
         # @param id [String] GrowSurf program ID.
         #
-        # @param body [Hash{Symbol=>Object}] Partial design configuration to merge, such as
-        #   `{ payoutDestinationConfirmation: { headline: "Confirm your {{payoutProvider}} payout email" } }`.
+        # @param body [Hash{Symbol=>Object}] Partial design configuration to merge. `resources`
+        #   accepts `isPublicDisplayed`, `title`, `viewResourcesLinkText`, `backLinkText`,
+        #   `copyButtonText`, `copiedText`, and `icon` (`type`: `DEFAULT`, `IMAGE`, or `NONE`, plus
+        #   `imageUrl` for `IMAGE`). Resource items use the Program Resources operations.
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #

@@ -1,0 +1,29 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type program_resource_upload_ticket_params =
+        { file_name: String, mime_type: String, bytes: Integer }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class ProgramResourceUploadTicketParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+        attr_accessor file_name: String
+        attr_accessor mime_type: String
+        attr_accessor bytes: Integer
+        def initialize: (
+          file_name: String,
+          mime_type: String,
+          bytes: Integer,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+        def to_hash: -> {
+          file_name: String,
+          mime_type: String,
+          bytes: Integer,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

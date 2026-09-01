@@ -399,7 +399,8 @@ module GrowsurfRuby
         # and reverses or adjusts the referrer's commission. The inverse of Record
         # Affiliate Transaction. Identify the original transaction with the same
         # identifier(s) you sent when recording it. Commissions already paid out to the
-        # affiliate are not clawed back; the amendment is recorded for tax reporting only.
+        # affiliate are not clawed back. The amendment still updates the sale revenue used
+        # in program reporting; full refunds and chargebacks also update tax reporting.
         sig do
           params(
             participant_id_or_email: String,

@@ -1,0 +1,45 @@
+module GrowsurfRuby
+  module Models
+    type campaign_retrieve_activation_analytics_params =
+      {
+        id: String,
+        cohort_from: Integer,
+        cohort_to: Integer,
+        cohort_interval: GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::cohort_interval,
+        observation_window_days: GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::observation_window_days,
+        timezone: String
+      }
+      & GrowsurfRuby::Internal::Type::request_parameters
+
+    class CampaignRetrieveActivationAnalyticsParams < GrowsurfRuby::Internal::Type::BaseModel
+      extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+      include GrowsurfRuby::Internal::Type::RequestParameters
+
+      type cohort_interval = :day | :week | :month
+      type observation_window_days = 7 | 30
+
+      attr_accessor id: String
+      attr_accessor cohort_from: Integer?
+      attr_accessor cohort_to: Integer?
+      attr_accessor cohort_interval: GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::cohort_interval?
+      attr_accessor observation_window_days: GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::observation_window_days?
+      attr_accessor timezone: String?
+      def initialize: (**untyped) -> void
+
+      module CohortInterval
+        extend GrowsurfRuby::Internal::Type::Enum
+        DAY: :day
+        WEEK: :week
+        MONTH: :month
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::cohort_interval]
+      end
+
+      module ObservationWindowDays
+        extend GrowsurfRuby::Internal::Type::Enum
+        SEVEN: 7
+        THIRTY: 30
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignRetrieveActivationAnalyticsParams::observation_window_days]
+      end
+    end
+  end
+end

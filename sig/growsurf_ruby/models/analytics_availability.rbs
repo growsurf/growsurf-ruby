@@ -1,0 +1,15 @@
+module GrowsurfRuby
+  module Models
+    type analytics_availability = :AVAILABLE | :PARTIAL | :UNAVAILABLE
+
+    module AnalyticsAvailability
+      extend GrowsurfRuby::Internal::Type::Enum
+
+      AVAILABLE: :AVAILABLE
+      PARTIAL: :PARTIAL
+      UNAVAILABLE: :UNAVAILABLE
+
+      def self?.values: -> ::Array[GrowsurfRuby::Models::analytics_availability]
+    end
+  end
+end

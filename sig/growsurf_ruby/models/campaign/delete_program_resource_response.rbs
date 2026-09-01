@@ -1,0 +1,14 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type delete_program_resource_response = { id: String, success: bool }
+
+      class DeleteProgramResourceResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+        attr_accessor success: bool
+        def initialize: (id: String, success: bool) -> void
+        def to_hash: -> delete_program_resource_response
+      end
+    end
+  end
+end
