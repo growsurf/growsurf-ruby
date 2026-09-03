@@ -116,6 +116,7 @@ module GrowsurfRuby
         DEFAULT_LAUNCHER = T.let(:DEFAULT_LAUNCHER, Symbol)
         SDK_OPEN = T.let(:SDK_OPEN, Symbol)
         CSS_CLASS = T.let(:CSS_CLASS, Symbol)
+        EMBEDDABLE_ELEMENT = T.let(:EMBEDDABLE_ELEMENT, Symbol)
         HOSTED_PORTAL = T.let(:HOSTED_PORTAL, Symbol)
         NATIVE_WINDOW = T.let(:NATIVE_WINDOW, Symbol)
         UNKNOWN = T.let(:UNKNOWN, Symbol)

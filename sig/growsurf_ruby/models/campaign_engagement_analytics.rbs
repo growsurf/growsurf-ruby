@@ -9,6 +9,7 @@ module GrowsurfRuby
         :DEFAULT_LAUNCHER
         | :SDK_OPEN
         | :CSS_CLASS
+        | :EMBEDDABLE_ELEMENT
         | :HOSTED_PORTAL
         | :NATIVE_WINDOW
         | :UNKNOWN
@@ -67,6 +68,7 @@ module GrowsurfRuby
         DEFAULT_LAUNCHER: :DEFAULT_LAUNCHER
         SDK_OPEN: :SDK_OPEN
         CSS_CLASS: :CSS_CLASS
+        EMBEDDABLE_ELEMENT: :EMBEDDABLE_ELEMENT
         HOSTED_PORTAL: :HOSTED_PORTAL
         NATIVE_WINDOW: :NATIVE_WINDOW
         UNKNOWN: :UNKNOWN
