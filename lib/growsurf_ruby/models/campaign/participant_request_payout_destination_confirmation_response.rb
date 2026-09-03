@@ -9,28 +9,28 @@ module GrowsurfRuby
         #   When the confirmation link expires, as a Unix timestamp in milliseconds.
         #
         #   @return [Integer, nil]
-        optional :expires_at, Integer, api_name: :expiresAt, nil?: true
+        required :expires_at, Integer, api_name: :expiresAt, nil?: true
 
         # @!attribute provider
         #   The provider the participant was asked to confirm.
         #
-        #   @return [String, nil]
-        optional :provider, String
+        #   @return [String]
+        required :provider, String
 
         # @!attribute provider_display_name
         #   The customer-facing provider name (e.g. "PayPal", "Wise").
         #
-        #   @return [String, nil]
-        optional :provider_display_name, String, api_name: :providerDisplayName
+        #   @return [String]
+        required :provider_display_name, String, api_name: :providerDisplayName
 
         # @!attribute status
         #   Confirms the message was requested.
         #
-        #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status, nil]
-        optional :status,
+        #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status]
+        required :status,
                  enum: -> { GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status }
 
-        # @!method initialize(expires_at: nil, provider: nil, provider_display_name: nil, status: nil)
+        # @!method initialize(expires_at:, provider:, provider_display_name:, status:)
         #   @param expires_at [Integer, nil] When the confirmation link expires, as a Unix timestamp in milliseconds.
         #
         #   @param provider [String] The provider the participant was asked to confirm.

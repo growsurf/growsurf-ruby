@@ -6,6 +6,7 @@ module GrowsurfRuby
         company_logo_image_url: String,
         company_name: String,
         currency_iso: String,
+        goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         name: String,
         rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams]
       }
@@ -29,6 +30,12 @@ module GrowsurfRuby
 
       def currency_iso=: (String) -> String
 
+      attr_reader goal: GrowsurfRuby::Models::CampaignCreateParams::goal?
+
+      def goal=: (
+        GrowsurfRuby::Models::CampaignCreateParams::goal
+      ) -> GrowsurfRuby::Models::CampaignCreateParams::goal
+
       attr_reader name: String?
 
       def name=: (String) -> String
@@ -44,6 +51,7 @@ module GrowsurfRuby
         ?company_logo_image_url: String,
         ?company_name: String,
         ?currency_iso: String,
+        ?goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         ?name: String,
         ?rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
         ?request_options: GrowsurfRuby::request_opts
@@ -54,6 +62,7 @@ module GrowsurfRuby
         company_logo_image_url: String,
         company_name: String,
         currency_iso: String,
+        goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         name: String,
         rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
         request_options: GrowsurfRuby::RequestOptions
@@ -68,6 +77,26 @@ module GrowsurfRuby
         AFFILIATE: :AFFILIATE
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignCreateParams::type_]
+      end
+
+      type goal =
+        :CUSTOMERS | :USERS | :SUBSCRIBERS | :WAITLIST | :B2B_SAAS_SELF_SERVICE | :B2B_SAAS_ENTERPRISE | :B2C_SUBSCRIPTIONS | :FINANCIAL_SERVICES | :ONLINE_EDUCATION | :ONLINE_INSURANCE
+
+      module Goal
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        CUSTOMERS: :CUSTOMERS
+        USERS: :USERS
+        SUBSCRIBERS: :SUBSCRIBERS
+        WAITLIST: :WAITLIST
+        B2B_SAAS_SELF_SERVICE: :B2B_SAAS_SELF_SERVICE
+        B2B_SAAS_ENTERPRISE: :B2B_SAAS_ENTERPRISE
+        B2C_SUBSCRIPTIONS: :B2C_SUBSCRIPTIONS
+        FINANCIAL_SERVICES: :FINANCIAL_SERVICES
+        ONLINE_EDUCATION: :ONLINE_EDUCATION
+        ONLINE_INSURANCE: :ONLINE_INSURANCE
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignCreateParams::goal]
       end
     end
   end

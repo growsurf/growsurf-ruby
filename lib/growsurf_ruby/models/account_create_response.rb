@@ -5,9 +5,9 @@ module GrowsurfRuby
     # @see GrowsurfRuby::Resources::Account#create
     class AccountCreateResponse < GrowsurfRuby::Internal::Type::BaseModel
       # @!attribute api_key
-      #   An API key for the new account. Use it as the `Bearer` token on subsequent
-      #   requests. Locked (`403` `EMAIL_NOT_VERIFIED_ERROR`) until the account's email
-      #   is verified, and rotated when the account owner first signs in to the GrowSurf
+      #   An API key for the new account. Use it as the `Bearer` token on subsequent requests. Locked (`403`
+      #   `EMAIL_NOT_VERIFIED_ERROR`) until the account's email is verified; verification unlocks this same
+      #   key, so keep it and retry. It is replaced only when the account owner first signs in to the GrowSurf
       #   dashboard.
       #
       #   @return [String]

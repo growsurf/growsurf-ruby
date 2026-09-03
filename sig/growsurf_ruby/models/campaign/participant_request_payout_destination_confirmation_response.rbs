@@ -12,27 +12,25 @@ module GrowsurfRuby
       class ParticipantRequestPayoutDestinationConfirmationResponse < GrowsurfRuby::Internal::Type::BaseModel
         attr_accessor expires_at: Integer?
 
-        attr_reader provider: String?
+        attr_reader provider: String
 
-        def provider=: (
-          String
-        ) -> String
+        def provider=: (String) -> String
 
-        attr_reader provider_display_name: String?
+        attr_reader provider_display_name: String
 
         def provider_display_name=: (String) -> String
 
-        attr_reader status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status?
+        attr_reader status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
 
         def status=: (
           GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
         ) -> GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
 
         def initialize: (
-          ?expires_at: Integer?,
-          ?provider: String,
-          ?provider_display_name: String,
-          ?status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
+          expires_at: Integer?,
+          provider: String,
+          provider_display_name: String,
+          status: GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::status
         ) -> void
 
         def to_hash: -> {

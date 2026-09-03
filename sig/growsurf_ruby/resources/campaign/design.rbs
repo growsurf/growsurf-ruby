@@ -17,6 +17,7 @@ module GrowsurfRuby
           backLinkText?: String,
           copyButtonText?: String,
           copiedText?: String,
+          emptyState?: String,
           icon?: resources_icon
         }
 

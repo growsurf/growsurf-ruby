@@ -10,14 +10,14 @@ module GrowsurfRuby
         #   one.
         #
         #   @return [String, nil]
-        optional :active_provider, String, api_name: :activeProvider, nil?: true
+        required :active_provider, String, api_name: :activeProvider, nil?: true
 
         # @!attribute destinations
         #   One entry per enabled payout provider describing the participant's destination
         #   for it.
         #
-        #   @return [Array<GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination>, nil]
-        optional :destinations,
+        #   @return [Array<GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination>]
+        required :destinations,
                  -> {
                    GrowsurfRuby::Internal::Type::ArrayOf[
                      GrowsurfRuby::Campaign::ParticipantGetPayoutDestinationResponse::Destination
@@ -27,14 +27,14 @@ module GrowsurfRuby
         # @!attribute enabled_providers
         #   The payout providers enabled for this program.
         #
-        #   @return [Array<String>, nil]
-        optional :enabled_providers,
+        #   @return [Array<String>]
+        required :enabled_providers,
                  -> {
                    GrowsurfRuby::Internal::Type::ArrayOf[String]
                  },
                  api_name: :enabledProviders
 
-        # @!method initialize(active_provider: nil, destinations: nil, enabled_providers: nil)
+        # @!method initialize(active_provider:, destinations:, enabled_providers:)
         #   @param active_provider [String, nil] The provider that currently gets paid, or null until the participant confirms one.
         #
         #   @param destinations [Array<GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination>] One entry per enabled payout provider describing the participant's destination for it.
@@ -47,19 +47,19 @@ module GrowsurfRuby
           #   The confirmed payout email for this provider.
           #
           #   @return [String, nil]
-          optional :claim_email, String, api_name: :claimEmail, nil?: true
+          required :claim_email, String, api_name: :claimEmail, nil?: true
 
           # @!attribute confirmed_at
           #   When the destination was confirmed, as a Unix timestamp in milliseconds.
           #
           #   @return [Integer, nil]
-          optional :confirmed_at, Integer, api_name: :confirmedAt, nil?: true
+          required :confirmed_at, Integer, api_name: :confirmedAt, nil?: true
 
           # @!attribute legal_entity_type
           #   The legal recipient type the participant confirmed, if any.
           #
           #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination::LegalEntityType, nil]
-          optional :legal_entity_type,
+          required :legal_entity_type,
                    enum: -> {
                      GrowsurfRuby::Campaign::ParticipantGetPayoutDestinationResponse::Destination::LegalEntityType
                    },
@@ -70,29 +70,29 @@ module GrowsurfRuby
           #   When status is `NEEDS_REPAIR`, why (e.g. a bounced delivery).
           #
           #   @return [String, nil]
-          optional :needs_repair_reason, String, api_name: :needsRepairReason, nil?: true
+          required :needs_repair_reason, String, api_name: :needsRepairReason, nil?: true
 
           # @!attribute provider
           #   The payout provider this entry describes.
           #
-          #   @return [String, nil]
-          optional :provider, String
+          #   @return [String]
+          required :provider, String
 
           # @!attribute provider_display_name
           #   The customer-facing provider name (e.g. "PayPal", "Wise").
           #
-          #   @return [String, nil]
-          optional :provider_display_name, String, api_name: :providerDisplayName
+          #   @return [String]
+          required :provider_display_name, String, api_name: :providerDisplayName
 
           # @!attribute status
           #   The destination's current status: `NONE` (not set up), `PENDING_CONFIRMATION`,
           #   `CONFIRMED`, `ACTIVE`, `NEEDS_REPAIR`, or `EXPIRED`. Historical superseded
           #   or revoked destinations are projected as `NONE`.
           #
-          #   @return [String, nil]
-          optional :status, String
+          #   @return [String]
+          required :status, String
 
-          # @!method initialize(claim_email: nil, confirmed_at: nil, legal_entity_type: nil, needs_repair_reason: nil, provider: nil, provider_display_name: nil, status: nil)
+          # @!method initialize(claim_email:, confirmed_at:, legal_entity_type:, needs_repair_reason:, provider:, provider_display_name:, status:)
           #   @param claim_email [String, nil] The confirmed payout email for this provider.
           #
           #   @param confirmed_at [Integer, nil] When the destination was confirmed, as a Unix timestamp in milliseconds.

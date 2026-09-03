@@ -11,22 +11,20 @@ module GrowsurfRuby
       class ParticipantGetPayoutDestinationResponse < GrowsurfRuby::Internal::Type::BaseModel
         attr_accessor active_provider: String?
 
-        attr_reader destinations: ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination]?
+        attr_reader destinations: ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination]
 
         def destinations=: (
           ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination]
         ) -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination]
 
-        attr_reader enabled_providers: ::Array[String]?
+        attr_reader enabled_providers: ::Array[String]
 
-        def enabled_providers=: (
-          ::Array[String]
-        ) -> ::Array[String]
+        def enabled_providers=: (::Array[String]) -> ::Array[String]
 
         def initialize: (
-          ?active_provider: String?,
-          ?destinations: ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination],
-          ?enabled_providers: ::Array[String]
+          active_provider: String?,
+          destinations: ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination],
+          enabled_providers: ::Array[String]
         ) -> void
 
         def to_hash: -> {
@@ -55,28 +53,26 @@ module GrowsurfRuby
 
           attr_accessor needs_repair_reason: String?
 
-          attr_reader provider: String?
+          attr_reader provider: String
 
-          def provider=: (
-            String
-          ) -> String
+          def provider=: (String) -> String
 
-          attr_reader provider_display_name: String?
+          attr_reader provider_display_name: String
 
           def provider_display_name=: (String) -> String
 
-          attr_reader status: String?
+          attr_reader status: String
 
           def status=: (String) -> String
 
           def initialize: (
-            ?claim_email: String?,
-            ?confirmed_at: Integer?,
-            ?legal_entity_type: GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination::legal_entity_type?,
-            ?needs_repair_reason: String?,
-            ?provider: String,
-            ?provider_display_name: String,
-            ?status: String
+            claim_email: String?,
+            confirmed_at: Integer?,
+            legal_entity_type: GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination::legal_entity_type?,
+            needs_repair_reason: String?,
+            provider: String,
+            provider_display_name: String,
+            status: String
           ) -> void
 
           def to_hash: -> {
@@ -99,7 +95,6 @@ module GrowsurfRuby
 
             def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantGetPayoutDestinationResponse::Destination::legal_entity_type]
           end
-
         end
       end
     end

@@ -22,6 +22,7 @@ module GrowsurfRuby
             backLinkText: T.nilable(String),
             copyButtonText: T.nilable(String),
             copiedText: T.nilable(String),
+            emptyState: T.nilable(String),
             icon: T.nilable(ResourcesIcon)
           }
         end

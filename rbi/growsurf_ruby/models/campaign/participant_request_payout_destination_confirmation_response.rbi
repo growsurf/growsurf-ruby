@@ -17,14 +17,14 @@ module GrowsurfRuby
         attr_accessor :expires_at
 
         # The provider the participant was asked to confirm.
-        sig { returns(T.nilable(String)) }
+        sig { returns(String) }
         attr_reader :provider
 
         sig { params(provider: String).void }
         attr_writer :provider
 
         # The customer-facing provider name (e.g. "PayPal", "Wise").
-        sig { returns(T.nilable(String)) }
+        sig { returns(String) }
         attr_reader :provider_display_name
 
         sig { params(provider_display_name: String).void }
@@ -33,9 +33,7 @@ module GrowsurfRuby
         # Confirms the message was requested.
         sig do
           returns(
-            T.nilable(
-              GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status::OrSymbol
-            )
+            GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status::OrSymbol
           )
         end
         attr_reader :status
@@ -59,13 +57,13 @@ module GrowsurfRuby
         end
         def self.new(
           # When the confirmation link expires, as a Unix timestamp in milliseconds.
-          expires_at: nil,
+          expires_at:,
           # The provider the participant was asked to confirm.
-          provider: nil,
+          provider:,
           # The customer-facing provider name (e.g. "PayPal", "Wise").
-          provider_display_name: nil,
+          provider_display_name:,
           # Confirms the message was requested.
-          status: nil
+          status:
         )
         end
 

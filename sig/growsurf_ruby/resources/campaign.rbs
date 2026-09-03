@@ -35,6 +35,7 @@ module GrowsurfRuby
         ?company_logo_image_url: String,
         ?company_name: String,
         ?currency_iso: String,
+        ?goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         ?name: String,
         ?rewards: ::Array[GrowsurfRuby::Campaign::RewardCreateParams],
         ?request_options: GrowsurfRuby::request_opts

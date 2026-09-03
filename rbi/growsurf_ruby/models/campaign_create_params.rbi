@@ -35,6 +35,16 @@ module GrowsurfRuby
       sig { params(currency_iso: String).void }
       attr_writer :currency_iso
 
+      sig do
+        returns(T.nilable(GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol))
+      end
+      attr_reader :goal
+
+      sig do
+        params(goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol).void
+      end
+      attr_writer :goal
+
       sig { returns(T.nilable(String)) }
       attr_reader :name
 
@@ -59,6 +69,7 @@ module GrowsurfRuby
           company_logo_image_url: String,
           company_name: String,
           currency_iso: String,
+          goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol,
           name: String,
           rewards: T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
           request_options: GrowsurfRuby::RequestOptions::OrHash
@@ -69,6 +80,7 @@ module GrowsurfRuby
         company_logo_image_url: nil,
         company_name: nil,
         currency_iso: nil,
+        goal: nil,
         name: nil,
         rewards: nil,
         request_options: {}
@@ -82,6 +94,7 @@ module GrowsurfRuby
             company_logo_image_url: String,
             company_name: String,
             currency_iso: String,
+            goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol,
             name: String,
             rewards:
               T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
@@ -115,6 +128,84 @@ module GrowsurfRuby
         sig do
           override.returns(
             T::Array[GrowsurfRuby::CampaignCreateParams::Type::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
+      module Goal
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, GrowsurfRuby::CampaignCreateParams::Goal)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CUSTOMERS =
+          T.let(
+            :CUSTOMERS,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        USERS =
+          T.let(
+            :USERS,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        SUBSCRIBERS =
+          T.let(
+            :SUBSCRIBERS,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        WAITLIST =
+          T.let(
+            :WAITLIST,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        B2B_SAAS_SELF_SERVICE =
+          T.let(
+            :B2B_SAAS_SELF_SERVICE,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        B2B_SAAS_ENTERPRISE =
+          T.let(
+            :B2B_SAAS_ENTERPRISE,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        B2C_SUBSCRIPTIONS =
+          T.let(
+            :B2C_SUBSCRIPTIONS,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        FINANCIAL_SERVICES =
+          T.let(
+            :FINANCIAL_SERVICES,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        ONLINE_EDUCATION =
+          T.let(
+            :ONLINE_EDUCATION,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        ONLINE_INSURANCE =
+          T.let(
+            :ONLINE_INSURANCE,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol]
           )
         end
         def self.values

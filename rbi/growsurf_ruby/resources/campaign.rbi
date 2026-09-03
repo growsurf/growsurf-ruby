@@ -73,6 +73,7 @@ module GrowsurfRuby
           company_logo_image_url: String,
           company_name: String,
           currency_iso: String,
+          goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol,
           name: String,
           rewards: T::Array[GrowsurfRuby::Campaign::RewardCreateParams::OrHash],
           request_options: GrowsurfRuby::RequestOptions::OrHash
@@ -86,6 +87,11 @@ module GrowsurfRuby
         # ISO 4217 currency code. Defaults to USD. Chosen when the program is created and
         # immutable afterward — it cannot be changed on update.
         currency_iso: nil,
+        # What the program is for, which seeds share settings that suit that audience.
+        # Programs selling to businesses start with the LinkedIn share button visible;
+        # consumer, financial, education, insurance, newsletter, and waitlist programs
+        # start with it hidden. Set only when the program is created.
+        goal: nil,
         # The program name. Defaults to a generated friendly label plus the creation date.
         name: nil,
         # Optional inline rewards to create with the program.
