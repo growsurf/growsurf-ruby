@@ -433,6 +433,23 @@ module GrowsurfRuby
         # @return [Hash{Symbol=>Object}]
         def deep_to_h = self.class.recursively_to_h(@data, convert: false)
 
+        # @api public
+        #
+        # Returns the normalized HTTP response headers for models returned by the client.
+        # Models created directly have no response headers.
+        #
+        # @return [Hash{String=>String}]
+        attr_reader :response_headers
+
+        # @api private
+        #
+        # @param headers [Hash{String=>String}]
+        # @return [self]
+        def attach_response_headers(headers)
+          @response_headers = headers.freeze
+          self
+        end
+
         # @param keys [Array<Symbol>, nil]
         #
         # @return [Hash{Symbol=>Object}]
@@ -476,6 +493,7 @@ module GrowsurfRuby
         def initialize(data = {})
           @data = {}
           @coerced = {}
+          @response_headers = {}.freeze
           GrowsurfRuby::Internal::Util.coerce_hash!(data).each do
             if self.class.known_fields.key?(_1)
               public_send(:"#{_1}=", _2)

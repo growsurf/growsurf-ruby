@@ -24,7 +24,8 @@ module GrowsurfRuby
         # The reward type must be compatible with the program type (affiliate programs
         # support only `AFFILIATE` rewards; referral programs support all other types).
         # Enabling an active reward of a type automatically enables that reward type on
-        # the program.
+        # the program. For an affiliate reward, `commissionStructure.event: LEAD`
+        # requires a `FIXED` commission with a positive `amount`.
         sig do
           params(
             id: String,
@@ -32,23 +33,23 @@ module GrowsurfRuby
               GrowsurfRuby::Models::Campaign::RewardCreateParams::Type::OrSymbol,
             commission_structure: GrowsurfRuby::CommissionStructure::OrHash,
             conversions_required: Integer,
-            coupon_code: String,
+            coupon_code: T.nilable(String),
             description: String,
             event:
               GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
-            image_url: String,
+            image_url: T.nilable(String),
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
             limit_duration:
               GrowsurfRuby::Models::Campaign::RewardCreateParams::LimitDuration::OrSymbol,
             metadata: T::Hash[Symbol, T.anything],
-            next_milestone_prefix: String,
-            next_milestone_suffix: String,
+            next_milestone_prefix: T.nilable(String),
+            next_milestone_suffix: T.nilable(String),
             number_of_winners: Integer,
             order: Integer,
-            referral_coupon_code: String,
-            referral_description: String,
+            referral_coupon_code: T.nilable(String),
+            referral_description: T.nilable(String),
             referred_reward_upfront: T::Boolean,
             referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
             title: String,
@@ -61,7 +62,9 @@ module GrowsurfRuby
           id,
           # Body param: The reward type. Immutable after creation.
           type:,
-          # Body param
+          # Body param: The affiliate commission structure. Required when creating an
+          # `AFFILIATE` reward. A `FIXED` commission requires `amount`; a `PERCENT`
+          # commission requires `percent`.
           commission_structure: nil,
           # Body param
           conversions_required: nil,
@@ -128,30 +131,31 @@ module GrowsurfRuby
         # immutable and cannot be changed. When the update replaces `metadata`, renamed
         # keys automatically rewrite any `{{campaignReward[…]}}` references in campaign
         # copy; removing a key that campaign copy still references returns a `409` listing
-        # the referencing fields.
+        # the referencing fields. For an affiliate reward, `commissionStructure.event:
+        # LEAD` requires a `FIXED` commission with a positive `amount`.
         sig do
           params(
             campaign_reward_id: String,
             id: String,
             commission_structure: GrowsurfRuby::CommissionStructure::OrHash,
             conversions_required: Integer,
-            coupon_code: String,
+            coupon_code: T.nilable(String),
             description: String,
             event:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
-            image_url: String,
+            image_url: T.nilable(String),
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
             limit_duration:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::LimitDuration::OrSymbol,
             metadata: T::Hash[Symbol, T.anything],
-            next_milestone_prefix: String,
-            next_milestone_suffix: String,
+            next_milestone_prefix: T.nilable(String),
+            next_milestone_suffix: T.nilable(String),
             number_of_winners: Integer,
             order: Integer,
-            referral_coupon_code: String,
-            referral_description: String,
+            referral_coupon_code: T.nilable(String),
+            referral_description: T.nilable(String),
             referred_reward_upfront: T::Boolean,
             referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
             title: String,
@@ -164,7 +168,8 @@ module GrowsurfRuby
           campaign_reward_id,
           # Path param: GrowSurf program ID.
           id:,
-          # Body param
+          # Body param: The affiliate commission structure. A `FIXED` commission requires
+          # `amount`; a `PERCENT` commission requires `percent`.
           commission_structure: nil,
           # Body param
           conversions_required: nil,

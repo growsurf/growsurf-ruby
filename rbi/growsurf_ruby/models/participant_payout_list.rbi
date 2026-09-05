@@ -88,13 +88,13 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :exchange_rate_at
 
-        sig { params(exchange_rate_at: Integer).void }
+        sig { params(exchange_rate_at: T.nilable(Integer)).void }
         attr_writer :exchange_rate_at
 
         sig { returns(T.nilable(Integer)) }
         attr_reader :failed_at
 
-        sig { params(failed_at: Integer).void }
+        sig { params(failed_at: T.nilable(Integer)).void }
         attr_writer :failed_at
 
         sig { returns(T.nilable(String)) }
@@ -103,7 +103,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :issued_at
 
-        sig { params(issued_at: Integer).void }
+        sig { params(issued_at: T.nilable(Integer)).void }
         attr_writer :issued_at
 
         sig { returns(T.nilable(String)) }
@@ -112,13 +112,13 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :queued_at
 
-        sig { params(queued_at: Integer).void }
+        sig { params(queued_at: T.nilable(Integer)).void }
         attr_writer :queued_at
 
         sig { returns(T.nilable(Integer)) }
         attr_reader :reversed_at
 
-        sig { params(reversed_at: Integer).void }
+        sig { params(reversed_at: T.nilable(Integer)).void }
         attr_writer :reversed_at
 
         sig do
@@ -134,13 +134,13 @@ module GrowsurfRuby
             amount_in_campaign_currency: T.nilable(Integer),
             campaign_currency_iso: T.nilable(String),
             exchange_rate: T.nilable(Float),
-            exchange_rate_at: Integer,
-            failed_at: Integer,
+            exchange_rate_at: T.nilable(Integer),
+            failed_at: T.nilable(Integer),
             fx_error: T.nilable(String),
-            issued_at: Integer,
+            issued_at: T.nilable(Integer),
             provider: T.nilable(String),
-            queued_at: Integer,
-            reversed_at: Integer
+            queued_at: T.nilable(Integer),
+            reversed_at: T.nilable(Integer)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -178,13 +178,13 @@ module GrowsurfRuby
               amount_in_campaign_currency: T.nilable(Integer),
               campaign_currency_iso: T.nilable(String),
               exchange_rate: T.nilable(Float),
-              exchange_rate_at: Integer,
-              failed_at: Integer,
+              exchange_rate_at: T.nilable(Integer),
+              failed_at: T.nilable(Integer),
               fx_error: T.nilable(String),
-              issued_at: Integer,
+              issued_at: T.nilable(Integer),
               provider: T.nilable(String),
-              queued_at: Integer,
-              reversed_at: Integer
+              queued_at: T.nilable(Integer),
+              reversed_at: T.nilable(Integer)
             }
           )
         end

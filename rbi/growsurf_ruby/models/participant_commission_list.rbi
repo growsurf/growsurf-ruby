@@ -99,7 +99,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :approved_at
 
-        sig { params(approved_at: Integer).void }
+        sig { params(approved_at: T.nilable(Integer)).void }
         attr_writer :approved_at
 
         sig { returns(T.nilable(String)) }
@@ -111,7 +111,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :exchange_rate_at
 
-        sig { params(exchange_rate_at: Integer).void }
+        sig { params(exchange_rate_at: T.nilable(Integer)).void }
         attr_writer :exchange_rate_at
 
         sig { returns(T.nilable(String)) }
@@ -123,13 +123,13 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :paid_at
 
-        sig { params(paid_at: Integer).void }
+        sig { params(paid_at: T.nilable(Integer)).void }
         attr_writer :paid_at
 
         sig { returns(T.nilable(Integer)) }
         attr_reader :payout_queued_at
 
-        sig { params(payout_queued_at: Integer).void }
+        sig { params(payout_queued_at: T.nilable(Integer)).void }
         attr_writer :payout_queued_at
 
         sig { returns(T.nilable(String)) }
@@ -138,7 +138,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :reversed_at
 
-        sig { params(reversed_at: Integer).void }
+        sig { params(reversed_at: T.nilable(Integer)).void }
         attr_writer :reversed_at
 
         sig { returns(T.nilable(Integer)) }
@@ -158,16 +158,16 @@ module GrowsurfRuby
             status:
               GrowsurfRuby::ParticipantCommissionList::Commission::Status::OrSymbol,
             amount_in_campaign_currency: T.nilable(Integer),
-            approved_at: Integer,
+            approved_at: T.nilable(Integer),
             campaign_currency_iso: T.nilable(String),
             exchange_rate: T.nilable(Float),
-            exchange_rate_at: Integer,
+            exchange_rate_at: T.nilable(Integer),
             fx_error: T.nilable(String),
             hold_duration: T.nilable(Integer),
-            paid_at: Integer,
-            payout_queued_at: Integer,
+            paid_at: T.nilable(Integer),
+            payout_queued_at: T.nilable(Integer),
             provider: T.nilable(String),
-            reversed_at: Integer,
+            reversed_at: T.nilable(Integer),
             sale_amount_in_campaign_currency: T.nilable(Integer)
           ).returns(T.attached_class)
         end
@@ -212,16 +212,16 @@ module GrowsurfRuby
               status:
                 GrowsurfRuby::ParticipantCommissionList::Commission::Status::TaggedSymbol,
               amount_in_campaign_currency: T.nilable(Integer),
-              approved_at: Integer,
+              approved_at: T.nilable(Integer),
               campaign_currency_iso: T.nilable(String),
               exchange_rate: T.nilable(Float),
-              exchange_rate_at: Integer,
+              exchange_rate_at: T.nilable(Integer),
               fx_error: T.nilable(String),
               hold_duration: T.nilable(Integer),
-              paid_at: Integer,
-              payout_queued_at: Integer,
+              paid_at: T.nilable(Integer),
+              payout_queued_at: T.nilable(Integer),
               provider: T.nilable(String),
-              reversed_at: Integer,
+              reversed_at: T.nilable(Integer),
               sale_amount_in_campaign_currency: T.nilable(Integer)
             }
           )

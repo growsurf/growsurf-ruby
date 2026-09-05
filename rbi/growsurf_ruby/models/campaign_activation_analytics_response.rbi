@@ -104,6 +104,34 @@ module GrowsurfRuby
         end
       end
 
+      module StalledSegmentFromStage
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+        ELIGIBLE = T.let(:ELIGIBLE, Symbol)
+        PORTAL_VIEWED = T.let(:PORTAL_VIEWED, Symbol)
+        SHARE_ACTION = T.let(:SHARE_ACTION, Symbol)
+        UNIQUE_REFERRAL_VISIT = T.let(:UNIQUE_REFERRAL_VISIT, Symbol)
+        LEAD = T.let(:LEAD, Symbol)
+        sig { override.returns(T::Array[Symbol]) }
+        def self.values
+        end
+      end
+
+      module StalledSegmentToStage
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+        PORTAL_VIEWED = T.let(:PORTAL_VIEWED, Symbol)
+        SHARE_ACTION = T.let(:SHARE_ACTION, Symbol)
+        UNIQUE_REFERRAL_VISIT = T.let(:UNIQUE_REFERRAL_VISIT, Symbol)
+        LEAD = T.let(:LEAD, Symbol)
+        CREDITED_REFERRAL = T.let(:CREDITED_REFERRAL, Symbol)
+        sig { override.returns(T::Array[Symbol]) }
+        def self.values
+        end
+      end
+
       module ImprovementAreaKey
         extend GrowsurfRuby::Internal::Type::Enum
 
@@ -179,8 +207,11 @@ module GrowsurfRuby
         sig { returns(StalledSegmentKey::OrSymbol) }
         attr_accessor :key
 
-        sig { returns(StageKey::OrSymbol) }
-        attr_accessor :from_stage, :to_stage
+        sig { returns(StalledSegmentFromStage::OrSymbol) }
+        attr_accessor :from_stage
+
+        sig { returns(StalledSegmentToStage::OrSymbol) }
+        attr_accessor :to_stage
 
         sig { returns(Integer) }
         attr_accessor :count

@@ -28,7 +28,8 @@ module GrowsurfRuby
         # The reward type must be compatible with the program type (affiliate programs
         # support only `AFFILIATE` rewards; referral programs support all other types).
         # Enabling an active reward of a type automatically enables that reward type on
-        # the program.
+        # the program. For an affiliate reward, `commissionStructure.event: LEAD`
+        # requires a `FIXED` commission with a positive `amount`.
         #
         # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
@@ -36,7 +37,7 @@ module GrowsurfRuby
         #
         # @param type [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::Type] Body param: The reward type. Immutable after creation.
         #
-        # @param commission_structure [GrowsurfRuby::Models::CommissionStructure] Body param
+        # @param commission_structure [GrowsurfRuby::Models::CommissionStructure] Body param: The affiliate commission structure. Required when creating an `AFFILIATE` reward. A `FIXED` commission requires `amount`; a `PERCENT` commission requires `percent`.
         #
         # @param conversions_required [Integer] Body param
         #
@@ -98,7 +99,8 @@ module GrowsurfRuby
         # immutable and cannot be changed. When the update replaces `metadata`, renamed
         # keys automatically rewrite any `{{campaignReward[…]}}` references in campaign
         # copy; removing a key that campaign copy still references returns a `409` listing
-        # the referencing fields.
+        # the referencing fields. For an affiliate reward, `commissionStructure.event:
+        # LEAD` requires a `FIXED` commission with a positive `amount`.
         #
         # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
@@ -106,7 +108,7 @@ module GrowsurfRuby
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
-        # @param commission_structure [GrowsurfRuby::Models::CommissionStructure] Body param
+        # @param commission_structure [GrowsurfRuby::Models::CommissionStructure] Body param: The affiliate commission structure. A `FIXED` commission requires `amount`; a `PERCENT` commission requires `percent`.
         #
         # @param conversions_required [Integer] Body param
         #

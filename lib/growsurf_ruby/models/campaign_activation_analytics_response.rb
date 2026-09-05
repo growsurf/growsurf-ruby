@@ -69,6 +69,26 @@ module GrowsurfRuby
         LEAD_NO_CREDITED_REFERRAL = :LEAD_NO_CREDITED_REFERRAL
       end
 
+      module StalledSegmentFromStage
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        ELIGIBLE = :ELIGIBLE
+        PORTAL_VIEWED = :PORTAL_VIEWED
+        SHARE_ACTION = :SHARE_ACTION
+        UNIQUE_REFERRAL_VISIT = :UNIQUE_REFERRAL_VISIT
+        LEAD = :LEAD
+      end
+
+      module StalledSegmentToStage
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        PORTAL_VIEWED = :PORTAL_VIEWED
+        SHARE_ACTION = :SHARE_ACTION
+        UNIQUE_REFERRAL_VISIT = :UNIQUE_REFERRAL_VISIT
+        LEAD = :LEAD
+        CREDITED_REFERRAL = :CREDITED_REFERRAL
+      end
+
       class Stage < GrowsurfRuby::Internal::Type::BaseModel
         required :key, enum: -> { StageKey }
         required :count, Integer
@@ -94,8 +114,8 @@ module GrowsurfRuby
 
       class StalledSegment < GrowsurfRuby::Internal::Type::BaseModel
         required :key, enum: -> { StalledSegmentKey }
-        required :from_stage, enum: -> { StageKey }, api_name: :fromStage
-        required :to_stage, enum: -> { StageKey }, api_name: :toStage
+        required :from_stage, enum: -> { StalledSegmentFromStage }, api_name: :fromStage
+        required :to_stage, enum: -> { StalledSegmentToStage }, api_name: :toStage
         required :count, Integer
       end
 

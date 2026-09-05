@@ -34,8 +34,14 @@ module GrowsurfRuby
         sig { returns(T.nilable(Integer)) }
         attr_reader :approved_at
 
-        sig { params(approved_at: Integer).void }
+        sig { params(approved_at: T.nilable(Integer)).void }
         attr_writer :approved_at
+
+        sig { returns(T.nilable(Float)) }
+        attr_reader :amount
+
+        sig { params(amount: T.nilable(Float)).void }
+        attr_writer :amount
 
         sig { returns(T.nilable(GrowsurfRuby::CommissionStructure)) }
         attr_reader :commission_structure
@@ -48,10 +54,16 @@ module GrowsurfRuby
         end
         attr_writer :commission_structure
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :currency_iso
+
+        sig { params(currency_iso: T.nilable(String)).void }
+        attr_writer :currency_iso
+
         sig { returns(T.nilable(Integer)) }
         attr_reader :fulfilled_at
 
-        sig { params(fulfilled_at: Integer).void }
+        sig { params(fulfilled_at: T.nilable(Integer)).void }
         attr_writer :fulfilled_at
 
         sig { returns(T.nilable(T::Boolean)) }
@@ -96,10 +108,12 @@ module GrowsurfRuby
             reward_id: String,
             status: GrowsurfRuby::Campaign::ParticipantReward::Status::OrSymbol,
             approved: T::Boolean,
-            approved_at: Integer,
+            approved_at: T.nilable(Integer),
+            amount: T.nilable(Float),
             commission_structure:
               T.nilable(GrowsurfRuby::CommissionStructure::OrHash),
-            fulfilled_at: Integer,
+            currency_iso: T.nilable(String),
+            fulfilled_at: T.nilable(Integer),
             is_available: T::Boolean,
             is_fulfilled: T::Boolean,
             is_referrer: T::Boolean,
@@ -114,7 +128,9 @@ module GrowsurfRuby
           status:,
           approved: nil,
           approved_at: nil,
+          amount: nil,
           commission_structure: nil,
+          currency_iso: nil,
           fulfilled_at: nil,
           is_available: nil,
           is_fulfilled: nil,
@@ -133,10 +149,12 @@ module GrowsurfRuby
               status:
                 GrowsurfRuby::Campaign::ParticipantReward::Status::TaggedSymbol,
               approved: T::Boolean,
-              approved_at: Integer,
+              approved_at: T.nilable(Integer),
+              amount: T.nilable(Float),
               commission_structure:
                 T.nilable(GrowsurfRuby::CommissionStructure),
-              fulfilled_at: Integer,
+              currency_iso: T.nilable(String),
+              fulfilled_at: T.nilable(Integer),
               is_available: T::Boolean,
               is_fulfilled: T::Boolean,
               is_referrer: T::Boolean,

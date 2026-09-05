@@ -14,11 +14,11 @@ This will install all the required dependencies.
 
 ## Modifying/Adding code
 
-Most of the SDK is generated code. Modifications to code will be persisted between generations, but may result in merge conflicts between manual patches and changes from the generator. The generator will never modify the contents of `lib/growsurf_ruby/helpers/` and `examples/` directory.
+GrowSurf maintains this SDK by hand. Keep resources, request and response types, signatures, documentation, and tests aligned with the public GrowSurf OpenAPI contract.
 
 ## Adding and running examples
 
-All files in the `examples/` directory are not modified by the generator and can be freely edited or added to.
+Examples are maintained by hand and can be freely edited or added to.
 
 ```ruby
 #!/usr/bin/env ruby

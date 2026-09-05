@@ -532,7 +532,12 @@ module GrowsurfRuby
             page.new(client: self, req: req, headers: headers, page_data: decoded)
           else
             unwrapped = GrowsurfRuby::Internal::Util.dig(decoded, unwrap)
-            GrowsurfRuby::Internal::Type::Converter.coerce(model, unwrapped)
+            result = GrowsurfRuby::Internal::Type::Converter.coerce(model, unwrapped)
+            if result.is_a?(GrowsurfRuby::Internal::Type::BaseModel)
+              result.attach_response_headers(headers)
+            else
+              result
+            end
           end
         end
 

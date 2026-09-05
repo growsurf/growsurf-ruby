@@ -2,13 +2,13 @@
 
 The Growsurf Ruby library provides convenient access to the Growsurf REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/growsurf/growsurf-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
-It is generated with [Stainless](https://www.stainless.com/).
+This library was originally generated with [Stainless](https://www.stainless.com/) and is now maintained by GrowSurf.
 
 ## Documentation
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/growsurf-ruby).
 
-The REST API documentation can be found on [growsurf.com](https://growsurf.com/settings#contact_support).
+See the [GrowSurf REST API reference](https://docs.growsurf.com/developer-tools/rest-api/api-reference) for endpoint documentation.
 
 ## Installation
 
@@ -73,9 +73,9 @@ Error codes are as follows:
 
 ### Retries
 
-Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
+Retryable requests are automatically retried 2 times by default, with a short exponential backoff.
 
-Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts will all be retried by default.
+Automatic retries apply only to `GET` and `HEAD` requests, plus `POST /api-key/rotate`. For those requests, the library retries connection errors, timeouts, HTTP 408, HTTP 409, HTTP 429, and HTTP 5xx responses. Other mutations are never retried automatically.
 
 You can use the `max_retries` option to configure or disable this:
 
@@ -105,7 +105,7 @@ growsurf.campaign.list(request_options: {timeout: 5})
 
 On timeout, `GrowsurfRuby::Errors::APITimeoutError` is raised.
 
-Note that requests that time out are retried by default.
+A timed-out request is retried only when it meets the retry rules above.
 
 ## Advanced concepts
 
@@ -120,6 +120,9 @@ All parameter and response objects inherit from `GrowsurfRuby::Internal::Type::B
 3. Both instances and the classes themselves can be pretty-printed.
 
 4. Helpers such as `#to_h`, `#deep_to_h`, `#to_json`, and `#to_yaml`.
+
+5. Normalized HTTP response headers through `#response_headers`. For example,
+   `response.response_headers["ratelimit"]` exposes the current rate-limit state.
 
 ### Making custom or undocumented requests
 
@@ -221,7 +224,7 @@ growsurf.campaign.create_mobile_participant_token(
 
 ## Versioning
 
-This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.
+This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. Breaking API changes use a new major version.
 
 This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` type definitions to be non-breaking changes.
 

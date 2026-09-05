@@ -25,6 +25,9 @@ module GrowsurfRuby
         def to_enum
         end
 
+        sig { returns(T::Hash[String, String]) }
+        attr_reader :response_headers
+
         # @api private
         sig do
           params(

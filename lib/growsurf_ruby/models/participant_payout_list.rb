@@ -79,12 +79,12 @@ module GrowsurfRuby
         # @!attribute exchange_rate_at
         #
         #   @return [Integer, nil]
-        optional :exchange_rate_at, Integer, api_name: :exchangeRateAt
+        optional :exchange_rate_at, Integer, api_name: :exchangeRateAt, nil?: true
 
         # @!attribute failed_at
         #
         #   @return [Integer, nil]
-        optional :failed_at, Integer, api_name: :failedAt
+        optional :failed_at, Integer, api_name: :failedAt, nil?: true
 
         # @!attribute fx_error
         #
@@ -94,7 +94,7 @@ module GrowsurfRuby
         # @!attribute issued_at
         #
         #   @return [Integer, nil]
-        optional :issued_at, Integer, api_name: :issuedAt
+        optional :issued_at, Integer, api_name: :issuedAt, nil?: true
 
         # @!attribute provider
         #
@@ -104,12 +104,12 @@ module GrowsurfRuby
         # @!attribute queued_at
         #
         #   @return [Integer, nil]
-        optional :queued_at, Integer, api_name: :queuedAt
+        optional :queued_at, Integer, api_name: :queuedAt, nil?: true
 
         # @!attribute reversed_at
         #
         #   @return [Integer, nil]
-        optional :reversed_at, Integer, api_name: :reversedAt
+        optional :reversed_at, Integer, api_name: :reversedAt, nil?: true
 
         # @!method initialize(id:, amount:, commission_ids:, created_at:, currency_iso:, participant_id:, status:, amount_in_campaign_currency: nil, campaign_currency_iso: nil, exchange_rate: nil, exchange_rate_at: nil, failed_at: nil, fx_error: nil, issued_at: nil, provider: nil, queued_at: nil, reversed_at: nil)
         #   @param id [String]

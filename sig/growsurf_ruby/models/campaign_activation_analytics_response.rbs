@@ -18,6 +18,10 @@ module GrowsurfRuby
         | :SHARED_NO_UNIQUE_REFERRAL_VISIT
         | :UNIQUE_VISIT_NO_LEAD
         | :LEAD_NO_CREDITED_REFERRAL
+      type stalled_segment_from_stage =
+        :ELIGIBLE | :PORTAL_VIEWED | :SHARE_ACTION | :UNIQUE_REFERRAL_VISIT | :LEAD
+      type stalled_segment_to_stage =
+        :PORTAL_VIEWED | :SHARE_ACTION | :UNIQUE_REFERRAL_VISIT | :LEAD | :CREDITED_REFERRAL
       type improvement_area_key =
         :PORTAL_ACCESS
         | :SHARING_EXPERIENCE
@@ -81,6 +85,27 @@ module GrowsurfRuby
         def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_key]
       end
 
+
+      module StalledSegmentFromStage
+        extend GrowsurfRuby::Internal::Type::Enum
+        ELIGIBLE: :ELIGIBLE
+        PORTAL_VIEWED: :PORTAL_VIEWED
+        SHARE_ACTION: :SHARE_ACTION
+        UNIQUE_REFERRAL_VISIT: :UNIQUE_REFERRAL_VISIT
+        LEAD: :LEAD
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_from_stage]
+      end
+
+      module StalledSegmentToStage
+        extend GrowsurfRuby::Internal::Type::Enum
+        PORTAL_VIEWED: :PORTAL_VIEWED
+        SHARE_ACTION: :SHARE_ACTION
+        UNIQUE_REFERRAL_VISIT: :UNIQUE_REFERRAL_VISIT
+        LEAD: :LEAD
+        CREDITED_REFERRAL: :CREDITED_REFERRAL
+        def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_to_stage]
+      end
+
       module ImprovementAreaKey
         extend GrowsurfRuby::Internal::Type::Enum
         PORTAL_ACCESS: :PORTAL_ACCESS
@@ -122,8 +147,8 @@ module GrowsurfRuby
 
       class StalledSegment < GrowsurfRuby::Internal::Type::BaseModel
         attr_accessor key: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_key
-        attr_accessor from_stage: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stage_key
-        attr_accessor to_stage: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stage_key
+        attr_accessor from_stage: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_from_stage
+        attr_accessor to_stage: GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::stalled_segment_to_stage
         attr_accessor count: Integer
         def initialize: (**untyped) -> void
       end

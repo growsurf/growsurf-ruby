@@ -43,7 +43,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_reader :coupon_code
 
-        sig { params(coupon_code: String).void }
+        sig { params(coupon_code: T.nilable(String)).void }
         attr_writer :coupon_code
 
         sig { returns(T.nilable(String)) }
@@ -76,7 +76,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_reader :image_url
 
-        sig { params(image_url: String).void }
+        sig { params(image_url: T.nilable(String)).void }
         attr_writer :image_url
 
         # Whether the reward can be earned an unlimited number of times. Defaults to
@@ -130,7 +130,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_reader :next_milestone_prefix
 
-        sig { params(next_milestone_prefix: String).void }
+        sig { params(next_milestone_prefix: T.nilable(String)).void }
         attr_writer :next_milestone_prefix
 
         # Text shown after a participant's referral count in milestone-progress copy.
@@ -138,7 +138,7 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_reader :next_milestone_suffix
 
-        sig { params(next_milestone_suffix: String).void }
+        sig { params(next_milestone_suffix: T.nilable(String)).void }
         attr_writer :next_milestone_suffix
 
         # The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
@@ -162,13 +162,13 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_reader :referral_coupon_code
 
-        sig { params(referral_coupon_code: String).void }
+        sig { params(referral_coupon_code: T.nilable(String)).void }
         attr_writer :referral_coupon_code
 
         sig { returns(T.nilable(String)) }
         attr_reader :referral_description
 
-        sig { params(referral_description: String).void }
+        sig { params(referral_description: T.nilable(String)).void }
         attr_writer :referral_description
 
         sig { returns(T.nilable(T::Boolean)) }
@@ -183,7 +183,10 @@ module GrowsurfRuby
         attr_reader :referred_value
 
         sig do
-          params(referred_value: GrowsurfRuby::RewardTaxValuation::OrHash).void
+          params(
+            referred_value:
+              T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
+          ).void
         end
         attr_writer :referred_value
 
@@ -198,7 +201,11 @@ module GrowsurfRuby
         sig { returns(T.nilable(GrowsurfRuby::RewardTaxValuation)) }
         attr_reader :value
 
-        sig { params(value: GrowsurfRuby::RewardTaxValuation::OrHash).void }
+        sig do
+          params(
+            value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash)
+          ).void
+        end
         attr_writer :value
 
         sig do
@@ -207,27 +214,28 @@ module GrowsurfRuby
             campaign_reward_id: String,
             commission_structure: GrowsurfRuby::CommissionStructure::OrHash,
             conversions_required: Integer,
-            coupon_code: String,
+            coupon_code: T.nilable(String),
             description: String,
             event:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
-            image_url: String,
+            image_url: T.nilable(String),
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
             limit_duration:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::LimitDuration::OrSymbol,
             metadata: T::Hash[Symbol, T.anything],
-            next_milestone_prefix: String,
-            next_milestone_suffix: String,
+            next_milestone_prefix: T.nilable(String),
+            next_milestone_suffix: T.nilable(String),
             number_of_winners: Integer,
             order: Integer,
-            referral_coupon_code: String,
-            referral_description: String,
+            referral_coupon_code: T.nilable(String),
+            referral_description: T.nilable(String),
             referred_reward_upfront: T::Boolean,
-            referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
+            referred_value:
+              T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
             title: String,
-            value: GrowsurfRuby::RewardTaxValuation::OrHash,
+            value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -292,27 +300,28 @@ module GrowsurfRuby
               campaign_reward_id: String,
               commission_structure: GrowsurfRuby::CommissionStructure::OrHash,
               conversions_required: Integer,
-              coupon_code: String,
+              coupon_code: T.nilable(String),
               description: String,
               event:
                 GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
-              image_url: String,
+              image_url: T.nilable(String),
               is_unlimited: T::Boolean,
               is_visible: T::Boolean,
               limit: Integer,
               limit_duration:
                 GrowsurfRuby::Models::Campaign::RewardUpdateParams::LimitDuration::OrSymbol,
               metadata: T::Hash[Symbol, T.anything],
-              next_milestone_prefix: String,
-              next_milestone_suffix: String,
+              next_milestone_prefix: T.nilable(String),
+              next_milestone_suffix: T.nilable(String),
               number_of_winners: Integer,
               order: Integer,
-              referral_coupon_code: String,
-              referral_description: String,
+              referral_coupon_code: T.nilable(String),
+              referral_description: T.nilable(String),
               referred_reward_upfront: T::Boolean,
-              referred_value: GrowsurfRuby::RewardTaxValuation::OrHash,
+              referred_value:
+                T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
               title: String,
-              value: GrowsurfRuby::RewardTaxValuation::OrHash,
+              value: T.nilable(GrowsurfRuby::RewardTaxValuation::OrHash),
               request_options: GrowsurfRuby::RequestOptions
             }
           )

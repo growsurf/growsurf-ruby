@@ -264,6 +264,16 @@ module GrowsurfRuby
         def deep_to_h
         end
 
+        sig { returns(T::Hash[String, String]) }
+        attr_reader :response_headers
+
+        # @api private
+        sig do
+          params(headers: T::Hash[String, String]).returns(T.self_type)
+        end
+        def attach_response_headers(headers)
+        end
+
         sig do
           params(keys: T.nilable(T::Array[Symbol])).returns(
             GrowsurfRuby::Internal::AnyHash

@@ -12,6 +12,8 @@ module GrowsurfRuby
 
         alias enum_for to_enum
 
+        attr_reader response_headers: ::Hash[String, String]
+
         def initialize: (
           client: GrowsurfRuby::Internal::Transport::BaseClient,
           req: GrowsurfRuby::Internal::Transport::BaseClient::request_components,

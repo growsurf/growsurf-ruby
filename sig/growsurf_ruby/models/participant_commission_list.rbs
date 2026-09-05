@@ -38,16 +38,16 @@ module GrowsurfRuby
           sale_amount: Integer?,
           status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status,
           amount_in_campaign_currency: Integer?,
-          approved_at: Integer,
+          approved_at: Integer?,
           campaign_currency_iso: String?,
           exchange_rate: Float?,
-          exchange_rate_at: Integer,
+          exchange_rate_at: Integer?,
           fx_error: String?,
           hold_duration: Integer?,
-          paid_at: Integer,
-          payout_queued_at: Integer,
+          paid_at: Integer?,
+          payout_queued_at: Integer?,
           provider: String?,
-          reversed_at: Integer,
+          reversed_at: Integer?,
           sale_amount_in_campaign_currency: Integer?
         }
 
@@ -74,7 +74,7 @@ module GrowsurfRuby
 
         attr_reader approved_at: Integer?
 
-        def approved_at=: (Integer) -> Integer
+        def approved_at=: (Integer?) -> Integer?
 
         attr_accessor campaign_currency_iso: String?
 
@@ -82,7 +82,7 @@ module GrowsurfRuby
 
         attr_reader exchange_rate_at: Integer?
 
-        def exchange_rate_at=: (Integer) -> Integer
+        def exchange_rate_at=: (Integer?) -> Integer?
 
         attr_accessor fx_error: String?
 
@@ -90,17 +90,17 @@ module GrowsurfRuby
 
         attr_reader paid_at: Integer?
 
-        def paid_at=: (Integer) -> Integer
+        def paid_at=: (Integer?) -> Integer?
 
         attr_reader payout_queued_at: Integer?
 
-        def payout_queued_at=: (Integer) -> Integer
+        def payout_queued_at=: (Integer?) -> Integer?
 
         attr_accessor provider: String?
 
         attr_reader reversed_at: Integer?
 
-        def reversed_at=: (Integer) -> Integer
+        def reversed_at=: (Integer?) -> Integer?
 
         attr_accessor sale_amount_in_campaign_currency: Integer?
 
@@ -115,16 +115,16 @@ module GrowsurfRuby
           sale_amount: Integer?,
           status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status,
           ?amount_in_campaign_currency: Integer?,
-          ?approved_at: Integer,
+          ?approved_at: Integer?,
           ?campaign_currency_iso: String?,
           ?exchange_rate: Float?,
-          ?exchange_rate_at: Integer,
+          ?exchange_rate_at: Integer?,
           ?fx_error: String?,
           ?hold_duration: Integer?,
-          ?paid_at: Integer,
-          ?payout_queued_at: Integer,
+          ?paid_at: Integer?,
+          ?payout_queued_at: Integer?,
           ?provider: String?,
-          ?reversed_at: Integer,
+          ?reversed_at: Integer?,
           ?sale_amount_in_campaign_currency: Integer?
         ) -> void
 
@@ -139,16 +139,16 @@ module GrowsurfRuby
           sale_amount: Integer?,
           status: GrowsurfRuby::Models::ParticipantCommissionList::Commission::status,
           amount_in_campaign_currency: Integer?,
-          approved_at: Integer,
+          approved_at: Integer?,
           campaign_currency_iso: String?,
           exchange_rate: Float?,
-          exchange_rate_at: Integer,
+          exchange_rate_at: Integer?,
           fx_error: String?,
           hold_duration: Integer?,
-          paid_at: Integer,
-          payout_queued_at: Integer,
+          paid_at: Integer?,
+          payout_queued_at: Integer?,
           provider: String?,
-          reversed_at: Integer,
+          reversed_at: Integer?,
           sale_amount_in_campaign_currency: Integer?
         }
 

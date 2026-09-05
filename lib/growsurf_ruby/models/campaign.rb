@@ -57,7 +57,7 @@ module GrowsurfRuby
       # @!attribute currency_iso
       #
       #   @return [String, nil]
-      optional :currency_iso, String, api_name: :currencyISO
+      optional :currency_iso, String, api_name: :currencyISO, nil?: true
 
       # @!method initialize(id:, impression_count:, invite_count:, name:, participant_count:, referral_count:, rewards:, status:, type:, winner_count:, currency_iso: nil)
       #   @param id [String]
@@ -293,8 +293,10 @@ module GrowsurfRuby
         extend GrowsurfRuby::Internal::Type::Enum
 
         DRAFT = :DRAFT
+        PENDING = :PENDING
         IN_PROGRESS = :IN_PROGRESS
         COMPLETE = :COMPLETE
+        CANCELLED = :CANCELLED
         DELETED = :DELETED
 
         # @!method self.values

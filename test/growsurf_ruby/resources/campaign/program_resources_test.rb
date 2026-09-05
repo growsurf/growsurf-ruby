@@ -70,6 +70,16 @@ class GrowsurfRuby::Test::Resources::Campaign::ProgramResourcesTest < GrowsurfRu
     assert_match(/must be supplied together/, error.message)
   end
 
+  def test_update_type_requires_replacement_content_before_request
+    [:FILE, :LINK, :TEXT].each do |type|
+      error = assert_raises(ArgumentError) do
+        @growsurf.campaign.resources.update("resource-id", id: "program-id", type: type)
+      end
+
+      assert_match(/requires its replacement content/, error.message)
+    end
+  end
+
   def test_update_and_upload_ticket_enforce_public_bounds_before_request
     empty_error = assert_raises(ArgumentError) do
       @growsurf.campaign.resources.update("resource-id", id: "program-id")

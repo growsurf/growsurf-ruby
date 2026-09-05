@@ -36,7 +36,7 @@ module GrowsurfRuby
         #   issued coupon when one exists.
         #
         #   @return [String, nil]
-        optional :coupon_code, String, api_name: :couponCode
+        optional :coupon_code, String, api_name: :couponCode, nil?: true
 
         # @!attribute description
         #
@@ -55,7 +55,7 @@ module GrowsurfRuby
         # @!attribute image_url
         #
         #   @return [String, nil]
-        optional :image_url, String, api_name: :imageUrl
+        optional :image_url, String, api_name: :imageUrl, nil?: true
 
         # @!attribute is_unlimited
         #   Whether the reward can be earned an unlimited number of times. Defaults to
@@ -94,14 +94,14 @@ module GrowsurfRuby
         #   Applies to `MILESTONE` rewards.
         #
         #   @return [String, nil]
-        optional :next_milestone_prefix, String, api_name: :nextMilestonePrefix
+        optional :next_milestone_prefix, String, api_name: :nextMilestonePrefix, nil?: true
 
         # @!attribute next_milestone_suffix
         #   Text shown after a participant's referral count in milestone-progress copy.
         #   Applies to `MILESTONE` rewards.
         #
         #   @return [String, nil]
-        optional :next_milestone_suffix, String, api_name: :nextMilestoneSuffix
+        optional :next_milestone_suffix, String, api_name: :nextMilestoneSuffix, nil?: true
 
         # @!attribute number_of_winners
         #   The number of winners (`LEADERBOARD` rewards only). With `limitDuration`
@@ -122,12 +122,12 @@ module GrowsurfRuby
         #   connected billing integration's issued coupon when one exists.
         #
         #   @return [String, nil]
-        optional :referral_coupon_code, String, api_name: :referralCouponCode
+        optional :referral_coupon_code, String, api_name: :referralCouponCode, nil?: true
 
         # @!attribute referral_description
         #
         #   @return [String, nil]
-        optional :referral_description, String, api_name: :referralDescription
+        optional :referral_description, String, api_name: :referralDescription, nil?: true
 
         # @!attribute referred_reward_upfront
         #
@@ -143,7 +143,8 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :referred_value,
                  -> { GrowsurfRuby::RewardTaxValuation },
-                 api_name: :referredValue
+                 api_name: :referredValue,
+                 nil?: true
 
         # @!attribute title
         #
@@ -155,7 +156,7 @@ module GrowsurfRuby
         #   Used by tax documentation / 1099 reporting.
         #
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
-        optional :value, -> { GrowsurfRuby::RewardTaxValuation }
+        optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
 
         # @!method initialize(id:, campaign_reward_id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #   Some parameter documentations has been truncated, see

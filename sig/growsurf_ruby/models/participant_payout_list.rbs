@@ -38,13 +38,13 @@ module GrowsurfRuby
           amount_in_campaign_currency: Integer?,
           campaign_currency_iso: String?,
           exchange_rate: Float?,
-          exchange_rate_at: Integer,
-          failed_at: Integer,
+          exchange_rate_at: Integer?,
+          failed_at: Integer?,
           fx_error: String?,
-          issued_at: Integer,
+          issued_at: Integer?,
           provider: String?,
-          queued_at: Integer,
-          reversed_at: Integer
+          queued_at: Integer?,
+          reversed_at: Integer?
         }
 
       class Payout < GrowsurfRuby::Internal::Type::BaseModel
@@ -70,27 +70,27 @@ module GrowsurfRuby
 
         attr_reader exchange_rate_at: Integer?
 
-        def exchange_rate_at=: (Integer) -> Integer
+        def exchange_rate_at=: (Integer?) -> Integer?
 
         attr_reader failed_at: Integer?
 
-        def failed_at=: (Integer) -> Integer
+        def failed_at=: (Integer?) -> Integer?
 
         attr_accessor fx_error: String?
 
         attr_reader issued_at: Integer?
 
-        def issued_at=: (Integer) -> Integer
+        def issued_at=: (Integer?) -> Integer?
 
         attr_accessor provider: String?
 
         attr_reader queued_at: Integer?
 
-        def queued_at=: (Integer) -> Integer
+        def queued_at=: (Integer?) -> Integer?
 
         attr_reader reversed_at: Integer?
 
-        def reversed_at=: (Integer) -> Integer
+        def reversed_at=: (Integer?) -> Integer?
 
         def initialize: (
           id: String,
@@ -103,13 +103,13 @@ module GrowsurfRuby
           ?amount_in_campaign_currency: Integer?,
           ?campaign_currency_iso: String?,
           ?exchange_rate: Float?,
-          ?exchange_rate_at: Integer,
-          ?failed_at: Integer,
+          ?exchange_rate_at: Integer?,
+          ?failed_at: Integer?,
           ?fx_error: String?,
-          ?issued_at: Integer,
+          ?issued_at: Integer?,
           ?provider: String?,
-          ?queued_at: Integer,
-          ?reversed_at: Integer
+          ?queued_at: Integer?,
+          ?reversed_at: Integer?
         ) -> void
 
         def to_hash: -> {
@@ -123,13 +123,13 @@ module GrowsurfRuby
           amount_in_campaign_currency: Integer?,
           campaign_currency_iso: String?,
           exchange_rate: Float?,
-          exchange_rate_at: Integer,
-          failed_at: Integer,
+          exchange_rate_at: Integer?,
+          failed_at: Integer?,
           fx_error: String?,
-          issued_at: Integer,
+          issued_at: Integer?,
           provider: String?,
-          queued_at: Integer,
-          reversed_at: Integer
+          queued_at: Integer?,
+          reversed_at: Integer?
         }
 
         type status = :UPCOMING | :QUEUED | :ISSUED | :FAILED | :REVERSED

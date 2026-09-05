@@ -27,7 +27,12 @@ module GrowsurfRuby
         # @!attribute approved_at
         #
         #   @return [Integer, nil]
-        optional :approved_at, Integer, api_name: :approvedAt
+        optional :approved_at, Integer, api_name: :approvedAt, nil?: true
+
+        # @!attribute amount
+        #
+        #   @return [Float, nil]
+        optional :amount, Float, nil?: true
 
         # @!attribute commission_structure
         #
@@ -37,10 +42,15 @@ module GrowsurfRuby
                  api_name: :commissionStructure,
                  nil?: true
 
+        # @!attribute currency_iso
+        #
+        #   @return [String, nil]
+        optional :currency_iso, String, api_name: :currencyISO, nil?: true
+
         # @!attribute fulfilled_at
         #
         #   @return [Integer, nil]
-        optional :fulfilled_at, Integer, api_name: :fulfilledAt
+        optional :fulfilled_at, Integer, api_name: :fulfilledAt, nil?: true
 
         # @!attribute is_available
         #
@@ -72,13 +82,15 @@ module GrowsurfRuby
         #   @return [Boolean, nil]
         optional :unread, GrowsurfRuby::Internal::Type::Boolean
 
-        # @!method initialize(id:, reward_id:, status:, approved: nil, approved_at: nil, commission_structure: nil, fulfilled_at: nil, is_available: nil, is_fulfilled: nil, is_referrer: nil, referred_id: nil, referrer_id: nil, unread: nil)
+        # @!method initialize(id:, reward_id:, status:, approved: nil, approved_at: nil, amount: nil, commission_structure: nil, currency_iso: nil, fulfilled_at: nil, is_available: nil, is_fulfilled: nil, is_referrer: nil, referred_id: nil, referrer_id: nil, unread: nil)
         #   @param id [String]
         #   @param reward_id [String]
         #   @param status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantReward::Status]
         #   @param approved [Boolean]
         #   @param approved_at [Integer]
+        #   @param amount [Float]
         #   @param commission_structure [GrowsurfRuby::Models::CommissionStructure, nil]
+        #   @param currency_iso [String]
         #   @param fulfilled_at [Integer]
         #   @param is_available [Boolean]
         #   @param is_fulfilled [Boolean]

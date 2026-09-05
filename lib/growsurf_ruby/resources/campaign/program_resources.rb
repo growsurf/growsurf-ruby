@@ -99,6 +99,9 @@ module GrowsurfRuby
           if supplied_types.any? && !type.nil? && supplied_types.first != type
             raise ArgumentError.new("content fields must match the selected Program Resource type")
           end
+          if !creating && !type.nil? && supplied_types != [type]
+            raise ArgumentError.new("changing a Program Resource type requires its replacement content")
+          end
           return unless creating && (supplied_types.empty? || supplied_types.first != type)
 
           raise ArgumentError.new("create requires content fields for the selected Program Resource type")

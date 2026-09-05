@@ -383,4 +383,22 @@ class GrowsurfRubyTest < Minitest::Test
       headers.fetch_values(*expected).each { refute_empty(_1) }
     end
   end
+
+  def test_successful_model_response_exposes_response_headers
+    stub_request(:get, "http://localhost/campaigns").to_return_json(
+      status: 200,
+      headers: {
+        "RateLimit-Policy" => '"minute";q=400;w=60',
+        "RateLimit" => '"minute";r=399;t=12'
+      },
+      body: {campaigns: []}
+    )
+    growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: "My API Key")
+
+    response = growsurf.campaign.list
+
+    assert_instance_of(GrowsurfRuby::Models::CampaignListResponse, response)
+    assert_equal('"minute";q=400;w=60', response.response_headers.fetch("ratelimit-policy"))
+    assert_equal('"minute";r=399;t=12', response.response_headers.fetch("ratelimit"))
+  end
 end

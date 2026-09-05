@@ -12,7 +12,7 @@ module GrowsurfRuby
         status: GrowsurfRuby::Models::CampaignAPI::status,
         type: GrowsurfRuby::Models::CampaignAPI::type_,
         winner_count: Integer,
-        currency_iso: String
+        currency_iso: String?
       }
 
     class CampaignAPI < GrowsurfRuby::Internal::Type::BaseModel
@@ -38,7 +38,7 @@ module GrowsurfRuby
 
       attr_reader currency_iso: String?
 
-      def currency_iso=: (String) -> String
+      def currency_iso=: (String?) -> String?
 
       def initialize: (
         id: String,
@@ -51,7 +51,7 @@ module GrowsurfRuby
         status: GrowsurfRuby::Models::CampaignAPI::status,
         type: GrowsurfRuby::Models::CampaignAPI::type_,
         winner_count: Integer,
-        ?currency_iso: String
+        ?currency_iso: String?
       ) -> void
 
       def to_hash: -> {
@@ -65,7 +65,7 @@ module GrowsurfRuby
         status: GrowsurfRuby::Models::CampaignAPI::status,
         type: GrowsurfRuby::Models::CampaignAPI::type_,
         winner_count: Integer,
-        currency_iso: String
+        currency_iso: String?
       }
 
       type reward =
@@ -224,14 +224,16 @@ module GrowsurfRuby
         end
       end
 
-      type status = :DRAFT | :IN_PROGRESS | :COMPLETE | :DELETED
+      type status = :DRAFT | :PENDING | :IN_PROGRESS | :COMPLETE | :CANCELLED | :DELETED
 
       module Status
         extend GrowsurfRuby::Internal::Type::Enum
 
         DRAFT: :DRAFT
+        PENDING: :PENDING
         IN_PROGRESS: :IN_PROGRESS
         COMPLETE: :COMPLETE
+        CANCELLED: :CANCELLED
         DELETED: :DELETED
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::status]

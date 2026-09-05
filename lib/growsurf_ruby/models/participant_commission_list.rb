@@ -80,7 +80,7 @@ module GrowsurfRuby
         # @!attribute approved_at
         #
         #   @return [Integer, nil]
-        optional :approved_at, Integer, api_name: :approvedAt
+        optional :approved_at, Integer, api_name: :approvedAt, nil?: true
 
         # @!attribute campaign_currency_iso
         #
@@ -95,7 +95,7 @@ module GrowsurfRuby
         # @!attribute exchange_rate_at
         #
         #   @return [Integer, nil]
-        optional :exchange_rate_at, Integer, api_name: :exchangeRateAt
+        optional :exchange_rate_at, Integer, api_name: :exchangeRateAt, nil?: true
 
         # @!attribute fx_error
         #
@@ -110,12 +110,12 @@ module GrowsurfRuby
         # @!attribute paid_at
         #
         #   @return [Integer, nil]
-        optional :paid_at, Integer, api_name: :paidAt
+        optional :paid_at, Integer, api_name: :paidAt, nil?: true
 
         # @!attribute payout_queued_at
         #
         #   @return [Integer, nil]
-        optional :payout_queued_at, Integer, api_name: :payoutQueuedAt
+        optional :payout_queued_at, Integer, api_name: :payoutQueuedAt, nil?: true
 
         # @!attribute provider
         #
@@ -125,7 +125,7 @@ module GrowsurfRuby
         # @!attribute reversed_at
         #
         #   @return [Integer, nil]
-        optional :reversed_at, Integer, api_name: :reversedAt
+        optional :reversed_at, Integer, api_name: :reversedAt, nil?: true
 
         # @!attribute sale_amount_in_campaign_currency
         #

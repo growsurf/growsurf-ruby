@@ -41,7 +41,7 @@ module GrowsurfRuby
       sig { returns(T.nilable(String)) }
       attr_reader :currency_iso
 
-      sig { params(currency_iso: String).void }
+      sig { params(currency_iso: T.nilable(String)).void }
       attr_writer :currency_iso
 
       sig do
@@ -56,7 +56,7 @@ module GrowsurfRuby
           status: GrowsurfRuby::CampaignAPI::Status::OrSymbol,
           type: GrowsurfRuby::CampaignAPI::Type::OrSymbol,
           winner_count: Integer,
-          currency_iso: String
+          currency_iso: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -87,7 +87,7 @@ module GrowsurfRuby
             status: GrowsurfRuby::CampaignAPI::Status::TaggedSymbol,
             type: GrowsurfRuby::CampaignAPI::Type::TaggedSymbol,
             winner_count: Integer,
-            currency_iso: String
+            currency_iso: T.nilable(String)
           }
         )
       end
@@ -441,10 +441,13 @@ module GrowsurfRuby
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         DRAFT = T.let(:DRAFT, GrowsurfRuby::CampaignAPI::Status::TaggedSymbol)
+        PENDING = T.let(:PENDING, GrowsurfRuby::CampaignAPI::Status::TaggedSymbol)
         IN_PROGRESS =
           T.let(:IN_PROGRESS, GrowsurfRuby::CampaignAPI::Status::TaggedSymbol)
         COMPLETE =
           T.let(:COMPLETE, GrowsurfRuby::CampaignAPI::Status::TaggedSymbol)
+        CANCELLED =
+          T.let(:CANCELLED, GrowsurfRuby::CampaignAPI::Status::TaggedSymbol)
         DELETED =
           T.let(:DELETED, GrowsurfRuby::CampaignAPI::Status::TaggedSymbol)
 

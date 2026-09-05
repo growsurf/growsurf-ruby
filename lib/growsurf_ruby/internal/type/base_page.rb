@@ -35,6 +35,11 @@ module GrowsurfRuby
 
         alias_method :enum_for, :to_enum
 
+        # @api public
+        #
+        # @return [Hash{String=>String}]
+        attr_reader :response_headers
+
         # @api private
         #
         # @param client [GrowsurfRuby::Internal::Transport::BaseClient]
@@ -45,6 +50,7 @@ module GrowsurfRuby
           @client = client
           @req = req
           @model = req.fetch(:model)
+          @response_headers = headers.freeze
           super()
         end
 

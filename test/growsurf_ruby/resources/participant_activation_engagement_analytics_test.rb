@@ -69,6 +69,17 @@ class GrowsurfRuby::Test::Resources::ParticipantActivationEngagementAnalyticsTes
     )
   end
 
+  def test_stalled_segments_expose_only_valid_transition_stages
+    assert_equal(
+      [:ELIGIBLE, :LEAD, :PORTAL_VIEWED, :SHARE_ACTION, :UNIQUE_REFERRAL_VISIT],
+      GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::StalledSegmentFromStage.values.sort
+    )
+    assert_equal(
+      [:CREDITED_REFERRAL, :LEAD, :PORTAL_VIEWED, :SHARE_ACTION, :UNIQUE_REFERRAL_VISIT],
+      GrowsurfRuby::Models::CampaignActivationAnalyticsResponse::StalledSegmentToStage.values.sort
+    )
+  end
+
   def test_requests_keep_existing_calls_and_add_exact_opt_in_contracts
     stub_request(:get, "#{@base_url}/campaign/campaign_123/analytics")
       .to_return_json(status: 200, body: {analytics: {}, startDate: 1, endDate: 2})
