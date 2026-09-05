@@ -82,6 +82,14 @@ module GrowsurfRuby
             define_method(setter) do |value|
               target = type_fn.call
               state = GrowsurfRuby::Internal::Type::Converter.new_coerce_state(translate_names: false)
+              # Mirror `.coerce`: an explicit `nil` is valid for nullable and optional fields,
+              # so it must not be coerced against the field type and recorded as an error.
+              if value.nil? && (nilable || !required)
+                @coerced.store(name_sym, true)
+                @data.store(name_sym, nil)
+                next
+              end
+
               coerced = GrowsurfRuby::Internal::Type::Converter.coerce(target, value, state: state)
               status = @coerced.store(name_sym, state.fetch(:error) || true)
               stored =
