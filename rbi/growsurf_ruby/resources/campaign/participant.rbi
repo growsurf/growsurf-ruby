@@ -13,7 +13,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::Campaign::CampaignParticipant)
         end
         def retrieve(
-          # GrowSurf participant ID or URL-encoded participant email address.
+          # GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
@@ -46,7 +46,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::Campaign::CampaignParticipant)
         end
         def update(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -86,7 +86,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::Models::Campaign::ParticipantDeleteResponse)
         end
         def delete(
-          # GrowSurf participant ID or URL-encoded participant email address.
+          # GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
@@ -189,7 +189,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::ParticipantCommissionList)
         end
         def list_commissions(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -217,7 +217,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::ParticipantPayoutList)
         end
         def list_payouts(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -250,7 +250,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::ReferralList)
         end
         def list_referrals(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -289,7 +289,7 @@ module GrowsurfRuby
           )
         end
         def list_rewards(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -340,7 +340,7 @@ module GrowsurfRuby
           )
         end
         def record_transaction(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -427,7 +427,7 @@ module GrowsurfRuby
           )
         end
         def refund_transaction(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -481,7 +481,7 @@ module GrowsurfRuby
           )
         end
         def send_invites(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -511,7 +511,7 @@ module GrowsurfRuby
           )
         end
         def trigger_referral(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -540,7 +540,7 @@ module GrowsurfRuby
           )
         end
         def cancel_delayed_referral(
-          # GrowSurf participant ID or URL-encoded participant email address.
+          # GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
@@ -568,7 +568,7 @@ module GrowsurfRuby
           ).returns(GrowsurfRuby::Models::Campaign::ParticipantEmailResponse)
         end
         def email(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -610,7 +610,7 @@ module GrowsurfRuby
           )
         end
         def list_activity_logs(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
@@ -646,7 +646,7 @@ module GrowsurfRuby
           )
         end
         def retrieve_analytics(
-          # GrowSurf participant ID or URL-encoded participant email address.
+          # GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
@@ -691,7 +691,7 @@ module GrowsurfRuby
           )
         end
         def get_payout_destination(
-          # GrowSurf participant ID or URL-encoded participant email address.
+          # GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # GrowSurf program ID.
           id:,
@@ -715,7 +715,7 @@ module GrowsurfRuby
           )
         end
         def request_payout_destination_confirmation(
-          # Path param: GrowSurf participant ID or URL-encoded participant email address.
+          # Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,

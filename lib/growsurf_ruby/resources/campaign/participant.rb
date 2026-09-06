@@ -8,7 +8,7 @@ module GrowsurfRuby
         #
         # @overload retrieve(participant_id_or_email, id:, request_options: {})
         #
-        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -39,7 +39,7 @@ module GrowsurfRuby
         #
         # @overload update(participant_id_or_email, id:, affiliate_status: nil, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -87,7 +87,7 @@ module GrowsurfRuby
         #
         # @overload delete(participant_id_or_email, id:, request_options: {})
         #
-        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -200,7 +200,7 @@ module GrowsurfRuby
         #
         # @overload list_commissions(participant_id_or_email, id:, limit: nil, next_id: nil, status: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -236,7 +236,7 @@ module GrowsurfRuby
         #
         # @overload list_payouts(participant_id_or_email, id:, limit: nil, next_id: nil, status: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -271,7 +271,7 @@ module GrowsurfRuby
         #
         # @overload list_referrals(participant_id_or_email, id:, desc: nil, email: nil, first_name: nil, last_name: nil, limit: nil, next_id: nil, offset: nil, referral_status: nil, sort_by: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -324,7 +324,7 @@ module GrowsurfRuby
         #
         # @overload list_rewards(participant_id_or_email, id:, limit: nil, next_id: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -362,7 +362,7 @@ module GrowsurfRuby
         #
         # @overload record_transaction(participant_id_or_email, id:, currency:, gross_amount:, amount_cash_net: nil, amount_paid: nil, charge_id: nil, customer_id: nil, description: nil, external_id: nil, invoice_id: nil, invoice_subtotal_excluding_tax: nil, invoice_total: nil, invoice_total_excluding_tax: nil, net_amount: nil, order_id: nil, paid_at: nil, payment_id: nil, payment_intent_id: nil, subscription_id: nil, tax_amount: nil, total_tax_amount: nil, total_tax_amounts: nil, total_taxes: nil, transaction_id: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -442,7 +442,7 @@ module GrowsurfRuby
         #
         # @overload refund_transaction(participant_id_or_email, id:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -502,7 +502,7 @@ module GrowsurfRuby
         #
         # @overload send_invites(participant_id_or_email, id:, email_addresses:, message_text:, subject_text:, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -544,7 +544,7 @@ module GrowsurfRuby
         #
         # @overload trigger_referral(participant_id_or_email, id:, delay_in_days: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -578,7 +578,7 @@ module GrowsurfRuby
         #
         # @overload cancel_delayed_referral(participant_id_or_email, id:, request_options: {})
         #
-        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -612,7 +612,7 @@ module GrowsurfRuby
         #
         # @overload email(participant_id_or_email, id:, body: nil, email_type: nil, preheader: nil, subject: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -649,7 +649,7 @@ module GrowsurfRuby
         #
         # @overload list_activity_logs(participant_id_or_email, id:, limit: nil, offset: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -694,7 +694,7 @@ module GrowsurfRuby
         #
         # @overload retrieve_analytics(participant_id_or_email, id:, days: nil, end_date: nil, include: nil, interval: nil, start_date: nil, request_options: {})
         #
-        # @param participant_id_or_email [String] GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -738,7 +738,7 @@ module GrowsurfRuby
         #
         # @overload get_payout_destination(participant_id_or_email, id:, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -768,7 +768,7 @@ module GrowsurfRuby
         #
         # @overload request_payout_destination_confirmation(participant_id_or_email, id:, provider:, request_options: {})
         #
-        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or URL-encoded participant email address.
+        # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
