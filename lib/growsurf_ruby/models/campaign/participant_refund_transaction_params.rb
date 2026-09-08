@@ -76,11 +76,18 @@ module GrowsurfRuby
         optional :payment_intent_id, String, api_name: :paymentIntentId
 
         # @!attribute refund_amount
+        #   Positive amount for this individual refund, no greater than the sale amount, in minor units. Record it with `refundId` on each original refund to support cancellation and out-of-order amendments. A cancellation may omit an already recorded amount. Missing or conflicting refund history returns `409` without applying the cancellation. Newly observed higher cumulative refunds and incomplete coverage are retained for reconciliation.
         #
         #   @return [Integer, nil]
         optional :refund_amount, Integer, api_name: :refundAmount
 
+        # Confirm only after every original refund ID and amount is recorded, including canceled refunds.
+        # Resolves previously incomplete history. Replaying an old confirmation cannot resolve a later gap; confirm a newly reconciled refund or complete provider list.
+        optional :refund_history_complete, GrowsurfRuby::Internal::Type::Boolean, api_name: :refundHistoryComplete
+
         # @!attribute refund_id
+        #   Stable per-refund identifier. Required when canceling a refund or changing the
+        #   refunded total after a cancellation. Reuse the original refund's identifier for its cancellation.
         #
         #   @return [String, nil]
         optional :refund_id, String, api_name: :refundId
@@ -95,7 +102,7 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :transaction_id, String, api_name: :transactionId
 
-        # @!method initialize(id:, participant_id_or_email:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
+        # @!method initialize(id:, participant_id_or_email:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_history_complete: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
         #   @param id [String]
         #   @param participant_id_or_email [String]
         #   @param amendment_type [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::AmendmentType]
@@ -110,6 +117,7 @@ module GrowsurfRuby
         #   @param payment_id [String]
         #   @param payment_intent_id [String]
         #   @param refund_amount [Integer]
+        #   @param refund_history_complete [Boolean]
         #   @param refund_id [String]
         #   @param refund_status [String]
         #   @param transaction_id [String]
