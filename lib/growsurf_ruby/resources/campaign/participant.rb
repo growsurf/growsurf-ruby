@@ -360,7 +360,7 @@ module GrowsurfRuby
         # de-duplicated — without one, a resent sale would create a second commission.
         # Reuse the same identifier(s) when refunding.
         #
-        # @overload record_transaction(participant_id_or_email, id:, currency:, gross_amount:, amount_cash_net: nil, amount_paid: nil, charge_id: nil, customer_id: nil, description: nil, external_id: nil, invoice_id: nil, invoice_subtotal_excluding_tax: nil, invoice_total: nil, invoice_total_excluding_tax: nil, net_amount: nil, order_id: nil, paid_at: nil, payment_id: nil, payment_intent_id: nil, subscription_id: nil, tax_amount: nil, total_tax_amount: nil, total_tax_amounts: nil, total_taxes: nil, transaction_id: nil, request_options: {})
+        # @overload record_transaction(participant_id_or_email, id:, currency:, gross_amount:, amount_cash_net: nil, amount_paid: nil, charge_id: nil, customer_id: nil, description: nil, external_id: nil, invoice_id: nil, invoice_subtotal_excluding_tax: nil, invoice_total: nil, invoice_total_excluding_tax: nil, net_amount: nil, order_id: nil, paid_at: nil, payment_id: nil, payment_intent_id: nil, subscription_id: nil, tax_amount: nil, total_tax_amount: nil, total_tax_amounts: nil, total_taxes: nil, transaction_id: nil, payment_provider: nil, test_mode: nil, request_options: {})
         #
         # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
@@ -440,7 +440,7 @@ module GrowsurfRuby
         # affiliate are not clawed back. The amendment still updates the sale revenue used
         # in program reporting; full refunds and chargebacks also update tax reporting.
         #
-        # @overload refund_transaction(participant_id_or_email, id:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
+        # @overload refund_transaction(participant_id_or_email, id:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_id: nil, refund_status: nil, transaction_id: nil, payment_provider: nil, test_mode: nil, request_options: {})
         #
         # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #

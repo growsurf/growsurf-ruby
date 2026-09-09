@@ -102,7 +102,13 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :transaction_id, String, api_name: :transactionId
 
-        # @!method initialize(id:, participant_id_or_email:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_history_complete: nil, refund_id: nil, refund_status: nil, transaction_id: nil, request_options: {})
+        # Connected provider: `stripe`, `chargebee` or `recurly`. Requires `transactionId` and `testMode`.
+        optional :payment_provider, String, api_name: :paymentProvider
+
+        # `true` for test or `false` for live. Requires `paymentProvider`.
+        optional :test_mode, GrowsurfRuby::Internal::Type::Boolean, api_name: :testMode
+
+        # @!method initialize(id:, participant_id_or_email:, amendment_type: nil, amount: nil, amount_refunded: nil, charge_id: nil, currency: nil, description: nil, external_id: nil, invoice_id: nil, order_id: nil, payment_id: nil, payment_intent_id: nil, refund_amount: nil, refund_history_complete: nil, refund_id: nil, refund_status: nil, transaction_id: nil, payment_provider: nil, test_mode: nil, request_options: {})
         #   @param id [String]
         #   @param participant_id_or_email [String]
         #   @param amendment_type [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::AmendmentType]
@@ -121,6 +127,8 @@ module GrowsurfRuby
         #   @param refund_id [String]
         #   @param refund_status [String]
         #   @param transaction_id [String]
+        #   @param payment_provider [String]
+        #   @param test_mode [Boolean]
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 
         module AmendmentType

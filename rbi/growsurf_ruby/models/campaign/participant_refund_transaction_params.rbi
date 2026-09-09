@@ -122,6 +122,18 @@ module GrowsurfRuby
         sig { params(transaction_id: String).void }
         attr_writer :transaction_id
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :payment_provider
+
+        sig { params(payment_provider: String).void }
+        attr_writer :payment_provider
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :test_mode
+
+        sig { params(test_mode: T::Boolean).void }
+        attr_writer :test_mode
+
         sig do
           params(
             id: String,
@@ -142,6 +154,8 @@ module GrowsurfRuby
             refund_id: String,
             refund_status: String,
             transaction_id: String,
+            payment_provider: String,
+            test_mode: T::Boolean,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -163,6 +177,8 @@ module GrowsurfRuby
           refund_id: nil,
           refund_status: nil,
           transaction_id: nil,
+          payment_provider: nil,
+          test_mode: nil,
           request_options: {}
         )
         end
@@ -188,6 +204,8 @@ module GrowsurfRuby
               refund_id: String,
               refund_status: String,
               transaction_id: String,
+              payment_provider: String,
+              test_mode: T::Boolean,
               request_options: GrowsurfRuby::RequestOptions
             }
           )

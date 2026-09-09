@@ -137,7 +137,13 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :transaction_id, String, api_name: :transactionId
 
-        # @!method initialize(id:, participant_id_or_email:, currency:, gross_amount:, amount_cash_net: nil, amount_paid: nil, charge_id: nil, customer_id: nil, description: nil, external_id: nil, invoice_id: nil, invoice_subtotal_excluding_tax: nil, invoice_total: nil, invoice_total_excluding_tax: nil, net_amount: nil, order_id: nil, paid_at: nil, payment_id: nil, payment_intent_id: nil, subscription_id: nil, tax_amount: nil, total_tax_amount: nil, total_tax_amounts: nil, total_taxes: nil, transaction_id: nil, request_options: {})
+        # Connected provider: `stripe`, `chargebee` or `recurly`. Requires `transactionId` and `testMode`.
+        optional :payment_provider, String, api_name: :paymentProvider
+
+        # `true` for test or `false` for live. Requires `paymentProvider`.
+        optional :test_mode, GrowsurfRuby::Internal::Type::Boolean, api_name: :testMode
+
+        # @!method initialize(id:, participant_id_or_email:, currency:, gross_amount:, amount_cash_net: nil, amount_paid: nil, charge_id: nil, customer_id: nil, description: nil, external_id: nil, invoice_id: nil, invoice_subtotal_excluding_tax: nil, invoice_total: nil, invoice_total_excluding_tax: nil, net_amount: nil, order_id: nil, paid_at: nil, payment_id: nil, payment_intent_id: nil, subscription_id: nil, tax_amount: nil, total_tax_amount: nil, total_tax_amounts: nil, total_taxes: nil, transaction_id: nil, payment_provider: nil, test_mode: nil, request_options: {})
         #   @param id [String]
         #   @param participant_id_or_email [String]
         #   @param currency [String]
@@ -163,6 +169,8 @@ module GrowsurfRuby
         #   @param total_tax_amounts [Array<Hash{Symbol=>Object}>]
         #   @param total_taxes [Array<Hash{Symbol=>Object}>]
         #   @param transaction_id [String]
+        #   @param payment_provider [String]
+        #   @param test_mode [Boolean]
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
       end
     end

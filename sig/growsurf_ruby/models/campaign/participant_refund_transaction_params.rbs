@@ -19,7 +19,9 @@ module GrowsurfRuby
           refund_amount: Integer,
           refund_id: String,
           refund_status: String,
-          transaction_id: String
+          transaction_id: String,
+          payment_provider: String,
+          test_mode: bool
         }
         & GrowsurfRuby::Internal::Type::request_parameters
 
@@ -93,6 +95,14 @@ module GrowsurfRuby
 
         def transaction_id=: (String) -> String
 
+        attr_reader payment_provider: String?
+
+        def payment_provider=: (String) -> String
+
+        attr_reader test_mode: bool?
+
+        def test_mode=: (bool) -> bool
+
         def initialize: (
           id: String,
           participant_id_or_email: String,
@@ -111,6 +121,8 @@ module GrowsurfRuby
           ?refund_id: String,
           ?refund_status: String,
           ?transaction_id: String,
+          ?payment_provider: String,
+          ?test_mode: bool,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
 
@@ -132,6 +144,8 @@ module GrowsurfRuby
           refund_id: String,
           refund_status: String,
           transaction_id: String,
+          payment_provider: String,
+          test_mode: bool,
           request_options: GrowsurfRuby::RequestOptions
         }
 

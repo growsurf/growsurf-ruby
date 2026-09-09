@@ -118,6 +118,8 @@ module GrowsurfRuby
           ?total_tax_amounts: ::Array[::Hash[Symbol, top]],
           ?total_taxes: ::Array[::Hash[Symbol, top]],
           ?transaction_id: String,
+          ?payment_provider: String,
+          ?test_mode: bool,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::participant_record_transaction_response
 
@@ -139,6 +141,8 @@ module GrowsurfRuby
           ?refund_id: String,
           ?refund_status: String,
           ?transaction_id: String,
+          ?payment_provider: String,
+          ?test_mode: bool,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionResponse
 
