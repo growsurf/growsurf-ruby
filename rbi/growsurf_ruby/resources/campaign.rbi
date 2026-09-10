@@ -38,6 +38,10 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::Installation) }
       attr_reader :installation
 
+      # Integration status operations.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Integrations) }
+      attr_reader :integrations
+
       # Program webhook configuration operations.
       sig { returns(GrowsurfRuby::Resources::Campaign::Webhooks) }
       attr_reader :webhooks

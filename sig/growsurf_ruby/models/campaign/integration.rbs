@@ -1,0 +1,47 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type integration =
+        {
+          id: String,
+          auto_disabled: bool,
+          connect_url: String,
+          connected: bool,
+          enabled: bool,
+          name: String
+        }
+
+      class Integration < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor auto_disabled: bool
+
+        attr_accessor connect_url: String
+
+        attr_accessor connected: bool
+
+        attr_accessor enabled: bool
+
+        attr_accessor name: String
+
+        def initialize: (
+          id: String,
+          auto_disabled: bool,
+          connect_url: String,
+          connected: bool,
+          enabled: bool,
+          name: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          auto_disabled: bool,
+          connect_url: String,
+          connected: bool,
+          enabled: bool,
+          name: String
+        }
+      end
+    end
+  end
+end

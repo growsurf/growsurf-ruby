@@ -1,0 +1,20 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type integration_list_response =
+        { integrations: ::Array[GrowsurfRuby::Campaign::Integration] }
+
+      class IntegrationListResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor integrations: ::Array[GrowsurfRuby::Campaign::Integration]
+
+        def initialize: (
+          integrations: ::Array[GrowsurfRuby::Campaign::Integration]
+        ) -> void
+
+        def to_hash: -> {
+          integrations: ::Array[GrowsurfRuby::Campaign::Integration]
+        }
+      end
+    end
+  end
+end

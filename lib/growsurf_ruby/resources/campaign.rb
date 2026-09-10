@@ -38,6 +38,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Installation]
       attr_reader :installation
 
+      # Integration status operations.
+      # @return [GrowsurfRuby::Resources::Campaign::Integrations]
+      attr_reader :integrations
+
       # Program webhook configuration operations.
       # @return [GrowsurfRuby::Resources::Campaign::Webhooks]
       attr_reader :webhooks
@@ -698,6 +702,7 @@ module GrowsurfRuby
         @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)
         @options = GrowsurfRuby::Resources::Campaign::Options.new(client: client)
         @installation = GrowsurfRuby::Resources::Campaign::Installation.new(client: client)
+        @integrations = GrowsurfRuby::Resources::Campaign::Integrations.new(client: client)
         @webhooks = GrowsurfRuby::Resources::Campaign::Webhooks.new(client: client)
       end
     end

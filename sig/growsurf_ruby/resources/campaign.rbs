@@ -19,6 +19,8 @@ module GrowsurfRuby
 
       attr_reader installation: GrowsurfRuby::Resources::Campaign::Installation
 
+      attr_reader integrations: GrowsurfRuby::Resources::Campaign::Integrations
+
       attr_reader webhooks: GrowsurfRuby::Resources::Campaign::Webhooks
 
       def retrieve: (
