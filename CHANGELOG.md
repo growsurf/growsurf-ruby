@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.5.0](https://github.com/growsurf/growsurf-ruby/compare/v1.4.0...v1.5.0) (2026-09-10)
+
+
+### Features
+
+* **api:** add campaign integrations list endpoint ([8d9ca3f](https://github.com/growsurf/growsurf-ruby/commit/8d9ca3f29169cd4ff79625eeba3c19035f2aaa66))
+* **api:** add EMBEDDABLE_ELEMENT portal view source ([0978220](https://github.com/growsurf/growsurf-ruby/commit/0978220cf482049b18bb7e615a3536e362966d6d))
+* **api:** add paymentProvider and testMode to transaction params ([f11947c](https://github.com/growsurf/growsurf-ruby/commit/f11947c1485f25f88aef6de555f894243767e3a8))
+* **api:** add refundHistoryComplete to refund transaction params ([3d765f7](https://github.com/growsurf/growsurf-ruby/commit/3d765f73aad7faf38c798d36dc3355689460fda0))
+* **api:** expose response headers and sync reward and analytics models ([8f0859e](https://github.com/growsurf/growsurf-ruby/commit/8f0859e8b09fe3cf0098b4805f513bbd39c3a76b))
+* **api:** sync analytics and program resources ([1cc5cd2](https://github.com/growsurf/growsurf-ruby/commit/1cc5cd2eca64cfa792ded6bd84c198a348eb9f00))
+
+
+### Bug Fixes
+
+* accept explicit nil in setters for nullable and optional fields ([5d5dc21](https://github.com/growsurf/growsurf-ruby/commit/5d5dc216ee160ea5fbbab8bacfa8731238937e67))
+
+
+### Documentation
+
+* clarify participant email addresses must be unencoded ([b22d681](https://github.com/growsurf/growsurf-ruby/commit/b22d681f111b31cd29fbd530912f05ef2c04b3b2))
+
 ## [1.4.0](https://github.com/growsurf/growsurf-ruby/compare/v1.3.0...v1.4.0) (2026-08-25)
 
 
