@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.1](https://github.com/growsurf/growsurf-ruby/compare/v1.5.0...v1.5.1) (2026-09-10)
+
+
+### Chores
+
+* merge main (release 1.5.0) into dev ([649434a](https://github.com/growsurf/growsurf-ruby/commit/649434ad8a9e326c3ce00f3291e8bd9d476e47d2))
+
+
+### Documentation
+
+* **api:** warn that a new account API key cannot be recovered ([3fbfe2b](https://github.com/growsurf/growsurf-ruby/commit/3fbfe2b758a0a2aecf0ad28be458c8350197a1e9))
+
 ## [1.5.0](https://github.com/growsurf/growsurf-ruby/compare/v1.4.0...v1.5.0) (2026-09-10)
 
 
