@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.6.0](https://github.com/growsurf/growsurf-ruby/compare/v1.5.1...v1.6.0) (2026-09-14)
+
+
+### Features
+
+* **api:** add pending analyticsErasure to participant delete responses ([43ea40d](https://github.com/growsurf/growsurf-ruby/commit/43ea40d0b1aef235b6bd11e3bbda0c6ac092a60c))
+
+
+### Bug Fixes
+
+* **types:** correct analyticsErasure param ordering and RBI style ([44b0dc1](https://github.com/growsurf/growsurf-ruby/commit/44b0dc1852633775a99227951aaf9b7b51d13d46))
+
+
+### Chores
+
+* merge dev into main ([9855d24](https://github.com/growsurf/growsurf-ruby/commit/9855d240457ad9ae95d4946d0574787390177e2d))
+
 ## [1.5.1](https://github.com/growsurf/growsurf-ruby/compare/v1.5.0...v1.5.1) (2026-09-10)
 
 
