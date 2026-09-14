@@ -1,0 +1,14 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type pending_analytics_erasure = { status: String, operation_id: String }
+
+      class PendingAnalyticsErasure < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor status: String
+        attr_accessor operation_id: String
+        def initialize: (status: String, operation_id: String) -> void
+        def to_hash: -> { status: String, operation_id: String }
+      end
+    end
+  end
+end

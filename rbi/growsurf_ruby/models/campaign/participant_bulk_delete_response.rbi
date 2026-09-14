@@ -15,6 +15,23 @@ module GrowsurfRuby
         # One entry per submitted identifier, in the same order as the request.
         sig do
           returns(
+            T.nilable(GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure)
+          )
+        end
+        attr_reader :analytics_erasure
+
+        sig do
+          params(
+            analytics_erasure:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure::OrHash
+              )
+          ).void
+        end
+        attr_writer :analytics_erasure
+
+        sig do
+          returns(
             T::Array[
               GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result
             ]
@@ -39,6 +56,10 @@ module GrowsurfRuby
 
         sig do
           params(
+            analytics_erasure:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure::OrHash
+              ),
             results:
               T::Array[
                 GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result::OrHash
@@ -50,13 +71,18 @@ module GrowsurfRuby
         def self.new(
           # One entry per submitted identifier, in the same order as the request.
           results:,
-          summary:
+          summary:,
+          analytics_erasure: nil
         )
         end
 
         sig do
           override.returns(
             {
+              analytics_erasure:
+                T.nilable(
+                  GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure
+                ),
               results:
                 T::Array[
                   GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result
