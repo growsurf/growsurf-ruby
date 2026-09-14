@@ -19,8 +19,11 @@ jobs:
   release-please:
     if: github.repository == 'growsurf/growsurf-ruby'
     runs-on: ubuntu-latest
+    outputs:
+      pr: ${{ steps.release.outputs.pr }}
     steps:
       - name: Run release-please
+        id: release
         uses: googleapis/release-please-action@v4
         with:
           # A PAT (RELEASE_PLEASE_TOKEN) lets the created release trigger Publish Gem;
@@ -29,3 +32,40 @@ jobs:
           token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+
+  # release-please bumps lib/growsurf_ruby/version.rb but not Gemfile.lock, whose
+  # PATH section records that same version, so the lock otherwise sits one release
+  # behind and every local `bundle` run dirties the worktree. `bundle install`
+  # (never `bundle update`) rewrites only that line: with a lockfile present it
+  # keeps the pinned syntax_tree-rbs git revision rather than re-resolving that
+  # gem's branch.
+  refresh-lockfile:
+    name: refresh lockfile
+    needs: release-please
+    if: needs.release-please.outputs.pr != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ fromJSON(needs.release-please.outputs.pr).headBranchName }}
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
+        with:
+          bundler-cache: false
+
+      - run: |-
+          bundle install
+
+      - name: Commit refreshed lockfile
+        run: |
+          if git diff --quiet -- Gemfile.lock; then
+            echo "Gemfile.lock already matches the released version."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Gemfile.lock
+          git commit -m "chore: refresh Gemfile.lock"
+          git push
