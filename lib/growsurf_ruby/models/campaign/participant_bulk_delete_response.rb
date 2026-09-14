@@ -5,23 +5,33 @@ module GrowsurfRuby
     module Campaign
       # @see GrowsurfRuby::Resources::Campaign::Participant#bulk_delete
       class ParticipantBulkDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
+        # @!attribute analytics_erasure
+        #   Analytics erasure is pending. Do not repeat successful deletions.
+        #   @return [GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure, nil]
+        optional :analytics_erasure,
+                 -> { GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure },
+                 api_name: :analyticsErasure
+
         # @!attribute results
         #   One entry per submitted identifier, in the same order as the request.
         #
         #   @return [Array<GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result>]
         required :results,
-                 -> {
+                 -> do
                    GrowsurfRuby::Internal::Type::ArrayOf[
                      GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result
                    ]
-                 }
+                 end
 
         # @!attribute summary
         #
         #   @return [GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary]
-        required :summary, -> { GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary }
+        required :summary,
+                 -> do
+                   GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary
+                 end
 
-        # @!method initialize(results:, summary:)
+        # @!method initialize(results:, summary:, analytics_erasure: nil)
         #   @param results [Array<GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result>] One entry per submitted identifier, in the same order as the request.
         #
         #   @param summary [GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary]
@@ -46,7 +56,10 @@ module GrowsurfRuby
           #   `ERROR` — the lookup or deletion failed for this row.
           #
           #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::Status]
-          required :status, enum: -> { GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result::Status }
+          required :status,
+                   enum: -> do
+                     GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result::Status
+                   end
 
           # @!attribute email
           #   The resolved participant's email address. Present on `DELETED` rows.

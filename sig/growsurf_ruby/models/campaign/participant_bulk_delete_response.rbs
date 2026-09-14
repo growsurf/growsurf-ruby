@@ -4,22 +4,27 @@ module GrowsurfRuby
       type participant_bulk_delete_response =
         {
           results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result],
-          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary,
+          ?analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure?
         }
 
       class ParticipantBulkDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure?
+
         attr_accessor results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result]
 
         attr_accessor summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
 
         def initialize: (
           results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result],
-          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary,
+          ?analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure?
         ) -> void
 
         def to_hash: -> {
           results: ::Array[GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result],
-          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary
+          summary: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary,
+          ?analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure?
         }
 
         type result =

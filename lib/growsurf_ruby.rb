@@ -75,6 +75,7 @@ require_relative "growsurf_ruby/models/campaign/participant_bulk_delete_response
 require_relative "growsurf_ruby/models/campaign/participant_cancel_delayed_referral_params"
 require_relative "growsurf_ruby/models/campaign/participant_cancel_delayed_referral_response"
 require_relative "growsurf_ruby/models/campaign/participant_delete_params"
+require_relative "growsurf_ruby/models/campaign/pending_analytics_erasure"
 require_relative "growsurf_ruby/models/campaign/participant_delete_response"
 require_relative "growsurf_ruby/models/campaign/participant_email_params"
 require_relative "growsurf_ruby/models/campaign/participant_email_response"

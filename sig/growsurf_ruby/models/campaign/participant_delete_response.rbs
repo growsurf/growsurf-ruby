@@ -1,14 +1,16 @@
 module GrowsurfRuby
   module Models
     module Campaign
-      type participant_delete_response = { success: bool }
+      type participant_delete_response = { success: bool, ?analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure? }
 
       class ParticipantDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure?
+
         attr_accessor success: bool
 
-        def initialize: (success: bool) -> void
+        def initialize: (success: bool, ?analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure?) -> void
 
-        def to_hash: -> { success: bool }
+        def to_hash: -> { success: bool, ?analytics_erasure: GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure? }
       end
     end
   end
