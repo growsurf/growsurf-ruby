@@ -7,6 +7,7 @@ module GrowsurfRuby
       class ParticipantBulkDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
         # @!attribute analytics_erasure
         #   Analytics erasure is pending. Do not repeat successful deletions.
+        #
         #   @return [GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure, nil]
         optional :analytics_erasure,
                  -> { GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure },
@@ -35,6 +36,8 @@ module GrowsurfRuby
         #   @param results [Array<GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result>] One entry per submitted identifier, in the same order as the request.
         #
         #   @param summary [GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Summary]
+        #
+        #   @param analytics_erasure [GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure, nil] Analytics erasure is pending. Do not repeat successful deletions.
 
         class Result < GrowsurfRuby::Internal::Type::BaseModel
           # @!attribute identifier

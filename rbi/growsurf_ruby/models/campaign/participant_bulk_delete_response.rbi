@@ -12,7 +12,7 @@ module GrowsurfRuby
             )
           end
 
-        # One entry per submitted identifier, in the same order as the request.
+        # Analytics erasure is pending. Do not repeat successful deletions.
         sig do
           returns(
             T.nilable(GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure)
@@ -30,6 +30,7 @@ module GrowsurfRuby
         end
         attr_writer :analytics_erasure
 
+        # One entry per submitted identifier, in the same order as the request.
         sig do
           returns(
             T::Array[
@@ -56,22 +57,23 @@ module GrowsurfRuby
 
         sig do
           params(
-            analytics_erasure:
-              T.nilable(
-                GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure::OrHash
-              ),
             results:
               T::Array[
                 GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result::OrHash
               ],
             summary:
-              GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary::OrHash
+              GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Summary::OrHash,
+            analytics_erasure:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure::OrHash
+              )
           ).returns(T.attached_class)
         end
         def self.new(
           # One entry per submitted identifier, in the same order as the request.
           results:,
           summary:,
+          # Analytics erasure is pending. Do not repeat successful deletions.
           analytics_erasure: nil
         )
         end

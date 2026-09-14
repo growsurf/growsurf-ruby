@@ -12,15 +12,23 @@ module GrowsurfRuby
             )
           end
 
+        # Analytics erasure has been accepted but is not confirmed complete.
         sig { returns(String) }
         attr_accessor :status
+
+        # Opaque reference for support inquiries about this analytics erasure.
         sig { returns(String) }
         attr_accessor :operation_id
 
         sig do
           params(status: String, operation_id: String).returns(T.attached_class)
         end
-        def self.new(status:, operation_id:)
+        def self.new(
+          # Analytics erasure has been accepted but is not confirmed complete.
+          status:,
+          # Opaque reference for support inquiries about this analytics erasure.
+          operation_id:
+        )
         end
 
         sig { override.returns({ status: String, operation_id: String }) }

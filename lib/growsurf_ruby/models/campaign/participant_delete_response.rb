@@ -7,6 +7,7 @@ module GrowsurfRuby
       class ParticipantDeleteResponse < GrowsurfRuby::Internal::Type::BaseModel
         # @!attribute analytics_erasure
         #   Analytics erasure is pending. Do not repeat successful deletions.
+        #
         #   @return [GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure, nil]
         optional :analytics_erasure,
                  -> { GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure },
@@ -19,6 +20,8 @@ module GrowsurfRuby
 
         # @!method initialize(success:, analytics_erasure: nil)
         #   @param success [Boolean]
+        #
+        #   @param analytics_erasure [GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure, nil] Analytics erasure is pending. Do not repeat successful deletions.
       end
     end
   end

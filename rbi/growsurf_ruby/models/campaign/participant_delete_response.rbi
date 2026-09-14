@@ -12,6 +12,7 @@ module GrowsurfRuby
             )
           end
 
+        # Analytics erasure is pending. Do not repeat successful deletions.
         sig do
           returns(
             T.nilable(GrowsurfRuby::Models::Campaign::PendingAnalyticsErasure)
@@ -41,7 +42,11 @@ module GrowsurfRuby
               )
           ).returns(T.attached_class)
         end
-        def self.new(success:, analytics_erasure: nil)
+        def self.new(
+          success:,
+          # Analytics erasure is pending. Do not repeat successful deletions.
+          analytics_erasure: nil
+        )
         end
 
         sig do
