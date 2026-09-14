@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/growsurf/growsurf-ruby/compare/v1.6.0...v1.6.1) (2026-09-14)
+
+
+### Chores
+
+* refresh Gemfile.lock for 1.6.0 and keep it current on release PRs ([b767b23](https://github.com/growsurf/growsurf-ruby/commit/b767b238c2c52bc3fc9d55efa85a6d95a52164dd))
+
 ## [1.6.0](https://github.com/growsurf/growsurf-ruby/compare/v1.5.1...v1.6.0) (2026-09-14)
 
 
