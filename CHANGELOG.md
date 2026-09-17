@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/growsurf/growsurf-ruby/compare/v1.6.0...v1.7.0) (2026-09-17)
+
+
+### Features
+
+* **api:** add metadata filter to campaign.listParticipants ([8ac3946](https://github.com/growsurf/growsurf-ruby/commit/8ac3946c277c4c7f7fa67883fd37c683a200c0a1))
+
+
+### Chores
+
+* refresh Gemfile.lock for 1.6.0 and keep it current on release PRs ([b767b23](https://github.com/growsurf/growsurf-ruby/commit/b767b238c2c52bc3fc9d55efa85a6d95a52164dd))
+
 ## [1.6.0](https://github.com/growsurf/growsurf-ruby/compare/v1.5.1...v1.6.0) (2026-09-14)
 
 
