@@ -24,6 +24,15 @@ module GrowsurfRuby
       sig { params(limit: Integer).void }
       attr_writer :limit
 
+      # Return only participants whose metadata matches every given key and value
+      # exactly. Send each pair as `metadata[key]=value`. Up to 3 keys per request.
+      # Values compare as strings, which is how metadata is stored.
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_reader :metadata
+
+      sig { params(metadata: T::Hash[Symbol, String]).void }
+      attr_writer :metadata
+
       # ID to start the next paged result set with.
       sig { returns(T.nilable(String)) }
       attr_reader :next_id
@@ -35,6 +44,7 @@ module GrowsurfRuby
         params(
           id: String,
           limit: Integer,
+          metadata: T::Hash[Symbol, String],
           next_id: String,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -43,6 +53,10 @@ module GrowsurfRuby
         id:,
         # Number of results to return. Maximum 100.
         limit: nil,
+        # Return only participants whose metadata matches every given key and value
+        # exactly. Send each pair as `metadata[key]=value`. Up to 3 keys per request.
+        # Values compare as strings, which is how metadata is stored.
+        metadata: nil,
         # ID to start the next paged result set with.
         next_id: nil,
         request_options: {}
@@ -54,6 +68,7 @@ module GrowsurfRuby
           {
             id: String,
             limit: Integer,
+            metadata: T::Hash[Symbol, String],
             next_id: String,
             request_options: GrowsurfRuby::RequestOptions
           }

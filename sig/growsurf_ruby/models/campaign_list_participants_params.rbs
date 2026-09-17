@@ -1,7 +1,12 @@
 module GrowsurfRuby
   module Models
     type campaign_list_participants_params =
-      { id: String, limit: Integer, next_id: String }
+      {
+        id: String,
+        limit: Integer,
+        metadata: ::Hash[Symbol, String],
+        next_id: String
+      }
       & GrowsurfRuby::Internal::Type::request_parameters
 
     class CampaignListParticipantsParams < GrowsurfRuby::Internal::Type::BaseModel
@@ -14,6 +19,10 @@ module GrowsurfRuby
 
       def limit=: (Integer) -> Integer
 
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
       attr_reader next_id: String?
 
       def next_id=: (String) -> String
@@ -21,6 +30,7 @@ module GrowsurfRuby
       def initialize: (
         id: String,
         ?limit: Integer,
+        ?metadata: ::Hash[Symbol, String],
         ?next_id: String,
         ?request_options: GrowsurfRuby::request_opts
       ) -> void
@@ -28,6 +38,7 @@ module GrowsurfRuby
       def to_hash: -> {
         id: String,
         limit: Integer,
+        metadata: ::Hash[Symbol, String],
         next_id: String,
         request_options: GrowsurfRuby::RequestOptions
       }

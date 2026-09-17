@@ -377,11 +377,13 @@ module GrowsurfRuby
 
       # Retrieves a paged list of participants in a program.
       #
-      # @overload list_participants(id, limit: nil, next_id: nil, request_options: {})
+      # @overload list_participants(id, limit: nil, metadata: nil, next_id: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
       #
       # @param limit [Integer] Number of results to return. Maximum 100.
+      #
+      # @param metadata [Hash{Symbol=>String}] Return only participants whose metadata matches every given key and value exac
       #
       # @param next_id [String] ID to start the next paged result set with.
       #

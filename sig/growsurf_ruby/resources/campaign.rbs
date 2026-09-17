@@ -115,6 +115,7 @@ module GrowsurfRuby
       def list_participants: (
         String id,
         ?limit: Integer,
+        ?metadata: ::Hash[Symbol, String],
         ?next_id: String,
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::ParticipantList
