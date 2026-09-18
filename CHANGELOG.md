@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.1](https://github.com/growsurf/growsurf-ruby/compare/v1.7.0...v1.7.1) (2026-09-18)
+
+
+### Bug Fixes
+
+* **package:** point package homepage at growsurf.com ([e66cfd8](https://github.com/growsurf/growsurf-ruby/commit/e66cfd8b5fd28146af8b4f079a1b866ff777ff2c))
+
+
+### Chores
+
+* merge dev into main ([efe1594](https://github.com/growsurf/growsurf-ruby/commit/efe1594d2f1d5a49f3c42c831cade3d1143bc144))
+
 ## [1.7.0](https://github.com/growsurf/growsurf-ruby/compare/v1.6.0...v1.7.0) (2026-09-17)
 
 
