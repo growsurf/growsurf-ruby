@@ -32,7 +32,9 @@ module GrowsurfRuby
         # channels + invite, signup form, Resources presentation, portal/landing pages, theme styling, and the
         # referral/affiliate summary + status sections. `referredExperience` includes the Claim
         # Offer Popup for both program types, with its colors under
-        # `theme.referredExperienceOfferPopup`.
+        # `theme.referredExperienceOfferPopup`. `widget` is the website widget shown in a
+        # corner of your own site, with its colors under `theme.widget`; both of its audience
+        # switches start off, so a program shows nothing until you turn one on.
         # `participantAvatarStyle` is `CHARACTERS`, `INITIALS`, `ANIMALS`, or `GRADIENT`; missing or
         # unknown values mean `INITIALS`.
         # `payoutDestinationConfirmation` is omitted when no confirmation fields are stored. Stored
@@ -51,7 +53,8 @@ module GrowsurfRuby
         end
 
         # Updates a program's design configuration, including the payout-destination confirmation
-        # page copy and the Claim Offer Popup under `referredExperience`. Only the fields you send are
+        # page copy, the Claim Offer Popup under `referredExperience`, and the website widget under
+        # `widget`. Only the fields you send are
         # changed; anything you leave out is untouched (arrays such as `signup.fields` replace
         # wholesale). Unknown fields, fields not available for the program type, and invalid
         # values return a `400`. Landing-page custom code and JavaScript are not editable via the

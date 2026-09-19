@@ -197,9 +197,27 @@ module GrowsurfRuby
             GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
           )
 
+        INSURANCE =
+          T.let(
+            :INSURANCE,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
         ONLINE_INSURANCE =
           T.let(
             :ONLINE_INSURANCE,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        TELEHEALTH =
+          T.let(
+            :TELEHEALTH,
+            GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
+          )
+
+        HEALTHCARE_PROVIDERS =
+          T.let(
+            :HEALTHCARE_PROVIDERS,
             GrowsurfRuby::CampaignCreateParams::Goal::TaggedSymbol
           )
 
