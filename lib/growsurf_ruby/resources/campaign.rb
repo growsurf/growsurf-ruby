@@ -97,7 +97,7 @@ module GrowsurfRuby
       #
       # @param currency_iso [String] ISO 4217 currency code. Defaults to USD. Chosen when the program is created and immutable afterward — it cannot be changed on update.
       #
-      # @param goal [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Goal] What the program is for, which seeds share settings that suit that audience. Programs whose participants refer other businesses start with the LinkedIn share button visible; consumer, financial, education, insurance, telehealth, newsletter, and waitlist programs start with it hidden. Set only when the program is created.
+      # @param goal [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Goal] What the program is for, which seeds the share buttons and the starter rewards that suit that audience. Programs whose participants refer other businesses start with the LinkedIn share button visible; consumer, financial, education, insurance, telehealth, newsletter, and waitlist programs start with it hidden. Starter rewards arrive switched off with a placeholder name, so the program awards nothing until you set the amount and turn one on. Set only when the program is created.
       #
       # @param name [String] The program name. Defaults to a generated friendly label plus the creation date.
       #
