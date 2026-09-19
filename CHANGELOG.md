@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/growsurf/growsurf-ruby/compare/v1.7.1...v1.8.0) (2026-09-19)
+
+
+### Features
+
+* **api:** add campaign design widget section and healthcare goals ([5432ec3](https://github.com/growsurf/growsurf-ruby/commit/5432ec3df0834b8f877378cfd8de2447c22a6d79))
+
+
+### Chores
+
+* merge dev into main ([fba5897](https://github.com/growsurf/growsurf-ruby/commit/fba589788c1a6d99aef06377fd940776c8a03676))
+
 ## [1.7.1](https://github.com/growsurf/growsurf-ruby/compare/v1.7.0...v1.7.1) (2026-09-18)
 
 
