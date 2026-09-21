@@ -132,6 +132,14 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :last_name
 
+        # The number of pending referrals the participant made that have not converted
+        # into successful referrals yet.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :lead_count
+
+        sig { params(lead_count: Integer).void }
+        attr_writer :lead_count
+
         # Shallow custom metadata object.
         sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :metadata
@@ -311,6 +319,7 @@ module GrowsurfRuby
             is_new: T::Boolean,
             is_winner: T::Boolean,
             last_name: T.nilable(String),
+            lead_count: Integer,
             metadata: T::Hash[Symbol, T.anything],
             mobile_instance_id: T.nilable(String),
             monthly_referrals: T::Array[String],
@@ -369,6 +378,9 @@ module GrowsurfRuby
           is_new: nil,
           is_winner: nil,
           last_name: nil,
+          # The number of pending referrals the participant made that have not converted
+          # into successful referrals yet.
+          lead_count: nil,
           # Shallow custom metadata object.
           metadata: nil,
           # App-install scoped mobile identifier used for anti-fraud matching when provided
@@ -425,6 +437,7 @@ module GrowsurfRuby
               is_new: T::Boolean,
               is_winner: T::Boolean,
               last_name: T.nilable(String),
+              lead_count: Integer,
               metadata: T::Hash[Symbol, T.anything],
               mobile_instance_id: T.nilable(String),
               monthly_referrals: T::Array[String],
@@ -629,6 +642,14 @@ module GrowsurfRuby
           sig { returns(T.nilable(String)) }
           attr_accessor :last_name
 
+          # The number of pending referrals the participant made that have not converted
+          # into successful referrals yet.
+          sig { returns(T.nilable(Integer)) }
+          attr_reader :lead_count
+
+          sig { params(lead_count: Integer).void }
+          attr_writer :lead_count
+
           # Shallow custom metadata object.
           sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
           attr_reader :metadata
@@ -751,6 +772,7 @@ module GrowsurfRuby
               ip_address: T.nilable(String),
               is_winner: T::Boolean,
               last_name: T.nilable(String),
+              lead_count: Integer,
               metadata: T::Hash[Symbol, T.anything],
               monthly_rank: Integer,
               monthly_referral_count: Integer,
@@ -781,6 +803,9 @@ module GrowsurfRuby
             ip_address: nil,
             is_winner: nil,
             last_name: nil,
+            # The number of pending referrals the participant made that have not converted
+            # into successful referrals yet.
+            lead_count: nil,
             # Shallow custom metadata object.
             metadata: nil,
             monthly_rank: nil,
@@ -816,6 +841,7 @@ module GrowsurfRuby
                 ip_address: T.nilable(String),
                 is_winner: T::Boolean,
                 last_name: T.nilable(String),
+                lead_count: Integer,
                 metadata: T::Hash[Symbol, T.anything],
                 monthly_rank: Integer,
                 monthly_referral_count: Integer,

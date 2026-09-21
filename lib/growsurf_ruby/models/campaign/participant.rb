@@ -135,6 +135,13 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :last_name, String, api_name: :lastName, nil?: true
 
+        # @!attribute lead_count
+        #   The number of pending referrals the participant made that have not converted
+        #   into successful referrals yet.
+        #
+        #   @return [Integer, nil]
+        optional :lead_count, Integer, api_name: :leadCount
+
         # @!attribute metadata
         #   Shallow custom metadata object.
         #
@@ -249,7 +256,7 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
+        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, last_name: nil, lead_count: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::CampaignParticipant} for more details.
         #
@@ -299,6 +306,8 @@ module GrowsurfRuby
         #   @param is_winner [Boolean]
         #
         #   @param last_name [String, nil]
+        #
+        #   @param lead_count [Integer] The number of pending referrals the participant made that have not converted
         #
         #   @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
         #
@@ -436,6 +445,13 @@ module GrowsurfRuby
           #   @return [String, nil]
           optional :last_name, String, api_name: :lastName, nil?: true
 
+          # @!attribute lead_count
+          #   The number of pending referrals the participant made that have not converted
+          #   into successful referrals yet.
+          #
+          #   @return [Integer, nil]
+          optional :lead_count, Integer, api_name: :leadCount
+
           # @!attribute metadata
           #   Shallow custom metadata object.
           #
@@ -522,7 +538,7 @@ module GrowsurfRuby
           #   @return [Boolean, nil]
           optional :unsubscribed, GrowsurfRuby::Internal::Type::Boolean
 
-          # @!method initialize(id: nil, created_at: nil, email: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_winner: nil, last_name: nil, metadata: nil, monthly_rank: nil, monthly_referral_count: nil, monthly_referrals: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, rank: nil, referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, share_count: nil, share_url: nil, unique_impression_count: nil, unsubscribed: nil)
+          # @!method initialize(id: nil, created_at: nil, email: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_winner: nil, last_name: nil, lead_count: nil, metadata: nil, monthly_rank: nil, monthly_referral_count: nil, monthly_referrals: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, rank: nil, referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, share_count: nil, share_url: nil, unique_impression_count: nil, unsubscribed: nil)
           #   @param id [String]
           #
           #   @param created_at [Integer]
@@ -546,6 +562,8 @@ module GrowsurfRuby
           #   @param is_winner [Boolean]
           #
           #   @param last_name [String, nil]
+          #
+          #   @param lead_count [Integer] The number of pending referrals the participant made that have not converted
           #
           #   @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
           #

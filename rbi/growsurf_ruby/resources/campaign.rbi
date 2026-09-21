@@ -151,6 +151,28 @@ module GrowsurfRuby
       )
       end
 
+      # Renders the program's current saved configuration into two preview images: the
+      # referrer window a participant sees, and the referred-friend experience. Use them
+      # to show a person what the draft looks like before anything launches. The images
+      # render GrowSurf's own preview, not the program's installed website, so they do
+      # not prove an installation. Each URL is private and expires; capture again when
+      # you need a fresh view. Only the account owner's credential can capture
+      # screenshots, and the endpoint takes no request body.
+      sig do
+        params(
+          id: String,
+          request_options: GrowsurfRuby::RequestOptions::OrHash
+        ).returns(
+          GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse
+        )
+      end
+      def capture_referral_flow_screenshots(
+        # GrowSurf program ID.
+        id,
+        request_options: {}
+      )
+      end
+
       # Invites someone to join the affiliate program. GrowSurf emails them a single-use
       # accept link; accepting it enrolls them as an approved affiliate without going
       # through the public application. One active invite can exist per email address.

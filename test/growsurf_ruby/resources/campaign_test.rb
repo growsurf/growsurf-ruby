@@ -157,6 +157,24 @@ class GrowsurfRuby::Test::Resources::CampaignTest < GrowsurfRuby::Test::Resource
     end
   end
 
+  def test_capture_referral_flow_screenshots
+    skip("Mock server tests are disabled")
+
+    response = @growsurf.campaign.capture_referral_flow_screenshots("id")
+
+    assert_pattern do
+      response => GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse
+    end
+
+    assert_pattern do
+      response => {
+        expires_at: Time,
+        generated_at: Time,
+        screenshots: ^(GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot])
+      }
+    end
+  end
+
   def test_create_mobile_participant_token_required_params
     skip("Mock server tests are disabled")
 

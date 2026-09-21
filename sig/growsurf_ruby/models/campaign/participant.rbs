@@ -26,6 +26,7 @@ module GrowsurfRuby
           is_new: bool,
           is_winner: bool,
           last_name: String?,
+          lead_count: Integer,
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String?,
           monthly_referrals: ::Array[String],
@@ -117,6 +118,12 @@ module GrowsurfRuby
         def is_winner=: (bool) -> bool
 
         attr_accessor last_name: String?
+
+
+        attr_reader lead_count: Integer?
+
+
+        def lead_count=: (Integer) -> Integer
 
         attr_reader metadata: ::Hash[Symbol, top]?
 
@@ -218,6 +225,7 @@ module GrowsurfRuby
           ?is_new: bool,
           ?is_winner: bool,
           ?last_name: String?,
+          ?lead_count: Integer,
           ?metadata: ::Hash[Symbol, top],
           ?mobile_instance_id: String?,
           ?monthly_referrals: ::Array[String],
@@ -263,6 +271,7 @@ module GrowsurfRuby
           is_new: bool,
           is_winner: bool,
           last_name: String?,
+          lead_count: Integer,
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String?,
           monthly_referrals: ::Array[String],
@@ -330,6 +339,7 @@ module GrowsurfRuby
             ip_address: String?,
             is_winner: bool,
             last_name: String?,
+            lead_count: Integer,
             metadata: ::Hash[Symbol, top],
             monthly_rank: Integer,
             monthly_referral_count: Integer,
@@ -389,6 +399,12 @@ module GrowsurfRuby
           def is_winner=: (bool) -> bool
 
           attr_accessor last_name: String?
+
+
+          attr_reader lead_count: Integer?
+
+
+          def lead_count=: (Integer) -> Integer
 
           attr_reader metadata: ::Hash[Symbol, top]?
 
@@ -467,6 +483,7 @@ module GrowsurfRuby
             ?ip_address: String?,
             ?is_winner: bool,
             ?last_name: String?,
+            ?lead_count: Integer,
             ?metadata: ::Hash[Symbol, top],
             ?monthly_rank: Integer,
             ?monthly_referral_count: Integer,
@@ -497,6 +514,7 @@ module GrowsurfRuby
             ip_address: String?,
             is_winner: bool,
             last_name: String?,
+            lead_count: Integer,
             metadata: ::Hash[Symbol, top],
             monthly_rank: Integer,
             monthly_referral_count: Integer,

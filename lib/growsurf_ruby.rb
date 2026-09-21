@@ -143,6 +143,7 @@ require_relative "growsurf_ruby/models/team_resend_owner_verification_email_resp
 require_relative "growsurf_ruby/models/team_rotate_api_key_response"
 require_relative "growsurf_ruby/models/team_update_params"
 require_relative "growsurf_ruby/models/campaign"
+require_relative "growsurf_ruby/models/campaign_capture_referral_flow_screenshots_response"
 require_relative "growsurf_ruby/models/campaign_create_affiliate_invite_params"
 require_relative "growsurf_ruby/models/campaign_create_mobile_participant_token_params"
 require_relative "growsurf_ruby/models/campaign_create_mobile_participant_token_response"

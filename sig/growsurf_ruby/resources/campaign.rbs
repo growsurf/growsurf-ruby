@@ -57,6 +57,11 @@ module GrowsurfRuby
         ?request_options: GrowsurfRuby::request_opts
       ) -> GrowsurfRuby::CampaignAPI
 
+      def capture_referral_flow_screenshots: (
+        String id,
+        ?request_options: GrowsurfRuby::request_opts
+      ) -> GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse
+
       def create_affiliate_invite: (
         String id,
         email: String,

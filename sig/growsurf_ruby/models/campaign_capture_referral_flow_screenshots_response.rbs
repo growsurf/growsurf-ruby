@@ -1,0 +1,88 @@
+module GrowsurfRuby
+  module Models
+    type campaign_capture_referral_flow_screenshots_response =
+      {
+        expires_at: Time,
+        generated_at: Time,
+        screenshots: ::Array[GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot]
+      }
+
+    class CampaignCaptureReferralFlowScreenshotsResponse < GrowsurfRuby::Internal::Type::BaseModel
+      attr_accessor expires_at: Time
+
+      attr_accessor generated_at: Time
+
+      attr_accessor screenshots: ::Array[GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot]
+
+      def initialize: (
+        expires_at: Time,
+        generated_at: Time,
+        screenshots: ::Array[GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot]
+      ) -> void
+
+      def to_hash: -> {
+        expires_at: Time,
+        generated_at: Time,
+        screenshots: ::Array[GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot]
+      }
+
+      type screenshot =
+        {
+          content_type: String,
+          expires_at: Time,
+          height: Integer,
+          label: String,
+          url: String,
+          view: GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot::view,
+          width: Integer
+        }
+
+      class Screenshot < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor content_type: String
+
+        attr_accessor expires_at: Time
+
+        attr_accessor height: Integer
+
+        attr_accessor label: String
+
+        attr_accessor url: String
+
+        attr_accessor view: GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot::view
+
+        attr_accessor width: Integer
+
+        def initialize: (
+          content_type: String,
+          expires_at: Time,
+          height: Integer,
+          label: String,
+          url: String,
+          view: GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot::view,
+          width: Integer
+        ) -> void
+
+        def to_hash: -> {
+          content_type: String,
+          expires_at: Time,
+          height: Integer,
+          label: String,
+          url: String,
+          view: GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot::view,
+          width: Integer
+        }
+
+        type view = :referrer | :referredFriend
+
+        module View
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          REFERRER: :referrer
+          REFERRED_FRIEND: :referredFriend
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignCaptureReferralFlowScreenshotsResponse::Screenshot::view]
+        end
+      end
+    end
+  end
+end
