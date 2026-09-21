@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.9.0](https://github.com/growsurf/growsurf-ruby/compare/v1.8.1...v1.9.0) (2026-09-21)
+
+
+### Features
+
+* **api:** add referral-flow screenshot capture and participant leadCount ([5063d8e](https://github.com/growsurf/growsurf-ruby/commit/5063d8ec000bcab673eb783af42dd670cc0d475c))
+
+
+### Chores
+
+* merge origin/main ([10f605f](https://github.com/growsurf/growsurf-ruby/commit/10f605fee31fc665e2fc17a1f930231d840d34be))
+
 ## [1.8.1](https://github.com/growsurf/growsurf-ruby/compare/v1.8.0...v1.8.1) (2026-09-19)
 
 
