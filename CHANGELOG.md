@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.8.1](https://github.com/growsurf/growsurf-ruby/compare/v1.8.0...v1.8.1) (2026-09-19)
+
+
+### Chores
+
+* merge dev into main ([f954268](https://github.com/growsurf/growsurf-ruby/commit/f954268c05141b1eaf2b0b12c505b4fb212e4a61))
+* merge dev into main ([36ac45a](https://github.com/growsurf/growsurf-ruby/commit/36ac45a41e8df7d0484fc3adf3f9b40f37e34eda))
+
+
+### Documentation
+
+* **api:** document the starter rewards each campaign goal seeds ([f33a807](https://github.com/growsurf/growsurf-ruby/commit/f33a807119d979c67fd0e9e10744aae96c74ee9d))
+* **api:** document the starter rewards each campaign goal seeds ([41c4330](https://github.com/growsurf/growsurf-ruby/commit/41c4330aad6022de40dbb96a237a8fef644b0be0))
+
 ## [1.8.0](https://github.com/growsurf/growsurf-ruby/compare/v1.7.1...v1.8.0) (2026-09-19)
 
 
