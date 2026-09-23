@@ -4,9 +4,9 @@ module GrowsurfRuby
   module Resources
     class Campaign
       class Rewards
-        # Retrieves the list of a program's configured rewards (`CampaignReward`s) — the
-        # same set embedded in the `rewards` array of the campaign response. Delete a
-        # reward with `DELETE /campaign/{id}/reward-configs/{campaignRewardId}`.
+        # Retrieves configured Campaign Rewards, including switched-off rewards and rewards
+        # whose group is not selected. Deleted rewards are excluded. The campaign response's
+        # embedded rewards array includes only enabled, visible rewards.
         sig do
           params(
             id: String,

@@ -12,7 +12,9 @@ module GrowsurfRuby
         # types, with its colors under `theme.referredExperienceOfferPopup`. `widget` is the website
         # widget shown in a corner of your own site, with its colors under `theme.widget`;
         # both of its audience switches start off, so a program shows nothing until you turn one
-        # on.
+        # on. `trafficInsights` is the participant Traffic report; it starts on for new affiliate
+        # programs and hidden for referral programs, and `GET` returns every setting with its
+        # default copy.
         # `participantAvatarStyle` is `CHARACTERS`, `INITIALS`, `ANIMALS`, or `GRADIENT`; missing or
         # unknown values mean `INITIALS`.
         # `payoutDestinationConfirmation` is omitted when no confirmation fields are stored. Stored
@@ -35,8 +37,9 @@ module GrowsurfRuby
         end
 
         # Updates a program's design configuration, including the payout-destination confirmation
-        # page copy, the Claim Offer Popup under `referredExperience`, and the website widget under
-        # `widget`. Only the fields you send
+        # page copy, the Claim Offer Popup under `referredExperience`, the website widget under
+        # `widget`, and the participant Traffic report under `trafficInsights` (its labels cannot be
+        # blank). Only the fields you send
         # are changed;
         # anything you leave out is untouched (arrays such as `signup.fields` replace wholesale).
         # Unknown fields, fields not available for the program type, and invalid values return a
