@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/growsurf/growsurf-ruby/compare/v1.9.0...v1.10.0) (2026-09-23)
+
+
+### Features
+
+* **api:** update SDK campaign contracts and request handling ([86574eb](https://github.com/growsurf/growsurf-ruby/commit/86574ebcadd9997ea10e202cb6e2abe5a58e9f39))
+
 ## [1.9.0](https://github.com/growsurf/growsurf-ruby/compare/v1.8.1...v1.9.0) (2026-09-21)
 
 
