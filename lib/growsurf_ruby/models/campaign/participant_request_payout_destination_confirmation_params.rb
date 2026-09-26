@@ -39,6 +39,7 @@ module GrowsurfRuby
           extend GrowsurfRuby::Internal::Type::Enum
 
           PAYPAL = :PAYPAL
+          VENMO = :VENMO
           WISECOM = :WISECOM
 
           # @!method self.values
