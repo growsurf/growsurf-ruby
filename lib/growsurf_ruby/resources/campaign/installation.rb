@@ -7,7 +7,8 @@ module GrowsurfRuby
         # Retrieves a program's installation configuration — the same surface as the
         # dashboard Program Editor's **Installation** tab (plus the Mobile SDK settings).
         # Includes the referral trigger (referral programs only), signup tracking method,
-        # share URL and whitelist, custom-form signup settings, and mobile SDK settings.
+        # share URL and whitelist, custom-form signup settings, mobile SDK settings,
+        # and saved installation-guide choices (`instructionSelections`).
         #
         # @overload retrieve(id, request_options: {})
         #
