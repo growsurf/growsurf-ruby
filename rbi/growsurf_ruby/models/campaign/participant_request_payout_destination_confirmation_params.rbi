@@ -78,6 +78,11 @@ module GrowsurfRuby
               :PAYPAL,
               GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider::TaggedSymbol
             )
+          VENMO =
+            T.let(
+              :VENMO,
+              GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider::TaggedSymbol
+            )
           WISECOM =
             T.let(
               :WISECOM,
