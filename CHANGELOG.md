@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.11.0](https://github.com/growsurf/growsurf-ruby/compare/v1.10.0...v1.11.0) (2026-09-29)
+
+
+### Features
+
+* **api:** update campaign contracts ([7471c59](https://github.com/growsurf/growsurf-ruby/commit/7471c59accda12c5839042efb04a3fd84dc58246))
+
+
+### Bug Fixes
+
+* include Venmo in payout provider RBI ([2b3d0ca](https://github.com/growsurf/growsurf-ruby/commit/2b3d0ca567d9a73a1f5b694d50a8838023e56b85))
+
 ## [1.10.0](https://github.com/growsurf/growsurf-ruby/compare/v1.9.0...v1.10.0) (2026-09-23)
 
 
