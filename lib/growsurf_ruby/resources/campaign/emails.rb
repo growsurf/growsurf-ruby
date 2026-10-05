@@ -10,6 +10,10 @@ module GrowsurfRuby
         # contact, and design). The set of email templates returned depends on the program
         # type (referral vs affiliate). `offerClaimed` is available to both program types and sends
         # while the Claim Offer Popup is enabled.
+        # `followUpReminder` is disabled by default. It reminds the referrer about new
+        # invitations sent while enabled when the contacts have not signed up.
+        # `delayDays` accepts integers from 2 to 30 (default 3); changing it leaves
+        # existing reminder dates unchanged.
         #
         # @overload retrieve(id, request_options: {})
         #
