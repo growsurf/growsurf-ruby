@@ -30,9 +30,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
         with:
-          bundler-cache: false
-      - run: |-
-          bundle install
+          bundler-cache: true
 
       - name: Get GitHub OIDC Token
         if: |-
@@ -64,14 +62,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
         with:
-          bundler-cache: false
+          bundler-cache: true
       - name: Verify the release lockfile version
         run: |
           version="$(ruby -r ./lib/growsurf_ruby/version -e 'print GrowsurfRuby::VERSION')"
           grep -Fqx "    growsurf-ruby ($version)" Gemfile.lock
-      - run: |-
-          bundle install
-
       - name: Run lints
         run: ./scripts/lint
   test:
@@ -89,12 +84,12 @@ jobs:
         uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: false
-      - run: |-
-          bundle install
+          bundler-cache: true
 
-      - name: Run tests
-        run: ./scripts/test
+      # Bootstrap is complete; tests and the dependency audit can run independently.
+      - parallel:
+          - name: Run tests
+            run: ./scripts/test
 
-      - name: Audit dependencies
-        run: bundle exec bundle-audit check --update
+          - name: Audit dependencies
+            run: bundle exec bundle-audit check --update

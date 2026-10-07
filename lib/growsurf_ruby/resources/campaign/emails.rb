@@ -7,9 +7,15 @@ module GrowsurfRuby
         # Retrieves a program's email configuration — the same surface as the dashboard
         # Program Editor's **Emails** tab. Returns each editable email template
         # (`subject`, `preheader`, `body`, `isEnabled`) plus the `settings` block (sender,
-        # contact, and design). The set of email templates returned depends on the program
+        # contact, and design). New programs return read-only `settings.design.layoutMode`
+        # as `INLINE`: bodies require `{{emailFooter}}`; `{{emailHeader}}` is optional.
+        # Older programs omit the mode and keep their existing layout. The set of email templates returned depends on the program
         # type (referral vs affiliate). `offerClaimed` is available to both program types and sends
         # while the Claim Offer Popup is enabled.
+        # `followUpReminder` is disabled by default. It reminds the referrer about new
+        # invitations sent while enabled when the contacts have not signed up.
+        # `delayDays` accepts integers from 2 to 30 (default 3); changing it leaves
+        # existing reminder dates unchanged.
         #
         # @overload retrieve(id, request_options: {})
         #
