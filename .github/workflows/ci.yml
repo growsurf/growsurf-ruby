@@ -86,8 +86,10 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
-      - name: Run tests
-        run: ./scripts/test
+      # Bootstrap is complete; tests and the dependency audit can run independently.
+      - parallel:
+          - name: Run tests
+            run: ./scripts/test
 
-      - name: Audit dependencies
-        run: bundle exec bundle-audit check --update
+          - name: Audit dependencies
+            run: bundle exec bundle-audit check --update
