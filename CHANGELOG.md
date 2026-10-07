@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.12.0](https://github.com/growsurf/growsurf-ruby/compare/v1.11.0...v1.12.0) (2026-10-07)
+
+
+### Chores
+
+* prepare SDK 1.12.0 ([d163c5e](https://github.com/growsurf/growsurf-ruby/commit/d163c5e7fda6400d44ae79a985763d50ead59b40))
+* release 1.12.0 ([e2d8538](https://github.com/growsurf/growsurf-ruby/commit/e2d853807892abd014ec31c9865cb2b01d0663a7))
+
+
+### Documentation
+
+* clarify welcome email recipient eligibility ([7b91dc6](https://github.com/growsurf/growsurf-ruby/commit/7b91dc651b2456f2e944735b72870045ff8c6ae2))
+* describe follow-up reminder eligibility and delay ([cc938ab](https://github.com/growsurf/growsurf-ruby/commit/cc938ab446327df49d9814b13f66002493d5b3c7))
+* describe inline email layout and required footer token ([8d0d06c](https://github.com/growsurf/growsurf-ruby/commit/8d0d06c94793453447278c7e5294cffece80deb9))
+
 ## [1.11.0](https://github.com/growsurf/growsurf-ruby/compare/v1.10.0...v1.11.0) (2026-09-29)
 
 

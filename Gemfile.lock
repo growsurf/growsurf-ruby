@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    growsurf-ruby (1.11.0)
+    growsurf-ruby (1.12.0)
       cgi
       connection_pool
 
