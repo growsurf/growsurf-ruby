@@ -53,6 +53,12 @@ module GrowsurfRuby
         sig { params(first_name: String).void }
         attr_writer :first_name
 
+        # The language of the participant's portal and program emails. Must be one of the
+        # program's languages (see `languages` in the program options). Send the base
+        # language or `null` to use the program's base language.
+        sig { returns(T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol)) }
+        attr_accessor :language
+
         sig { returns(T.nilable(String)) }
         attr_reader :last_name
 
@@ -117,6 +123,7 @@ module GrowsurfRuby
               GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
+            language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             notes: String,
@@ -137,6 +144,10 @@ module GrowsurfRuby
           affiliate_status: nil,
           email: nil,
           first_name: nil,
+          # The language of the participant's portal and program emails. Must be one of the
+          # program's languages (see `languages` in the program options). Send the base
+          # language or `null` to use the program's base language.
+          language: nil,
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,
@@ -160,6 +171,7 @@ module GrowsurfRuby
                 GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
               email: String,
               first_name: String,
+              language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
               last_name: String,
               metadata: T::Hash[Symbol, T.anything],
               notes: String,

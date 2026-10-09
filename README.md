@@ -130,7 +130,7 @@ All parameter and response objects inherit from `GrowsurfRuby::Internal::Type::B
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
 
-Note: the `extra_` parameters of the same name overrides the documented parameters.
+Note: the `extra_` parameters of the same name override the documented parameters.
 
 ```ruby
 campaigns =
@@ -165,7 +165,7 @@ response = client.request(
 
 ### Concurrency & connection pooling
 
-The `GrowsurfRuby::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
+The `GrowsurfRuby::Client` instances are threadsafe, but are only fork-safe when there are no in-flight HTTP requests.
 
 Each instance of `GrowsurfRuby::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
 
@@ -196,7 +196,7 @@ growsurf.campaign.list(**params)
 
 ### Enums
 
-Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols", which are always primitives at runtime:
 
 ```ruby
 # :CREDIT_PENDING

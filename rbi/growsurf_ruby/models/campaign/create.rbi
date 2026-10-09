@@ -43,6 +43,16 @@ module GrowsurfRuby
         sig { params(is_affiliate: T::Boolean).void }
         attr_writer :is_affiliate
 
+        # The language of the participant's portal and program emails. Must be one of the
+        # program's languages. Applied only when this request creates the participant.
+        sig { returns(T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol)) }
+        attr_reader :language
+
+        sig do
+          params(language: GrowsurfRuby::Campaign::Language::OrSymbol).void
+        end
+        attr_writer :language
+
         sig { returns(T.nilable(String)) }
         attr_reader :last_name
 
@@ -98,6 +108,7 @@ module GrowsurfRuby
             first_name: String,
             ip_address: String,
             is_affiliate: T::Boolean,
+            language: GrowsurfRuby::Campaign::Language::OrSymbol,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             mobile_instance_id: String,
@@ -116,6 +127,9 @@ module GrowsurfRuby
           # a non-affiliate without `affiliateStatus`. Existing participants are returned
           # unchanged.
           is_affiliate: nil,
+          # The language of the participant's portal and program emails. Must be one of the
+          # program's languages. Applied only when this request creates the participant.
+          language: nil,
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,
@@ -141,6 +155,7 @@ module GrowsurfRuby
               first_name: String,
               ip_address: String,
               is_affiliate: T::Boolean,
+              language: GrowsurfRuby::Campaign::Language::OrSymbol,
               last_name: String,
               metadata: T::Hash[Symbol, T.anything],
               mobile_instance_id: String,

@@ -65,6 +65,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         is_affiliate: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_new: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_winner: GrowsurfRuby::Internal::Type::Boolean | nil,
+        language: GrowsurfRuby::Campaign::Language | nil,
         last_name: String | nil,
         lead_count: Integer | nil,
         metadata: ^(GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]) | nil,
@@ -123,6 +124,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         is_affiliate: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_new: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_winner: GrowsurfRuby::Internal::Type::Boolean | nil,
+        language: GrowsurfRuby::Campaign::Language | nil,
         last_name: String | nil,
         lead_count: Integer | nil,
         metadata: ^(GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]) | nil,
@@ -214,6 +216,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         is_affiliate: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_new: GrowsurfRuby::Internal::Type::Boolean | nil,
         is_winner: GrowsurfRuby::Internal::Type::Boolean | nil,
+        language: GrowsurfRuby::Campaign::Language | nil,
         last_name: String | nil,
         lead_count: Integer | nil,
         metadata: ^(GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]) | nil,
@@ -514,6 +517,49 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         provider_display_name: String | nil,
         status: GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationResponse::Status | nil
       }
+    end
+  end
+end
+
+class GrowsurfRuby::Test::Resources::Campaign::ParticipantLanguageContractTest < Minitest::Test
+  extend Minitest::Serial
+  include WebMock::API
+
+  def setup
+    super
+    WebMock.enable!
+    @base_url = "http://localhost"
+    @growsurf = GrowsurfRuby::Client.new(base_url: @base_url, api_key: "My API Key")
+  end
+
+  def teardown
+    WebMock.reset!
+    WebMock.disable!
+    super
+  end
+
+  def test_language_requests_send_contract_codes_and_null_reset
+    participant = {id: "participant", email: "gavin@hooli.com", language: "pt-BR"}
+    stub_request(:post, "#{@base_url}/campaign/campaign/participant").to_return_json(
+      status: 200,
+      body: participant
+    )
+    stub_request(:post, "#{@base_url}/campaign/campaign/participant/participant").to_return_json(
+      status: 200,
+      body: participant
+    )
+
+    added = @growsurf.campaign.participant.add("campaign", email: "gavin@hooli.com", language: :"pt-BR")
+    @growsurf.campaign.participant.update("participant", id: "campaign", language: nil)
+
+    assert_equal(:"pt-BR", added.language)
+
+    assert_requested(:post, "#{@base_url}/campaign/campaign/participant") do |request|
+      JSON.parse(request.body)["language"] == "pt-BR"
+    end
+    # `null` must reach the API so it resets the participant to the base language.
+    assert_requested(:post, "#{@base_url}/campaign/campaign/participant/participant") do |request|
+      JSON.parse(request.body) == {"language" => nil}
     end
   end
 end

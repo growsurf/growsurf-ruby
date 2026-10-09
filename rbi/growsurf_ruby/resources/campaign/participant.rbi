@@ -34,6 +34,7 @@ module GrowsurfRuby
               GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
+            language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             notes: String,
@@ -58,6 +59,10 @@ module GrowsurfRuby
           email: nil,
           # Body param
           first_name: nil,
+          # Body param: The language of the participant's portal and program emails. Must be
+          # one of the program's languages (see `languages` in the program options). Send the
+          # base language or `null` to use the program's base language.
+          language: nil,
           # Body param
           last_name: nil,
           # Body param: Shallow custom metadata object.
@@ -136,6 +141,7 @@ module GrowsurfRuby
             first_name: String,
             ip_address: String,
             is_affiliate: T::Boolean,
+            language: GrowsurfRuby::Campaign::Language::OrSymbol,
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
             mobile_instance_id: String,
@@ -157,6 +163,9 @@ module GrowsurfRuby
           # creates a non-affiliate without `affiliateStatus`. Existing participants are
           # returned unchanged.
           is_affiliate: nil,
+          # The language of the participant's portal and program emails. Must be one of the
+          # program's languages. Applied only when this request creates the participant.
+          language: nil,
           last_name: nil,
           # Shallow custom metadata object.
           metadata: nil,

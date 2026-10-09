@@ -129,6 +129,19 @@ module GrowsurfRuby
         sig { params(is_winner: T::Boolean).void }
         attr_writer :is_winner
 
+        # The language of the participant's portal and program emails. The program's base
+        # language unless the participant (or you) picked another of the program's
+        # languages.
+        sig do
+          returns(T.nilable(GrowsurfRuby::Campaign::Language::TaggedSymbol))
+        end
+        attr_reader :language
+
+        sig do
+          params(language: GrowsurfRuby::Campaign::Language::OrSymbol).void
+        end
+        attr_writer :language
+
         sig { returns(T.nilable(String)) }
         attr_accessor :last_name
 
@@ -318,6 +331,7 @@ module GrowsurfRuby
             is_affiliate: T::Boolean,
             is_new: T::Boolean,
             is_winner: T::Boolean,
+            language: GrowsurfRuby::Campaign::Language::OrSymbol,
             last_name: T.nilable(String),
             lead_count: Integer,
             metadata: T::Hash[Symbol, T.anything],
@@ -377,6 +391,10 @@ module GrowsurfRuby
           is_affiliate: nil,
           is_new: nil,
           is_winner: nil,
+          # The language of the participant's portal and program emails. The program's base
+          # language unless the participant (or you) picked another of the program's
+          # languages.
+          language: nil,
           last_name: nil,
           # The number of pending referrals the participant made that have not converted
           # into successful referrals yet.
@@ -436,6 +454,7 @@ module GrowsurfRuby
               is_affiliate: T::Boolean,
               is_new: T::Boolean,
               is_winner: T::Boolean,
+              language: GrowsurfRuby::Campaign::Language::TaggedSymbol,
               last_name: T.nilable(String),
               lead_count: Integer,
               metadata: T::Hash[Symbol, T.anything],

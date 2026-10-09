@@ -235,7 +235,7 @@ module GrowsurfRuby
       # participant endpoints. Use this endpoint from your backend after your mobile app
       # authenticates a signed-in user. The program must have mobile SDK access enabled.
       #
-      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
+      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
       #
@@ -246,6 +246,8 @@ module GrowsurfRuby
       # @param first_name [String]
       #
       # @param ip_address [String]
+      #
+      # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Must be one of the program's languages. Applied only when this request creates the participant.
       #
       # @param last_name [String]
       #
