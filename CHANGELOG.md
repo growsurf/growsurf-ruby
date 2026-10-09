@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.0](https://github.com/growsurf/growsurf-ruby/compare/v1.12.0...v1.13.0) (2026-10-09)
+
+
+### Features
+
+* add program and participant language support ([22ddc3e](https://github.com/growsurf/growsurf-ruby/commit/22ddc3e0b9ea5c63be36d5ebc1ffb49730712197))
+* add program languages and update SDK maintenance guidance ([d7a8ec1](https://github.com/growsurf/growsurf-ruby/commit/d7a8ec1f4f0ef0ed4918312ba9ac6d698da2667c))
+
 ## [1.12.0](https://github.com/growsurf/growsurf-ruby/compare/v1.11.0...v1.12.0) (2026-10-07)
 
 
