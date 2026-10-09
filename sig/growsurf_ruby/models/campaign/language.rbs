@@ -1,0 +1,42 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type language =
+        :en
+        | :es
+        | :fr
+        | :de
+        | :it
+        | :"pt-BR"
+        | :nl
+        | :pl
+        | :sv
+        | :tr
+        | :ja
+        | :ko
+        | :"zh-CN"
+        | :id
+
+      module Language
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        EN: :en
+        ES: :es
+        FR: :fr
+        DE: :de
+        IT: :it
+        PT_BR: :"pt-BR"
+        NL: :nl
+        PL: :pl
+        SV: :sv
+        TR: :tr
+        JA: :ja
+        KO: :ko
+        ZH_CN: :"zh-CN"
+        ID: :id
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::language]
+      end
+    end
+  end
+end

@@ -25,6 +25,7 @@ module GrowsurfRuby
           is_affiliate: bool,
           is_new: bool,
           is_winner: bool,
+          language: GrowsurfRuby::Models::Campaign::language,
           last_name: String?,
           lead_count: Integer,
           metadata: ::Hash[Symbol, top],
@@ -116,6 +117,12 @@ module GrowsurfRuby
         attr_reader is_winner: bool?
 
         def is_winner=: (bool) -> bool
+
+        attr_reader language: GrowsurfRuby::Models::Campaign::language?
+
+        def language=: (
+          GrowsurfRuby::Models::Campaign::language
+        ) -> GrowsurfRuby::Models::Campaign::language
 
         attr_accessor last_name: String?
 
@@ -224,6 +231,7 @@ module GrowsurfRuby
           ?is_affiliate: bool,
           ?is_new: bool,
           ?is_winner: bool,
+          ?language: GrowsurfRuby::Models::Campaign::language,
           ?last_name: String?,
           ?lead_count: Integer,
           ?metadata: ::Hash[Symbol, top],
@@ -270,6 +278,7 @@ module GrowsurfRuby
           is_affiliate: bool,
           is_new: bool,
           is_winner: bool,
+          language: GrowsurfRuby::Models::Campaign::language,
           last_name: String?,
           lead_count: Integer,
           metadata: ::Hash[Symbol, top],

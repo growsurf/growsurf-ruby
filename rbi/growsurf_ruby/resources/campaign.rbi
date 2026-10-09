@@ -209,6 +209,7 @@ module GrowsurfRuby
           fingerprint: String,
           first_name: String,
           ip_address: String,
+          language: GrowsurfRuby::Campaign::Language::OrSymbol,
           last_name: String,
           metadata: T::Hash[Symbol, T.anything],
           mobile_instance_id: String,
@@ -227,6 +228,9 @@ module GrowsurfRuby
         fingerprint: nil,
         first_name: nil,
         ip_address: nil,
+        # The language of the participant's portal and program emails. Must be one of the
+        # program's languages. Applied only when this request creates the participant.
+        language: nil,
         last_name: nil,
         # Shallow custom metadata object.
         metadata: nil,

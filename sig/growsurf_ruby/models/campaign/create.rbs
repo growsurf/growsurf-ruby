@@ -8,6 +8,7 @@ module GrowsurfRuby
           first_name: String,
           ip_address: String,
           is_affiliate: bool,
+          language: GrowsurfRuby::Models::Campaign::language,
           last_name: String,
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String,
@@ -33,6 +34,12 @@ module GrowsurfRuby
         attr_reader is_affiliate: bool?
 
         def is_affiliate=: (bool) -> bool
+
+        attr_reader language: GrowsurfRuby::Models::Campaign::language?
+
+        def language=: (
+          GrowsurfRuby::Models::Campaign::language
+        ) -> GrowsurfRuby::Models::Campaign::language
 
         attr_reader last_name: String?
 
@@ -62,6 +69,7 @@ module GrowsurfRuby
           ?first_name: String,
           ?ip_address: String,
           ?is_affiliate: bool,
+          ?language: GrowsurfRuby::Models::Campaign::language,
           ?last_name: String,
           ?metadata: ::Hash[Symbol, top],
           ?mobile_instance_id: String,
@@ -75,6 +83,7 @@ module GrowsurfRuby
           first_name: String,
           ip_address: String,
           is_affiliate: bool,
+          language: GrowsurfRuby::Models::Campaign::language,
           last_name: String,
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String,

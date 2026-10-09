@@ -7,8 +7,9 @@ module GrowsurfRuby
         # Retrieves a program's options — the same surface as the dashboard Program
         # Editor's **Options** tab. Includes reward/fraud approval, anti-fraud lists +
         # toggles, referral cookie/credit windows, reCAPTCHA, affiliate enrollment +
-        # application review, payout threshold + tax settings (affiliate only), and
-        # notification-email settings. `fraud.recaptcha.secretKey` is never returned.
+        # application review, payout threshold + tax settings (affiliate only),
+        # notification-email settings, and the program's languages.
+        # `fraud.recaptcha.secretKey` is never returned.
         sig do
           params(
             id: String,
@@ -28,6 +29,8 @@ module GrowsurfRuby
         # and `payoutThreshold`/`taxDocumentation` are affiliate-only, and affiliate
         # programs require `requireParticipantAuth: true`). `fraud.recaptcha.secretKey`
         # is write-only. `referralCreditWindowDays: null` means "never expires".
+        # Turning on `languages.additionalLanguages` requires the Business plan or
+        # higher (`403` otherwise).
         sig do
           params(
             id: String,

@@ -46,7 +46,7 @@ To install via git in your `Gemfile`:
 gem "growsurf-ruby", git: "https://github.com/growsurf/growsurf-ruby"
 ```
 
-Alternatively, reference local copy of the repo:
+Alternatively, reference a local copy of the repo:
 
 ```bash
 $ git clone -- 'https://github.com/growsurf/growsurf-ruby' '<path-to-repo>'
@@ -94,17 +94,17 @@ $ bundle exec rake format
 
 [Ruby LSP](https://github.com/Shopify/ruby-lsp) has quite good support for go to definition, but not auto-completion.
 
-This can be installed along side Solargraph.
+This can be installed alongside Solargraph.
 
 ### Solargraph
 
 [Solargraph](https://solargraph.org) has quite good support for auto-completion, but not go to definition.
 
-This can be installed along side Ruby LSP.
+This can be installed alongside Ruby LSP.
 
 ### Sorbet
 
-[Sorbet](https://sorbet.org) should mostly work out of the box when editing this library directly. However, there are a some caveats due to the colocation of `*.rb` and `*.rbi` files in the same project. These issues should not otherwise manifest when this library is used as a dependency.
+[Sorbet](https://sorbet.org) should mostly work out of the box when editing this library directly. However, there are some caveats due to the colocation of `*.rb` and `*.rbi` files in the same project. These issues should not otherwise manifest when this library is used as a dependency.
 
 1. For go to definition usages, sorbet might get confused and may not always navigate to the correct location.
 

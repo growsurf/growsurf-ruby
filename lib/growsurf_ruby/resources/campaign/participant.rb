@@ -37,7 +37,7 @@ module GrowsurfRuby
         # require an existing affiliate. This endpoint does not accept `isAffiliate`, and
         # affiliate enrollment cannot be removed through REST.
         #
-        # @overload update(participant_id_or_email, id:, affiliate_status: nil, email: nil, first_name: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        # @overload update(participant_id_or_email, id:, affiliate_status: nil, email: nil, first_name: nil, language: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
         #
         # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
@@ -48,6 +48,8 @@ module GrowsurfRuby
         # @param email [String] Body param
         #
         # @param first_name [String] Body param
+        #
+        # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language, nil] Body param: The language of the participant's portal and program emails. Must be one of the program's languages (see `languages` in the program options). Send the base language or `null` to use the program's base language.
         #
         # @param last_name [String] Body param
         #
@@ -155,7 +157,7 @@ module GrowsurfRuby
         # `isAffiliate: true` to keep the referral attribution and enroll the participant
         # as an affiliate.
         #
-        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
+        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -168,6 +170,8 @@ module GrowsurfRuby
         # @param ip_address [String]
         #
         # @param is_affiliate [Boolean] Affiliate programs only. Controls affiliate enrollment for a new participant. `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates a non-affiliate without `affiliateStatus`. Existing participants are returned unchanged.
+        #
+        # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Must be one of the program's languages. Applied only when this request creates the participant.
         #
         # @param last_name [String]
         #
@@ -607,7 +611,7 @@ module GrowsurfRuby
         # name, postal address, and an unsubscribe link are added automatically, and
         # unsubscribed participants are suppressed). Sending requires the team to be
         # verified by GrowSurf. Requires a **verified custom email domain** on the program
-        # (which can be completed in *Campaign Editor > 3. Emails > Email Settings*).
+        # (which can be completed in *Program Editor > 3. Emails > Email Settings*).
         # Returns `400` until one is verified. The email is accepted for delivery.
         #
         # @overload email(participant_id_or_email, id:, body: nil, email_type: nil, preheader: nil, subject: nil, request_options: {})

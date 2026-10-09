@@ -33,6 +33,13 @@ module GrowsurfRuby
         #   @return [Boolean, nil]
         optional :is_affiliate, GrowsurfRuby::Internal::Type::Boolean, api_name: :isAffiliate
 
+        # @!attribute language
+        #   The language of the participant's portal and program emails. Must be one of the
+        #   program's languages. Applied only when this request creates the participant.
+        #
+        #   @return [Symbol, GrowsurfRuby::Models::Campaign::Language, nil]
+        optional :language, enum: -> { GrowsurfRuby::Campaign::Language }
+
         # @!attribute last_name
         #
         #   @return [String, nil]
@@ -69,7 +76,7 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :referred_by, String, api_name: :referredBy
 
-        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil)
+        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::Create} for more details.
         #
@@ -82,6 +89,8 @@ module GrowsurfRuby
         #   @param ip_address [String]
         #
         #   @param is_affiliate [Boolean] Affiliate programs only. Controls affiliate enrollment for a new participant.
+        #
+        #   @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Must be one of the
         #
         #   @param last_name [String]
         #

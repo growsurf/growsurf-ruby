@@ -76,6 +76,7 @@ module GrowsurfRuby
         ?fingerprint: String,
         ?first_name: String,
         ?ip_address: String,
+        ?language: GrowsurfRuby::Models::Campaign::language,
         ?last_name: String,
         ?metadata: ::Hash[Symbol, top],
         ?mobile_instance_id: String,
