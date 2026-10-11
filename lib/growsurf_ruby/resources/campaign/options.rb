@@ -34,7 +34,8 @@ module GrowsurfRuby
         # programs require `requireParticipantAuth: true`). `fraud.recaptcha.secretKey`
         # is write-only. `referralCreditWindowDays: null` means "never expires".
         # Turning on `languages.additionalLanguages` requires the Business plan or
-        # higher (`403` otherwise).
+        # higher. While any are on, every `languages` change, including turning them
+        # off, requires it too (`403` otherwise).
         #
         # @overload update(id, body, request_options: {})
         #
