@@ -27,6 +27,7 @@ module GrowsurfRuby
         # Enabling an active reward of a type automatically enables that reward type on
         # the program. For an affiliate reward, `commissionStructure.event: LEAD`
         # requires a `FIXED` commission with a positive `amount`.
+        # A concurrent edit can return `409`; reload the program before retrying.
         sig do
           params(
             id: String,
@@ -134,6 +135,10 @@ module GrowsurfRuby
         # copy; removing a key that campaign copy still references returns a `409` listing
         # the referencing fields. For an affiliate reward, `commissionStructure.event:
         # LEAD` requires a `FIXED` commission with a positive `amount`.
+        # Changes to participant email content are checked before saving. Rejected content
+        # returns `400`; if the check is unavailable, `503` asks you to retry. Neither
+        # response saves the change. A concurrent edit can return `409`; reload the
+        # program before retrying.
         sig do
           params(
             campaign_reward_id: String,
