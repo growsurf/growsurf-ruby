@@ -31,6 +31,7 @@ module GrowsurfRuby
         # Enabling an active reward of a type automatically enables that reward type on
         # the program. For an affiliate reward, `commissionStructure.event: LEAD`
         # requires a `FIXED` commission with a positive `amount`.
+        # A concurrent edit can return `409`; reload the program before retrying.
         #
         # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
@@ -102,6 +103,10 @@ module GrowsurfRuby
         # copy; removing a key that campaign copy still references returns a `409` listing
         # the referencing fields. For an affiliate reward, `commissionStructure.event:
         # LEAD` requires a `FIXED` commission with a positive `amount`.
+        # Changes to participant email content are checked before saving. Rejected content
+        # returns `400`; if the check is unavailable, `503` asks you to retry. Neither
+        # response saves the change. A concurrent edit can return `409`; reload the
+        # program before retrying.
         #
         # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
