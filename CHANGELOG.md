@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.13.1](https://github.com/growsurf/growsurf-ruby/compare/v1.13.0...v1.13.1) (2026-10-14)
+
+
+### Documentation
+
+* note Business plan covers any language change while languages are on ([10cb2ca](https://github.com/growsurf/growsurf-ruby/commit/10cb2ca8522e15e509b7a31774a7da0571859ebc))
+* sync SDK comments with the REST API contract ([28ab4fd](https://github.com/growsurf/growsurf-ruby/commit/28ab4fddd5f58bb2234d018f10afdda047df3c00))
+* sync SDK guidance with the REST API contract ([d2e01f5](https://github.com/growsurf/growsurf-ruby/commit/d2e01f53d729d54220b56c766160f15ff19e14d0))
+
 ## [1.13.0](https://github.com/growsurf/growsurf-ruby/compare/v1.12.0...v1.13.0) (2026-10-09)
 
 
