@@ -22,6 +22,31 @@ module GrowsurfRuby
         KO = :ko
         ZH_CN = :"zh-CN"
         ID = :id
+        DA = :da
+        NB = :nb
+        NN = :nn
+        FI = :fi
+        IS = :is
+        CS = :cs
+        SK = :sk
+        HU = :hu
+        RO = :ro
+        HR = :hr
+        SL = :sl
+        ET = :et
+        LV = :lv
+        LT = :lt
+        EL = :el
+        BG = :bg
+        UK = :uk
+        RU = :ru
+        PT_PT = :"pt-PT"
+        CA = :ca
+        VI = :vi
+        MS = :ms
+        FIL = :fil
+        AF = :af
+        SW = :sw
 
         # @!method self.values
         #   @return [Array<Symbol>]
