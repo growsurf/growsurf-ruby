@@ -16,6 +16,31 @@ module GrowsurfRuby
         | :ko
         | :"zh-CN"
         | :id
+        | :da
+        | :nb
+        | :nn
+        | :fi
+        | :is
+        | :cs
+        | :sk
+        | :hu
+        | :ro
+        | :hr
+        | :sl
+        | :et
+        | :lv
+        | :lt
+        | :el
+        | :bg
+        | :uk
+        | :ru
+        | :"pt-PT"
+        | :ca
+        | :vi
+        | :ms
+        | :fil
+        | :af
+        | :sw
 
       module Language
         extend GrowsurfRuby::Internal::Type::Enum
@@ -34,6 +59,31 @@ module GrowsurfRuby
         KO: :ko
         ZH_CN: :"zh-CN"
         ID: :id
+        DA: :da
+        NB: :nb
+        NN: :nn
+        FI: :fi
+        IS: :is
+        CS: :cs
+        SK: :sk
+        HU: :hu
+        RO: :ro
+        HR: :hr
+        SL: :sl
+        ET: :et
+        LV: :lv
+        LT: :lt
+        EL: :el
+        BG: :bg
+        UK: :uk
+        RU: :ru
+        PT_PT: :"pt-PT"
+        CA: :ca
+        VI: :vi
+        MS: :ms
+        FIL: :fil
+        AF: :af
+        SW: :sw
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::language]
       end
