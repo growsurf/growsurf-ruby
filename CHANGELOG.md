@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.14.0](https://github.com/growsurf/growsurf-ruby/compare/v1.13.1...v1.14.0) (2026-10-15)
+
+
+### Features
+
+* support 25 additional program languages ([41f420e](https://github.com/growsurf/growsurf-ruby/commit/41f420e608df905b407b16a65afb12dd72f80142))
+* support 25 additional program languages ([10aedd8](https://github.com/growsurf/growsurf-ruby/commit/10aedd8d8859cbcd6fa75dd6849af917bc011c46))
+
 ## [1.13.1](https://github.com/growsurf/growsurf-ruby/compare/v1.13.0...v1.13.1) (2026-10-14)
 
 
