@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.14.1](https://github.com/growsurf/growsurf-ruby/compare/v1.14.0...v1.14.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* clarify participant deletion access and cleanup docs ([2245335](https://github.com/growsurf/growsurf-ruby/commit/224533514fc90574304c7a37047e1ad551b3c8eb))
+* clarify participant deletion access and cleanup docs ([964dafe](https://github.com/growsurf/growsurf-ruby/commit/964dafefa58ce7e8528435e81d546f2b8c12f757))
+
 ## [1.14.0](https://github.com/growsurf/growsurf-ruby/compare/v1.13.1...v1.14.0) (2026-10-15)
 
 
