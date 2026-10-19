@@ -18,7 +18,8 @@ module GrowsurfRuby
           copyButtonText?: String,
           copiedText?: String,
           emptyState?: String,
-          icon?: resources_icon
+          icon?: resources_icon,
+          emptyStateGraphic?: ::Hash[Symbol, top]
         }
 
         def retrieve: (
