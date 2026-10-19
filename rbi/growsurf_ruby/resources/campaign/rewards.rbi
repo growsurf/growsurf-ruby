@@ -40,6 +40,10 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            image_icon_key:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
+              ),
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
@@ -83,6 +87,11 @@ module GrowsurfRuby
           event: nil,
           # Body param
           image_url: nil,
+          # Body param: The starter icon shown for the reward, or `null` when `imageUrl` is
+          # your own image. Participant pages draw this icon in your program's accent color.
+          # Also set `imageUrl` to the icon's image so the iOS and Android SDKs can show it.
+          # Sending `imageUrl` without `imageIconKey` clears it.
+          image_icon_key: nil,
           # Body param: Whether the reward can be earned an unlimited number of times.
           # Defaults to `true`, except `MILESTONE` rewards, which can only be earned once.
           is_unlimited: nil,
@@ -150,6 +159,10 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            image_icon_key:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey::OrSymbol
+              ),
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
@@ -192,6 +205,11 @@ module GrowsurfRuby
           event: nil,
           # Body param
           image_url: nil,
+          # Body param: The starter icon shown for the reward, or `null` when `imageUrl` is
+          # your own image. Participant pages draw this icon in your program's accent color.
+          # Also set `imageUrl` to the icon's image so the iOS and Android SDKs can show it.
+          # Sending `imageUrl` without `imageIconKey` clears it.
+          image_icon_key: nil,
           # Body param: Whether the reward can be earned an unlimited number of times.
           # Defaults to `true`, except `MILESTONE` rewards, which can only be earned once.
           is_unlimited: nil,

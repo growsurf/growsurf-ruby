@@ -57,6 +57,18 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :image_url, String, api_name: :imageUrl, nil?: true
 
+        # @!attribute image_icon_key
+        #   The starter icon shown for the reward, or `null` when `imageUrl` is your own
+        #   image. Participant pages draw this icon in your program's accent color. Also set
+        #   `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
+        #   `imageUrl` without `imageIconKey` clears it.
+        #
+        #   @return [Symbol, GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey, nil]
+        optional :image_icon_key,
+                 enum: -> { GrowsurfRuby::Campaign::RewardUpdateParams::ImageIconKey },
+                 api_name: :imageIconKey,
+                 nil?: true
+
         # @!attribute is_unlimited
         #   Whether the reward can be earned an unlimited number of times. Defaults to
         #   `true`, except `MILESTONE` rewards, which can only be earned once.
@@ -158,7 +170,7 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
 
-        # @!method initialize(id:, campaign_reward_id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @!method initialize(id:, campaign_reward_id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::RewardUpdateParams} for more details.
         #
@@ -177,6 +189,8 @@ module GrowsurfRuby
         #   @param event [Symbol, GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event] The referral event that earns this Campaign Reward.
         #
         #   @param image_url [String]
+        #
+        #   @param image_icon_key [Symbol, GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey, nil] The starter icon shown for the reward, or `null` when `imageUrl` is your own image.
         #
         #   @param is_unlimited [Boolean] Whether the reward can be earned an unlimited number of times. Defaults to `true
         #
@@ -228,6 +242,37 @@ module GrowsurfRuby
           IN_TOTAL = :IN_TOTAL
           PER_MONTH = :PER_MONTH
           PER_YEAR = :PER_YEAR
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @see GrowsurfRuby::Models::Campaign::RewardUpdateParams#image_icon_key
+        module ImageIconKey
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          GIFT_1 = :GIFT_1
+          GIFT_2 = :GIFT_2
+          GIFT_3 = :GIFT_3
+          GIFT_4 = :GIFT_4
+          GIFT_5 = :GIFT_5
+          GIFT_6 = :GIFT_6
+          GIFT_CARD = :GIFT_CARD
+          CASH = :CASH
+          COIN = :COIN
+          CARD = :CARD
+          STAR_1 = :STAR_1
+          STAR_2 = :STAR_2
+          STAR_3 = :STAR_3
+          TROPHY = :TROPHY
+          CROWN = :CROWN
+          SEAL = :SEAL
+          HEART_1 = :HEART_1
+          HEART_2 = :HEART_2
+          TAG = :TAG
+          DIAMOND = :DIAMOND
+          CONFETTI = :CONFETTI
+          ROCKET = :ROCKET
 
           # @!method self.values
           #   @return [Array<Symbol>]

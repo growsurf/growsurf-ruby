@@ -11,6 +11,7 @@ module GrowsurfRuby
           description: String,
           event: GrowsurfRuby::Models::Campaign::RewardUpdateParams::event,
           image_url: String?,
+          image_icon_key: GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?,
           is_unlimited: bool,
           is_visible: bool,
           limit: Integer,
@@ -64,6 +65,12 @@ module GrowsurfRuby
         attr_reader image_url: String?
 
         def image_url=: (String?) -> String?
+
+        attr_reader image_icon_key: GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?
+
+        def image_icon_key=: (
+          GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?
+        ) -> GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?
 
         attr_reader is_unlimited: bool?
 
@@ -140,6 +147,7 @@ module GrowsurfRuby
           ?description: String,
           ?event: GrowsurfRuby::Models::Campaign::RewardUpdateParams::event,
           ?image_url: String?,
+          ?image_icon_key: GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?,
           ?is_unlimited: bool,
           ?is_visible: bool,
           ?limit: Integer,
@@ -167,6 +175,7 @@ module GrowsurfRuby
           description: String,
           event: GrowsurfRuby::Models::Campaign::RewardUpdateParams::event,
           image_url: String?,
+          image_icon_key: GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?,
           is_unlimited: bool,
           is_visible: bool,
           limit: Integer,
@@ -206,6 +215,59 @@ module GrowsurfRuby
           PER_YEAR: :PER_YEAR
 
           def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::RewardUpdateParams::limit_duration]
+        end
+
+        type image_icon_key =
+          :GIFT_1
+          | :GIFT_2
+          | :GIFT_3
+          | :GIFT_4
+          | :GIFT_5
+          | :GIFT_6
+          | :GIFT_CARD
+          | :CASH
+          | :COIN
+          | :CARD
+          | :STAR_1
+          | :STAR_2
+          | :STAR_3
+          | :TROPHY
+          | :CROWN
+          | :SEAL
+          | :HEART_1
+          | :HEART_2
+          | :TAG
+          | :DIAMOND
+          | :CONFETTI
+          | :ROCKET
+
+        module ImageIconKey
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          GIFT_1: :GIFT_1
+          GIFT_2: :GIFT_2
+          GIFT_3: :GIFT_3
+          GIFT_4: :GIFT_4
+          GIFT_5: :GIFT_5
+          GIFT_6: :GIFT_6
+          GIFT_CARD: :GIFT_CARD
+          CASH: :CASH
+          COIN: :COIN
+          CARD: :CARD
+          STAR_1: :STAR_1
+          STAR_2: :STAR_2
+          STAR_3: :STAR_3
+          TROPHY: :TROPHY
+          CROWN: :CROWN
+          SEAL: :SEAL
+          HEART_1: :HEART_1
+          HEART_2: :HEART_2
+          TAG: :TAG
+          DIAMOND: :DIAMOND
+          CONFETTI: :CONFETTI
+          ROCKET: :ROCKET
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key]
         end
       end
     end

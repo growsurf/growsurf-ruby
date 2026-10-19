@@ -80,6 +80,29 @@ module GrowsurfRuby
         sig { params(image_url: T.nilable(String)).void }
         attr_writer :image_url
 
+        # The starter icon shown for the reward, or `null` when `imageUrl` is your own
+        # image. Participant pages draw this icon in your program's accent color. Also set
+        # `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
+        # `imageUrl` without `imageIconKey` clears it.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
+            )
+          )
+        end
+        attr_reader :image_icon_key
+
+        sig do
+          params(
+            image_icon_key:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
+              )
+          ).void
+        end
+        attr_writer :image_icon_key
+
         # Whether the reward can be earned an unlimited number of times. Defaults to
         # `true`, except `MILESTONE` rewards, which can only be earned once.
         sig { returns(T.nilable(T::Boolean)) }
@@ -220,6 +243,10 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            image_icon_key:
+              T.nilable(
+                GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
+              ),
             is_unlimited: T::Boolean,
             is_visible: T::Boolean,
             limit: Integer,
@@ -255,6 +282,11 @@ module GrowsurfRuby
           # `MILESTONE` rewards. When omitted, it defaults to `CONVERSION`.
           event: nil,
           image_url: nil,
+          # The starter icon shown for the reward, or `null` when `imageUrl` is your own
+          # image. Participant pages draw this icon in your program's accent color. Also set
+          # `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
+          # `imageUrl` without `imageIconKey` clears it.
+          image_icon_key: nil,
           # Whether the reward can be earned an unlimited number of times. Defaults to
           # `true`, except `MILESTONE` rewards, which can only be earned once.
           is_unlimited: nil,
@@ -305,6 +337,10 @@ module GrowsurfRuby
               event:
                 GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
               image_url: T.nilable(String),
+              image_icon_key:
+                T.nilable(
+                  GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
+                ),
               is_unlimited: T::Boolean,
               is_visible: T::Boolean,
               limit: Integer,
@@ -444,6 +480,140 @@ module GrowsurfRuby
             override.returns(
               T::Array[
                 GrowsurfRuby::Models::Campaign::RewardCreateParams::LimitDuration::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module ImageIconKey
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          GIFT_1 =
+            T.let(
+              :GIFT_1,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          GIFT_2 =
+            T.let(
+              :GIFT_2,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          GIFT_3 =
+            T.let(
+              :GIFT_3,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          GIFT_4 =
+            T.let(
+              :GIFT_4,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          GIFT_5 =
+            T.let(
+              :GIFT_5,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          GIFT_6 =
+            T.let(
+              :GIFT_6,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          GIFT_CARD =
+            T.let(
+              :GIFT_CARD,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          CASH =
+            T.let(
+              :CASH,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          COIN =
+            T.let(
+              :COIN,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          CARD =
+            T.let(
+              :CARD,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          STAR_1 =
+            T.let(
+              :STAR_1,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          STAR_2 =
+            T.let(
+              :STAR_2,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          STAR_3 =
+            T.let(
+              :STAR_3,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          TROPHY =
+            T.let(
+              :TROPHY,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          CROWN =
+            T.let(
+              :CROWN,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          SEAL =
+            T.let(
+              :SEAL,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          HEART_1 =
+            T.let(
+              :HEART_1,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          HEART_2 =
+            T.let(
+              :HEART_2,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          TAG =
+            T.let(
+              :TAG,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          DIAMOND =
+            T.let(
+              :DIAMOND,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          CONFETTI =
+            T.let(
+              :CONFETTI,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+          ROCKET =
+            T.let(
+              :ROCKET,
+              GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::TaggedSymbol
               ]
             )
           end
