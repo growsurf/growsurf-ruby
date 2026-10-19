@@ -152,6 +152,17 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :image_url
 
+        # The starter icon shown for the reward, or `null` when `imageUrl` is your own
+        # image.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          )
+        end
+        attr_accessor :image_icon_key
+
         # `-1` represents an unlimited reward in REST responses.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :limit
@@ -234,6 +245,10 @@ module GrowsurfRuby
             event:
               T.nilable(GrowsurfRuby::CampaignAPI::Reward::Event::OrSymbol),
             image_url: T.nilable(String),
+            image_icon_key:
+              T.nilable(
+                GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::OrSymbol
+              ),
             limit: T.nilable(Integer),
             limit_duration:
               T.nilable(
@@ -268,6 +283,9 @@ module GrowsurfRuby
           # Rewards return `CONVERSION`.
           event: nil,
           image_url: nil,
+          # The starter icon shown for the reward, or `null` when `imageUrl` is your own
+          # image.
+          image_icon_key: nil,
           # `-1` represents an unlimited reward in REST responses.
           limit: nil,
           limit_duration: nil,
@@ -311,6 +329,10 @@ module GrowsurfRuby
                   GrowsurfRuby::CampaignAPI::Reward::Event::TaggedSymbol
                 ),
               image_url: T.nilable(String),
+              image_icon_key:
+                T.nilable(
+                  GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+                ),
               limit: T.nilable(Integer),
               limit_duration:
                 T.nilable(
@@ -425,6 +447,140 @@ module GrowsurfRuby
             override.returns(
               T::Array[
                 GrowsurfRuby::CampaignAPI::Reward::LimitDuration::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module ImageIconKey
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                GrowsurfRuby::CampaignAPI::Reward::ImageIconKey
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          GIFT_1 =
+            T.let(
+              :GIFT_1,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          GIFT_2 =
+            T.let(
+              :GIFT_2,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          GIFT_3 =
+            T.let(
+              :GIFT_3,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          GIFT_4 =
+            T.let(
+              :GIFT_4,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          GIFT_5 =
+            T.let(
+              :GIFT_5,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          GIFT_6 =
+            T.let(
+              :GIFT_6,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          GIFT_CARD =
+            T.let(
+              :GIFT_CARD,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          CASH =
+            T.let(
+              :CASH,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          COIN =
+            T.let(
+              :COIN,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          CARD =
+            T.let(
+              :CARD,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          STAR_1 =
+            T.let(
+              :STAR_1,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          STAR_2 =
+            T.let(
+              :STAR_2,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          STAR_3 =
+            T.let(
+              :STAR_3,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          TROPHY =
+            T.let(
+              :TROPHY,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          CROWN =
+            T.let(
+              :CROWN,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          SEAL =
+            T.let(
+              :SEAL,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          HEART_1 =
+            T.let(
+              :HEART_1,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          HEART_2 =
+            T.let(
+              :HEART_2,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          TAG =
+            T.let(
+              :TAG,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          DIAMOND =
+            T.let(
+              :DIAMOND,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          CONFETTI =
+            T.let(
+              :CONFETTI,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+          ROCKET =
+            T.let(
+              :ROCKET,
+              GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::CampaignAPI::Reward::ImageIconKey::TaggedSymbol
               ]
             )
           end
