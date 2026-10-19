@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.16.0](https://github.com/growsurf/growsurf-ruby/compare/v1.15.0...v1.16.0) (2026-10-19)
+
+
+### Features
+
+* support resource empty-state graphics ([70dfd1e](https://github.com/growsurf/growsurf-ruby/commit/70dfd1ebbc88e76936108b844acb4e36e88082f1))
+* support resource empty-state graphics ([7ea20b0](https://github.com/growsurf/growsurf-ruby/commit/7ea20b04e735a4c82aba685041ac44512828eeb4))
+
 ## [1.15.0](https://github.com/growsurf/growsurf-ruby/compare/v1.14.1...v1.15.0) (2026-10-19)
 
 
