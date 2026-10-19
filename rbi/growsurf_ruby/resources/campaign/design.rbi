@@ -23,7 +23,8 @@ module GrowsurfRuby
             copyButtonText: T.nilable(String),
             copiedText: T.nilable(String),
             emptyState: T.nilable(String),
-            icon: T.nilable(ResourcesIcon)
+            icon: T.nilable(ResourcesIcon),
+            emptyStateGraphic: T.nilable(T::Hash[Symbol, T.untyped])
           }
         end
 

@@ -56,7 +56,8 @@ module GrowsurfRuby
         # @param body [Hash{Symbol=>Object}] Partial design configuration to merge. `resources`
         #   accepts `isPublicDisplayed`, `title`, `viewResourcesLinkText`, `backLinkText`,
         #   `copyButtonText`, `copiedText`, `emptyState`, and `icon` (`type`: `DEFAULT`, `IMAGE`, or `NONE`, plus
-        #   `imageUrl` for `IMAGE`). Resource items use the Program Resources operations.
+        #   `imageUrl` for `IMAGE`). `emptyStateGraphic` accepts `type` (`DEFAULT`, `IMAGE`, `NONE`),
+        #   a starter `key`, and `imageUrl`. Resource items use the Program Resources operations.
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #
