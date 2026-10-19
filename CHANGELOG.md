@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.15.0](https://github.com/growsurf/growsurf-ruby/compare/v1.14.1...v1.15.0) (2026-10-19)
+
+
+### Features
+
+* support reward image icon keys ([a51d974](https://github.com/growsurf/growsurf-ruby/commit/a51d9748c1073120d2ecc2a4b2facbe0618d62aa))
+* support reward image icon keys ([a0290fa](https://github.com/growsurf/growsurf-ruby/commit/a0290fa507bd49a413d6d1969446eab5ba09a7c2))
+
 ## [1.14.1](https://github.com/growsurf/growsurf-ruby/compare/v1.14.0...v1.14.1) (2026-10-18)
 
 
