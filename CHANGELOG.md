@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.17.0](https://github.com/growsurf/growsurf-ruby/compare/v1.16.0...v1.17.0) (2026-10-20)
+
+
+### Features
+
+* add PER_YEAR reward limit duration ([c3b68aa](https://github.com/growsurf/growsurf-ruby/commit/c3b68aa7131f5882b2a8f820ae9d87c53786edc7))
+* add PER_YEAR reward limit duration ([42fbf20](https://github.com/growsurf/growsurf-ruby/commit/42fbf20d8568de9b5ac00c3eeafdb456f60a995b))
+
 ## [1.16.0](https://github.com/growsurf/growsurf-ruby/compare/v1.15.0...v1.16.0) (2026-10-19)
 
 
