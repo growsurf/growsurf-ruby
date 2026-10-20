@@ -294,6 +294,7 @@ module GrowsurfRuby
 
           IN_TOTAL = :IN_TOTAL
           PER_MONTH = :PER_MONTH
+          PER_YEAR = :PER_YEAR
 
           # @!method self.values
           #   @return [Array<Symbol>]
