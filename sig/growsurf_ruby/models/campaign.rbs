@@ -217,13 +217,14 @@ module GrowsurfRuby
           def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::Reward::event]
         end
 
-        type limit_duration = :IN_TOTAL | :PER_MONTH
+        type limit_duration = :IN_TOTAL | :PER_MONTH | :PER_YEAR
 
         module LimitDuration
           extend GrowsurfRuby::Internal::Type::Enum
 
           IN_TOTAL: :IN_TOTAL
           PER_MONTH: :PER_MONTH
+          PER_YEAR: :PER_YEAR
 
           def self?.values: -> ::Array[GrowsurfRuby::Models::CampaignAPI::Reward::limit_duration]
         end

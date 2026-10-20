@@ -442,6 +442,11 @@ module GrowsurfRuby
               :PER_MONTH,
               GrowsurfRuby::CampaignAPI::Reward::LimitDuration::TaggedSymbol
             )
+          PER_YEAR =
+            T.let(
+              :PER_YEAR,
+              GrowsurfRuby::CampaignAPI::Reward::LimitDuration::TaggedSymbol
+            )
 
           sig do
             override.returns(
