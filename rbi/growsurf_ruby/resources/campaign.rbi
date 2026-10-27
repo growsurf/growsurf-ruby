@@ -74,8 +74,8 @@ module GrowsurfRuby
       sig do
         params(
           type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,
-          company_logo_image_url: String,
-          company_name: String,
+          company_logo_image_url: T.nilable(String),
+          company_name: T.nilable(String),
           currency_iso: String,
           goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol,
           name: String,
@@ -111,14 +111,13 @@ module GrowsurfRuby
       # dedicated config sub-resources, not here. The program cannot be deleted via this
       # endpoint.
       # Changes to participant email content are checked before saving. Rejected content
-      # returns `400`; if the check is unavailable, `503` asks you to retry. Neither
-      # response saves the change. A concurrent edit can return `409`; reload the program
-      # before retrying.
+      # returns `400` and is not saved. A concurrent edit can return `409`; reload the
+      # program before retrying.
       sig do
         params(
           id: String,
-          company_logo_image_url: String,
-          company_name: String,
+          company_logo_image_url: T.nilable(String),
+          company_name: T.nilable(String),
           name: String,
           status: GrowsurfRuby::CampaignUpdateParams::Status::OrSymbol,
           request_options: GrowsurfRuby::RequestOptions::OrHash
@@ -220,6 +219,7 @@ module GrowsurfRuby
           mobile_instance_id: String,
           referral_status:
             GrowsurfRuby::Campaign::Create::ReferralStatus::OrSymbol,
+          referred_at: T.nilable(Integer),
           referred_by: String,
           request_options: GrowsurfRuby::RequestOptions::OrHash
         ).returns(
@@ -233,8 +233,11 @@ module GrowsurfRuby
         fingerprint: nil,
         first_name: nil,
         ip_address: nil,
-        # The language of the participant's portal and program emails. Must be one of the
-        # program's languages. Applied only when this request creates the participant.
+        # The language of the participant's portal and program emails. Stored when it is
+        # one of the program's languages. A regional tag maps to its language (for
+        # example, `es-MX` is stored as `es`). Any other value is ignored and the
+        # program's base language applies. Applied only when this request creates the
+        # participant.
         language: nil,
         last_name: nil,
         # Shallow custom metadata object.
@@ -244,6 +247,11 @@ module GrowsurfRuby
         # mobile SDKs generate this as a lowercase UUID.
         mobile_instance_id: nil,
         referral_status: nil,
+        # When the participant was referred, in Unix milliseconds. Used only with a valid
+        # `referredBy`. If you omit `referralStatus`, GrowSurf compares this time with
+        # the program's referral credit window to set it. Defaults to the time of the
+        # request.
+        referred_at: nil,
         # Referrer participant ID or email address.
         referred_by: nil,
         request_options: {}

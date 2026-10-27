@@ -147,7 +147,10 @@ module GrowsurfRuby
         # {GrowsurfRuby::Models::Campaign::ParticipantAddParams} for more details.
         #
         # Adds a new participant to the program. If the email already exists, the existing
-        # participant is returned unchanged. For affiliate programs, set `isAffiliate` to
+        # participant is returned unchanged. One exception: if that participant claimed an
+        # offer in the Claim Offer Popup and the signup is not complete yet, Add completes
+        # the signup with the original referrer and saves any non-blank `firstName`,
+        # `lastName`, and `metadata` you send. For affiliate programs, set `isAffiliate` to
         # `true` to enroll a new participant as an approved affiliate or `false` to create
         # a non-affiliate. If you omit `isAffiliate`, a valid `referredBy` creates a
         # referred non-affiliate; without a valid referrer, the new participant is enrolled
@@ -155,7 +158,7 @@ module GrowsurfRuby
         # `isAffiliate: true` to keep the referral attribution and enroll the participant
         # as an affiliate.
         #
-        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
+        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil, request_options: {})
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -169,7 +172,7 @@ module GrowsurfRuby
         #
         # @param is_affiliate [Boolean] Affiliate programs only. Controls affiliate enrollment for a new participant. `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates a non-affiliate without `affiliateStatus`. Existing participants are returned unchanged.
         #
-        # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Must be one of the program's languages. Applied only when this request creates the participant.
+        # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Stored when it is one of the program's languages. A regional tag maps to its language (for example, `es-MX` is stored as `es`). Any other value is ignored and the program's base language applies. Applied only when this request creates the participant.
         #
         # @param last_name [String]
         #
@@ -178,6 +181,8 @@ module GrowsurfRuby
         # @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
         #
         # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus] The referral credit status; only meaningful when `referred_by` resolves to a ref
+        #
+        # @param referred_at [Integer, nil] When the participant was referred, in Unix milliseconds. Used only with a valid `referredBy`. If you omit `referralStatus`, GrowSurf compares this time with the program's referral credit window to set it. Defaults to the time of the request.
         #
         # @param referred_by [String] Referrer participant ID or email address.
         #
@@ -620,7 +625,7 @@ module GrowsurfRuby
         #
         # @param body [String] Body param: HTML body for a free-form email. You can personalize it with dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
         #
-        # @param email_type [String] Body param: The program email template to send (template mode). Send the camelCase
+        # @param email_type [String] Body param: The program email template to trigger (template mode). Send the camelC
         #
         # @param preheader [String] Body param: Optional preheader text for a free-form email.
         #

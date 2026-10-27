@@ -45,8 +45,7 @@ module GrowsurfRuby
         # Unknown fields, fields not available for the program type, and invalid values return a
         # `400`. Landing-page custom code and JavaScript are not editable via the API.
         # Changes to participant email content are checked before saving. Rejected content
-        # returns `400`; if the check is unavailable, `503` asks you to retry. Neither
-        # response saves the change. A concurrent edit can return `409`; reload the
+        # returns `400` and is not saved. A concurrent edit can return `409`; reload the
         # program before retrying.
         #
         # @overload update(id, body, request_options: {})

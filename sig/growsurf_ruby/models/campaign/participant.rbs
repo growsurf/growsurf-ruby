@@ -36,6 +36,7 @@ module GrowsurfRuby
           paypal_email_address: String,
           prev_monthly_rank: Integer,
           prev_monthly_referral_count: Integer,
+          referral_lead_qualified_at: Integer?,
           referrals: ::Array[String],
           referral_source: GrowsurfRuby::Models::Campaign::referral_source,
           referral_status: GrowsurfRuby::Models::Campaign::referral_status,
@@ -162,6 +163,8 @@ module GrowsurfRuby
 
         def prev_monthly_referral_count=: (Integer) -> Integer
 
+        attr_accessor referral_lead_qualified_at: Integer?
+
         attr_reader referrals: ::Array[String]?
 
         def referrals=: (::Array[String]) -> ::Array[String]
@@ -242,6 +245,7 @@ module GrowsurfRuby
           ?paypal_email_address: String,
           ?prev_monthly_rank: Integer,
           ?prev_monthly_referral_count: Integer,
+          ?referral_lead_qualified_at: Integer?,
           ?referrals: ::Array[String],
           ?referral_source: GrowsurfRuby::Models::Campaign::referral_source,
           ?referral_status: GrowsurfRuby::Models::Campaign::referral_status,
@@ -289,6 +293,7 @@ module GrowsurfRuby
           paypal_email_address: String,
           prev_monthly_rank: Integer,
           prev_monthly_referral_count: Integer,
+          referral_lead_qualified_at: Integer?,
           referrals: ::Array[String],
           referral_source: GrowsurfRuby::Models::Campaign::referral_source,
           referral_status: GrowsurfRuby::Models::Campaign::referral_status,

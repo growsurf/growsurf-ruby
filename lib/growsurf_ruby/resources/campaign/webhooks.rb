@@ -22,7 +22,11 @@ module GrowsurfRuby
           )
         end
 
-        # Adds a webhook to the program.
+        # Adds a webhook to the program. A program can have only one saved Bask Health
+        # webhook across all `bask.ninja` hosts and paths, including disabled webhooks. A
+        # second Bask Health webhook returns `400`.
+        # A concurrent change to webhook settings can return `409`; reload the webhooks
+        # before retrying.
         #
         # @overload create(id, payload_url:, events: nil, is_enabled: nil, secret: nil, request_options: {})
         #
@@ -52,7 +56,11 @@ module GrowsurfRuby
           )
         end
 
-        # Updates a webhook by id.
+        # Updates a webhook by id. A program can have only one saved Bask Health webhook
+        # across all `bask.ninja` hosts and paths, including disabled webhooks. An update
+        # that leaves more than one Bask Health webhook returns `400`.
+        # A concurrent change to webhook settings can return `409`; reload the webhooks
+        # before retrying.
         #
         # @overload update(webhook_id, id:, events: nil, is_enabled: nil, payload_url: nil, secret: nil, request_options: {})
         #

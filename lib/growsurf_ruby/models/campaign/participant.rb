@@ -201,6 +201,14 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :prev_monthly_referral_count, Integer, api_name: :prevMonthlyReferralCount
 
+        # @!attribute referral_lead_qualified_at
+        #   When this referred signup counted as a lead for the referrer, in Unix
+        #   milliseconds. Set only when the program's `referralTrigger` is `CUSTOM`.
+        #   Lead-event Campaign Rewards and commissions use it.
+        #
+        #   @return [Integer, nil]
+        optional :referral_lead_qualified_at, Integer, api_name: :referralLeadQualifiedAt, nil?: true
+
         # @!attribute referrals
         #
         #   @return [Array<String>, nil]
@@ -264,7 +272,7 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, language: nil, last_name: nil, lead_count: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
+        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, language: nil, last_name: nil, lead_count: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referral_lead_qualified_at: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::CampaignParticipant} for more details.
         #
@@ -334,6 +342,8 @@ module GrowsurfRuby
         #   @param prev_monthly_rank [Integer]
         #
         #   @param prev_monthly_referral_count [Integer]
+        #
+        #   @param referral_lead_qualified_at [Integer, nil] When this referred signup counted as a lead for the referrer, in Unix
         #
         #   @param referrals [Array<String>]
         #

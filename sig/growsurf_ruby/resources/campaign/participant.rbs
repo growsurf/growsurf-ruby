@@ -49,6 +49,7 @@ module GrowsurfRuby
           ?metadata: ::Hash[Symbol, top],
           ?mobile_instance_id: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          ?referred_at: Integer?,
           ?referred_by: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Campaign::CampaignParticipant

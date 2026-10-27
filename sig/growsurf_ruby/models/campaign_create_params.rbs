@@ -3,8 +3,8 @@ module GrowsurfRuby
     type campaign_create_params =
       {
         type: GrowsurfRuby::Models::CampaignCreateParams::type_,
-        company_logo_image_url: String,
-        company_name: String,
+        company_logo_image_url: String?,
+        company_name: String?,
         currency_iso: String,
         goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         name: String,
@@ -18,13 +18,9 @@ module GrowsurfRuby
 
       attr_accessor type: GrowsurfRuby::Models::CampaignCreateParams::type_
 
-      attr_reader company_logo_image_url: String?
+      attr_accessor company_logo_image_url: String?
 
-      def company_logo_image_url=: (String) -> String
-
-      attr_reader company_name: String?
-
-      def company_name=: (String) -> String
+      attr_accessor company_name: String?
 
       attr_reader currency_iso: String?
 
@@ -48,8 +44,8 @@ module GrowsurfRuby
 
       def initialize: (
         type: GrowsurfRuby::Models::CampaignCreateParams::type_,
-        ?company_logo_image_url: String,
-        ?company_name: String,
+        ?company_logo_image_url: String?,
+        ?company_name: String?,
         ?currency_iso: String,
         ?goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         ?name: String,
@@ -59,8 +55,8 @@ module GrowsurfRuby
 
       def to_hash: -> {
         type: GrowsurfRuby::Models::CampaignCreateParams::type_,
-        company_logo_image_url: String,
-        company_name: String,
+        company_logo_image_url: String?,
+        company_name: String?,
         currency_iso: String,
         goal: GrowsurfRuby::Models::CampaignCreateParams::goal,
         name: String,

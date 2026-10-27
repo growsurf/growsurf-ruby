@@ -213,6 +213,12 @@ module GrowsurfRuby
         sig { params(prev_monthly_referral_count: Integer).void }
         attr_writer :prev_monthly_referral_count
 
+        # When this referred signup counted as a lead for the referrer, in Unix
+        # milliseconds. Set only when the program's `referralTrigger` is `CUSTOM`.
+        # Lead-event Campaign Rewards and commissions use it.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :referral_lead_qualified_at
+
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :referrals
 
@@ -343,6 +349,7 @@ module GrowsurfRuby
             paypal_email_address: String,
             prev_monthly_rank: Integer,
             prev_monthly_referral_count: Integer,
+            referral_lead_qualified_at: T.nilable(Integer),
             referrals: T::Array[String],
             referral_source: GrowsurfRuby::Campaign::ReferralSource::OrSymbol,
             referral_status: GrowsurfRuby::Campaign::ReferralStatus::OrSymbol,
@@ -414,6 +421,10 @@ module GrowsurfRuby
           paypal_email_address: nil,
           prev_monthly_rank: nil,
           prev_monthly_referral_count: nil,
+          # When this referred signup counted as a lead for the referrer, in Unix
+          # milliseconds. Set only when the program's `referralTrigger` is `CUSTOM`.
+          # Lead-event Campaign Rewards and commissions use it.
+          referral_lead_qualified_at: nil,
           referrals: nil,
           referral_source: nil,
           referral_status: nil,
@@ -466,6 +477,7 @@ module GrowsurfRuby
               paypal_email_address: String,
               prev_monthly_rank: Integer,
               prev_monthly_referral_count: Integer,
+              referral_lead_qualified_at: T.nilable(Integer),
               referrals: T::Array[String],
               referral_source:
                 GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol,
