@@ -125,7 +125,7 @@ module GrowsurfRuby
 
         # Adds a new participant to the program. If the email already exists, the existing
         # participant is returned unchanged. One exception: if that participant claimed an
-        # offer in the Claim Offer Popup and the signup is not complete yet, Add completes
+        # offer in the Claim Offer Popup and the signup is not complete yet, this call completes
         # the signup with the original referrer and saves any non-blank `firstName`,
         # `lastName`, and `metadata` you send. For affiliate programs, set `isAffiliate` to
         # `true` to enroll a new participant as an approved affiliate or `false` to create
