@@ -16,7 +16,8 @@ module GrowsurfRuby
         # programs and hidden for referral programs, and `GET` returns every setting with its
         # default copy.
         # `participantAvatarStyle` is `CHARACTERS`, `INITIALS`, `ANIMALS`, or `GRADIENT`; missing or
-        # unknown values mean `INITIALS`.
+        # unknown values mean `INITIALS`. `visualStyle` is `GLOW`, `CLEAN`, `FLAT`, or `ROUND`, and is
+        # omitted when the program has no saved Style.
         # `payoutDestinationConfirmation` is omitted when no confirmation fields are stored. Stored
         # `null` fields are returned as `null`; omitted and `null` fields use localized defaults.
         #
