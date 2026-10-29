@@ -143,6 +143,14 @@ module GrowsurfRuby
         attr_writer :limit_duration
 
         # Custom key/value metadata (single-level; values are stored as strings).
+        #
+        #   For `DOUBLE_SIDED` rewards in referral programs, `rewardAmount` is the
+        #   referrer’s amount and `referredRewardAmount` is the friend’s amount. If
+        #   `referredRewardAmount` is absent, both use `rewardAmount`. New or changed positive
+        #   numeric amounts must use whole units for currencies without decimals, such as JPY, and
+        #   no more than two decimal places for other currencies, including USD and KWD. Excess
+        #   precision is rejected rather than rounded, including when you clone a program. Existing
+        #   unchanged amounts and earned rewards keep their saved values.
         sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :metadata
 
@@ -296,6 +304,14 @@ module GrowsurfRuby
           limit: nil,
           limit_duration: nil,
           # Custom key/value metadata (single-level; values are stored as strings).
+          #
+          #   For `DOUBLE_SIDED` rewards in referral programs, `rewardAmount` is the
+          #   referrer’s amount and `referredRewardAmount` is the friend’s amount. If
+          #   `referredRewardAmount` is absent, both use `rewardAmount`. New or changed positive
+          #   numeric amounts must use whole units for currencies without decimals, such as JPY, and
+          #   no more than two decimal places for other currencies, including USD and KWD. Excess
+          #   precision is rejected rather than rounded, including when you clone a program.
+          #   Existing unchanged amounts and earned rewards keep their saved values.
           metadata: nil,
           # Text shown before a participant's referral count in milestone-progress copy.
           # Applies to `MILESTONE` rewards.
