@@ -82,6 +82,14 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :last_name
 
+        # When the referrer's credit for this referral expired, as a Unix timestamp in milliseconds. `null` when the credit has not expired.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :referral_credit_expired_at
+
+        # When the referral was triggered, as a Unix timestamp in milliseconds. `null` until the referral is triggered, and for invites.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :referral_triggered_at
+
         sig do
           params(
             id: String,
@@ -91,7 +99,9 @@ module GrowsurfRuby
             referred_by: String,
             updated_at: Integer,
             first_name: T.nilable(String),
-            last_name: T.nilable(String)
+            last_name: T.nilable(String),
+            referral_credit_expired_at: T.nilable(Integer),
+            referral_triggered_at: T.nilable(Integer)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -102,7 +112,11 @@ module GrowsurfRuby
           referred_by:,
           updated_at:,
           first_name: nil,
-          last_name: nil
+          last_name: nil,
+          # When the referrer's credit for this referral expired, as a Unix timestamp in milliseconds. `null` when the credit has not expired.
+          referral_credit_expired_at: nil,
+          # When the referral was triggered, as a Unix timestamp in milliseconds. `null` until the referral is triggered, and for invites.
+          referral_triggered_at: nil
         )
         end
 
@@ -117,7 +131,9 @@ module GrowsurfRuby
               referred_by: String,
               updated_at: Integer,
               first_name: T.nilable(String),
-              last_name: T.nilable(String)
+              last_name: T.nilable(String),
+              referral_credit_expired_at: T.nilable(Integer),
+              referral_triggered_at: T.nilable(Integer)
             }
           )
         end

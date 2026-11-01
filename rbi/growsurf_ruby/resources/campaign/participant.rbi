@@ -353,7 +353,7 @@ module GrowsurfRuby
             total_tax_amounts: T::Array[T::Hash[Symbol, T.anything]],
             total_taxes: T::Array[T::Hash[Symbol, T.anything]],
             transaction_id: String,
-            payment_provider: String,
+            payment_provider: GrowsurfRuby::Campaign::ParticipantRecordTransactionParams::PaymentProvider::OrSymbol,
             test_mode: T::Boolean,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(
@@ -444,7 +444,7 @@ module GrowsurfRuby
             refund_id: String,
             refund_status: String,
             transaction_id: String,
-            payment_provider: String,
+            payment_provider: GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::OrSymbol,
             test_mode: T::Boolean,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(

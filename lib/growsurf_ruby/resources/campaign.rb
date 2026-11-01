@@ -26,6 +26,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Design]
       attr_reader :design
 
+      # Custom domain operations for a program's landing pages.
+      # @return [GrowsurfRuby::Resources::Campaign::CustomDomain]
+      attr_reader :custom_domain
+
       # Program Editor "Emails" tab configuration operations.
       # @return [GrowsurfRuby::Resources::Campaign::Emails]
       attr_reader :emails
@@ -733,6 +737,7 @@ module GrowsurfRuby
         @rewards = GrowsurfRuby::Resources::Campaign::Rewards.new(client: client)
         @resources = GrowsurfRuby::Resources::Campaign::ProgramResources.new(client: client)
         @design = GrowsurfRuby::Resources::Campaign::Design.new(client: client)
+        @custom_domain = GrowsurfRuby::Resources::Campaign::CustomDomain.new(client: client)
         @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)
         @options = GrowsurfRuby::Resources::Campaign::Options.new(client: client)
         @installation = GrowsurfRuby::Resources::Campaign::Installation.new(client: client)

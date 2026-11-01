@@ -142,6 +142,10 @@ module GrowsurfRuby
         attr_writer :limit_duration
 
         # Custom key/value metadata (single-level; values are stored as strings).
+        # Each value must be a string, number, or boolean of up to 500 characters. Each
+        # key must have 1 to 40 characters once camelCased, and two keys that camelCase
+        # to the same key are rejected. Up to 50 keys. An entry that breaks these rules
+        # returns `400`.
         #
         #   For `DOUBLE_SIDED` rewards in referral programs, `rewardAmount` is the
         #   referrer’s amount and `referredRewardAmount` is the friend’s amount. If
@@ -304,6 +308,10 @@ module GrowsurfRuby
           limit: nil,
           limit_duration: nil,
           # Custom key/value metadata (single-level; values are stored as strings).
+          # Each value must be a string, number, or boolean of up to 500 characters.
+          # Each key must have 1 to 40 characters once camelCased, and two keys that
+          # camelCase to the same key are rejected. Up to 50 keys. An entry that breaks
+          # these rules returns `400`.
           #
           #   For `DOUBLE_SIDED` rewards in referral programs, `rewardAmount` is the
           #   referrer’s amount and `referredRewardAmount` is the friend’s amount. If

@@ -1,0 +1,84 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type campaign_custom_domain =
+        {
+          created_at: Integer?,
+          dns_record: GrowsurfRuby::Campaign::CampaignCustomDomain::DNSRecord?,
+          domain: String?,
+          is_verified: bool,
+          updated_at: Integer?,
+          verified_at: Integer?
+        }
+
+      class CampaignCustomDomain < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor created_at: Integer?
+
+        attr_accessor dns_record: GrowsurfRuby::Campaign::CampaignCustomDomain::DNSRecord?
+
+        attr_accessor domain: String?
+
+        attr_accessor is_verified: bool
+
+        attr_accessor updated_at: Integer?
+
+        attr_accessor verified_at: Integer?
+
+        def initialize: (
+          created_at: Integer?,
+          dns_record: GrowsurfRuby::Campaign::CampaignCustomDomain::DNSRecord?,
+          domain: String?,
+          is_verified: bool,
+          updated_at: Integer?,
+          verified_at: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Integer?,
+          dns_record: GrowsurfRuby::Campaign::CampaignCustomDomain::DNSRecord?,
+          domain: String?,
+          is_verified: bool,
+          updated_at: Integer?,
+          verified_at: Integer?
+        }
+
+        type dns_record =
+          {
+            name: String,
+            type: GrowsurfRuby::Models::Campaign::CampaignCustomDomain::DNSRecord::type_,
+            value: String
+          }
+
+        class DNSRecord < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor name: String
+
+          attr_accessor type: GrowsurfRuby::Models::Campaign::CampaignCustomDomain::DNSRecord::type_
+
+          attr_accessor value: String
+
+          def initialize: (
+            name: String,
+            type: GrowsurfRuby::Models::Campaign::CampaignCustomDomain::DNSRecord::type_,
+            value: String
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            type: GrowsurfRuby::Models::Campaign::CampaignCustomDomain::DNSRecord::type_,
+            value: String
+          }
+
+          type type_ = :CNAME
+
+          module Type
+            extend GrowsurfRuby::Internal::Type::Enum
+
+            CNAME: :CNAME
+
+            def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::CampaignCustomDomain::DNSRecord::type_]
+          end
+        end
+      end
+    end
+  end
+end

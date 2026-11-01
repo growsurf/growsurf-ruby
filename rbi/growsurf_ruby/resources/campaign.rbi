@@ -26,6 +26,10 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::Design) }
       attr_reader :design
 
+      # Custom domain operations for a program's landing pages.
+      sig { returns(GrowsurfRuby::Resources::Campaign::CustomDomain) }
+      attr_reader :custom_domain
+
       # Program Editor "Emails" tab configuration operations.
       sig { returns(GrowsurfRuby::Resources::Campaign::Emails) }
       attr_reader :emails

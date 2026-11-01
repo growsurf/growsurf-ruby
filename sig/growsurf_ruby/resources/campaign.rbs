@@ -13,6 +13,8 @@ module GrowsurfRuby
 
       attr_reader design: GrowsurfRuby::Resources::Campaign::Design
 
+      attr_reader custom_domain: GrowsurfRuby::Resources::Campaign::CustomDomain
+
       attr_reader emails: GrowsurfRuby::Resources::Campaign::Emails
 
       attr_reader options: GrowsurfRuby::Resources::Campaign::Options

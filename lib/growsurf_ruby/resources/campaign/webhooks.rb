@@ -25,6 +25,8 @@ module GrowsurfRuby
         # Adds a webhook to the program. A program can have only one saved Bask Health
         # webhook across all `bask.ninja` hosts and paths, including disabled webhooks. A
         # second Bask Health webhook returns `400`.
+        # A program can have up to 5 webhooks, counting the primary webhook slot, so you
+        # can create up to 4. Creating another returns `400`.
         # A concurrent change to webhook settings can return `409`; reload the webhooks
         # before retrying.
         #
@@ -34,7 +36,7 @@ module GrowsurfRuby
         #
         # @param payload_url [String] Body param: The URL that receives webhook deliveries.
         #
-        # @param events [Array<Symbol, GrowsurfRuby::Models::Campaign::WebhookEvent>] Body param: The events this webhook is subscribed to. When omitted, it is subscri
+        # @param events [Array<Symbol, GrowsurfRuby::Models::Campaign::WebhookEvent>] Body param: The events this webhook is subscribed to. When omitted, the webhook i
         #
         # @param is_enabled [Boolean] Body param
         #

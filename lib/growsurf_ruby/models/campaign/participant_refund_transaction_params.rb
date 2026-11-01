@@ -103,7 +103,9 @@ module GrowsurfRuby
         optional :transaction_id, String, api_name: :transactionId
 
         # Connected provider: `stripe`, `chargebee` or `recurly`. Requires `transactionId` and `testMode`.
-        optional :payment_provider, String, api_name: :paymentProvider
+        optional :payment_provider,
+                 enum: -> { GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider },
+                 api_name: :paymentProvider
 
         # `true` for test or `false` for live. Requires `paymentProvider`.
         optional :test_mode, GrowsurfRuby::Internal::Type::Boolean, api_name: :testMode
@@ -127,7 +129,7 @@ module GrowsurfRuby
         #   @param refund_id [String]
         #   @param refund_status [String]
         #   @param transaction_id [String]
-        #   @param payment_provider [String]
+        #   @param payment_provider [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRefundTransactionParams::PaymentProvider]
         #   @param test_mode [Boolean]
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 
@@ -136,6 +138,18 @@ module GrowsurfRuby
 
           REFUND = :REFUND
           CHARGEBACK = :CHARGEBACK
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Connected payment provider.
+        module PaymentProvider
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          STRIPE = :stripe
+          CHARGEBEE = :chargebee
+          RECURLY = :recurly
 
           # @!method self.values
           #   @return [Array<Symbol>]
