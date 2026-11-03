@@ -21,7 +21,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    runs-on: ${{ github.repository == 'stainless-sdks/growsurf-ruby' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/growsurf-ruby' && 'depot-ubuntu-24.04' || 'ubuntu-24.04' }}
     if: |-
       github.repository == 'stainless-sdks/growsurf-ruby' &&
       (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
@@ -54,7 +54,7 @@ jobs:
   lint:
     timeout-minutes: 10
     name: lint
-    runs-on: ${{ github.repository == 'stainless-sdks/growsurf-ruby' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/growsurf-ruby' && 'depot-ubuntu-24.04' || 'ubuntu-24.04' }}
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
@@ -72,7 +72,7 @@ jobs:
   test:
     timeout-minutes: 10
     name: test
-    runs-on: ${{ github.repository == 'stainless-sdks/growsurf-ruby' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/growsurf-ruby' && 'depot-ubuntu-24.04' || 'ubuntu-24.04' }}
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     strategy:
       fail-fast: false
