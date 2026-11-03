@@ -50,13 +50,9 @@ class GrowsurfRuby::Test::Resources::TeamContractTest < Minitest::Test
     assert_requested(:post, "#{@base_url}/api-key/rotate")
   end
 
-  def test_safe_team_and_onboarding_models
+  def test_safe_team_model
     team_model = GrowsurfRuby::Models.const_get(:Team)
 
     assert_equal([:name, :verification_requested_at, :verification_status], team_model.fields.keys.sort)
-    assert_equal(
-      [:api_key, :email, :verification_status],
-      GrowsurfRuby::Models::AccountCreateResponse.fields.keys.sort
-    )
   end
 end

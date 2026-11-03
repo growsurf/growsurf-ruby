@@ -1,6 +1,4 @@
 module GrowsurfRuby
-  class AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
-
   module AnalyticsAvailability = GrowsurfRuby::Models::AnalyticsAvailability
 
   module AnalyticsUnavailableReason = GrowsurfRuby::Models::AnalyticsUnavailableReason

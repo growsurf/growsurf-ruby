@@ -39,8 +39,6 @@ module GrowsurfRuby
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
-  AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
-
   AnalyticsAvailability = GrowsurfRuby::Models::AnalyticsAvailability
 
   AnalyticsUnavailableReason = GrowsurfRuby::Models::AnalyticsUnavailableReason
