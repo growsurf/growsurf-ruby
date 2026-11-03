@@ -37,27 +37,6 @@ class GrowsurfRubyTest < Minitest::Test
     ENV["GROWSURF_API_KEY"] = original_api_key unless original_api_key.nil?
   end
 
-  def test_account_creation_never_sends_authorization
-    stub_request(:post, "http://localhost/accounts").to_return_json(
-      status: 200,
-      body: {email: "richard@piedpiper.com", apiKey: "new_key", verificationStatus: "NOT_REQUESTED"}
-    )
-
-    [nil, "My API Key"].each do |api_key|
-      growsurf = GrowsurfRuby::Client.new(base_url: "http://localhost", api_key: api_key)
-      growsurf.account.create(email: "richard@piedpiper.com")
-    end
-
-    assert_requested(:post, "http://localhost/accounts", times: 2) do |request|
-      request.headers.keys.none? { _1.downcase == "authorization" }
-    end
-    recorded = WebMock::RequestRegistry.instance.requested_signatures.hash.keys
-    assert_equal(1, recorded.length)
-    recorded.each do |request|
-      refute_includes(request.headers.keys.map(&:downcase), "authorization")
-    end
-  end
-
   def test_client_default_request_default_retry_attempts
     stub_request(:get, "http://localhost/campaigns").to_return_json(status: 500, body: {})
 

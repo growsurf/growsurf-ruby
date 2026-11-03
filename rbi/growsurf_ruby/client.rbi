@@ -14,9 +14,6 @@ module GrowsurfRuby
     sig { returns(T.nilable(String)) }
     attr_reader :api_key
 
-    sig { returns(GrowsurfRuby::Resources::Account) }
-    attr_reader :account
-
     sig { returns(GrowsurfRuby::Resources::Team) }
     attr_reader :team
 

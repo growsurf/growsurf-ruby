@@ -10,8 +10,6 @@ module GrowsurfRuby
 
     attr_reader api_key: String?
 
-    attr_reader account: GrowsurfRuby::Resources::Account
-
     attr_reader team: GrowsurfRuby::Resources::Team
 
     attr_reader campaign: GrowsurfRuby::Resources::Campaign

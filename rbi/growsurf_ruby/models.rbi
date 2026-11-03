@@ -1,8 +1,6 @@
 # typed: strong
 
 module GrowsurfRuby
-  AccountCreateParams = GrowsurfRuby::Models::AccountCreateParams
-
   AnalyticsAvailability = GrowsurfRuby::Models::AnalyticsAvailability
 
   AnalyticsUnavailableReason = GrowsurfRuby::Models::AnalyticsUnavailableReason

@@ -19,9 +19,6 @@ module GrowsurfRuby
     # @return [String]
     attr_reader :api_key
 
-    # @return [GrowsurfRuby::Resources::Account]
-    attr_reader :account
-
     # @return [GrowsurfRuby::Resources::Team]
     attr_reader :team
 
@@ -87,7 +84,6 @@ module GrowsurfRuby
         headers: headers
       )
 
-      @account = GrowsurfRuby::Resources::Account.new(client: self)
       @team = GrowsurfRuby::Resources::Team.new(client: self)
       @campaign = GrowsurfRuby::Resources::Campaign.new(client: self)
     end
