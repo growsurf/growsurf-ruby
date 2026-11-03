@@ -1,0 +1,25 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type custom_domain_set_params =
+        { domain: String } & GrowsurfRuby::Internal::Type::request_parameters
+
+      class CustomDomainSetParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+
+        attr_accessor domain: String
+
+        def initialize: (
+          domain: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          domain: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,30 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      class CustomDomain
+        def retrieve: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::CampaignCustomDomain
+
+        def set: (
+          String id,
+          domain: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::CampaignCustomDomain
+
+        def verify: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::CampaignCustomDomain
+
+        def delete: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Models::Campaign::DeleteCampaignCustomDomainResponse
+
+        def initialize: (client: GrowsurfRuby::Client) -> void
+      end
+    end
+  end
+end

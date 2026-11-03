@@ -13,6 +13,7 @@ module GrowsurfRuby
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String,
           referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          referred_at: Integer?,
           referred_by: String
         }
 
@@ -59,6 +60,8 @@ module GrowsurfRuby
           GrowsurfRuby::Models::Campaign::Create::referral_status
         ) -> GrowsurfRuby::Models::Campaign::Create::referral_status
 
+        attr_accessor referred_at: Integer?
+
         attr_reader referred_by: String?
 
         def referred_by=: (String) -> String
@@ -74,6 +77,7 @@ module GrowsurfRuby
           ?metadata: ::Hash[Symbol, top],
           ?mobile_instance_id: String,
           ?referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          ?referred_at: Integer?,
           ?referred_by: String
         ) -> void
 
@@ -88,6 +92,7 @@ module GrowsurfRuby
           metadata: ::Hash[Symbol, top],
           mobile_instance_id: String,
           referral_status: GrowsurfRuby::Models::Campaign::Create::referral_status,
+          referred_at: Integer?,
           referred_by: String
         }
 

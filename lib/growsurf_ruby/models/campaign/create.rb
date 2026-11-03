@@ -34,8 +34,11 @@ module GrowsurfRuby
         optional :is_affiliate, GrowsurfRuby::Internal::Type::Boolean, api_name: :isAffiliate
 
         # @!attribute language
-        #   The language of the participant's portal and program emails. Must be one of the
-        #   program's languages. Applied only when this request creates the participant.
+        #   The language of the participant's portal and program emails. Stored when it is
+        #   one of the program's languages. A regional tag maps to its language (for
+        #   example, `es-MX` is stored as `es`). Any other value is ignored and the
+        #   program's base language applies. Applied only when this request creates the
+        #   participant.
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::Language, nil]
         optional :language, enum: -> { GrowsurfRuby::Campaign::Language }
@@ -70,13 +73,22 @@ module GrowsurfRuby
                  enum: -> { GrowsurfRuby::Campaign::Create::ReferralStatus },
                  api_name: :referralStatus
 
+        # @!attribute referred_at
+        #   When the participant was referred, in Unix milliseconds. Used only with a valid
+        #   `referredBy`. If you omit `referralStatus`, GrowSurf compares this time with
+        #   the program's referral credit window to set it. Defaults to the time of the
+        #   request.
+        #
+        #   @return [Integer, nil]
+        optional :referred_at, Integer, api_name: :referredAt, nil?: true
+
         # @!attribute referred_by
         #   Referrer participant ID or email address.
         #
         #   @return [String, nil]
         optional :referred_by, String, api_name: :referredBy
 
-        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil)
+        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::Create} for more details.
         #
@@ -90,7 +102,7 @@ module GrowsurfRuby
         #
         #   @param is_affiliate [Boolean] Affiliate programs only. Controls affiliate enrollment for a new participant.
         #
-        #   @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Must be one of the
+        #   @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Stored when it is
         #
         #   @param last_name [String]
         #
@@ -99,6 +111,8 @@ module GrowsurfRuby
         #   @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
         #
         #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus] The referral credit status; only meaningful when `referred_by` resolves to a ref
+        #
+        #   @param referred_at [Integer, nil] When the participant was referred, in Unix milliseconds. Used only with a valid
         #
         #   @param referred_by [String] Referrer participant ID or email address.
 

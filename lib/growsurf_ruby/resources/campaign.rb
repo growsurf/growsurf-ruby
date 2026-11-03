@@ -26,6 +26,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::Design]
       attr_reader :design
 
+      # Custom domain operations for a program's landing pages.
+      # @return [GrowsurfRuby::Resources::Campaign::CustomDomain]
+      attr_reader :custom_domain
+
       # Program Editor "Emails" tab configuration operations.
       # @return [GrowsurfRuby::Resources::Campaign::Emails]
       attr_reader :emails
@@ -91,9 +95,9 @@ module GrowsurfRuby
       #
       # @param type [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Type] The program type. Immutable after creation.
       #
-      # @param company_logo_image_url [String]
+      # @param company_logo_image_url [String, nil]
       #
-      # @param company_name [String]
+      # @param company_name [String, nil]
       #
       # @param currency_iso [String] ISO 4217 currency code. Defaults to USD. Chosen when the program is created and immutable afterward — it cannot be changed on update.
       #
@@ -125,17 +129,16 @@ module GrowsurfRuby
       # dedicated config sub-resources, not here. The program cannot be deleted via this
       # endpoint.
       # Changes to participant email content are checked before saving. Rejected content
-      # returns `400`; if the check is unavailable, `503` asks you to retry. Neither
-      # response saves the change. A concurrent edit can return `409`; reload the program
-      # before retrying.
+      # returns `400` and is not saved. A concurrent edit can return `409`; reload the
+      # program before retrying.
       #
       # @overload update(id, company_logo_image_url: nil, company_name: nil, name: nil, status: nil, request_options: {})
       #
       # @param id [String] Path param: GrowSurf program ID.
       #
-      # @param company_logo_image_url [String] Body param
+      # @param company_logo_image_url [String, nil] Body param
       #
-      # @param company_name [String] Body param
+      # @param company_name [String, nil] Body param
       #
       # @param name [String] Body param
       #
@@ -240,7 +243,7 @@ module GrowsurfRuby
       # participant endpoints. Use this endpoint from your backend after your mobile app
       # authenticates a signed-in user. The program must have mobile SDK access enabled.
       #
-      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_by: nil, request_options: {})
+      # @overload create_mobile_participant_token(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
       #
@@ -252,7 +255,7 @@ module GrowsurfRuby
       #
       # @param ip_address [String]
       #
-      # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Must be one of the program's languages. Applied only when this request creates the participant.
+      # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language] The language of the participant's portal and program emails. Stored when it is one of the program's languages. A regional tag maps to its language (for example, `es-MX` is stored as `es`). Any other value is ignored and the program's base language applies. Applied only when this request creates the participant.
       #
       # @param last_name [String]
       #
@@ -261,6 +264,8 @@ module GrowsurfRuby
       # @param mobile_instance_id [String] Optional app-install scoped identifier for native mobile anti-fraud. Recommended
       #
       # @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::Create::ReferralStatus]
+      #
+      # @param referred_at [Integer, nil] When the participant was referred, in Unix milliseconds. Used only with a valid `referredBy`. If you omit `referralStatus`, GrowSurf compares this time with the program's referral credit window to set it. Defaults to the time of the request.
       #
       # @param referred_by [String] Referrer participant ID or email address.
       #
@@ -732,6 +737,7 @@ module GrowsurfRuby
         @rewards = GrowsurfRuby::Resources::Campaign::Rewards.new(client: client)
         @resources = GrowsurfRuby::Resources::Campaign::ProgramResources.new(client: client)
         @design = GrowsurfRuby::Resources::Campaign::Design.new(client: client)
+        @custom_domain = GrowsurfRuby::Resources::Campaign::CustomDomain.new(client: client)
         @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)
         @options = GrowsurfRuby::Resources::Campaign::Options.new(client: client)
         @installation = GrowsurfRuby::Resources::Campaign::Installation.new(client: client)

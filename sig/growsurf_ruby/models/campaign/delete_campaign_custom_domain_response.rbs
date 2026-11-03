@@ -1,0 +1,18 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type delete_campaign_custom_domain_response =
+        { domain: String, success: bool }
+
+      class DeleteCampaignCustomDomainResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor domain: String
+
+        attr_accessor success: bool
+
+        def initialize: (domain: String, success: bool) -> void
+
+        def to_hash: -> { domain: String, success: bool }
+      end
+    end
+  end
+end

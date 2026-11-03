@@ -201,6 +201,14 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :prev_monthly_referral_count, Integer, api_name: :prevMonthlyReferralCount
 
+        # @!attribute referral_lead_qualified_at
+        #   When this referred signup counted as a lead for the referrer, in Unix
+        #   milliseconds. Set only when the program's `referralTrigger` is `CUSTOM`.
+        #   Lead-event Campaign Rewards and commissions use it.
+        #
+        #   @return [Integer, nil]
+        optional :referral_lead_qualified_at, Integer, api_name: :referralLeadQualifiedAt, nil?: true
+
         # @!attribute referrals
         #
         #   @return [Array<String>, nil]
@@ -264,7 +272,7 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, language: nil, last_name: nil, lead_count: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
+        # @!method initialize(id:, email:, monthly_rank:, monthly_referral_count:, rank:, referral_count:, rewards:, share_url: nil, affiliate_enrollment_source: nil, affiliate_status: nil, all_matching_fraudsters: nil, created_at: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_affiliate: nil, is_new: nil, is_winner: nil, language: nil, last_name: nil, lead_count: nil, metadata: nil, mobile_instance_id: nil, monthly_referrals: nil, notes: nil, payout_settings: nil, paypal_email_address: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, referral_lead_qualified_at: nil, referrals: nil, referral_source: nil, referral_status: nil, referred_by: nil, referrer: nil, share_count: nil, unique_impression_count: nil, unread_commissions_count: nil, unread_payouts_count: nil, unsubscribed: nil, vanity_keys: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::CampaignParticipant} for more details.
         #
@@ -335,6 +343,8 @@ module GrowsurfRuby
         #
         #   @param prev_monthly_referral_count [Integer]
         #
+        #   @param referral_lead_qualified_at [Integer, nil] When this referred signup counted as a lead for the referrer, in Unix
+        #
         #   @param referrals [Array<String>]
         #
         #   @param referral_source [Symbol, GrowsurfRuby::Models::Campaign::ReferralSource]
@@ -389,221 +399,11 @@ module GrowsurfRuby
           end
         end
 
+        # The participant's referrer. It has the same fields as a `Participant`. Its own
+        # `referrer` is always `null`.
+        #
         # @see GrowsurfRuby::Models::Campaign::CampaignParticipant#referrer
-        class Referrer < GrowsurfRuby::Internal::Type::BaseModel
-          # @!attribute id
-          #
-          #   @return [String, nil]
-          optional :id, String
-
-          # @!attribute created_at
-          #
-          #   @return [Integer, nil]
-          optional :created_at, Integer, api_name: :createdAt
-
-          # @!attribute email
-          #
-          #   @return [String, nil]
-          optional :email, String
-
-          # @!attribute fingerprint
-          #
-          #   @return [String, nil]
-          optional :fingerprint, String, nil?: true
-
-          # @!attribute first_name
-          #
-          #   @return [String, nil]
-          optional :first_name, String, api_name: :firstName, nil?: true
-
-          # @!attribute fraud_reason_code
-          #
-          #   @return [String, nil]
-          optional :fraud_reason_code, String, api_name: :fraudReasonCode
-
-          # @!attribute fraud_risk_level
-          #
-          #   @return [Symbol, GrowsurfRuby::Models::Campaign::FraudRiskLevel, nil]
-          optional :fraud_risk_level,
-                   enum: -> {
-                     GrowsurfRuby::Campaign::FraudRiskLevel
-                   },
-                   api_name: :fraudRiskLevel
-
-          # @!attribute impression_count
-          #
-          #   @return [Integer, nil]
-          optional :impression_count, Integer, api_name: :impressionCount
-
-          # @!attribute invite_count
-          #
-          #   @return [Integer, nil]
-          optional :invite_count, Integer, api_name: :inviteCount
-
-          # @!attribute ip_address
-          #
-          #   @return [String, nil]
-          optional :ip_address, String, api_name: :ipAddress, nil?: true
-
-          # @!attribute is_winner
-          #
-          #   @return [Boolean, nil]
-          optional :is_winner, GrowsurfRuby::Internal::Type::Boolean, api_name: :isWinner
-
-          # @!attribute last_name
-          #
-          #   @return [String, nil]
-          optional :last_name, String, api_name: :lastName, nil?: true
-
-          # @!attribute lead_count
-          #   The number of pending referrals the participant made that have not converted
-          #   into successful referrals yet.
-          #
-          #   @return [Integer, nil]
-          optional :lead_count, Integer, api_name: :leadCount
-
-          # @!attribute metadata
-          #   Shallow custom metadata object.
-          #
-          #   @return [Hash{Symbol=>Object}, nil]
-          optional :metadata, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
-
-          # @!attribute monthly_rank
-          #
-          #   @return [Integer, nil]
-          optional :monthly_rank, Integer, api_name: :monthlyRank
-
-          # @!attribute monthly_referral_count
-          #
-          #   @return [Integer, nil]
-          optional :monthly_referral_count, Integer, api_name: :monthlyReferralCount
-
-          # @!attribute monthly_referrals
-          #
-          #   @return [Array<String>, nil]
-          optional :monthly_referrals,
-                   GrowsurfRuby::Internal::Type::ArrayOf[String],
-                   api_name: :monthlyReferrals
-
-          # @!attribute prev_monthly_rank
-          #
-          #   @return [Integer, nil]
-          optional :prev_monthly_rank, Integer, api_name: :prevMonthlyRank
-
-          # @!attribute prev_monthly_referral_count
-          #
-          #   @return [Integer, nil]
-          optional :prev_monthly_referral_count, Integer, api_name: :prevMonthlyReferralCount
-
-          # @!attribute rank
-          #
-          #   @return [Integer, nil]
-          optional :rank, Integer
-
-          # @!attribute referral_count
-          #
-          #   @return [Integer, nil]
-          optional :referral_count, Integer, api_name: :referralCount
-
-          # @!attribute referrals
-          #
-          #   @return [Array<String>, nil]
-          optional :referrals, GrowsurfRuby::Internal::Type::ArrayOf[String]
-
-          # @!attribute referral_source
-          #
-          #   @return [Symbol, GrowsurfRuby::Models::Campaign::ReferralSource, nil]
-          optional :referral_source,
-                   enum: -> {
-                     GrowsurfRuby::Campaign::ReferralSource
-                   },
-                   api_name: :referralSource
-
-          # @!attribute referral_status
-          #
-          #   @return [Symbol, GrowsurfRuby::Models::Campaign::ReferralStatus, nil]
-          optional :referral_status,
-                   enum: -> {
-                     GrowsurfRuby::Campaign::ReferralStatus
-                   },
-                   api_name: :referralStatus
-
-          # @!attribute share_count
-          #
-          #   @return [Hash{Symbol=>Integer}, nil]
-          optional :share_count, GrowsurfRuby::Internal::Type::HashOf[Integer], api_name: :shareCount
-
-          # @!attribute share_url
-          #
-          #   @return [String, nil]
-          optional :share_url, String, api_name: :shareUrl
-
-          # @!attribute unique_impression_count
-          #
-          #   @return [Integer, nil]
-          optional :unique_impression_count, Integer, api_name: :uniqueImpressionCount
-
-          # @!attribute unsubscribed
-          #
-          #   @return [Boolean, nil]
-          optional :unsubscribed, GrowsurfRuby::Internal::Type::Boolean
-
-          # @!method initialize(id: nil, created_at: nil, email: nil, fingerprint: nil, first_name: nil, fraud_reason_code: nil, fraud_risk_level: nil, impression_count: nil, invite_count: nil, ip_address: nil, is_winner: nil, last_name: nil, lead_count: nil, metadata: nil, monthly_rank: nil, monthly_referral_count: nil, monthly_referrals: nil, prev_monthly_rank: nil, prev_monthly_referral_count: nil, rank: nil, referral_count: nil, referrals: nil, referral_source: nil, referral_status: nil, share_count: nil, share_url: nil, unique_impression_count: nil, unsubscribed: nil)
-          #   @param id [String]
-          #
-          #   @param created_at [Integer]
-          #
-          #   @param email [String]
-          #
-          #   @param fingerprint [String, nil]
-          #
-          #   @param first_name [String, nil]
-          #
-          #   @param fraud_reason_code [String]
-          #
-          #   @param fraud_risk_level [Symbol, GrowsurfRuby::Models::Campaign::FraudRiskLevel]
-          #
-          #   @param impression_count [Integer]
-          #
-          #   @param invite_count [Integer]
-          #
-          #   @param ip_address [String, nil]
-          #
-          #   @param is_winner [Boolean]
-          #
-          #   @param last_name [String, nil]
-          #
-          #   @param lead_count [Integer] The number of pending referrals the participant made that have not converted
-          #
-          #   @param metadata [Hash{Symbol=>Object}] Shallow custom metadata object.
-          #
-          #   @param monthly_rank [Integer]
-          #
-          #   @param monthly_referral_count [Integer]
-          #
-          #   @param monthly_referrals [Array<String>]
-          #
-          #   @param prev_monthly_rank [Integer]
-          #
-          #   @param prev_monthly_referral_count [Integer]
-          #
-          #   @param rank [Integer]
-          #
-          #   @param referral_count [Integer]
-          #
-          #   @param referrals [Array<String>]
-          #
-          #   @param referral_source [Symbol, GrowsurfRuby::Models::Campaign::ReferralSource]
-          #
-          #   @param referral_status [Symbol, GrowsurfRuby::Models::Campaign::ReferralStatus]
-          #
-          #   @param share_count [Hash{Symbol=>Integer}]
-          #
-          #   @param share_url [String]
-          #
-          #   @param unique_impression_count [Integer]
-          #
-          #   @param unsubscribed [Boolean]
+        class Referrer < GrowsurfRuby::Models::Campaign::CampaignParticipant
         end
       end
     end

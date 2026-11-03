@@ -191,21 +191,6 @@ module GrowsurfRuby
               :email,
               GrowsurfRuby::Campaign::ParticipantListReferralsParams::SortBy::TaggedSymbol
             )
-          FIRST_NAME =
-            T.let(
-              :firstName,
-              GrowsurfRuby::Campaign::ParticipantListReferralsParams::SortBy::TaggedSymbol
-            )
-          LAST_NAME =
-            T.let(
-              :lastName,
-              GrowsurfRuby::Campaign::ParticipantListReferralsParams::SortBy::TaggedSymbol
-            )
-          REFERRAL_STATUS =
-            T.let(
-              :referralStatus,
-              GrowsurfRuby::Campaign::ParticipantListReferralsParams::SortBy::TaggedSymbol
-            )
           REFERRAL_TRIGGERED_AT =
             T.let(
               :referralTriggeredAt,

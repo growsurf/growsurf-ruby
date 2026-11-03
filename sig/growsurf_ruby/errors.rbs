@@ -71,6 +71,38 @@ module GrowsurfRuby
         ?message: String?
       ) -> instance
 
+      attr_reader error_name: String?
+
+      attr_reader error_code: String?
+
+      attr_reader error_message: String?
+
+      attr_reader errors: ::Array[::Hash[Symbol, top]]?
+
+      attr_reader support_url: String?
+
+      attr_reader policy_name: String?
+
+      attr_reader level: String?
+
+      attr_reader timestamp: String?
+
+      attr_reader fraud_risk_level: String?
+
+      attr_reader fraud_reason_code: String?
+
+      attr_reader matched_participant_ids: ::Array[String]?
+
+      attr_reader email: String?
+
+      attr_reader referrer_id: String?
+
+      attr_reader ip_address: String?
+
+      attr_reader fingerprint: String?
+
+      attr_reader blocked_at: String?
+
       def initialize: (
         url: URI::Generic,
         status: Integer,
@@ -80,6 +112,14 @@ module GrowsurfRuby
         response: nil,
         ?message: String?
       ) -> void
+
+      private
+
+      def string_or_nil: (top value) -> String?
+
+      def string_list_or_nil: (top value) -> ::Array[String]?
+
+      def hash_list_or_nil: (top value) -> ::Array[::Hash[Symbol, top]]?
     end
 
     class BadRequestError < GrowsurfRuby::Errors::APIStatusError

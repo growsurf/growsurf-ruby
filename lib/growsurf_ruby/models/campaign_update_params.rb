@@ -15,12 +15,12 @@ module GrowsurfRuby
       # @!attribute company_logo_image_url
       #
       #   @return [String, nil]
-      optional :company_logo_image_url, String, api_name: :companyLogoImageUrl
+      optional :company_logo_image_url, String, api_name: :companyLogoImageUrl, nil?: true
 
       # @!attribute company_name
       #
       #   @return [String, nil]
-      optional :company_name, String, api_name: :companyName
+      optional :company_name, String, api_name: :companyName, nil?: true
 
       # @!attribute name
       #
@@ -35,9 +35,9 @@ module GrowsurfRuby
       # @!method initialize(id:, company_logo_image_url: nil, company_name: nil, name: nil, status: nil, request_options: {})
       #   @param id [String]
       #
-      #   @param company_logo_image_url [String]
+      #   @param company_logo_image_url [String, nil]
       #
-      #   @param company_name [String]
+      #   @param company_name [String, nil]
       #
       #   @param name [String]
       #

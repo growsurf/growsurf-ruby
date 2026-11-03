@@ -103,9 +103,6 @@ module GrowsurfRuby
           UPDATED_AT = :updatedAt
           CREATED_AT = :createdAt
           EMAIL = :email
-          FIRST_NAME = :firstName
-          LAST_NAME = :lastName
-          REFERRAL_STATUS = :referralStatus
           REFERRAL_TRIGGERED_AT = :referralTriggeredAt
 
           # @!method self.values

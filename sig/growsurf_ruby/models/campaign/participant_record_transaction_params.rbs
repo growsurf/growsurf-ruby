@@ -28,7 +28,7 @@ module GrowsurfRuby
           total_tax_amounts: ::Array[::Hash[Symbol, top]],
           total_taxes: ::Array[::Hash[Symbol, top]],
           transaction_id: String,
-          payment_provider: String,
+          payment_provider: GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider,
           test_mode: bool
         }
         & GrowsurfRuby::Internal::Type::request_parameters
@@ -133,9 +133,11 @@ module GrowsurfRuby
 
         def transaction_id=: (String) -> String
 
-        attr_reader payment_provider: String?
+        attr_reader payment_provider: GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider?
 
-        def payment_provider=: (String) -> String
+        def payment_provider=: (
+          GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider
+        ) -> GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider
 
         attr_reader test_mode: bool?
 
@@ -167,7 +169,7 @@ module GrowsurfRuby
           ?total_tax_amounts: ::Array[::Hash[Symbol, top]],
           ?total_taxes: ::Array[::Hash[Symbol, top]],
           ?transaction_id: String,
-          ?payment_provider: String,
+          ?payment_provider: GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider,
           ?test_mode: bool,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
@@ -198,10 +200,22 @@ module GrowsurfRuby
           total_tax_amounts: ::Array[::Hash[Symbol, top]],
           total_taxes: ::Array[::Hash[Symbol, top]],
           transaction_id: String,
-          payment_provider: String,
+          payment_provider: GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider,
           test_mode: bool,
           request_options: GrowsurfRuby::RequestOptions
         }
+
+        type payment_provider = :stripe | :chargebee | :recurly
+
+        module PaymentProvider
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          STRIPE: :stripe
+          CHARGEBEE: :chargebee
+          RECURLY: :recurly
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantRecordTransactionParams::payment_provider]
+        end
       end
     end
   end

@@ -81,7 +81,19 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :last_name, String, api_name: :lastName, nil?: true
 
-        # @!method initialize(id:, created_at:, email:, referral_status:, referred_by:, updated_at:, first_name: nil, last_name: nil)
+        # @!attribute referral_credit_expired_at
+        #   When the referrer's credit for this referral expired, as a Unix timestamp in milliseconds. `null` when the credit has not expired.
+        #
+        #   @return [Integer, nil]
+        optional :referral_credit_expired_at, Integer, api_name: :referralCreditExpiredAt, nil?: true
+
+        # @!attribute referral_triggered_at
+        #   When the referral was triggered, as a Unix timestamp in milliseconds. `null` until the referral is triggered, and for invites.
+        #
+        #   @return [Integer, nil]
+        optional :referral_triggered_at, Integer, api_name: :referralTriggeredAt, nil?: true
+
+        # @!method initialize(id:, created_at:, email:, referral_status:, referred_by:, updated_at:, first_name: nil, last_name: nil, referral_credit_expired_at: nil, referral_triggered_at: nil)
         #   @param id [String]
         #   @param created_at [Integer]
         #   @param email [String]
@@ -90,6 +102,10 @@ module GrowsurfRuby
         #   @param updated_at [Integer]
         #   @param first_name [String, nil]
         #   @param last_name [String, nil]
+        #
+        #   @param referral_credit_expired_at [Integer, nil] When the referrer's credit for this referral expired, as a Unix timestamp in milliseconds. `null` when the credit has not expired.
+        #
+        #   @param referral_triggered_at [Integer, nil] When the referral was triggered, as a Unix timestamp in milliseconds. `null` until the referral is triggered, and for invites.
       end
     end
   end

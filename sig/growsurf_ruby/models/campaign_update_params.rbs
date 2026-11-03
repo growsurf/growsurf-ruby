@@ -3,8 +3,8 @@ module GrowsurfRuby
     type campaign_update_params =
       {
         id: String,
-        company_logo_image_url: String,
-        company_name: String,
+        company_logo_image_url: String?,
+        company_name: String?,
         name: String,
         status: GrowsurfRuby::Models::CampaignUpdateParams::status
       }
@@ -16,13 +16,9 @@ module GrowsurfRuby
 
       attr_accessor id: String
 
-      attr_reader company_logo_image_url: String?
+      attr_accessor company_logo_image_url: String?
 
-      def company_logo_image_url=: (String) -> String
-
-      attr_reader company_name: String?
-
-      def company_name=: (String) -> String
+      attr_accessor company_name: String?
 
       attr_reader name: String?
 
@@ -36,8 +32,8 @@ module GrowsurfRuby
 
       def initialize: (
         id: String,
-        ?company_logo_image_url: String,
-        ?company_name: String,
+        ?company_logo_image_url: String?,
+        ?company_name: String?,
         ?name: String,
         ?status: GrowsurfRuby::Models::CampaignUpdateParams::status,
         ?request_options: GrowsurfRuby::request_opts
@@ -45,8 +41,8 @@ module GrowsurfRuby
 
       def to_hash: -> {
         id: String,
-        company_logo_image_url: String,
-        company_name: String,
+        company_logo_image_url: String?,
+        company_name: String?,
         name: String,
         status: GrowsurfRuby::Models::CampaignUpdateParams::status,
         request_options: GrowsurfRuby::RequestOptions

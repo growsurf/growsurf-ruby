@@ -18,16 +18,10 @@ module GrowsurfRuby
       attr_accessor :type
 
       sig { returns(T.nilable(String)) }
-      attr_reader :company_logo_image_url
-
-      sig { params(company_logo_image_url: String).void }
-      attr_writer :company_logo_image_url
+      attr_accessor :company_logo_image_url
 
       sig { returns(T.nilable(String)) }
-      attr_reader :company_name
-
-      sig { params(company_name: String).void }
-      attr_writer :company_name
+      attr_accessor :company_name
 
       sig { returns(T.nilable(String)) }
       attr_reader :currency_iso
@@ -66,8 +60,8 @@ module GrowsurfRuby
       sig do
         params(
           type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,
-          company_logo_image_url: String,
-          company_name: String,
+          company_logo_image_url: T.nilable(String),
+          company_name: T.nilable(String),
           currency_iso: String,
           goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol,
           name: String,
@@ -91,8 +85,8 @@ module GrowsurfRuby
         override.returns(
           {
             type: GrowsurfRuby::CampaignCreateParams::Type::OrSymbol,
-            company_logo_image_url: String,
-            company_name: String,
+            company_logo_image_url: T.nilable(String),
+            company_name: T.nilable(String),
             currency_iso: String,
             goal: GrowsurfRuby::CampaignCreateParams::Goal::OrSymbol,
             name: String,

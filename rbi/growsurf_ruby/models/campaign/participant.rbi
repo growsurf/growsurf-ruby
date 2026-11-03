@@ -213,6 +213,12 @@ module GrowsurfRuby
         sig { params(prev_monthly_referral_count: Integer).void }
         attr_writer :prev_monthly_referral_count
 
+        # When this referred signup counted as a lead for the referrer, in Unix
+        # milliseconds. Set only when the program's `referralTrigger` is `CUSTOM`.
+        # Lead-event Campaign Rewards and commissions use it.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :referral_lead_qualified_at
+
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :referrals
 
@@ -343,6 +349,7 @@ module GrowsurfRuby
             paypal_email_address: String,
             prev_monthly_rank: Integer,
             prev_monthly_referral_count: Integer,
+            referral_lead_qualified_at: T.nilable(Integer),
             referrals: T::Array[String],
             referral_source: GrowsurfRuby::Campaign::ReferralSource::OrSymbol,
             referral_status: GrowsurfRuby::Campaign::ReferralStatus::OrSymbol,
@@ -414,6 +421,10 @@ module GrowsurfRuby
           paypal_email_address: nil,
           prev_monthly_rank: nil,
           prev_monthly_referral_count: nil,
+          # When this referred signup counted as a lead for the referrer, in Unix
+          # milliseconds. Set only when the program's `referralTrigger` is `CUSTOM`.
+          # Lead-event Campaign Rewards and commissions use it.
+          referral_lead_qualified_at: nil,
           referrals: nil,
           referral_source: nil,
           referral_status: nil,
@@ -466,6 +477,7 @@ module GrowsurfRuby
               paypal_email_address: String,
               prev_monthly_rank: Integer,
               prev_monthly_referral_count: Integer,
+              referral_lead_qualified_at: T.nilable(Integer),
               referrals: T::Array[String],
               referral_source:
                 GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol,
@@ -584,7 +596,9 @@ module GrowsurfRuby
           end
         end
 
-        class Referrer < GrowsurfRuby::Internal::Type::BaseModel
+        # The participant's referrer. It has the same fields as a `Participant`. Its own
+        # `referrer` is always `null`.
+        class Referrer < GrowsurfRuby::Models::Campaign::CampaignParticipant
           OrHash =
             T.type_alias do
               T.any(
@@ -592,297 +606,6 @@ module GrowsurfRuby
                 GrowsurfRuby::Internal::AnyHash
               )
             end
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :id
-
-          sig { params(id: String).void }
-          attr_writer :id
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :created_at
-
-          sig { params(created_at: Integer).void }
-          attr_writer :created_at
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :email
-
-          sig { params(email: String).void }
-          attr_writer :email
-
-          sig { returns(T.nilable(String)) }
-          attr_accessor :fingerprint
-
-          sig { returns(T.nilable(String)) }
-          attr_accessor :first_name
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :fraud_reason_code
-
-          sig { params(fraud_reason_code: String).void }
-          attr_writer :fraud_reason_code
-
-          sig do
-            returns(
-              T.nilable(GrowsurfRuby::Campaign::FraudRiskLevel::TaggedSymbol)
-            )
-          end
-          attr_reader :fraud_risk_level
-
-          sig do
-            params(
-              fraud_risk_level: GrowsurfRuby::Campaign::FraudRiskLevel::OrSymbol
-            ).void
-          end
-          attr_writer :fraud_risk_level
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :impression_count
-
-          sig { params(impression_count: Integer).void }
-          attr_writer :impression_count
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :invite_count
-
-          sig { params(invite_count: Integer).void }
-          attr_writer :invite_count
-
-          sig { returns(T.nilable(String)) }
-          attr_accessor :ip_address
-
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_reader :is_winner
-
-          sig { params(is_winner: T::Boolean).void }
-          attr_writer :is_winner
-
-          sig { returns(T.nilable(String)) }
-          attr_accessor :last_name
-
-          # The number of pending referrals the participant made that have not converted
-          # into successful referrals yet.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :lead_count
-
-          sig { params(lead_count: Integer).void }
-          attr_writer :lead_count
-
-          # Shallow custom metadata object.
-          sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-          attr_reader :metadata
-
-          sig { params(metadata: T::Hash[Symbol, T.anything]).void }
-          attr_writer :metadata
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :monthly_rank
-
-          sig { params(monthly_rank: Integer).void }
-          attr_writer :monthly_rank
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :monthly_referral_count
-
-          sig { params(monthly_referral_count: Integer).void }
-          attr_writer :monthly_referral_count
-
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :monthly_referrals
-
-          sig { params(monthly_referrals: T::Array[String]).void }
-          attr_writer :monthly_referrals
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :prev_monthly_rank
-
-          sig { params(prev_monthly_rank: Integer).void }
-          attr_writer :prev_monthly_rank
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :prev_monthly_referral_count
-
-          sig { params(prev_monthly_referral_count: Integer).void }
-          attr_writer :prev_monthly_referral_count
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :rank
-
-          sig { params(rank: Integer).void }
-          attr_writer :rank
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :referral_count
-
-          sig { params(referral_count: Integer).void }
-          attr_writer :referral_count
-
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :referrals
-
-          sig { params(referrals: T::Array[String]).void }
-          attr_writer :referrals
-
-          sig do
-            returns(
-              T.nilable(GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol)
-            )
-          end
-          attr_reader :referral_source
-
-          sig do
-            params(
-              referral_source: GrowsurfRuby::Campaign::ReferralSource::OrSymbol
-            ).void
-          end
-          attr_writer :referral_source
-
-          sig do
-            returns(
-              T.nilable(GrowsurfRuby::Campaign::ReferralStatus::TaggedSymbol)
-            )
-          end
-          attr_reader :referral_status
-
-          sig do
-            params(
-              referral_status: GrowsurfRuby::Campaign::ReferralStatus::OrSymbol
-            ).void
-          end
-          attr_writer :referral_status
-
-          sig { returns(T.nilable(T::Hash[Symbol, Integer])) }
-          attr_reader :share_count
-
-          sig { params(share_count: T::Hash[Symbol, Integer]).void }
-          attr_writer :share_count
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :share_url
-
-          sig { params(share_url: String).void }
-          attr_writer :share_url
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :unique_impression_count
-
-          sig { params(unique_impression_count: Integer).void }
-          attr_writer :unique_impression_count
-
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_reader :unsubscribed
-
-          sig { params(unsubscribed: T::Boolean).void }
-          attr_writer :unsubscribed
-
-          sig do
-            params(
-              id: String,
-              created_at: Integer,
-              email: String,
-              fingerprint: T.nilable(String),
-              first_name: T.nilable(String),
-              fraud_reason_code: String,
-              fraud_risk_level:
-                GrowsurfRuby::Campaign::FraudRiskLevel::OrSymbol,
-              impression_count: Integer,
-              invite_count: Integer,
-              ip_address: T.nilable(String),
-              is_winner: T::Boolean,
-              last_name: T.nilable(String),
-              lead_count: Integer,
-              metadata: T::Hash[Symbol, T.anything],
-              monthly_rank: Integer,
-              monthly_referral_count: Integer,
-              monthly_referrals: T::Array[String],
-              prev_monthly_rank: Integer,
-              prev_monthly_referral_count: Integer,
-              rank: Integer,
-              referral_count: Integer,
-              referrals: T::Array[String],
-              referral_source: GrowsurfRuby::Campaign::ReferralSource::OrSymbol,
-              referral_status: GrowsurfRuby::Campaign::ReferralStatus::OrSymbol,
-              share_count: T::Hash[Symbol, Integer],
-              share_url: String,
-              unique_impression_count: Integer,
-              unsubscribed: T::Boolean
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            id: nil,
-            created_at: nil,
-            email: nil,
-            fingerprint: nil,
-            first_name: nil,
-            fraud_reason_code: nil,
-            fraud_risk_level: nil,
-            impression_count: nil,
-            invite_count: nil,
-            ip_address: nil,
-            is_winner: nil,
-            last_name: nil,
-            # The number of pending referrals the participant made that have not converted
-            # into successful referrals yet.
-            lead_count: nil,
-            # Shallow custom metadata object.
-            metadata: nil,
-            monthly_rank: nil,
-            monthly_referral_count: nil,
-            monthly_referrals: nil,
-            prev_monthly_rank: nil,
-            prev_monthly_referral_count: nil,
-            rank: nil,
-            referral_count: nil,
-            referrals: nil,
-            referral_source: nil,
-            referral_status: nil,
-            share_count: nil,
-            share_url: nil,
-            unique_impression_count: nil,
-            unsubscribed: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                id: String,
-                created_at: Integer,
-                email: String,
-                fingerprint: T.nilable(String),
-                first_name: T.nilable(String),
-                fraud_reason_code: String,
-                fraud_risk_level:
-                  GrowsurfRuby::Campaign::FraudRiskLevel::TaggedSymbol,
-                impression_count: Integer,
-                invite_count: Integer,
-                ip_address: T.nilable(String),
-                is_winner: T::Boolean,
-                last_name: T.nilable(String),
-                lead_count: Integer,
-                metadata: T::Hash[Symbol, T.anything],
-                monthly_rank: Integer,
-                monthly_referral_count: Integer,
-                monthly_referrals: T::Array[String],
-                prev_monthly_rank: Integer,
-                prev_monthly_referral_count: Integer,
-                rank: Integer,
-                referral_count: Integer,
-                referrals: T::Array[String],
-                referral_source:
-                  GrowsurfRuby::Campaign::ReferralSource::TaggedSymbol,
-                referral_status:
-                  GrowsurfRuby::Campaign::ReferralStatus::TaggedSymbol,
-                share_count: T::Hash[Symbol, Integer],
-                share_url: String,
-                unique_impression_count: Integer,
-                unsubscribed: T::Boolean
-              }
-            )
-          end
-          def to_hash
-          end
         end
       end
     end

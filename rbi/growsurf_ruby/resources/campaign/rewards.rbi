@@ -105,6 +105,18 @@ module GrowsurfRuby
           limit_duration: nil,
           # Body param: Custom key/value metadata (single-level; values are stored as
           # strings).
+          # Each value must be a string, number, or boolean of up to 500 characters.
+          # Each key must have 1 to 40 characters once camelCased, and two keys that
+          # camelCase to the same key are rejected. Up to 50 keys. An entry that breaks
+          # these rules returns `400`.
+          #
+          #   For `DOUBLE_SIDED` rewards in referral programs, `rewardAmount` is the
+          #   referrer’s amount and `referredRewardAmount` is the friend’s amount. If
+          #   `referredRewardAmount` is absent, both use `rewardAmount`. New or changed positive
+          #   numeric amounts must use whole units for currencies without decimals, such as JPY, and
+          #   no more than two decimal places for other currencies, including USD and KWD. Excess
+          #   precision is rejected rather than rounded, including when you clone a program.
+          #   Existing unchanged amounts and earned rewards keep their saved values.
           metadata: nil,
           # Body param: Text shown before a participant's referral count in
           # milestone-progress copy. Applies to `MILESTONE` rewards.
@@ -145,8 +157,7 @@ module GrowsurfRuby
         # the referencing fields. For an affiliate reward, `commissionStructure.event:
         # LEAD` requires a `FIXED` commission with a positive `amount`.
         # Changes to participant email content are checked before saving. Rejected content
-        # returns `400`; if the check is unavailable, `503` asks you to retry. Neither
-        # response saves the change. A concurrent edit can return `409`; reload the
+        # returns `400` and is not saved. A concurrent edit can return `409`; reload the
         # program before retrying.
         sig do
           params(
@@ -223,6 +234,18 @@ module GrowsurfRuby
           limit_duration: nil,
           # Body param: Custom key/value metadata (single-level; values are stored as
           # strings).
+          # Each value must be a string, number, or boolean of up to 500 characters.
+          # Each key must have 1 to 40 characters once camelCased, and two keys that
+          # camelCase to the same key are rejected. Up to 50 keys. An entry that breaks
+          # these rules returns `400`.
+          #
+          #   For `DOUBLE_SIDED` rewards in referral programs, `rewardAmount` is the
+          #   referrer’s amount and `referredRewardAmount` is the friend’s amount. If
+          #   `referredRewardAmount` is absent, both use `rewardAmount`. New or changed positive
+          #   numeric amounts must use whole units for currencies without decimals, such as JPY, and
+          #   no more than two decimal places for other currencies, including USD and KWD. Excess
+          #   precision is rejected rather than rounded, including when you clone a program.
+          #   Existing unchanged amounts and earned rewards keep their saved values.
           metadata: nil,
           # Body param: Text shown before a participant's referral count in
           # milestone-progress copy. Applies to `MILESTONE` rewards.

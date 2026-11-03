@@ -4,6 +4,9 @@ module GrowsurfRuby
   module Models
     class CommissionStructure < GrowsurfRuby::Internal::Type::BaseModel
       # @!attribute amount
+      #   Fixed commission amount in the currency's smallest denomination, used when
+      #   `type` is `FIXED`. The maximum is `100000000` (1,000,000.00) for USD, EUR,
+      #   and GBP. `null` for percentage-based commissions.
       #
       #   @return [Integer, nil]
       optional :amount, Integer, nil?: true

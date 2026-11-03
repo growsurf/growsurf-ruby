@@ -15,12 +15,12 @@ module GrowsurfRuby
       # @!attribute company_logo_image_url
       #
       #   @return [String, nil]
-      optional :company_logo_image_url, String, api_name: :companyLogoImageUrl
+      optional :company_logo_image_url, String, api_name: :companyLogoImageUrl, nil?: true
 
       # @!attribute company_name
       #
       #   @return [String, nil]
-      optional :company_name, String, api_name: :companyName
+      optional :company_name, String, api_name: :companyName, nil?: true
 
       # @!attribute currency_iso
       #
@@ -44,7 +44,12 @@ module GrowsurfRuby
       #   arrives switched off with a placeholder name, so the program awards nothing
       #   until you set the amount and turn one on. `TELEHEALTH` is for consumer
       #   telehealth and wellness subscriptions; `HEALTHCARE_PROVIDERS` is for provider
-      #   networks and clinician-facing products. `INSURANCE` replaces
+      #   networks and clinician-facing products. A `TELEHEALTH` program also starts
+      #   with `useGrowSurfHostedLinks` on, so each referral link is a GrowSurf-hosted
+      #   link; turn it off with `PATCH /campaign/{id}/installation`. It also starts
+      #   with `offerPageRedirectSeconds` set to `10` and with starter offer-page
+      #   content (`referredExperience.offerPageDescription` and `offerPageSteps`).
+      #   Values you send in the create request are kept. `INSURANCE` replaces
       #   `ONLINE_INSURANCE`, which is still accepted. Omit it and every share button
       #   keeps its standard default. Set only when the program is created; it is not
       #   accepted on update.
@@ -66,9 +71,9 @@ module GrowsurfRuby
       # @!method initialize(type:, company_logo_image_url: nil, company_name: nil, currency_iso: nil, goal: nil, name: nil, rewards: nil, request_options: {})
       #   @param type [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Type]
       #
-      #   @param company_logo_image_url [String]
+      #   @param company_logo_image_url [String, nil]
       #
-      #   @param company_name [String]
+      #   @param company_name [String, nil]
       #
       #   @param currency_iso [String]
       #

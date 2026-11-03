@@ -30,15 +30,18 @@ module GrowsurfRuby
         sig { params(body: String).void }
         attr_writer :body
 
-        # The program email template to send (template mode). Send the camelCase key.
-        # The valid types depend on the program type; `isEnabled` only controls automatic sends.
-        # Referral programs: `welcomeNonReferred`, `referralLinkViewedFirstTime`,
-        # `referralLinkUsed`, `referredSignup`, `welcomeReferred`, `goalAchieved`,
-        # `campaignEndedWinners`, `campaignEndedNonWinners`, `progressUpdateMonthly`.
-        # Affiliate programs: `welcomeNonReferred`, `referralLinkViewedFirstTime`,
-        # `referredSignup`, `commissionGenerated`, `commissionAdjusted`, `payoutPending`,
-        # `payoutSentSuccess`, `progressUpdateMonthly`. System/transactional types (login
-        # link, PayPal confirmation, tax) and the invite email cannot be sent.
+        # The program email template to trigger (template mode). Send the camelCase
+        # email-type key. The available types depend on the program type; the template's
+        # `isEnabled` setting controls automatic sends only. This endpoint can trigger
+        # any sendable template. System and transactional types (login link, payout
+        # destination confirmation, tax notifications), the invite email, and the
+        # follow-up reminder cannot be sent. Referral programs: `welcomeNonReferred`,
+        # `referralLinkViewedFirstTime`, `referralLinkUsed`, `referredSignup`,
+        # `welcomeReferred`, `offerClaimed`, `goalAchieved`, `campaignEndedWinners`,
+        # `campaignEndedNonWinners`, `progressUpdateMonthly`. Affiliate programs:
+        # `welcomeNonReferred`, `referralLinkViewedFirstTime`, `referredSignup`,
+        # `offerClaimed`, `commissionGenerated`, `commissionAdjusted`, `payoutPending`,
+        # `payoutSentSuccess`, `progressUpdateMonthly`.
         sig { returns(T.nilable(String)) }
         attr_reader :email_type
 
@@ -78,15 +81,19 @@ module GrowsurfRuby
           # inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See
           # [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
           body: nil,
-          # The program email template to send (template mode). Send the camelCase key.
-          # The valid types depend on the program type; `isEnabled` only controls automatic sends.
-          # Referral programs: `welcomeNonReferred`, `referralLinkViewedFirstTime`,
-          # `referralLinkUsed`, `referredSignup`, `welcomeReferred`, `goalAchieved`,
+          # The program email template to trigger (template mode). Send the camelCase
+          # email-type key. The available types depend on the program type; the
+          # template's `isEnabled` setting controls automatic sends only. This endpoint
+          # can trigger any sendable template. System and transactional types (login
+          # link, payout destination confirmation, tax notifications), the invite email,
+          # and the follow-up reminder cannot be sent. Referral programs:
+          # `welcomeNonReferred`, `referralLinkViewedFirstTime`, `referralLinkUsed`,
+          # `referredSignup`, `welcomeReferred`, `offerClaimed`, `goalAchieved`,
           # `campaignEndedWinners`, `campaignEndedNonWinners`, `progressUpdateMonthly`.
           # Affiliate programs: `welcomeNonReferred`, `referralLinkViewedFirstTime`,
-          # `referredSignup`, `commissionGenerated`, `commissionAdjusted`, `payoutPending`,
-          # `payoutSentSuccess`, `progressUpdateMonthly`. System/transactional types (login
-          # link, PayPal confirmation, tax) and the invite email cannot be sent.
+          # `referredSignup`, `offerClaimed`, `commissionGenerated`,
+          # `commissionAdjusted`, `payoutPending`, `payoutSentSuccess`,
+          # `progressUpdateMonthly`.
           email_type: nil,
           # Optional preheader text for a free-form email.
           preheader: nil,

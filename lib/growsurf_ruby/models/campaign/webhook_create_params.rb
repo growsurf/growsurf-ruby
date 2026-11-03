@@ -15,8 +15,15 @@ module GrowsurfRuby
         required :payload_url, String, api_name: :payloadUrl
 
         # @!attribute events
-        #   The events this webhook is subscribed to. When omitted, it is subscribed to no
-        #   events.
+        #   The events this webhook is subscribed to. When omitted, the webhook is
+        #   subscribed to every event its program type offers, like a webhook added in
+        #   the dashboard: referral programs offer `PARTICIPANT_REACHED_A_GOAL`,
+        #   `NEW_PARTICIPANT_ADDED`, `PARTICIPANT_FRAUD_STATUS_UPDATED`, and
+        #   `CAMPAIGN_ENDED`; affiliate programs offer `NEW_COMMISSION_ADDED`,
+        #   `COMMISSION_ADJUSTED`, `NEW_PAYOUT_ISSUED`, `NEW_PARTICIPANT_ADDED`,
+        #   `PARTICIPANT_FRAUD_STATUS_UPDATED`, and `CAMPAIGN_ENDED`. Send `[]` to
+        #   subscribe to no events. An event the program type does not offer returns
+        #   `400`.
         #
         #   @return [Array<Symbol, GrowsurfRuby::Models::Campaign::WebhookEvent>, nil]
         optional :events, -> { GrowsurfRuby::Internal::Type::ArrayOf[enum: GrowsurfRuby::Campaign::WebhookEvent] }
@@ -39,7 +46,7 @@ module GrowsurfRuby
         #
         #   @param payload_url [String] The URL that receives webhook deliveries.
         #
-        #   @param events [Array<Symbol, GrowsurfRuby::Models::Campaign::WebhookEvent>] The events this webhook is subscribed to. When omitted, it is subscribed to no e
+        #   @param events [Array<Symbol, GrowsurfRuby::Models::Campaign::WebhookEvent>] The events this webhook is subscribed to. When omitted, the webhook is subscribed
         #
         #   @param is_enabled [Boolean]
         #

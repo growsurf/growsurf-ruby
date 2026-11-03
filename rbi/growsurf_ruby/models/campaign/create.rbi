@@ -43,8 +43,11 @@ module GrowsurfRuby
         sig { params(is_affiliate: T::Boolean).void }
         attr_writer :is_affiliate
 
-        # The language of the participant's portal and program emails. Must be one of the
-        # program's languages. Applied only when this request creates the participant.
+        # The language of the participant's portal and program emails. Stored when it is
+        # one of the program's languages. A regional tag maps to its language (for
+        # example, `es-MX` is stored as `es`). Any other value is ignored and the
+        # program's base language applies. Applied only when this request creates the
+        # participant.
         sig { returns(T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol)) }
         attr_reader :language
 
@@ -94,6 +97,13 @@ module GrowsurfRuby
         end
         attr_writer :referral_status
 
+        # When the participant was referred, in Unix milliseconds. Used only with a valid
+        # `referredBy`. If you omit `referralStatus`, GrowSurf compares this time with
+        # the program's referral credit window to set it. Defaults to the time of the
+        # request.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :referred_at
+
         # Referrer participant ID or email address.
         sig { returns(T.nilable(String)) }
         attr_reader :referred_by
@@ -114,6 +124,7 @@ module GrowsurfRuby
             mobile_instance_id: String,
             referral_status:
               GrowsurfRuby::Campaign::Create::ReferralStatus::OrSymbol,
+            referred_at: T.nilable(Integer),
             referred_by: String
           ).returns(T.attached_class)
         end
@@ -127,8 +138,11 @@ module GrowsurfRuby
           # a non-affiliate without `affiliateStatus`. Existing participants are returned
           # unchanged.
           is_affiliate: nil,
-          # The language of the participant's portal and program emails. Must be one of the
-          # program's languages. Applied only when this request creates the participant.
+          # The language of the participant's portal and program emails. Stored when it is
+          # one of the program's languages. A regional tag maps to its language (for
+          # example, `es-MX` is stored as `es`). Any other value is ignored and the
+          # program's base language applies. Applied only when this request creates the
+          # participant.
           language: nil,
           last_name: nil,
           # Shallow custom metadata object.
@@ -142,6 +156,11 @@ module GrowsurfRuby
           # (`CREDIT_AWARDED`, `CREDIT_PENDING`, or `CREDIT_EXPIRED`); left unset when no
           # referrer resolves.
           referral_status: nil,
+          # When the participant was referred, in Unix milliseconds. Used only with a valid
+          # `referredBy`. If you omit `referralStatus`, GrowSurf compares this time with
+          # the program's referral credit window to set it. Defaults to the time of the
+          # request.
+          referred_at: nil,
           # Referrer participant ID or email address.
           referred_by: nil
         )
@@ -161,6 +180,7 @@ module GrowsurfRuby
               mobile_instance_id: String,
               referral_status:
                 GrowsurfRuby::Campaign::Create::ReferralStatus::OrSymbol,
+              referred_at: T.nilable(Integer),
               referred_by: String
             }
           )

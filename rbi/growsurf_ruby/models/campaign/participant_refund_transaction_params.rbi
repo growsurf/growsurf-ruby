@@ -122,10 +122,10 @@ module GrowsurfRuby
         sig { params(transaction_id: String).void }
         attr_writer :transaction_id
 
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::OrSymbol)) }
         attr_reader :payment_provider
 
-        sig { params(payment_provider: String).void }
+        sig { params(payment_provider: GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::OrSymbol).void }
         attr_writer :payment_provider
 
         sig { returns(T.nilable(T::Boolean)) }
@@ -154,7 +154,7 @@ module GrowsurfRuby
             refund_id: String,
             refund_status: String,
             transaction_id: String,
-            payment_provider: String,
+            payment_provider: GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::OrSymbol,
             test_mode: T::Boolean,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -204,7 +204,7 @@ module GrowsurfRuby
               refund_id: String,
               refund_status: String,
               transaction_id: String,
-              payment_provider: String,
+              payment_provider: GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::OrSymbol,
               test_mode: T::Boolean,
               request_options: GrowsurfRuby::RequestOptions
             }
@@ -243,6 +243,25 @@ module GrowsurfRuby
               ]
             )
           end
+          def self.values
+          end
+        end
+
+        # Connected payment provider.
+        module PaymentProvider
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STRIPE = T.let(:stripe, GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::TaggedSymbol)
+          CHARGEBEE = T.let(:chargebee, GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::TaggedSymbol)
+          RECURLY = T.let(:recurly, GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::TaggedSymbol)
+
+          sig { override.returns(T::Array[GrowsurfRuby::Campaign::ParticipantRefundTransactionParams::PaymentProvider::TaggedSymbol]) }
           def self.values
           end
         end
