@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.19.0](https://github.com/growsurf/growsurf-ruby/compare/v1.18.0...v1.19.0) (2026-11-03)
+
+
+### Features
+
+* remove account create method (endpoint retired) ([cd591fb](https://github.com/growsurf/growsurf-ruby/commit/cd591fb6b2f2c2511063c120aed1ce992ebb8370))
+* remove account create method (endpoint retired) ([b156301](https://github.com/growsurf/growsurf-ruby/commit/b15630131c85037c933542b4d5d600c797bf7599))
+
 ## [1.18.0](https://github.com/growsurf/growsurf-ruby/compare/v1.17.0...v1.18.0) (2026-11-03)
 
 
