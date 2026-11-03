@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.18.0](https://github.com/growsurf/growsurf-ruby/compare/v1.17.0...v1.18.0) (2026-11-03)
+
+
+### Features
+
+* add Tint and Glass program styles ([17170ee](https://github.com/growsurf/growsurf-ruby/commit/17170ee7a04128b5394a69d2692755c2aedbe4bb))
+* **api:** sync REST v2 contract changes ([879b862](https://github.com/growsurf/growsurf-ruby/commit/879b862aab95002bbaa2a31bbc1e78ee0478f56c))
+* expose documented error-body fields and sync campaign and participant models ([4ead9ab](https://github.com/growsurf/growsurf-ruby/commit/4ead9abf9598b6a881905d0645686438fda781c9))
+* expose program visual style in campaign design ([0dec9da](https://github.com/growsurf/growsurf-ruby/commit/0dec9dac9039c5968c2debbc87c79ebeb100265b))
+
+
+### Bug Fixes
+
+* **program_resources:** accept a String type in update ([c5b5ef6](https://github.com/growsurf/growsurf-ruby/commit/c5b5ef63eb0d31d8d721130cb91eae7dd2630db4))
+
+
+### Chores
+
+* **deps:** bump addressable to 2.9.1 ([bd2f5df](https://github.com/growsurf/growsurf-ruby/commit/bd2f5dff06b0a0c559cfbea3c40b7758b25c7d2e))
+
+
+### Documentation
+
+* clarify Add Participant claim-offer wording and page title defaults ([1a3e4c1](https://github.com/growsurf/growsurf-ruby/commit/1a3e4c1a3866422a0c2907ee2f1255e4e3787c7e))
+* clarify referral reward metadata amounts ([636f8b5](https://github.com/growsurf/growsurf-ruby/commit/636f8b5a34993b9118fdab2874bcab8e39771bae))
+
 ## [1.17.0](https://github.com/growsurf/growsurf-ruby/compare/v1.16.0...v1.17.0) (2026-10-20)
 
 
