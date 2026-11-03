@@ -96,6 +96,7 @@ module GrowsurfRuby
           raise ArgumentError.new("send content fields for only one Program Resource type") if supplied_types.length > 1
 
           type = params[:type]
+          type = type.to_sym if type.is_a?(String)
           if supplied_types.any? && !type.nil? && supplied_types.first != type
             raise ArgumentError.new("content fields must match the selected Program Resource type")
           end
