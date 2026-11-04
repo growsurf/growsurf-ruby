@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.20.0](https://github.com/growsurf/growsurf-ruby/compare/v1.19.0...v1.20.0) (2026-11-04)
+
+
+### Features
+
+* add reward amountSource and percentOff, and zh-TW and es-419 languages ([7601d49](https://github.com/growsurf/growsurf-ruby/commit/7601d499c93eac3c3b2e08da34af327da28e5009))
+* add reward amountSource and percentOff, and zh-TW and es-419 languages ([9177434](https://github.com/growsurf/growsurf-ruby/commit/91774347a437eba38d35d031eec687d1fa0f5c1b))
+
 ## [1.19.0](https://github.com/growsurf/growsurf-ruby/compare/v1.18.0...v1.19.0) (2026-11-03)
 
 
