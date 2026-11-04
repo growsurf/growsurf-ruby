@@ -43,6 +43,17 @@ module GrowsurfRuby
         sig { params(amount: T.nilable(Float)).void }
         attr_writer :amount
 
+        # Where `amount` or `percent_off` comes from. `METADATA` means the amount saved
+        # when the reward was earned.
+        sig do
+          returns(
+            T.nilable(
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          )
+        end
+        attr_accessor :amount_source
+
         sig { returns(T.nilable(GrowsurfRuby::CommissionStructure)) }
         attr_reader :commission_structure
 
@@ -84,6 +95,13 @@ module GrowsurfRuby
         sig { params(is_referrer: T::Boolean).void }
         attr_writer :is_referrer
 
+        # Discount of a percent-off coupon (`20` = 20% off); `nil` for every other reward.
+        sig { returns(T.nilable(Float)) }
+        attr_reader :percent_off
+
+        sig { params(percent_off: T.nilable(Float)).void }
+        attr_writer :percent_off
+
         sig { returns(T.nilable(String)) }
         attr_reader :referred_id
 
@@ -110,6 +128,10 @@ module GrowsurfRuby
             approved: T::Boolean,
             approved_at: T.nilable(Integer),
             amount: T.nilable(Float),
+            amount_source:
+              T.nilable(
+                GrowsurfRuby::Campaign::ParticipantReward::AmountSource::OrSymbol
+              ),
             commission_structure:
               T.nilable(GrowsurfRuby::CommissionStructure::OrHash),
             currency_iso: T.nilable(String),
@@ -117,6 +139,7 @@ module GrowsurfRuby
             is_available: T::Boolean,
             is_fulfilled: T::Boolean,
             is_referrer: T::Boolean,
+            percent_off: T.nilable(Float),
             referred_id: String,
             referrer_id: String,
             unread: T::Boolean
@@ -129,12 +152,17 @@ module GrowsurfRuby
           approved: nil,
           approved_at: nil,
           amount: nil,
+          # Where `amount` or `percent_off` comes from. `METADATA` means the amount saved
+          # when the reward was earned.
+          amount_source: nil,
           commission_structure: nil,
           currency_iso: nil,
           fulfilled_at: nil,
           is_available: nil,
           is_fulfilled: nil,
           is_referrer: nil,
+          # Discount of a percent-off coupon (`20` = 20% off); `nil` for every other reward.
+          percent_off: nil,
           referred_id: nil,
           referrer_id: nil,
           unread: nil
@@ -151,6 +179,10 @@ module GrowsurfRuby
               approved: T::Boolean,
               approved_at: T.nilable(Integer),
               amount: T.nilable(Float),
+              amount_source:
+                T.nilable(
+                  GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+                ),
               commission_structure:
                 T.nilable(GrowsurfRuby::CommissionStructure),
               currency_iso: T.nilable(String),
@@ -158,6 +190,7 @@ module GrowsurfRuby
               is_available: T::Boolean,
               is_fulfilled: T::Boolean,
               is_referrer: T::Boolean,
+              percent_off: T.nilable(Float),
               referred_id: String,
               referrer_id: String,
               unread: T::Boolean
@@ -165,6 +198,80 @@ module GrowsurfRuby
           )
         end
         def to_hash
+        end
+
+        module AmountSource
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                GrowsurfRuby::Campaign::ParticipantReward::AmountSource
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STRIPE =
+            T.let(
+              :STRIPE,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          CHARGEBEE =
+            T.let(
+              :CHARGEBEE,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          RECURLY =
+            T.let(
+              :RECURLY,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          CHARGIFY =
+            T.let(
+              :CHARGIFY,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          PAYPAL =
+            T.let(
+              :PAYPAL,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          VENMO =
+            T.let(
+              :VENMO,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          TANGO_CARD =
+            T.let(
+              :TANGO_CARD,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          TREMENDOUS =
+            T.let(
+              :TREMENDOUS,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          XTRM =
+            T.let(
+              :XTRM,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+          METADATA =
+            T.let(
+              :METADATA,
+              GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                GrowsurfRuby::Campaign::ParticipantReward::AmountSource::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
 
         module Status

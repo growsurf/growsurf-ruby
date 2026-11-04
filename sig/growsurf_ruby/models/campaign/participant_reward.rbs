@@ -9,12 +9,14 @@ module GrowsurfRuby
           approved: bool,
           approved_at: Integer?,
           amount: Float?,
+          amount_source: GrowsurfRuby::Models::Campaign::ParticipantReward::amount_source?,
           commission_structure: GrowsurfRuby::CommissionStructure?,
           currency_iso: String?,
           fulfilled_at: Integer?,
           is_available: bool,
           is_fulfilled: bool,
           is_referrer: bool,
+          percent_off: Float?,
           referred_id: String,
           referrer_id: String,
           unread: bool
@@ -39,6 +41,8 @@ module GrowsurfRuby
 
         def amount=: (Float?) -> Float?
 
+        attr_accessor amount_source: GrowsurfRuby::Models::Campaign::ParticipantReward::amount_source?
+
         attr_accessor commission_structure: GrowsurfRuby::CommissionStructure?
 
         attr_reader currency_iso: String?
@@ -61,6 +65,10 @@ module GrowsurfRuby
 
         def is_referrer=: (bool) -> bool
 
+        attr_reader percent_off: Float?
+
+        def percent_off=: (Float?) -> Float?
+
         attr_reader referred_id: String?
 
         def referred_id=: (String) -> String
@@ -80,12 +88,14 @@ module GrowsurfRuby
           ?approved: bool,
           ?approved_at: Integer?,
           ?amount: Float?,
+          ?amount_source: GrowsurfRuby::Models::Campaign::ParticipantReward::amount_source?,
           ?commission_structure: GrowsurfRuby::CommissionStructure?,
           ?currency_iso: String?,
           ?fulfilled_at: Integer?,
           ?is_available: bool,
           ?is_fulfilled: bool,
           ?is_referrer: bool,
+          ?percent_off: Float?,
           ?referred_id: String,
           ?referrer_id: String,
           ?unread: bool
@@ -98,16 +108,38 @@ module GrowsurfRuby
           approved: bool,
           approved_at: Integer?,
           amount: Float?,
+          amount_source: GrowsurfRuby::Models::Campaign::ParticipantReward::amount_source?,
           commission_structure: GrowsurfRuby::CommissionStructure?,
           currency_iso: String?,
           fulfilled_at: Integer?,
           is_available: bool,
           is_fulfilled: bool,
           is_referrer: bool,
+          percent_off: Float?,
           referred_id: String,
           referrer_id: String,
           unread: bool
         }
+
+        type amount_source =
+          :STRIPE | :CHARGEBEE | :RECURLY | :CHARGIFY | :PAYPAL | :VENMO | :TANGO_CARD | :TREMENDOUS | :XTRM | :METADATA
+
+        module AmountSource
+          extend GrowsurfRuby::Internal::Type::Enum
+
+          STRIPE: :STRIPE
+          CHARGEBEE: :CHARGEBEE
+          RECURLY: :RECURLY
+          CHARGIFY: :CHARGIFY
+          PAYPAL: :PAYPAL
+          VENMO: :VENMO
+          TANGO_CARD: :TANGO_CARD
+          TREMENDOUS: :TREMENDOUS
+          XTRM: :XTRM
+          METADATA: :METADATA
+
+          def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::ParticipantReward::amount_source]
+        end
 
         type status = :PENDING | :FULFILLED | :CANCELLED
 

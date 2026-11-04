@@ -51,6 +51,8 @@ module GrowsurfRuby
         FIL = T.let(:fil, GrowsurfRuby::Campaign::Language::TaggedSymbol)
         AF = T.let(:af, GrowsurfRuby::Campaign::Language::TaggedSymbol)
         SW = T.let(:sw, GrowsurfRuby::Campaign::Language::TaggedSymbol)
+        ZH_TW = T.let(:"zh-TW", GrowsurfRuby::Campaign::Language::TaggedSymbol)
+        ES_419 = T.let(:"es-419", GrowsurfRuby::Campaign::Language::TaggedSymbol)
 
         sig do
           override.returns(

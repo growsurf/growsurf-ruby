@@ -41,6 +41,8 @@ module GrowsurfRuby
         | :fil
         | :af
         | :sw
+        | :"zh-TW"
+        | :"es-419"
 
       module Language
         extend GrowsurfRuby::Internal::Type::Enum
@@ -84,6 +86,8 @@ module GrowsurfRuby
         FIL: :fil
         AF: :af
         SW: :sw
+        ZH_TW: :"zh-TW"
+        ES_419: :"es-419"
 
         def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::language]
       end

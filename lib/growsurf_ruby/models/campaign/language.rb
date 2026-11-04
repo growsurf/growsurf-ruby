@@ -47,6 +47,8 @@ module GrowsurfRuby
         FIL = :fil
         AF = :af
         SW = :sw
+        ZH_TW = :"zh-TW"
+        ES_419 = :"es-419"
 
         # @!method self.values
         #   @return [Array<Symbol>]
