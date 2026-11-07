@@ -48,8 +48,11 @@ class GrowsurfRubyTest < Minitest::Test
         api_key: "test-key"
       )
     RUBY
+    # Keep CI's vendor/bundle gems available without preloading Bundler or development gems.
+    gem_path = Gem.path.join(File::PATH_SEPARATOR)
     _, error, status = Bundler.with_unbundled_env do
       Open3.capture3(
+        {"GEM_PATH" => gem_path},
         RbConfig.ruby,
         "-I",
         File.expand_path("../../lib", __dir__),
