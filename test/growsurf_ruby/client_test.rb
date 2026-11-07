@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "test_helper"
+require "bundler"
+require "open3"
 
 class GrowsurfRubyTest < Minitest::Test
   extend Minitest::Serial
@@ -35,6 +37,28 @@ class GrowsurfRubyTest < Minitest::Test
     assert_nil(client.api_key)
   ensure
     ENV["GROWSURF_API_KEY"] = original_api_key unless original_api_key.nil?
+  end
+
+  def test_plain_require_constructs_a_client_in_a_fresh_process
+    # Development dependencies can load CGI first and hide the public entrypoint failure.
+    script = <<~RUBY
+      require "growsurf_ruby"
+      GrowsurfRuby::Client.new(
+        base_url: "https://example.test/v2?tag=one&tag=two",
+        api_key: "test-key"
+      )
+    RUBY
+    _, error, status = Bundler.with_unbundled_env do
+      Open3.capture3(
+        RbConfig.ruby,
+        "-I",
+        File.expand_path("../../lib", __dir__),
+        "-e",
+        script
+      )
+    end
+
+    assert_predicate(status, :success?, error)
   end
 
   def test_client_default_request_default_retry_attempts
