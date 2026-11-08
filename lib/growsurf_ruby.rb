@@ -5,6 +5,7 @@
 require "English"
 require "base64"
 require "cgi"
+require "cgi/core" # Ruby 4's cgi compatibility shim does not load CGI.parse.
 require "date"
 require "erb"
 require "etc"
