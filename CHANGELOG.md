@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.20.1](https://github.com/growsurf/growsurf-ruby/compare/v1.20.0...v1.20.1) (2026-11-08)
+
+
+### Bug Fixes
+
+* load CGI parser for Ruby 4 client initialization ([e426967](https://github.com/growsurf/growsurf-ruby/commit/e4269674a7e62d7f952343adc43d8653adc4a40f))
+* patch Active Support security advisories ([7c009af](https://github.com/growsurf/growsurf-ruby/commit/7c009afb60b209e16902feda3cdca90681bf8f38))
+* preserve gem paths in fresh-process client test ([9bca655](https://github.com/growsurf/growsurf-ruby/commit/9bca6551092dc08df99b0fd2af6a4153be289a20))
+
 ## [1.20.0](https://github.com/growsurf/growsurf-ruby/compare/v1.19.0...v1.20.0) (2026-11-04)
 
 
