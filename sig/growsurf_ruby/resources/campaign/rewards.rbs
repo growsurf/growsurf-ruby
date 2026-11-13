@@ -4,6 +4,7 @@ module GrowsurfRuby
       class Rewards
         def list: (
           String id,
+          ?group_id: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::CampaignRewardListResponse
 
@@ -16,6 +17,7 @@ module GrowsurfRuby
           ?description: String,
           ?event: GrowsurfRuby::Models::Campaign::RewardCreateParams::event,
           ?image_url: String?,
+          ?group_id: String?,
           ?image_icon_key: GrowsurfRuby::Models::Campaign::RewardCreateParams::image_icon_key?,
           ?is_unlimited: bool,
           ?is_visible: bool,
@@ -44,6 +46,7 @@ module GrowsurfRuby
           ?description: String,
           ?event: GrowsurfRuby::Models::Campaign::RewardUpdateParams::event,
           ?image_url: String?,
+          ?group_id: String?,
           ?image_icon_key: GrowsurfRuby::Models::Campaign::RewardUpdateParams::image_icon_key?,
           ?is_unlimited: bool,
           ?is_visible: bool,

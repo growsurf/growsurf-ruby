@@ -37,7 +37,7 @@ module GrowsurfRuby
         # require an existing affiliate. This endpoint does not accept `isAffiliate`, and
         # affiliate enrollment cannot be removed through REST.
         #
-        # @overload update(participant_id_or_email, id:, affiliate_status: nil, email: nil, first_name: nil, language: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        # @overload update(participant_id_or_email, id:, affiliate_status: nil, email: nil, first_name: nil, group_id: nil, language: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
         #
         # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
@@ -48,6 +48,8 @@ module GrowsurfRuby
         # @param email [String] Body param
         #
         # @param first_name [String] Body param
+        #
+        # @param group_id [String, nil] Body param: Moves the participant to this group (`grp_…`), or to Default with `null`.
         #
         # @param language [Symbol, GrowsurfRuby::Models::Campaign::Language, nil] Body param: The language of the participant's portal and program emails. Must be one of the program's languages (see `languages` in the program options). Send the base language or `null` to use the program's base language.
         #
@@ -143,6 +145,40 @@ module GrowsurfRuby
           )
         end
 
+        # Moves a list of participants to a group, or to Default with `groupId: null`.
+        # Each entry in `participants` is a GrowSurf participant ID or an email address
+        # (mixed lists are allowed). Up to `200` entries per request. The response reports
+        # a per-row `status` for every submitted entry, so a `200` can include rows that
+        # were `NOT_FOUND`. All found participants move together: if the move fails, no one
+        # moves. A move is a manual placement, so the group's email and domain rules do not
+        # override it later, and it removes the participant from any other group's
+        # `PARTICIPANT` rules. A move applies to new referrals only. Rewards already earned
+        # keep their amounts. An ID that is not a group in this program returns `400`.
+        #
+        # @overload bulk_move(id, participants:, group_id:, request_options: {})
+        #
+        # @param id [String] GrowSurf program ID.
+        #
+        # @param participants [Array<String>] GrowSurf participant IDs and/or email addresses to move. Mixed entries are allowed. 1 to 200 entries.
+        #
+        # @param group_id [String, nil] The group to move them to (`grp_…`), or `nil` for Default.
+        #
+        # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [GrowsurfRuby::Models::Campaign::ParticipantBulkMoveResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::ParticipantBulkMoveParams
+        def bulk_move(id, params)
+          parsed, options = GrowsurfRuby::Campaign::ParticipantBulkMoveParams.dump_request(params)
+          @client.request(
+            method: :post,
+            path: ["campaign/%1$s/participants/bulk-move", id],
+            body: parsed,
+            model: GrowsurfRuby::Models::Campaign::ParticipantBulkMoveResponse,
+            options: options
+          )
+        end
+
         # Some parameter documentations has been truncated, see
         # {GrowsurfRuby::Models::Campaign::ParticipantAddParams} for more details.
         #
@@ -158,7 +194,7 @@ module GrowsurfRuby
         # `isAffiliate: true` to keep the referral attribution and enroll the participant
         # as an affiliate.
         #
-        # @overload add(id, email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil, request_options: {})
+        # @overload add(id, email:, fingerprint: nil, first_name: nil, group_id: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil, request_options: {})
         #
         # @param id [String] GrowSurf program ID.
         #
@@ -167,6 +203,8 @@ module GrowsurfRuby
         # @param fingerprint [String]
         #
         # @param first_name [String]
+        #
+        # @param group_id [String, nil] Places the new participant in this group (`grp_…`), or in Default with `null`.
         #
         # @param ip_address [String]
         #

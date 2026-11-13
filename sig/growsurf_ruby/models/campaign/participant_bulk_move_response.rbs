@@ -1,0 +1,90 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type participant_bulk_move_response =
+        {
+          results: ::Array[ParticipantBulkMoveResponse::Result],
+          summary: ParticipantBulkMoveResponse::Summary
+        }
+
+      class ParticipantBulkMoveResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor results: ::Array[ParticipantBulkMoveResponse::Result]
+        attr_accessor summary: ParticipantBulkMoveResponse::Summary
+        def initialize: (
+          results: ::Array[ParticipantBulkMoveResponse::Result],
+          summary: ParticipantBulkMoveResponse::Summary
+        ) -> void
+        def to_hash: -> participant_bulk_move_response
+
+        type result =
+          {
+            identifier: String,
+            index: Integer,
+            status: ParticipantBulkMoveResponse::Result::status,
+            email: String,
+            message: String,
+            participant_id: String
+          }
+
+        class Result < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor identifier: String
+          attr_accessor index: Integer
+          attr_accessor status: ParticipantBulkMoveResponse::Result::status
+          attr_reader email: String?
+          def email=: (String) -> String
+          attr_reader message: String?
+          def message=: (String) -> String
+          attr_reader participant_id: String?
+          def participant_id=: (String) -> String
+          def initialize: (
+            identifier: String,
+            index: Integer,
+            status: ParticipantBulkMoveResponse::Result::status,
+            ?email: String,
+            ?message: String,
+            ?participant_id: String
+          ) -> void
+          def to_hash: -> result
+
+          type status = :MOVED | :NOT_FOUND | :DUPLICATE | :ERROR
+          module Status
+            extend GrowsurfRuby::Internal::Type::Enum
+            MOVED: :MOVED
+            NOT_FOUND: :NOT_FOUND
+            DUPLICATE: :DUPLICATE
+            ERROR: :ERROR
+            def self?.values: -> ::Array[ParticipantBulkMoveResponse::Result::status]
+          end
+        end
+
+        type summary =
+          {
+            duplicate_count: Integer,
+            error_count: Integer,
+            group_id: String?,
+            moved_count: Integer,
+            not_found_count: Integer,
+            total: Integer
+          }
+
+        class Summary < GrowsurfRuby::Internal::Type::BaseModel
+          attr_accessor duplicate_count: Integer
+          attr_accessor error_count: Integer
+          attr_accessor group_id: String?
+          attr_accessor moved_count: Integer
+          attr_accessor not_found_count: Integer
+          attr_accessor total: Integer
+          def initialize: (
+            duplicate_count: Integer,
+            error_count: Integer,
+            group_id: String?,
+            moved_count: Integer,
+            not_found_count: Integer,
+            total: Integer
+          ) -> void
+          def to_hash: -> summary
+        end
+      end
+    end
+  end
+end

@@ -62,6 +62,13 @@ module GrowsurfRuby
         #   @return [Integer, nil]
         optional :fulfilled_at, Integer, api_name: :fulfilledAt, nil?: true
 
+        # @!attribute group_id
+        #   The group whose reward this is (`grp_…`), saved when it was earned. `null` for
+        #   Default and for rewards earned before groups existed.
+        #
+        #   @return [String, nil]
+        optional :group_id, String, api_name: :groupId, nil?: true
+
         # @!attribute is_available
         #
         #   @return [Boolean, nil]
@@ -98,7 +105,7 @@ module GrowsurfRuby
         #   @return [Boolean, nil]
         optional :unread, GrowsurfRuby::Internal::Type::Boolean
 
-        # @!method initialize(id:, reward_id:, status:, approved: nil, approved_at: nil, amount: nil, amount_source: nil, commission_structure: nil, currency_iso: nil, fulfilled_at: nil, is_available: nil, is_fulfilled: nil, is_referrer: nil, percent_off: nil, referred_id: nil, referrer_id: nil, unread: nil)
+        # @!method initialize(id:, reward_id:, status:, approved: nil, approved_at: nil, amount: nil, amount_source: nil, commission_structure: nil, currency_iso: nil, fulfilled_at: nil, group_id: nil, is_available: nil, is_fulfilled: nil, is_referrer: nil, percent_off: nil, referred_id: nil, referrer_id: nil, unread: nil)
         #   @param id [String]
         #   @param reward_id [String]
         #   @param status [Symbol, GrowsurfRuby::Models::Campaign::ParticipantReward::Status]
@@ -109,6 +116,7 @@ module GrowsurfRuby
         #   @param commission_structure [GrowsurfRuby::Models::CommissionStructure, nil]
         #   @param currency_iso [String]
         #   @param fulfilled_at [Integer]
+        #   @param group_id [String, nil]
         #   @param is_available [Boolean]
         #   @param is_fulfilled [Boolean]
         #   @param is_referrer [Boolean]

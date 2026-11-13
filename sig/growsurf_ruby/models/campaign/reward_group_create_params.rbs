@@ -1,0 +1,22 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_group_create_params =
+        { name: String, rules: ::Array[RewardGroupRule] }
+        & GrowsurfRuby::Internal::Type::request_parameters
+
+      class RewardGroupCreateParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+        attr_accessor name: String
+        attr_accessor rules: ::Array[RewardGroupRule]?
+        def initialize: (
+          name: String,
+          ?rules: ::Array[RewardGroupRule | reward_group_rule],
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+    end
+  end
+end

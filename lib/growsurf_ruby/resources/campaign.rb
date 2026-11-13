@@ -22,6 +22,10 @@ module GrowsurfRuby
       # @return [GrowsurfRuby::Resources::Campaign::ProgramResources]
       attr_reader :resources
 
+      # Group operations. Groups give some participants a different reward list.
+      # @return [GrowsurfRuby::Resources::Campaign::Groups]
+      attr_reader :groups
+
       # Program Editor "Design" tab configuration operations.
       # @return [GrowsurfRuby::Resources::Campaign::Design]
       attr_reader :design
@@ -413,9 +417,11 @@ module GrowsurfRuby
 
       # Retrieves a paged list of participants in a program.
       #
-      # @overload list_participants(id, limit: nil, metadata: nil, next_id: nil, request_options: {})
+      # @overload list_participants(id, group_id: nil, limit: nil, metadata: nil, next_id: nil, request_options: {})
       #
       # @param id [String] GrowSurf program ID.
+      #
+      # @param group_id [String] Return only this group's members. Default has no ID, so it cannot be named here. An ID that is not a group in this program returns `404`.
       #
       # @param limit [Integer] Number of results to return. Maximum 100.
       #
@@ -434,7 +440,7 @@ module GrowsurfRuby
         @client.request(
           method: :get,
           path: ["campaign/%1$s/participants", id],
-          query: query.transform_keys(next_id: "nextId"),
+          query: query.transform_keys(group_id: "groupId", next_id: "nextId"),
           model: GrowsurfRuby::ParticipantList,
           options: options
         )
@@ -736,6 +742,7 @@ module GrowsurfRuby
         @commission = GrowsurfRuby::Resources::Campaign::Commission.new(client: client)
         @rewards = GrowsurfRuby::Resources::Campaign::Rewards.new(client: client)
         @resources = GrowsurfRuby::Resources::Campaign::ProgramResources.new(client: client)
+        @groups = GrowsurfRuby::Resources::Campaign::Groups.new(client: client)
         @design = GrowsurfRuby::Resources::Campaign::Design.new(client: client)
         @custom_domain = GrowsurfRuby::Resources::Campaign::CustomDomain.new(client: client)
         @emails = GrowsurfRuby::Resources::Campaign::Emails.new(client: client)

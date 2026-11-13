@@ -13,6 +13,7 @@ module GrowsurfRuby
           commission_structure: GrowsurfRuby::CommissionStructure?,
           currency_iso: String?,
           fulfilled_at: Integer?,
+          group_id: String?,
           is_available: bool,
           is_fulfilled: bool,
           is_referrer: bool,
@@ -53,6 +54,8 @@ module GrowsurfRuby
 
         def fulfilled_at=: (Integer?) -> Integer?
 
+        attr_accessor group_id: String?
+
         attr_reader is_available: bool?
 
         def is_available=: (bool) -> bool
@@ -92,6 +95,7 @@ module GrowsurfRuby
           ?commission_structure: GrowsurfRuby::CommissionStructure?,
           ?currency_iso: String?,
           ?fulfilled_at: Integer?,
+          ?group_id: String?,
           ?is_available: bool,
           ?is_fulfilled: bool,
           ?is_referrer: bool,
@@ -112,6 +116,7 @@ module GrowsurfRuby
           commission_structure: GrowsurfRuby::CommissionStructure?,
           currency_iso: String?,
           fulfilled_at: Integer?,
+          group_id: String?,
           is_available: bool,
           is_fulfilled: bool,
           is_referrer: bool,

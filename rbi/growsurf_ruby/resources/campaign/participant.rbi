@@ -34,6 +34,7 @@ module GrowsurfRuby
               GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
+            group_id: T.nilable(String),
             language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
@@ -59,6 +60,7 @@ module GrowsurfRuby
           email: nil,
           # Body param
           first_name: nil,
+          group_id: nil,
           # Body param: The language of the participant's portal and program emails. Must be
           # one of the program's languages (see `languages` in the program options). Send the
           # base language or `null` to use the program's base language.
@@ -123,6 +125,35 @@ module GrowsurfRuby
         )
         end
 
+        # Moves a list of participants to a group, or to Default with `groupId: null`.
+        # Each entry in `participants` is a GrowSurf participant ID or an email address
+        # (mixed lists are allowed). Up to `200` entries per request. The response reports
+        # a per-row `status` for every submitted entry, so a `200` can include rows that
+        # were `NOT_FOUND`. All found participants move together: if the move fails, no one
+        # moves. A move is a manual placement, so the group's email and domain rules do not
+        # override it later, and it removes the participant from any other group's
+        # `PARTICIPANT` rules. A move applies to new referrals only. Rewards already earned
+        # keep their amounts. An ID that is not a group in this program returns `400`.
+        sig do
+          params(
+            id: String,
+            participants: T::Array[String],
+            group_id: T.nilable(String),
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(GrowsurfRuby::Models::Campaign::ParticipantBulkMoveResponse)
+        end
+        def bulk_move(
+          # GrowSurf program ID.
+          id,
+          # GrowSurf participant IDs and/or email addresses to move. Mixed entries are
+          # allowed. 1 to 200 entries.
+          participants:,
+          # The group to move them to (`grp_…`), or `nil` for Default.
+          group_id:,
+          request_options: {}
+        )
+        end
+
         # Adds a new participant to the program. If the email already exists, the existing
         # participant is returned unchanged. One exception: if that participant claimed an
         # offer in the Claim Offer Popup and the signup is not complete yet, this call completes
@@ -140,6 +171,7 @@ module GrowsurfRuby
             email: String,
             fingerprint: String,
             first_name: String,
+            group_id: T.nilable(String),
             ip_address: String,
             is_affiliate: T::Boolean,
             language: GrowsurfRuby::Campaign::Language::OrSymbol,
@@ -159,6 +191,7 @@ module GrowsurfRuby
           email:,
           fingerprint: nil,
           first_name: nil,
+          group_id: nil,
           ip_address: nil,
           # Affiliate programs only. Controls affiliate enrollment for a new participant.
           # `true` enrolls the participant with `affiliateStatus: APPROVED`; `false`

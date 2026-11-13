@@ -94,6 +94,20 @@ module GrowsurfRuby
         end
         attr_writer :fraud_risk_level
 
+        # The participant's group (`grp_…`), or `null` for Default. Their new referrals
+        # earn this group's rewards.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
+        # How the participant got into their group. `null` when no group placement was
+        # ever made.
+        sig do
+          returns(
+            T.nilable(GrowsurfRuby::Campaign::RewardGroupSource::TaggedSymbol)
+          )
+        end
+        attr_accessor :group_source
+
         sig { returns(T.nilable(Integer)) }
         attr_reader :impression_count
 
@@ -331,6 +345,9 @@ module GrowsurfRuby
             first_name: T.nilable(String),
             fraud_reason_code: String,
             fraud_risk_level: GrowsurfRuby::Campaign::FraudRiskLevel::OrSymbol,
+            group_id: T.nilable(String),
+            group_source:
+              T.nilable(GrowsurfRuby::Campaign::RewardGroupSource::OrSymbol),
             impression_count: Integer,
             invite_count: Integer,
             ip_address: T.nilable(String),
@@ -390,6 +407,10 @@ module GrowsurfRuby
           first_name: nil,
           fraud_reason_code: nil,
           fraud_risk_level: nil,
+          # The participant's group (`grp_…`), or `null` for Default.
+          group_id: nil,
+          # How the participant got into their group.
+          group_source: nil,
           impression_count: nil,
           invite_count: nil,
           ip_address: nil,
@@ -459,6 +480,11 @@ module GrowsurfRuby
               fraud_reason_code: String,
               fraud_risk_level:
                 GrowsurfRuby::Campaign::FraudRiskLevel::TaggedSymbol,
+              group_id: T.nilable(String),
+              group_source:
+                T.nilable(
+                  GrowsurfRuby::Campaign::RewardGroupSource::TaggedSymbol
+                ),
               impression_count: Integer,
               invite_count: Integer,
               ip_address: T.nilable(String),

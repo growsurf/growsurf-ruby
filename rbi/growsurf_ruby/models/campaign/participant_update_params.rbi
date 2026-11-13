@@ -53,6 +53,13 @@ module GrowsurfRuby
         sig { params(first_name: String).void }
         attr_writer :first_name
 
+        # Moves the participant to this group (`grp_…`), or to Default with `null`. This is
+        # a manual placement, so the groups' email and domain rules do not override it
+        # later. The move applies to new referrals only; rewards already earned keep their
+        # amounts. An ID that is not a group in this program returns `400`.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
         # The language of the participant's portal and program emails. Must be one of the
         # program's languages (see `languages` in the program options). Send the base
         # language or `null` to use the program's base language.
@@ -123,6 +130,7 @@ module GrowsurfRuby
               GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
+            group_id: T.nilable(String),
             language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
@@ -144,6 +152,7 @@ module GrowsurfRuby
           affiliate_status: nil,
           email: nil,
           first_name: nil,
+          group_id: nil,
           # The language of the participant's portal and program emails. Must be one of the
           # program's languages (see `languages` in the program options). Send the base
           # language or `null` to use the program's base language.
@@ -171,6 +180,7 @@ module GrowsurfRuby
                 GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
               email: String,
               first_name: String,
+              group_id: T.nilable(String),
               language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
               last_name: String,
               metadata: T::Hash[Symbol, T.anything],

@@ -19,6 +19,16 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :first_name, String, api_name: :firstName
 
+        # @!attribute group_id
+        #   Places the new participant in this group (`grp_…`), or in Default with `null`.
+        #   This is a manual placement, so the groups' email and domain rules do not apply
+        #   to them. Applied only when this request creates the participant; to move an
+        #   existing participant, use Update participant. An ID that is not a group in this
+        #   program returns `400` and adds no one.
+        #
+        #   @return [String, nil]
+        optional :group_id, String, api_name: :groupId, nil?: true
+
         # @!attribute ip_address
         #
         #   @return [String, nil]
@@ -88,7 +98,7 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :referred_by, String, api_name: :referredBy
 
-        # @!method initialize(email:, fingerprint: nil, first_name: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil)
+        # @!method initialize(email:, fingerprint: nil, first_name: nil, group_id: nil, ip_address: nil, is_affiliate: nil, language: nil, last_name: nil, metadata: nil, mobile_instance_id: nil, referral_status: nil, referred_at: nil, referred_by: nil)
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::Create} for more details.
         #
@@ -97,6 +107,8 @@ module GrowsurfRuby
         #   @param fingerprint [String]
         #
         #   @param first_name [String]
+        #
+        #   @param group_id [String, nil]
         #
         #   @param ip_address [String]
         #

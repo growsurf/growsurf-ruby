@@ -5,23 +5,32 @@ module GrowsurfRuby
     class Campaign
       class Rewards
         # Retrieves configured Campaign Rewards, including switched-off rewards and rewards
-        # whose group is not selected. Deleted rewards are excluded. The campaign response's
+        # whose reward type is not selected. Deleted rewards are excluded. The campaign response's
         # embedded `rewards` array includes only enabled, visible rewards. A reward can be earned only
-        # when it also appears in the campaign response's embedded `rewards` array.
+        # when it also appears in the campaign response's embedded `rewards` array. The list includes
+        # every group's rewards. Each reward's `groupId` names its group (`null` is Default). Pass
+        # `group_id` to return one group's rewards.
         #
-        # @overload list(id, request_options: {})
+        # @overload list(id, group_id: nil, request_options: {})
         #
         # @param id [String] GrowSurf program ID.
+        #
+        # @param group_id [String] Return only this group's rewards. To get Default's rewards, omit `groupId` and keep the rewards whose `groupId` is `null`. An ID that is not a group in this program returns `404`.
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [GrowsurfRuby::Models::Campaign::CampaignRewardListResponse]
+        #
+        # @see GrowsurfRuby::Models::Campaign::RewardListParams
         def list(id, params = {})
+          parsed, options = GrowsurfRuby::Campaign::RewardListParams.dump_request(params)
+          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["campaign/%1$s/reward-configs", id],
+            query: query.transform_keys(group_id: "groupId"),
             model: GrowsurfRuby::Models::Campaign::CampaignRewardListResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 
@@ -33,7 +42,7 @@ module GrowsurfRuby
         # requires a `FIXED` commission with a positive `amount`.
         # A concurrent edit can return `409`; reload the program before retrying.
         #
-        # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @overload create(id, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, group_id: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
@@ -50,6 +59,8 @@ module GrowsurfRuby
         # @param event [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::Event] Body param: The referral event that earns this Campaign Reward. Use `LEAD` or `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. When omitted, it defaults to `CONVERSION`.
         #
         # @param image_url [String] Body param
+        #
+        # @param group_id [String, nil] Body param: The group this reward belongs to (`grp_…`), or `null` for Default.
         #
         # @param image_icon_key [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey, nil] Body param: The starter icon shown for the reward, or `null` when `imageUrl` is your own image. Participant pages draw this icon in your program's accent color. Also set `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending `imageUrl` without `imageIconKey` clears it.
         #
@@ -117,7 +128,7 @@ module GrowsurfRuby
         # returns `400` and is not saved. A concurrent edit can return `409`; reload the
         # program before retrying.
         #
-        # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @overload update(campaign_reward_id, id:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, group_id: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #
         # @param campaign_reward_id [String] Path param: Campaign reward ID.
         #
@@ -134,6 +145,8 @@ module GrowsurfRuby
         # @param event [Symbol, GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event] Body param: The referral event that earns this Campaign Reward. Use `LEAD` or `CONVERSION`. `LEAD` requires the program installation's `referralTrigger` to be `CUSTOM`. This field applies only to `SINGLE_SIDED`, `DOUBLE_SIDED`, and `MILESTONE` rewards. When omitted, the stored event is preserved.
         #
         # @param image_url [String] Body param
+        #
+        # @param group_id [String, nil] Body param: The group this reward belongs to (`grp_…`), or `null` for Default.
         #
         # @param image_icon_key [Symbol, GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey, nil] Body param: The starter icon shown for the reward, or `null` when `imageUrl` is your own image. Participant pages draw this icon in your program's accent color. Also set `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending `imageUrl` without `imageIconKey` clears it.
         #

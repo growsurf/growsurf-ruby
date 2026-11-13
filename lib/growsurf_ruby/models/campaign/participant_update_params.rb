@@ -38,6 +38,15 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :first_name, String, api_name: :firstName
 
+        # @!attribute group_id
+        #   Moves the participant to this group (`grp_…`), or to Default with `null`. This is
+        #   a manual placement, so the groups' email and domain rules do not override it
+        #   later. The move applies to new referrals only; rewards already earned keep their
+        #   amounts. An ID that is not a group in this program returns `400`.
+        #
+        #   @return [String, nil]
+        optional :group_id, String, api_name: :groupId, nil?: true
+
         # @!attribute language
         #   The language of the participant's portal and program emails. Must be one of the
         #   program's languages (see `languages` in the program options). Send the base
@@ -86,7 +95,7 @@ module GrowsurfRuby
         #   @return [Array<String>, nil]
         optional :vanity_keys, GrowsurfRuby::Internal::Type::ArrayOf[String], api_name: :vanityKeys
 
-        # @!method initialize(id:, participant_id_or_email:, affiliate_status: nil, email: nil, first_name: nil, language: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
+        # @!method initialize(id:, participant_id_or_email:, affiliate_status: nil, email: nil, first_name: nil, group_id: nil, language: nil, last_name: nil, metadata: nil, notes: nil, referral_status: nil, referred_by: nil, unsubscribed: nil, vanity_keys: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::ParticipantUpdateParams} for more details.
         #
@@ -99,6 +108,8 @@ module GrowsurfRuby
         #   @param email [String]
         #
         #   @param first_name [String]
+        #
+        #   @param group_id [String, nil]
         #
         #   @param language [Symbol, GrowsurfRuby::Models::Campaign::Language, nil] The language of the participant's portal and program emails. Must be one of the
         #

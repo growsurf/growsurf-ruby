@@ -5,18 +5,25 @@ module GrowsurfRuby
     class Campaign
       class Rewards
         # Retrieves configured Campaign Rewards, including switched-off rewards and rewards
-        # whose group is not selected. Deleted rewards are excluded. The campaign response's
+        # whose reward type is not selected. Deleted rewards are excluded. The campaign response's
         # embedded `rewards` array includes only enabled, visible rewards. A reward can be earned only
-        # when it also appears in the campaign response's embedded `rewards` array.
+        # when it also appears in the campaign response's embedded `rewards` array. The list includes
+        # every group's rewards. Each reward's `groupId` names its group (`null` is Default). Pass
+        # `group_id` to return one group's rewards.
         sig do
           params(
             id: String,
+            group_id: String,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(GrowsurfRuby::Models::Campaign::CampaignRewardListResponse)
         end
         def list(
           # GrowSurf program ID.
           id,
+          # Return only this group's rewards. To get Default's rewards, omit `groupId`
+          # and keep the rewards whose `groupId` is `null`. An ID that is not a group in this program
+          # returns `404`.
+          group_id: nil,
           request_options: {}
         )
         end
@@ -40,6 +47,7 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            group_id: T.nilable(String),
             image_icon_key:
               T.nilable(
                 GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
@@ -87,6 +95,7 @@ module GrowsurfRuby
           event: nil,
           # Body param
           image_url: nil,
+          group_id: nil,
           # Body param: The starter icon shown for the reward, or `null` when `imageUrl` is
           # your own image. Participant pages draw this icon in your program's accent color.
           # Also set `imageUrl` to the icon's image so the iOS and Android SDKs can show it.
@@ -170,6 +179,7 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            group_id: T.nilable(String),
             image_icon_key:
               T.nilable(
                 GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey::OrSymbol
@@ -216,6 +226,7 @@ module GrowsurfRuby
           event: nil,
           # Body param
           image_url: nil,
+          group_id: nil,
           # Body param: The starter icon shown for the reward, or `null` when `imageUrl` is
           # your own image. Participant pages draw this icon in your program's accent color.
           # Also set `imageUrl` to the icon's image so the iOS and Android SDKs can show it.

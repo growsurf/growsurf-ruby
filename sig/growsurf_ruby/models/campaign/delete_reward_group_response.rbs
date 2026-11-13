@@ -1,0 +1,16 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type delete_reward_group_response =
+        { id: String, moved_to_default: Integer, success: bool }
+
+      class DeleteRewardGroupResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+        attr_accessor moved_to_default: Integer
+        attr_accessor success: bool
+        def initialize: (id: String, moved_to_default: Integer, success: bool) -> void
+        def to_hash: -> delete_reward_group_response
+      end
+    end
+  end
+end

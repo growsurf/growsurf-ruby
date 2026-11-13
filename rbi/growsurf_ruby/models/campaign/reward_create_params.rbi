@@ -80,6 +80,13 @@ module GrowsurfRuby
         sig { params(image_url: T.nilable(String)).void }
         attr_writer :image_url
 
+        # The group this reward belongs to (`grp_…`), or `null` for Default. A participant
+        # earns only their own group's rewards.
+        # `LEADERBOARD` rewards apply to the whole program and cannot be in a group. An ID
+        # that is not a group in this program returns `400`.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
         # The starter icon shown for the reward, or `null` when `imageUrl` is your own
         # image. Participant pages draw this icon in your program's accent color. Also set
         # `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
@@ -255,6 +262,7 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            group_id: T.nilable(String),
             image_icon_key:
               T.nilable(
                 GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
@@ -294,6 +302,7 @@ module GrowsurfRuby
           # `MILESTONE` rewards. When omitted, it defaults to `CONVERSION`.
           event: nil,
           image_url: nil,
+          group_id: nil,
           # The starter icon shown for the reward, or `null` when `imageUrl` is your own
           # image. Participant pages draw this icon in your program's accent color. Also set
           # `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
@@ -361,6 +370,7 @@ module GrowsurfRuby
               event:
                 GrowsurfRuby::Models::Campaign::RewardCreateParams::Event::OrSymbol,
               image_url: T.nilable(String),
+              group_id: T.nilable(String),
               image_icon_key:
                 T.nilable(
                   GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey::OrSymbol
