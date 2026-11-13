@@ -127,10 +127,7 @@ module GrowsurfRuby
 
           # The resolved participant's email address. Present on `DELETED` rows.
           sig { returns(T.nilable(String)) }
-          attr_reader :email
-
-          sig { params(email: String).void }
-          attr_writer :email
+          attr_accessor :email
 
           # Human-readable detail for `NOT_FOUND`, `DUPLICATE`, and `ERROR` rows.
           sig { returns(T.nilable(String)) }
@@ -153,7 +150,7 @@ module GrowsurfRuby
               index: Integer,
               status:
                 GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result::Status::OrSymbol,
-              email: String,
+              email: T.nilable(String),
               message: String,
               participant_id: String
             ).returns(T.attached_class)
@@ -185,7 +182,7 @@ module GrowsurfRuby
                 index: Integer,
                 status:
                   GrowsurfRuby::Campaign::ParticipantBulkDeleteResponse::Result::Status::TaggedSymbol,
-                email: String,
+                email: T.nilable(String),
                 message: String,
                 participant_id: String
               }

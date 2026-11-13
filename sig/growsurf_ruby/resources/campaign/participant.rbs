@@ -163,7 +163,6 @@ module GrowsurfRuby
           id: String,
           email_addresses: ::Array[String],
           message_text: String,
-          subject_text: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> GrowsurfRuby::Models::Campaign::ParticipantSendInvitesResponse
 

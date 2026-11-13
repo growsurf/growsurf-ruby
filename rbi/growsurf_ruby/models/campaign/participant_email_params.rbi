@@ -21,7 +21,7 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :participant_id_or_email
 
-        # HTML body for a free-form email. You can personalize it with dynamic text,
+        # HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with dynamic text,
         # inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See
         # [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
         sig { returns(T.nilable(String)) }
@@ -77,7 +77,7 @@ module GrowsurfRuby
         def self.new(
           id:,
           participant_id_or_email:,
-          # HTML body for a free-form email. You can personalize it with dynamic text,
+          # HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with dynamic text,
           # inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See
           # [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
           body: nil,

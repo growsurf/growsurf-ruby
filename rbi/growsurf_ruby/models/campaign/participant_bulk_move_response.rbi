@@ -45,10 +45,7 @@ module GrowsurfRuby
           attr_accessor :status
 
           sig { returns(T.nilable(String)) }
-          attr_reader :email
-
-          sig { params(email: String).void }
-          attr_writer :email
+          attr_accessor :email
 
           sig { returns(T.nilable(String)) }
           attr_reader :message
@@ -67,7 +64,7 @@ module GrowsurfRuby
               identifier: String,
               index: Integer,
               status: Status::OrSymbol,
-              email: String,
+              email: T.nilable(String),
               message: String,
               participant_id: String
             ).returns(T.attached_class)
@@ -88,7 +85,7 @@ module GrowsurfRuby
                 identifier: String,
                 index: Integer,
                 status: Status::TaggedSymbol,
-                email: String,
+                email: T.nilable(String),
                 message: String,
                 participant_id: String
               }

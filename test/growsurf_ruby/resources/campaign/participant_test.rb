@@ -374,8 +374,7 @@ class GrowsurfRuby::Test::Resources::Campaign::ParticipantTest < GrowsurfRuby::T
         "participantIdOrEmail",
         id: "id",
         email_addresses: ["erlich@aviato.com"],
-        message_text: "{{referrerFirstName}} invited you with {{referrerShareUrl}}.",
-        subject_text: "Join me on Pied Piper"
+        message_text: "{{referrerFirstName}} invited you with {{referrerShareUrl}}."
       )
 
     assert_pattern do

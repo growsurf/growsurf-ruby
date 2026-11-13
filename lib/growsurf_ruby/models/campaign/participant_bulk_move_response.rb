@@ -20,7 +20,7 @@ module GrowsurfRuby
           # in the same request. `ERROR` — the lookup failed for this row.
           required :status, enum: -> { GrowsurfRuby::Campaign::ParticipantBulkMoveResponse::Result::Status }
           # The resolved participant's email address. Present on `MOVED` rows.
-          optional :email, String
+          optional :email, String, nil?: true
           # Human-readable detail for `NOT_FOUND`, `DUPLICATE`, and `ERROR` rows.
           optional :message, String
           # The resolved GrowSurf participant ID. Present when the entry resolved to a

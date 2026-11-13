@@ -84,7 +84,7 @@ module GrowsurfRuby
         )
         end
 
-        # Removes participant access immediately by GrowSurf participant ID or email address. Related record cleanup completes automatically. Do not repeat a successful deletion to finish cleanup.
+        # Removes participant access immediately by GrowSurf participant ID or email address. Related record cleanup completes automatically. Do not repeat a successful deletion to finish cleanup. A `202` response includes pending analytics erasure details.
         sig do
           params(
             participant_id_or_email: String,
@@ -105,7 +105,7 @@ module GrowsurfRuby
         # `participants` is a GrowSurf participant ID or an email address (mixed lists are
         # allowed). Up to `200` entries per request — chunk larger lists across multiple
         # calls. The response reports a per-row `status` for every submitted entry, so a
-        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent. Successful rows lose participant access immediately; related record cleanup completes automatically, subject to required financial record retention.
+        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent. Successful rows lose participant access immediately; related record cleanup completes automatically, subject to required financial record retention. A `202` response also includes `analyticsErasure` when analytics erasure is pending.
         sig do
           params(
             id: String,
@@ -527,14 +527,13 @@ module GrowsurfRuby
 
         # Sends email invites on behalf of a participant to a list of email addresses.
         # Sending invites via the API requires a **verified custom email domain** on the
-        # program; the request fails until one is verified.
+        # program. Until one is verified, it returns `success: false`.
         sig do
           params(
             participant_id_or_email: String,
             id: String,
             email_addresses: T::Array[String],
             message_text: String,
-            subject_text: String,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(
             GrowsurfRuby::Models::Campaign::ParticipantSendInvitesResponse
@@ -549,8 +548,6 @@ module GrowsurfRuby
           email_addresses:,
           # Body param
           message_text:,
-          # Body param
-          subject_text:,
           request_options: {}
         )
         end
@@ -579,7 +576,7 @@ module GrowsurfRuby
           # Useful for honoring a refund window before crediting a referrer. Omit this field
           # to award credit immediately. The credit is awarded automatically once the delay
           # elapses, and can be cancelled before then with the Cancel delayed referral
-          # trigger request.
+          # trigger request. From `0` to `90`; `0` awards credit immediately.
           delay_in_days: nil,
           request_options: {}
         )
@@ -632,7 +629,7 @@ module GrowsurfRuby
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
-          # Body param: HTML body for a free-form email. You can personalize it with
+          # Body param: HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with
           # dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`.
           # See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
           body: nil,
@@ -782,7 +779,7 @@ module GrowsurfRuby
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
-          # Body param: The payout provider the participant should confirm a destination for.
+          # Body param: The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
           provider:,
           request_options: {}
         )

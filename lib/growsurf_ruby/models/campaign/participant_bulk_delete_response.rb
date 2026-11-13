@@ -68,7 +68,7 @@ module GrowsurfRuby
           #   The resolved participant's email address. Present on `DELETED` rows.
           #
           #   @return [String, nil]
-          optional :email, String
+          optional :email, String, nil?: true
 
           # @!attribute message
           #   Human-readable detail for `NOT_FOUND`, `DUPLICATE`, and `ERROR` rows.

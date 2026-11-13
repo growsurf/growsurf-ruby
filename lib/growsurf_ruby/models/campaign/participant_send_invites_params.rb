@@ -28,17 +28,11 @@ module GrowsurfRuby
         #   @return [String]
         required :message_text, String, api_name: :messageText
 
-        # @!attribute subject_text
-        #
-        #   @return [String]
-        required :subject_text, String, api_name: :subjectText
-
-        # @!method initialize(id:, participant_id_or_email:, email_addresses:, message_text:, subject_text:, request_options: {})
+        # @!method initialize(id:, participant_id_or_email:, email_addresses:, message_text:, request_options: {})
         #   @param id [String]
         #   @param participant_id_or_email [String]
         #   @param email_addresses [Array<String>]
         #   @param message_text [String]
-        #   @param subject_text [String]
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
       end
     end

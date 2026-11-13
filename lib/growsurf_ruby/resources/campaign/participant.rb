@@ -87,7 +87,7 @@ module GrowsurfRuby
           )
         end
 
-        # Removes participant access immediately by GrowSurf participant ID or email address. Related record cleanup completes automatically. Do not repeat a successful deletion to finish cleanup.
+        # Removes participant access immediately by GrowSurf participant ID or email address. Related record cleanup completes automatically. Do not repeat a successful deletion to finish cleanup. A `202` response includes pending analytics erasure details.
         #
         # @overload delete(participant_id_or_email, id:, request_options: {})
         #
@@ -121,7 +121,7 @@ module GrowsurfRuby
         # `participants` is a GrowSurf participant ID or an email address (mixed lists are
         # allowed). Up to `200` entries per request — chunk larger lists across multiple
         # calls. The response reports a per-row `status` for every submitted entry, so a
-        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent. Successful rows lose participant access immediately; related record cleanup completes automatically, subject to required financial record retention.
+        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent. Successful rows lose participant access immediately; related record cleanup completes automatically, subject to required financial record retention. A `202` response also includes `analyticsErasure` when analytics erasure is pending.
         #
         # @overload bulk_delete(id, participants:, request_options: {})
         #
@@ -262,11 +262,11 @@ module GrowsurfRuby
         # @see GrowsurfRuby::Models::Campaign::ParticipantListCommissionsParams
         def list_commissions(participant_id_or_email, params)
           parsed, options = GrowsurfRuby::Campaign::ParticipantListCommissionsParams.dump_request(params)
-          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           id =
             parsed.delete(:id) do
               raise ArgumentError.new("missing required path argument #{_1}")
             end
+          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["campaign/%1$s/participant/%2$s/commissions", id, participant_id_or_email],
@@ -298,11 +298,11 @@ module GrowsurfRuby
         # @see GrowsurfRuby::Models::Campaign::ParticipantListPayoutsParams
         def list_payouts(participant_id_or_email, params)
           parsed, options = GrowsurfRuby::Campaign::ParticipantListPayoutsParams.dump_request(params)
-          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           id =
             parsed.delete(:id) do
               raise ArgumentError.new("missing required path argument #{_1}")
             end
+          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["campaign/%1$s/participant/%2$s/payouts", id, participant_id_or_email],
@@ -345,11 +345,11 @@ module GrowsurfRuby
         # @see GrowsurfRuby::Models::Campaign::ParticipantListReferralsParams
         def list_referrals(participant_id_or_email, params)
           parsed, options = GrowsurfRuby::Campaign::ParticipantListReferralsParams.dump_request(params)
-          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           id =
             parsed.delete(:id) do
               raise ArgumentError.new("missing required path argument #{_1}")
             end
+          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["campaign/%1$s/participant/%2$s/referrals", id, participant_id_or_email],
@@ -384,11 +384,11 @@ module GrowsurfRuby
         # @see GrowsurfRuby::Models::Campaign::ParticipantListRewardsParams
         def list_rewards(participant_id_or_email, params)
           parsed, options = GrowsurfRuby::Campaign::ParticipantListRewardsParams.dump_request(params)
-          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           id =
             parsed.delete(:id) do
               raise ArgumentError.new("missing required path argument #{_1}")
             end
+          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["campaign/%1$s/participant/%2$s/rewards", id, participant_id_or_email],
@@ -543,9 +543,9 @@ module GrowsurfRuby
 
         # Sends email invites on behalf of a participant to a list of email addresses.
         # Sending invites via the API requires a **verified custom email domain** on the
-        # program; the request fails until one is verified.
+        # program. Until one is verified, it returns `success: false`.
         #
-        # @overload send_invites(participant_id_or_email, id:, email_addresses:, message_text:, subject_text:, request_options: {})
+        # @overload send_invites(participant_id_or_email, id:, email_addresses:, message_text:, request_options: {})
         #
         # @param participant_id_or_email [String] Path param: GrowSurf participant ID or unencoded participant email address (the SDK encodes it automatically).
         #
@@ -554,8 +554,6 @@ module GrowsurfRuby
         # @param email_addresses [Array<String>] Body param
         #
         # @param message_text [String] Body param
-        #
-        # @param subject_text [String] Body param
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -661,7 +659,7 @@ module GrowsurfRuby
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
-        # @param body [String] Body param: HTML body for a free-form email. You can personalize it with dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
+        # @param body [String] Body param: HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
         #
         # @param email_type [String] Body param: The program email template to trigger (template mode). Send the camelC
         #
@@ -709,11 +707,11 @@ module GrowsurfRuby
         # @see GrowsurfRuby::Models::Campaign::ParticipantListActivityLogsParams
         def list_activity_logs(participant_id_or_email, params)
           parsed, options = GrowsurfRuby::Campaign::ParticipantListActivityLogsParams.dump_request(params)
-          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           id =
             parsed.delete(:id) do
               raise ArgumentError.new("missing required path argument #{_1}")
             end
+          query = GrowsurfRuby::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["campaign/%1$s/participant/%2$s/activity-logs", id, participant_id_or_email],
@@ -817,7 +815,7 @@ module GrowsurfRuby
         #
         # @param id [String] Path param: GrowSurf program ID.
         #
-        # @param provider [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider] Body param: The payout provider the participant should confirm a destination for.
+        # @param provider [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider] Body param: The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
         #
         # @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}, nil]
         #

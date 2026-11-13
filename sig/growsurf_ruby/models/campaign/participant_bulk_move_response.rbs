@@ -21,7 +21,7 @@ module GrowsurfRuby
             identifier: String,
             index: Integer,
             status: ParticipantBulkMoveResponse::Result::status,
-            email: String,
+            email: String?,
             message: String,
             participant_id: String
           }
@@ -30,8 +30,7 @@ module GrowsurfRuby
           attr_accessor identifier: String
           attr_accessor index: Integer
           attr_accessor status: ParticipantBulkMoveResponse::Result::status
-          attr_reader email: String?
-          def email=: (String) -> String
+          attr_accessor email: String?
           attr_reader message: String?
           def message=: (String) -> String
           attr_reader participant_id: String?
@@ -40,7 +39,7 @@ module GrowsurfRuby
             identifier: String,
             index: Integer,
             status: ParticipantBulkMoveResponse::Result::status,
-            ?email: String,
+            ?email: String?,
             ?message: String,
             ?participant_id: String
           ) -> void

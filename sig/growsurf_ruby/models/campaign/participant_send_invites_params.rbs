@@ -6,8 +6,7 @@ module GrowsurfRuby
           id: String,
           participant_id_or_email: String,
           email_addresses: ::Array[String],
-          message_text: String,
-          subject_text: String
+          message_text: String
         }
         & GrowsurfRuby::Internal::Type::request_parameters
 
@@ -23,14 +22,11 @@ module GrowsurfRuby
 
         attr_accessor message_text: String
 
-        attr_accessor subject_text: String
-
         def initialize: (
           id: String,
           participant_id_or_email: String,
           email_addresses: ::Array[String],
           message_text: String,
-          subject_text: String,
           ?request_options: GrowsurfRuby::request_opts
         ) -> void
 
@@ -39,7 +35,6 @@ module GrowsurfRuby
           participant_id_or_email: String,
           email_addresses: ::Array[String],
           message_text: String,
-          subject_text: String,
           request_options: GrowsurfRuby::RequestOptions
         }
       end

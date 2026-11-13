@@ -25,7 +25,7 @@ module GrowsurfRuby
         # honoring a refund window before crediting a referrer. Omit this field to award
         # credit immediately. The credit is awarded automatically once the delay elapses,
         # and can be cancelled before then with the Cancel delayed referral trigger
-        # request.
+        # request. From `0` to `90`; `0` awards credit immediately.
         sig { returns(T.nilable(Integer)) }
         attr_reader :delay_in_days
 
@@ -47,7 +47,7 @@ module GrowsurfRuby
           # honoring a refund window before crediting a referrer. Omit this field to award
           # credit immediately. The credit is awarded automatically once the delay elapses,
           # and can be cancelled before then with the Cancel delayed referral trigger
-          # request.
+          # request. From `0` to `90`; `0` awards credit immediately.
           delay_in_days: nil,
           request_options: {}
         )
