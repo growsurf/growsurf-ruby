@@ -10,8 +10,7 @@ module GrowsurfRuby
         # The group name (internal only, never shown to participants). 1 to 100
         # characters.
         required :name, String
-        # The rules that place participants in this group. Each email and domain can be
-        # in one group only. Up to 500.
+        # Omit or send an empty array. Add rules after configuring a reward.
         optional :rules, -> { GrowsurfRuby::Internal::Type::ArrayOf[GrowsurfRuby::Campaign::RewardGroupRule] }
       end
     end
