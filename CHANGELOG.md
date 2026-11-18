@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.21.1](https://github.com/growsurf/growsurf-ruby/compare/v1.21.0...v1.21.1) (2026-11-18)
+
+
+### Bug Fixes
+
+* send enumerator and set array params as arrays ([53abd3d](https://github.com/growsurf/growsurf-ruby/commit/53abd3d152a8a45b035ea7eb2c9244c1695ddb0a))
+* send enumerator and set array params as arrays ([d2b77fc](https://github.com/growsurf/growsurf-ruby/commit/d2b77fce1138a2fdd8441ea7564354158415ee45))
+
 ## [1.21.0](https://github.com/growsurf/growsurf-ruby/compare/v1.20.1...v1.21.0) (2026-11-18)
 
 
