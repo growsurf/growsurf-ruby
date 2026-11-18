@@ -107,6 +107,10 @@ module GrowsurfRuby
         # @return [Array<Object>, Object]
         def dump(value, state:)
           target = item_type
+          # Enumerators (including lazy ones) and sets are not Arrays, and would
+          # otherwise be serialized as their `#to_s` text. Other Enumerables, such
+          # as Hash and IO, must stay unchanged.
+          value = value.to_a if value.is_a?(Enumerator) || value.is_a?(Set)
           if value.is_a?(Array)
             value.map do
               GrowsurfRuby::Internal::Type::Converter.dump(target, _1, state: state)
