@@ -20,10 +20,20 @@ module GrowsurfRuby
         #   @return [Boolean]
         required :success, GrowsurfRuby::Internal::Type::Boolean
 
-        # @!method initialize(invites_sent:, message_type:, success:)
+        # @!attribute message
+        #   Human-readable detail for the result. Empty when there is nothing to add.
+        #
+        #   @return [String, nil]
+        optional :message, String
+
+        # @!method initialize(invites_sent:, message_type:, success:, message: nil)
         #   @param invites_sent [Integer]
+        #
         #   @param message_type [String]
+        #
         #   @param success [Boolean]
+        #
+        #   @param message [String] Human-readable detail for the result. Empty when there is nothing to add.
       end
     end
   end

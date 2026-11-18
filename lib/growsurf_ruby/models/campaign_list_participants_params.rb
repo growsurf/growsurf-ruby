@@ -12,6 +12,13 @@ module GrowsurfRuby
       #   @return [String]
       required :id, String
 
+      # @!attribute group_id
+      #   Return only this group's members. Default has no ID, so it cannot be named
+      #   here. An ID that is not a group in this program returns `404`.
+      #
+      #   @return [String, nil]
+      optional :group_id, String
+
       # @!attribute limit
       #   Number of results to return. Maximum 100.
       #
@@ -32,8 +39,10 @@ module GrowsurfRuby
       #   @return [String, nil]
       optional :next_id, String
 
-      # @!method initialize(id:, limit: nil, metadata: nil, next_id: nil, request_options: {})
+      # @!method initialize(id:, group_id: nil, limit: nil, metadata: nil, next_id: nil, request_options: {})
       #   @param id [String]
+      #
+      #   @param group_id [String] Return only this group's members. Default has no ID, so it cannot be named here. An ID that is not a group in this program returns `404`.
       #
       #   @param limit [Integer] Number of results to return. Maximum 100.
       #

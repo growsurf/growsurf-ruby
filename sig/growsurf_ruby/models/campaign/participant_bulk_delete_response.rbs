@@ -32,7 +32,7 @@ module GrowsurfRuby
             identifier: String,
             index: Integer,
             status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status,
-            email: String,
+            email: String?,
             message: String,
             participant_id: String
           }
@@ -44,9 +44,7 @@ module GrowsurfRuby
 
           attr_accessor status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status
 
-          attr_reader email: String?
-
-          def email=: (String) -> String
+          attr_accessor email: String?
 
           attr_reader message: String?
 
@@ -60,7 +58,7 @@ module GrowsurfRuby
             identifier: String,
             index: Integer,
             status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status,
-            ?email: String,
+            ?email: String?,
             ?message: String,
             ?participant_id: String
           ) -> void
@@ -69,7 +67,7 @@ module GrowsurfRuby
             identifier: String,
             index: Integer,
             status: GrowsurfRuby::Models::Campaign::ParticipantBulkDeleteResponse::Result::status,
-            email: String,
+            email: String?,
             message: String,
             participant_id: String
           }

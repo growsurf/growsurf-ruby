@@ -34,6 +34,7 @@ module GrowsurfRuby
               GrowsurfRuby::Campaign::ParticipantUpdateParams::AffiliateStatus::OrSymbol,
             email: String,
             first_name: String,
+            group_id: T.nilable(String),
             language: T.nilable(GrowsurfRuby::Campaign::Language::OrSymbol),
             last_name: String,
             metadata: T::Hash[Symbol, T.anything],
@@ -59,6 +60,7 @@ module GrowsurfRuby
           email: nil,
           # Body param
           first_name: nil,
+          group_id: nil,
           # Body param: The language of the participant's portal and program emails. Must be
           # one of the program's languages (see `languages` in the program options). Send the
           # base language or `null` to use the program's base language.
@@ -82,7 +84,7 @@ module GrowsurfRuby
         )
         end
 
-        # Removes participant access immediately by GrowSurf participant ID or email address. Related record cleanup completes automatically. Do not repeat a successful deletion to finish cleanup.
+        # Removes participant access immediately by GrowSurf participant ID or email address. Related record cleanup completes automatically. Do not repeat a successful deletion to finish cleanup. A `202` response includes pending analytics erasure details.
         sig do
           params(
             participant_id_or_email: String,
@@ -103,7 +105,7 @@ module GrowsurfRuby
         # `participants` is a GrowSurf participant ID or an email address (mixed lists are
         # allowed). Up to `200` entries per request — chunk larger lists across multiple
         # calls. The response reports a per-row `status` for every submitted entry, so a
-        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent. Successful rows lose participant access immediately; related record cleanup completes automatically, subject to required financial record retention.
+        # `200` can include rows that were `NOT_FOUND` or failed. Deletion is permanent. Successful rows lose participant access immediately; related record cleanup completes automatically, subject to required financial record retention. A `202` response also includes `analyticsErasure` when analytics erasure is pending.
         sig do
           params(
             id: String,
@@ -119,6 +121,35 @@ module GrowsurfRuby
           # GrowSurf participant IDs and/or email addresses to delete. Mixed entries are
           # allowed.
           participants:,
+          request_options: {}
+        )
+        end
+
+        # Moves a list of participants to a group, or to Default with `groupId: null`.
+        # Each entry in `participants` is a GrowSurf participant ID or an email address
+        # (mixed lists are allowed). Up to `200` entries per request. The response reports
+        # a per-row `status` for every submitted entry, so a `200` can include rows that
+        # were `NOT_FOUND`. All found participants move together: if the move fails, no one
+        # moves. A move is a manual placement, so the group's email and domain rules do not
+        # override it later, and it removes the participant from any other group's
+        # `PARTICIPANT` rules. A move applies to new referrals only. Rewards already earned
+        # keep their amounts. An ID that is not a group in this program returns `400`.
+        sig do
+          params(
+            id: String,
+            participants: T::Array[String],
+            group_id: T.nilable(String),
+            request_options: GrowsurfRuby::RequestOptions::OrHash
+          ).returns(GrowsurfRuby::Models::Campaign::ParticipantBulkMoveResponse)
+        end
+        def bulk_move(
+          # GrowSurf program ID.
+          id,
+          # GrowSurf participant IDs and/or email addresses to move. Mixed entries are
+          # allowed. 1 to 200 entries.
+          participants:,
+          # The group to move them to (`grp_…`), or `nil` for Default.
+          group_id:,
           request_options: {}
         )
         end
@@ -140,6 +171,7 @@ module GrowsurfRuby
             email: String,
             fingerprint: String,
             first_name: String,
+            group_id: T.nilable(String),
             ip_address: String,
             is_affiliate: T::Boolean,
             language: GrowsurfRuby::Campaign::Language::OrSymbol,
@@ -159,6 +191,7 @@ module GrowsurfRuby
           email:,
           fingerprint: nil,
           first_name: nil,
+          group_id: nil,
           ip_address: nil,
           # Affiliate programs only. Controls affiliate enrollment for a new participant.
           # `true` enrolls the participant with `affiliateStatus: APPROVED`; `false`
@@ -494,14 +527,13 @@ module GrowsurfRuby
 
         # Sends email invites on behalf of a participant to a list of email addresses.
         # Sending invites via the API requires a **verified custom email domain** on the
-        # program; the request fails until one is verified.
+        # program. Until one is verified, it returns `success: false`.
         sig do
           params(
             participant_id_or_email: String,
             id: String,
             email_addresses: T::Array[String],
             message_text: String,
-            subject_text: String,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(
             GrowsurfRuby::Models::Campaign::ParticipantSendInvitesResponse
@@ -516,8 +548,6 @@ module GrowsurfRuby
           email_addresses:,
           # Body param
           message_text:,
-          # Body param
-          subject_text:,
           request_options: {}
         )
         end
@@ -546,7 +576,7 @@ module GrowsurfRuby
           # Useful for honoring a refund window before crediting a referrer. Omit this field
           # to award credit immediately. The credit is awarded automatically once the delay
           # elapses, and can be cancelled before then with the Cancel delayed referral
-          # trigger request.
+          # trigger request. From `0` to `90`; `0` awards credit immediately.
           delay_in_days: nil,
           request_options: {}
         )
@@ -599,7 +629,7 @@ module GrowsurfRuby
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
-          # Body param: HTML body for a free-form email. You can personalize it with
+          # Body param: HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with
           # dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`.
           # See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
           body: nil,
@@ -749,7 +779,7 @@ module GrowsurfRuby
           participant_id_or_email,
           # Path param: GrowSurf program ID.
           id:,
-          # Body param: The payout provider the participant should confirm a destination for.
+          # Body param: The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
           provider:,
           request_options: {}
         )

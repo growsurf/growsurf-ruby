@@ -1,0 +1,42 @@
+module GrowsurfRuby
+  module Resources
+    class Campaign
+      class Groups
+        def list: (
+          String id,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::RewardGroupListResponse
+
+        def create: (
+          String id,
+          name: String,
+          ?rules: ::Array[GrowsurfRuby::Campaign::RewardGroupRule | GrowsurfRuby::Campaign::reward_group_rule],
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::RewardGroup
+
+        def retrieve: (
+          String group_id,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::RewardGroup
+
+        def update: (
+          String group_id,
+          id: String,
+          ?name: String,
+          ?order: Integer,
+          ?rules: ::Array[GrowsurfRuby::Campaign::RewardGroupRule | GrowsurfRuby::Campaign::reward_group_rule],
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::RewardGroup
+
+        def delete: (
+          String group_id,
+          id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> GrowsurfRuby::Campaign::DeleteRewardGroupResponse
+
+        def initialize: (client: GrowsurfRuby::Client) -> void
+      end
+    end
+  end
+end

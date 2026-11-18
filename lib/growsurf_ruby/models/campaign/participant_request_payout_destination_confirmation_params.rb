@@ -19,7 +19,7 @@ module GrowsurfRuby
         required :participant_id_or_email, String
 
         # @!attribute provider
-        #   The payout provider the participant should confirm a destination for.
+        #   The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
         #
         #   @return [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider]
         required :provider,
@@ -30,11 +30,11 @@ module GrowsurfRuby
         #
         #   @param participant_id_or_email [String]
         #
-        #   @param provider [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider] The payout provider the participant should confirm a destination for.
+        #   @param provider [Symbol, GrowsurfRuby::Models::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider] The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
         #
         #   @param request_options [GrowsurfRuby::RequestOptions, Hash{Symbol=>Object}]
 
-        # The payout provider the participant should confirm a destination for.
+        # The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
         module Provider
           extend GrowsurfRuby::Internal::Type::Enum
 

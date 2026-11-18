@@ -21,7 +21,7 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :participant_id_or_email
 
-        # The payout provider the participant should confirm a destination for.
+        # The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
         sig do
           returns(
             GrowsurfRuby::Campaign::ParticipantRequestPayoutDestinationConfirmationParams::Provider::TaggedSymbol
@@ -41,7 +41,7 @@ module GrowsurfRuby
         def self.new(
           id:,
           participant_id_or_email:,
-          # The payout provider the participant should confirm a destination for.
+          # The payout provider the participant should confirm a destination for. `VENMO` uses a confirmed email and is available only when connected PayPal Payouts and payout-email confirmation are enabled in a USD program. Venmo recipients must be in the United States.
           provider:,
           request_options: {}
         )

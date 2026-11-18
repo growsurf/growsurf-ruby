@@ -65,6 +65,13 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :image_url, String, api_name: :imageUrl, nil?: true
 
+        # @!attribute group_id
+        #   The group this reward belongs to (`grp_…`), or `null` for Default. A participant
+        #   earns only their own group's rewards.
+        #
+        #   @return [String, nil]
+        optional :group_id, String, api_name: :groupId, nil?: true
+
         # @!attribute image_icon_key
         #   The starter icon shown for the reward, or `null` when `imageUrl` is your own
         #   image.
@@ -163,7 +170,7 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
 
-        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, image_icon_key: nil, is_visible: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil)
+        # @!method initialize(id:, is_unlimited:, metadata:, type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, group_id: nil, image_icon_key: nil, is_visible: nil, limit: nil, limit_duration: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil)
         #   @param id [String]
         #
         #   @param is_unlimited [Boolean]
@@ -183,6 +190,8 @@ module GrowsurfRuby
         #   @param event [Symbol, GrowsurfRuby::Models::Campaign::Reward::Event, nil] The referral event that earns this Campaign Reward.
         #
         #   @param image_url [String, nil]
+        #
+        #   @param group_id [String, nil]
         #
         #   @param image_icon_key [Symbol, GrowsurfRuby::Models::Campaign::Reward::ImageIconKey, nil] The starter icon shown for the reward, or `null` when `imageUrl` is your own image.
         #

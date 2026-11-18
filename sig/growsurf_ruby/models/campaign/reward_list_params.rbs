@@ -1,0 +1,23 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_list_params =
+        { group_id: String } & GrowsurfRuby::Internal::Type::request_parameters
+
+      class RewardListParams < GrowsurfRuby::Internal::Type::BaseModel
+        extend GrowsurfRuby::Internal::Type::RequestParameters::Converter
+        include GrowsurfRuby::Internal::Type::RequestParameters
+        attr_reader group_id: String?
+        def group_id=: (String) -> String
+        def initialize: (
+          ?group_id: String,
+          ?request_options: GrowsurfRuby::request_opts
+        ) -> void
+        def to_hash: -> {
+          group_id: String,
+          request_options: GrowsurfRuby::RequestOptions
+        }
+      end
+    end
+  end
+end

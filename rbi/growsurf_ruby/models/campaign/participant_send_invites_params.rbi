@@ -27,16 +27,12 @@ module GrowsurfRuby
         sig { returns(String) }
         attr_accessor :message_text
 
-        sig { returns(String) }
-        attr_accessor :subject_text
-
         sig do
           params(
             id: String,
             participant_id_or_email: String,
             email_addresses: T::Array[String],
             message_text: String,
-            subject_text: String,
             request_options: GrowsurfRuby::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -45,7 +41,6 @@ module GrowsurfRuby
           participant_id_or_email:,
           email_addresses:,
           message_text:,
-          subject_text:,
           request_options: {}
         )
         end
@@ -57,7 +52,6 @@ module GrowsurfRuby
               participant_id_or_email: String,
               email_addresses: T::Array[String],
               message_text: String,
-              subject_text: String,
               request_options: GrowsurfRuby::RequestOptions
             }
           )

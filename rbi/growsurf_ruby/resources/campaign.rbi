@@ -22,6 +22,10 @@ module GrowsurfRuby
       sig { returns(GrowsurfRuby::Resources::Campaign::ProgramResources) }
       attr_reader :resources
 
+      # Group operations. Groups give some participants a different reward list.
+      sig { returns(GrowsurfRuby::Resources::Campaign::Groups) }
+      attr_reader :groups
+
       # Program Editor "Design" tab configuration operations.
       sig { returns(GrowsurfRuby::Resources::Campaign::Design) }
       attr_reader :design
@@ -368,6 +372,7 @@ module GrowsurfRuby
       sig do
         params(
           id: String,
+          group_id: String,
           limit: Integer,
           metadata: T::Hash[Symbol, String],
           next_id: String,
@@ -377,6 +382,9 @@ module GrowsurfRuby
       def list_participants(
         # GrowSurf program ID.
         id,
+        # Return only this group's members. Default has no ID, so it cannot be named
+        # here. An ID that is not a group in this program returns `404`.
+        group_id: nil,
         # Number of results to return. Maximum 100.
         limit: nil,
         # Return only participants whose metadata matches every given key and value

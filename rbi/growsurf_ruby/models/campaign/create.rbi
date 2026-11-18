@@ -27,6 +27,14 @@ module GrowsurfRuby
         sig { params(first_name: String).void }
         attr_writer :first_name
 
+        # Places the new participant in this group (`grp_…`), or in Default with `null`.
+        # This is a manual placement, so the groups' email and domain rules do not apply
+        # to them. Applied only when this request creates the participant; to move an
+        # existing participant, use Update participant. An ID that is not a group in this
+        # program returns `400` and adds no one.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
         sig { returns(T.nilable(String)) }
         attr_reader :ip_address
 
@@ -116,6 +124,7 @@ module GrowsurfRuby
             email: String,
             fingerprint: String,
             first_name: String,
+            group_id: T.nilable(String),
             ip_address: String,
             is_affiliate: T::Boolean,
             language: GrowsurfRuby::Campaign::Language::OrSymbol,
@@ -132,6 +141,7 @@ module GrowsurfRuby
           email:,
           fingerprint: nil,
           first_name: nil,
+          group_id: nil,
           ip_address: nil,
           # Affiliate programs only. Controls affiliate enrollment for a new participant.
           # `true` enrolls the participant with `affiliateStatus: APPROVED`; `false` creates
@@ -172,6 +182,7 @@ module GrowsurfRuby
               email: String,
               fingerprint: String,
               first_name: String,
+              group_id: T.nilable(String),
               ip_address: String,
               is_affiliate: T::Boolean,
               language: GrowsurfRuby::Campaign::Language::OrSymbol,

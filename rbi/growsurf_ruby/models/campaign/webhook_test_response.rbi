@@ -15,7 +15,7 @@ module GrowsurfRuby
         sig { returns(T::Boolean) }
         attr_accessor :success
 
-        # The mock event payload that was sent.
+        # The mock event payload that was sent. `id` is the event ID.
         sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :payload
 
@@ -47,7 +47,7 @@ module GrowsurfRuby
         end
         def self.new(
           success:,
-          # The mock event payload that was sent.
+          # The mock event payload that was sent. `id` is the event ID.
           payload: nil,
           response: nil
         )

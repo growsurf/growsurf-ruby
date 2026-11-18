@@ -1,0 +1,55 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_group_rule =
+        { type: RewardGroupRule::type_, value: String }
+
+      class RewardGroupRule < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor type: type_
+        attr_accessor value: String
+        def initialize: (type: type_, value: String) -> void
+        def to_hash: -> reward_group_rule
+
+        type type_ = :PARTICIPANT | :EMAIL | :DOMAIN
+        module Type
+          extend GrowsurfRuby::Internal::Type::Enum
+          PARTICIPANT: :PARTICIPANT
+          EMAIL: :EMAIL
+          DOMAIN: :DOMAIN
+          def self?.values: -> ::Array[type_]
+        end
+      end
+
+      type reward_group =
+        {
+          id: String,
+          name: String,
+          order: Integer,
+          rules: ::Array[RewardGroupRule],
+          signup_code: String,
+          created_at: Integer,
+          updated_at: Integer
+        }
+
+      class RewardGroup < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor id: String
+        attr_accessor name: String
+        attr_accessor order: Integer
+        attr_accessor rules: ::Array[RewardGroupRule]
+        attr_accessor signup_code: String
+        attr_accessor created_at: Integer
+        attr_accessor updated_at: Integer
+        def initialize: (
+          id: String,
+          name: String,
+          order: Integer,
+          rules: ::Array[RewardGroupRule],
+          signup_code: String,
+          created_at: Integer,
+          updated_at: Integer
+        ) -> void
+        def to_hash: -> reward_group
+      end
+    end
+  end
+end

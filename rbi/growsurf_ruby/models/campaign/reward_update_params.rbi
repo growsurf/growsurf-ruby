@@ -79,6 +79,13 @@ module GrowsurfRuby
         sig { params(image_url: T.nilable(String)).void }
         attr_writer :image_url
 
+        # The group this reward belongs to (`grp_…`), or `null` for Default. A participant
+        # earns only their own group's rewards.
+        # `LEADERBOARD` rewards apply to the whole program and cannot be in a group. An ID
+        # that is not a group in this program returns `400`.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
         # The starter icon shown for the reward, or `null` when `imageUrl` is your own
         # image. Participant pages draw this icon in your program's accent color. Also set
         # `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
@@ -141,7 +148,7 @@ module GrowsurfRuby
         end
         attr_writer :limit_duration
 
-        # Custom key/value metadata (single-level; values are stored as strings).
+        # Custom key/value metadata (single-level; values are stored as strings). Sending `metadata` replaces the stored object.
         # Each value must be a string, number, or boolean of up to 500 characters. Each
         # key must have 1 to 40 characters once camelCased, and two keys that camelCase
         # to the same key are rejected. Up to 50 keys. An entry that breaks these rules
@@ -254,6 +261,7 @@ module GrowsurfRuby
             event:
               GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
             image_url: T.nilable(String),
+            group_id: T.nilable(String),
             image_icon_key:
               T.nilable(
                 GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey::OrSymbol
@@ -294,6 +302,7 @@ module GrowsurfRuby
           # `MILESTONE` rewards. When omitted, the stored event is preserved.
           event: nil,
           image_url: nil,
+          group_id: nil,
           # The starter icon shown for the reward, or `null` when `imageUrl` is your own
           # image. Participant pages draw this icon in your program's accent color. Also set
           # `imageUrl` to the icon's image so the iOS and Android SDKs can show it. Sending
@@ -307,7 +316,7 @@ module GrowsurfRuby
           is_visible: nil,
           limit: nil,
           limit_duration: nil,
-          # Custom key/value metadata (single-level; values are stored as strings).
+          # Custom key/value metadata (single-level; values are stored as strings). Sending `metadata` replaces the stored object.
           # Each value must be a string, number, or boolean of up to 500 characters.
           # Each key must have 1 to 40 characters once camelCased, and two keys that
           # camelCase to the same key are rejected. Up to 50 keys. An entry that breaks
@@ -361,6 +370,7 @@ module GrowsurfRuby
               event:
                 GrowsurfRuby::Models::Campaign::RewardUpdateParams::Event::OrSymbol,
               image_url: T.nilable(String),
+              group_id: T.nilable(String),
               image_icon_key:
                 T.nilable(
                   GrowsurfRuby::Models::Campaign::RewardUpdateParams::ImageIconKey::OrSymbol

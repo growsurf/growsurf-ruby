@@ -1202,6 +1202,24 @@ module GrowsurfRuby
               )
             end
 
+          # Queued or issued Wise payouts that are paused until a refund is confirmed.
+          sig do
+            returns(
+              T.nilable(
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+              )
+            )
+          end
+          attr_reader :attention
+
+          sig do
+            params(
+              attention:
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash
+            ).void
+          end
+          attr_writer :attention
+
           sig do
             returns(
               T.nilable(
@@ -1290,6 +1308,8 @@ module GrowsurfRuby
           # Affiliate only. Payout counts and amounts by status.
           sig do
             params(
+              attention:
+                GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash,
               failed:
                 GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric::OrHash,
               issued:
@@ -1303,6 +1323,8 @@ module GrowsurfRuby
             ).returns(T.attached_class)
           end
           def self.new(
+            # Queued or issued Wise payouts that are paused until a refund is confirmed.
+            attention: nil,
             failed: nil,
             issued: nil,
             queued: nil,
@@ -1314,6 +1336,8 @@ module GrowsurfRuby
           sig do
             override.returns(
               {
+                attention:
+                  GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
                 failed:
                   GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric,
                 issued:

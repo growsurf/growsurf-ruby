@@ -1,0 +1,13 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_group_list_response = { groups: ::Array[RewardGroup] }
+
+      class RewardGroupListResponse < GrowsurfRuby::Internal::Type::BaseModel
+        attr_accessor groups: ::Array[RewardGroup]
+        def initialize: (groups: ::Array[RewardGroup]) -> void
+        def to_hash: -> reward_group_list_response
+      end
+    end
+  end
+end

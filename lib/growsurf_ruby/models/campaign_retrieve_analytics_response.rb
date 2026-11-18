@@ -717,6 +717,15 @@ module GrowsurfRuby
 
         # @see GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts#payout_status
         class PayoutStatus < GrowsurfRuby::Internal::Type::BaseModel
+          # @!attribute attention
+          #   Queued or issued Wise payouts that are paused until a refund is confirmed.
+          #
+          #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric, nil]
+          optional :attention,
+                   -> {
+                     GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
+                   }
+
           # @!attribute failed
           #
           #   @return [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric, nil]
@@ -757,8 +766,10 @@ module GrowsurfRuby
                      GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric
                    }
 
-          # @!method initialize(failed: nil, issued: nil, queued: nil, reversed: nil, upcoming: nil)
+          # @!method initialize(attention: nil, failed: nil, issued: nil, queued: nil, reversed: nil, upcoming: nil)
           #   Affiliate only. Payout counts and amounts by status.
+          #
+          #   @param attention [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric] Queued or issued Wise payouts that are paused until a refund is confirmed.
           #
           #   @param failed [GrowsurfRuby::Models::CampaignRetrieveAnalyticsResponse::StatusCounts::PayoutStatus::PayoutStatusMetric]
           #

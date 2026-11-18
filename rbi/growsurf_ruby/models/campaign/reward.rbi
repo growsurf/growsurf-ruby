@@ -65,6 +65,11 @@ module GrowsurfRuby
         sig { returns(T.nilable(String)) }
         attr_accessor :image_url
 
+        # The group this reward belongs to (`grp_…`), or `null` for Default. A participant
+        # earns only their own group's rewards.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
         # The starter icon shown for the reward, or `null` when `imageUrl` is your own
         # image.
         sig do
@@ -172,6 +177,7 @@ module GrowsurfRuby
                 GrowsurfRuby::Models::Campaign::Reward::Event::OrSymbol
               ),
             image_url: T.nilable(String),
+            group_id: T.nilable(String),
             image_icon_key:
               T.nilable(
                 GrowsurfRuby::Models::Campaign::Reward::ImageIconKey::OrSymbol
@@ -212,6 +218,7 @@ module GrowsurfRuby
           # Rewards return `CONVERSION`.
           event: nil,
           image_url: nil,
+          group_id: nil,
           # The starter icon shown for the reward, or `null` when `imageUrl` is your own
           # image.
           image_icon_key: nil,
@@ -263,6 +270,7 @@ module GrowsurfRuby
                   GrowsurfRuby::Models::Campaign::Reward::Event::TaggedSymbol
                 ),
               image_url: T.nilable(String),
+              group_id: T.nilable(String),
               image_icon_key:
                 T.nilable(
                   GrowsurfRuby::Models::Campaign::Reward::ImageIconKey::TaggedSymbol

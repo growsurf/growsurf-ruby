@@ -2,7 +2,12 @@ module GrowsurfRuby
   module Models
     module Campaign
       type participant_send_invites_response =
-        { invites_sent: Integer, message_type: String, success: bool }
+        {
+          invites_sent: Integer,
+          message_type: String,
+          success: bool,
+          message: String
+        }
 
       class ParticipantSendInvitesResponse < GrowsurfRuby::Internal::Type::BaseModel
         attr_accessor invites_sent: Integer
@@ -11,16 +16,22 @@ module GrowsurfRuby
 
         attr_accessor success: bool
 
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
         def initialize: (
           invites_sent: Integer,
           message_type: String,
-          success: bool
+          success: bool,
+          ?message: String
         ) -> void
 
         def to_hash: -> {
           invites_sent: Integer,
           message_type: String,
-          success: bool
+          success: bool,
+          message: String
         }
       end
     end

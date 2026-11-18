@@ -11,7 +11,7 @@ module GrowsurfRuby
         required :success, GrowsurfRuby::Internal::Type::Boolean
 
         # @!attribute payload
-        #   The mock event payload that was sent.
+        #   The mock event payload that was sent. `id` is the event ID.
         #
         #   @return [Hash{Symbol=>Object}, nil]
         optional :payload, GrowsurfRuby::Internal::Type::HashOf[GrowsurfRuby::Internal::Type::Unknown]
@@ -24,7 +24,7 @@ module GrowsurfRuby
         # @!method initialize(success:, payload: nil, response: nil)
         #   @param success [Boolean]
         #
-        #   @param payload [Hash{Symbol=>Object}] The mock event payload that was sent.
+        #   @param payload [Hash{Symbol=>Object}] The mock event payload that was sent. `id` is the event ID.
         #
         #   @param response [GrowsurfRuby::Models::Campaign::WebhookTestResponse::Response]
 

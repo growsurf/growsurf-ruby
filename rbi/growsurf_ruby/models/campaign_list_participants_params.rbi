@@ -17,6 +17,14 @@ module GrowsurfRuby
       sig { returns(String) }
       attr_accessor :id
 
+      # Return only this group's members. Default has no ID, so it cannot be named
+      # here. An ID that is not a group in this program returns `404`.
+      sig { returns(T.nilable(String)) }
+      attr_reader :group_id
+
+      sig { params(group_id: String).void }
+      attr_writer :group_id
+
       # Number of results to return. Maximum 100.
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
@@ -43,6 +51,7 @@ module GrowsurfRuby
       sig do
         params(
           id: String,
+          group_id: String,
           limit: Integer,
           metadata: T::Hash[Symbol, String],
           next_id: String,
@@ -51,6 +60,9 @@ module GrowsurfRuby
       end
       def self.new(
         id:,
+        # Return only this group's members. Default has no ID, so it cannot be named
+        # here. An ID that is not a group in this program returns `404`.
+        group_id: nil,
         # Number of results to return. Maximum 100.
         limit: nil,
         # Return only participants whose metadata matches every given key and value
@@ -67,6 +79,7 @@ module GrowsurfRuby
         override.returns(
           {
             id: String,
+            group_id: String,
             limit: Integer,
             metadata: T::Hash[Symbol, String],
             next_id: String,

@@ -1,0 +1,18 @@
+module GrowsurfRuby
+  module Models
+    module Campaign
+      type reward_group_source = :MANUAL | :LINK | :EMAIL | :DOMAIN
+
+      module RewardGroupSource
+        extend GrowsurfRuby::Internal::Type::Enum
+
+        MANUAL: :MANUAL
+        LINK: :LINK
+        EMAIL: :EMAIL
+        DOMAIN: :DOMAIN
+
+        def self?.values: -> ::Array[GrowsurfRuby::Models::Campaign::reward_group_source]
+      end
+    end
+  end
+end

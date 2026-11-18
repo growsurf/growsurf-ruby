@@ -19,6 +19,8 @@ module GrowsurfRuby
           first_name: String?,
           fraud_reason_code: String,
           fraud_risk_level: GrowsurfRuby::Models::Campaign::fraud_risk_level,
+          group_id: String?,
+          group_source: GrowsurfRuby::Models::Campaign::reward_group_source?,
           impression_count: Integer,
           invite_count: Integer,
           ip_address: String?,
@@ -96,6 +98,10 @@ module GrowsurfRuby
         def fraud_risk_level=: (
           GrowsurfRuby::Models::Campaign::fraud_risk_level
         ) -> GrowsurfRuby::Models::Campaign::fraud_risk_level
+
+        attr_accessor group_id: String?
+
+        attr_accessor group_source: GrowsurfRuby::Models::Campaign::reward_group_source?
 
         attr_reader impression_count: Integer?
 
@@ -228,6 +234,8 @@ module GrowsurfRuby
           ?first_name: String?,
           ?fraud_reason_code: String,
           ?fraud_risk_level: GrowsurfRuby::Models::Campaign::fraud_risk_level,
+          ?group_id: String?,
+          ?group_source: GrowsurfRuby::Models::Campaign::reward_group_source?,
           ?impression_count: Integer,
           ?invite_count: Integer,
           ?ip_address: String?,
@@ -276,6 +284,8 @@ module GrowsurfRuby
           first_name: String?,
           fraud_reason_code: String,
           fraud_risk_level: GrowsurfRuby::Models::Campaign::fraud_risk_level,
+          group_id: String?,
+          group_source: GrowsurfRuby::Models::Campaign::reward_group_source?,
           impression_count: Integer,
           invite_count: Integer,
           ip_address: String?,

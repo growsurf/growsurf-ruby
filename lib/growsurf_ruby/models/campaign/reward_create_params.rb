@@ -52,6 +52,15 @@ module GrowsurfRuby
         #   @return [String, nil]
         optional :image_url, String, api_name: :imageUrl, nil?: true
 
+        # @!attribute group_id
+        #   The group this reward belongs to (`grp_…`), or `null` for Default. A participant
+        #   earns only their own group's rewards.
+        #   `LEADERBOARD` rewards apply to the whole program and cannot be in a group. An ID
+        #   that is not a group in this program returns `400`.
+        #
+        #   @return [String, nil]
+        optional :group_id, String, api_name: :groupId, nil?: true
+
         # @!attribute image_icon_key
         #   The starter icon shown for the reward, or `null` when `imageUrl` is your own
         #   image. Participant pages draw this icon in your program's accent color. Also set
@@ -177,7 +186,7 @@ module GrowsurfRuby
         #   @return [GrowsurfRuby::Models::RewardTaxValuation, nil]
         optional :value, -> { GrowsurfRuby::RewardTaxValuation }, nil?: true
 
-        # @!method initialize(type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
+        # @!method initialize(type:, commission_structure: nil, conversions_required: nil, coupon_code: nil, description: nil, event: nil, image_url: nil, group_id: nil, image_icon_key: nil, is_unlimited: nil, is_visible: nil, limit: nil, limit_duration: nil, metadata: nil, next_milestone_prefix: nil, next_milestone_suffix: nil, number_of_winners: nil, order: nil, referral_coupon_code: nil, referral_description: nil, referred_reward_upfront: nil, referred_value: nil, title: nil, value: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {GrowsurfRuby::Models::Campaign::RewardCreateParams} for more details.
         #
@@ -194,6 +203,8 @@ module GrowsurfRuby
         #   @param event [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::Event] The referral event that earns this Campaign Reward.
         #
         #   @param image_url [String]
+        #
+        #   @param group_id [String, nil]
         #
         #   @param image_icon_key [Symbol, GrowsurfRuby::Models::Campaign::RewardCreateParams::ImageIconKey, nil] The starter icon shown for the reward, or `null` when `imageUrl` is your own image.
         #

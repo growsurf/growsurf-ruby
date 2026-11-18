@@ -77,6 +77,11 @@ module GrowsurfRuby
         sig { params(fulfilled_at: T.nilable(Integer)).void }
         attr_writer :fulfilled_at
 
+        # The group whose reward this is (`grp_…`), saved when it was earned. `null` for
+        # Default and for rewards earned before groups existed.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :group_id
+
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :is_available
 
@@ -136,6 +141,7 @@ module GrowsurfRuby
               T.nilable(GrowsurfRuby::CommissionStructure::OrHash),
             currency_iso: T.nilable(String),
             fulfilled_at: T.nilable(Integer),
+            group_id: T.nilable(String),
             is_available: T::Boolean,
             is_fulfilled: T::Boolean,
             is_referrer: T::Boolean,
@@ -158,6 +164,7 @@ module GrowsurfRuby
           commission_structure: nil,
           currency_iso: nil,
           fulfilled_at: nil,
+          group_id: nil,
           is_available: nil,
           is_fulfilled: nil,
           is_referrer: nil,
@@ -187,6 +194,7 @@ module GrowsurfRuby
                 T.nilable(GrowsurfRuby::CommissionStructure),
               currency_iso: T.nilable(String),
               fulfilled_at: T.nilable(Integer),
+              group_id: T.nilable(String),
               is_available: T::Boolean,
               is_fulfilled: T::Boolean,
               is_referrer: T::Boolean,

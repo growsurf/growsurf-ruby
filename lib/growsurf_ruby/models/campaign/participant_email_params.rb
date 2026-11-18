@@ -19,7 +19,7 @@ module GrowsurfRuby
         required :participant_id_or_email, String
 
         # @!attribute body
-        #   HTML body for a free-form email. You can personalize it with dynamic text,
+        #   HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with dynamic text,
         #   inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See
         #   [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
         #
@@ -67,7 +67,7 @@ module GrowsurfRuby
         #
         #   @param participant_id_or_email [String]
         #
-        #   @param body [String] HTML body for a free-form email. You can personalize it with dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
+        #   @param body [String] HTML body for a free-form email. When `settings.design.layoutMode` is `INLINE`, include `{{emailFooter}}` in the body; `{{emailHeader}}` is optional. You can personalize it with dynamic text, inserting `{{...}}` tokens like `{{firstName}}` or `{{shareUrl}}`. See [Guide to using dynamic text in GrowSurf emails](https://support.growsurf.com/article/213-guide-to-using-dynamic-text-in-growsurf-emails).
         #
         #   @param email_type [String] The program email template to trigger (template mode). Send the camelCase email-
         #
