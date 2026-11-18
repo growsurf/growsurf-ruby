@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.21.0](https://github.com/growsurf/growsurf-ruby/compare/v1.20.1...v1.21.0) (2026-11-18)
+
+
+### Features
+
+* add reward groups and participant bulk move ([45ebfcf](https://github.com/growsurf/growsurf-ruby/commit/45ebfcf5160fcb5a35c73e8a77655eda42ecc39f))
+* **api:** add payout attention and invite message; align group wording ([c945457](https://github.com/growsurf/growsurf-ruby/commit/c945457ee09ff72129ca8bed7a3148582413ca3f))
+* **api:** sync REST v2 docs and types ([8752c45](https://github.com/growsurf/growsurf-ruby/commit/8752c45b5f2c7d901a0233b6cc480e8720213252))
+
+
+### Documentation
+
+* align group creation and webhook event contracts ([ae2edbe](https://github.com/growsurf/growsurf-ruby/commit/ae2edbe972b87f9697ceff20cbbcdb8424193479))
+
 ## [1.20.1](https://github.com/growsurf/growsurf-ruby/compare/v1.20.0...v1.20.1) (2026-11-08)
 
 
