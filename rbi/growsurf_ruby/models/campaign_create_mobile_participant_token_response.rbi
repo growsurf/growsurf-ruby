@@ -16,7 +16,8 @@ module GrowsurfRuby
       attr_accessor :expires_in
 
       # Whether this request created a new participant. Returns false when the
-      # participant already existed.
+      # participant already existed. A repeat call can return true while the
+      # first signup is still finishing.
       sig { returns(T::Boolean) }
       attr_accessor :is_new
 
@@ -46,7 +47,8 @@ module GrowsurfRuby
         # Token lifetime in seconds.
         expires_in:,
         # Whether this request created a new participant. Returns false when the
-        # participant already existed.
+        # participant already existed. A repeat call can return true while the
+        # first signup is still finishing.
         is_new:,
         participant:,
         # Participant-scoped bearer token for GrowSurf mobile SDK participant endpoints.

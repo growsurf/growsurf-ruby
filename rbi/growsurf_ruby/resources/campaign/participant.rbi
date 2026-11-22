@@ -611,8 +611,13 @@ module GrowsurfRuby
         # name, postal address, and an unsubscribe link are added automatically, and
         # unsubscribed participants are suppressed). Sending requires the team to be
         # verified by GrowSurf. Requires a **verified custom email domain** on the program
-        # (which can be completed in *Campaign Editor > 3. Emails > Email Settings*).
-        # Returns `400` until one is verified. The email is accepted for delivery.
+        # (which can be completed in *Program Editor > 3. Emails > Email Settings*).
+        # Returns `400` until one is verified. Returns `400` while the program's emails
+        # are paused because too many emails bounced or were marked as spam. Goal,
+        # winner, commission, and payout emails still send. Resume emails in
+        # *Program Editor > 3. Emails*. The email is accepted for delivery.
+        # `welcomeNonReferred` can only be sent to advocates or approved, enrolled affiliates in a
+        # program that has not ended. Returns `400` for other recipients.
         sig do
           params(
             participant_id_or_email: String,
