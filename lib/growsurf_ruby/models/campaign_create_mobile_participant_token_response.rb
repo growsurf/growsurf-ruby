@@ -12,7 +12,8 @@ module GrowsurfRuby
 
       # @!attribute is_new
       #   Whether this request created a new participant. Returns false when the
-      #   participant already existed.
+      #   participant already existed. A repeat call can return true while the
+      #   first signup is still finishing.
       #
       #   @return [Boolean]
       required :is_new, GrowsurfRuby::Internal::Type::Boolean, api_name: :isNew
