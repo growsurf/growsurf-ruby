@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.21.2](https://github.com/growsurf/growsurf-ruby/compare/v1.21.1...v1.21.2) (2026-11-27)
+
+
+### Documentation
+
+* describe TELEHEALTH goal privacy defaults and share disclosure ([a49208d](https://github.com/growsurf/growsurf-ruby/commit/a49208d63e7b2f5ef2d89c1448c5b19b85c68aa0))
+* document paused-email 400, welcomeNonReferred limits, and repeat isNew ([149f624](https://github.com/growsurf/growsurf-ruby/commit/149f624f607425fba94761edaf72836d0d30c178))
+* SDK docstring updates ([66d0794](https://github.com/growsurf/growsurf-ruby/commit/66d079418cc4b5c4706973e46209dda7c7e12450))
+
 ## [1.21.1](https://github.com/growsurf/growsurf-ruby/compare/v1.21.0...v1.21.1) (2026-11-18)
 
 
