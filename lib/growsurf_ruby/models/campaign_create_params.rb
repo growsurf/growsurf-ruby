@@ -54,6 +54,15 @@ module GrowsurfRuby
       #   keeps its standard default. Set only when the program is created; it is not
       #   accepted on update.
       #
+      #   New `TELEHEALTH` referral programs hide referrer names and photos in
+      #   friend-facing elements and hide the individual Referral Status list and
+      #   leaderboard. Email reveal is off, full email masking is on, and signup and
+      #   conversion alerts to referrers start off. Reward emails stay available. If a
+      #   visible reward pays the referrer, the default share messages and email
+      #   subject also say the participant may earn a reward. Change these settings
+      #   afterward through the Design and Emails endpoints; existing and cloned
+      #   programs keep their saved settings.
+      #
       #   @return [Symbol, GrowsurfRuby::Models::CampaignCreateParams::Goal, nil]
       optional :goal, enum: -> { GrowsurfRuby::CampaignCreateParams::Goal }
 
